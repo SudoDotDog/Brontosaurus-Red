@@ -6,3 +6,4 @@
 --recursive
 
 test/**/*.test.ts
+test/**/*.test.tsx
