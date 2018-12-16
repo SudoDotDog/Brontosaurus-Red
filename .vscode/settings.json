@@ -1,6 +1,9 @@
 {
     "cSpell.words": [
-        "Sudoo"
+        "Sudoo",
+        "devtool",
+        "ifeq",
+        "setx"
     ],
     "tslint.configFile": "typescript/tslint.json"
 }
