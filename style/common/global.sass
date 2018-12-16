@@ -1,0 +1,27 @@
+/**
+ * @author WMXPY
+ * @namespace Style
+ * @description Global
+ */
+
+@import './color.sass'
+
+html, body, #container
+    font-family: $font
+    height: 100%
+    padding: 0
+    margin: 0
+
+::-webkit-scrollbar
+    width: 0.5em
+    height: 0.5em
+
+::-webkit-scrollbar-thumb
+    background: $navy
+
+::-webkit-scrollbar-track
+    background: $gray
+
+::selection
+    background: rgba(255, 255, 125, 0.99)
+    color: #032764
