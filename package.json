@@ -80,8 +80,7 @@
     ],
     "report-dir": "coverage",
     "require": [
-      "./test/tshook.js",
-      "./test/mock.ts"
+      "./test/tshook.js"
     ],
     "sourceMap": true
   }
