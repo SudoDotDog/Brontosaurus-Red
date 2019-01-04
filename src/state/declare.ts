@@ -4,11 +4,10 @@
  * @description Declare
  */
 
-import { IFormStore } from "./form/type";
 
 export interface IStore {
 
-    readonly form: IFormStore;
+    a?: string;
 }
 
 export enum ACTIONS {

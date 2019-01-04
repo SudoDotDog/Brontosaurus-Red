@@ -8,6 +8,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppContainer } from "react-hot-loader";
 import { Provider } from "react-redux";
+import { HashRouter } from "react-router-dom";
 import '../style/common/global.sass';
 import Entry from "./entry";
 import { getStore } from "./state/store";
@@ -19,7 +20,9 @@ const render: (App: any) => void = (App: any): void => {
     ReactDOM.render(
         (<Provider store={getStore()}>
             <AppContainer>
-                <App />
+                <HashRouter>
+                    <App />
+                </HashRouter>
             </AppContainer>
         </Provider>),
         document.getElementById("container"));

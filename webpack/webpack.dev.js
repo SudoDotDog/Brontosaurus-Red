@@ -21,5 +21,5 @@ module.exports = SudooWebpack.create({
 
     APP_ENTRY_FILE_NAME: 'index.tsx',
 }, {
-    title: 'Brontosaurus',
+    title: 'Red - Brontosaurus',
 }).development();
