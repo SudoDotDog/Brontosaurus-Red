@@ -12,8 +12,11 @@ import { HashRouter } from "react-router-dom";
 import '../style/common/global.sass';
 import Entry from "./entry";
 import { getStore } from "./state/store";
+import { Web } from "./sudoo/web";
 
 declare const module: any;
+
+Web.register('http://localhost:8083');
 
 const render: (App: any) => void = (App: any): void => {
 
