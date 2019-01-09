@@ -22,10 +22,10 @@
     jss "^10.0.0-alpha.7"
     jss-preset-default "^10.0.0-alpha.7"
 
-"@sudoo/redux@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/redux/-/redux-0.1.1.tgz#b42d69aadff319efbd648e120d68cd7938ce6d52"
-  integrity sha512-aKgy9ySqKOAhq2XtRx5z0iZcs4fdjycDavWqoqKBdUuttpPCinFeIBN9pQwkcIqyohNzesEKo8Lfbhn8OGSuqA==
+"@sudoo/redux@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/redux/-/redux-1.0.0.tgz#eee376a737959e458bfd38a761d30bbd91baa92f"
+  integrity sha512-pG3YtswepolKNLWXiccaY9op6DlGacSOb1ESF7Gump17c1wGGGwOKTC+kpPERUjIeJcy+6vBKIDNttZMi3yJhw==
   dependencies:
     "@sudoo/bark" "^1.2.1"
     redux "^4.0.1"
