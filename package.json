@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/SudoDotDog/Brontosaurus-Red#readme",
   "dependencies": {
-    "@sudoo/neon": "^1.0.0",
+    "@sudoo/neon": "^1.0.1",
     "@sudoo/redux": "^1.0.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
