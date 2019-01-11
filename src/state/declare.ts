@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Portal_State
+ * @namespace Red_State
  * @description Declare
  */
 

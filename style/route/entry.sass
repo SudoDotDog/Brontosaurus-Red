@@ -5,12 +5,17 @@
  */
 
 .container
+    margin: 3rem
     display: grid
-    grid-template-areas: 'nav content'
-    grid-template-columns: 15rem auto
+    grid-template-areas: 'title' 'nav' 'content'
+    grid-template-columns: auto
     grid-template-rows: auto
 
+.title
+    grid-area: title
+
 .nav
+    display: flex
     grid-area: nav
 
 .content

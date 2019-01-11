@@ -4,6 +4,8 @@
  * @description Nav
  */
 
+import { NeonButton } from "@sudoo/neon/button";
+import { SIZE } from "@sudoo/neon/declare";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 
@@ -14,8 +16,18 @@ export const Nav: React.SFC<NavProp> = (props: NavProp) => {
 
     console.log(props);
 
-    return (<div>
-        <button onClick={() => props.history.push('/register')}>Register</button>
-        <button onClick={() => props.history.push('/edit')}>Edit</button>
-    </div>);
+    return (<React.Fragment>
+        <NeonButton
+            size={SIZE.MEDIUM}
+            onClick={() => props.history.push('/register')}
+        >
+            Register
+        </NeonButton>
+        <NeonButton
+            size={SIZE.MEDIUM}
+            onClick={() => props.history.push('/edit')}
+        >
+            Edit
+        </NeonButton>
+    </React.Fragment>);
 };

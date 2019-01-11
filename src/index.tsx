@@ -21,13 +21,13 @@ Web.register('http://localhost:8083', true).setCallbackPath('http://localhost:80
 const render: (App: any) => void = (App: any): void => {
 
     ReactDOM.render(
-        (<SudooProvider redux={redux}>
-            <AppContainer>
+        (<AppContainer>
+            <SudooProvider redux={redux}>
                 <HashRouter>
                     <App />
                 </HashRouter>
-            </AppContainer>
-        </SudooProvider>),
+            </SudooProvider>
+        </AppContainer>),
         document.getElementById("container"));
 };
 

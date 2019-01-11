@@ -1,9 +1,11 @@
 /**
  * @author WMXPY
- * @namespace Portal
+ * @namespace Red
  * @description Provider
  */
 
+import { NeonPaper } from "@sudoo/neon/paper";
+import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { Route } from "react-router-dom";
 import * as EntryStyle from "../style/route/entry.sass";
@@ -17,12 +19,17 @@ export class Entry extends React.Component {
 
         return (
             <div className={EntryStyle.container}>
+                <div className={EntryStyle.title}>
+                    <NeonTitle>Brontosaurus RED</NeonTitle>
+                </div>
                 <div className={EntryStyle.nav}>
                     <Route path="/" component={Nav} />
                 </div>
                 <div className={EntryStyle.content}>
-                    <Route path="/register" exact component={Register} />
-                    <Route path="/edit" exact component={Edit} />
+                    <NeonPaper>
+                        <Route path="/register" exact component={Register} />
+                        <Route path="/edit" exact component={Edit} />
+                    </NeonPaper>
                 </div>
             </div>
         );
