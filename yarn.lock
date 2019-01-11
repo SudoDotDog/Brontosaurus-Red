@@ -9,25 +9,46 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@sudoo/bark@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-1.2.1.tgz#622e75a36388af50539e0896563bd15163e059e6"
-  integrity sha512-O3011BzqwiEMXSY1UD98/61jemhW9I9IvuO7RBE6Xwt7+nmkXZpPkKAIRuYK4VYrEr/vd/MWfYiM2JgBNfvBog==
+"@sudoo/bark@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-1.2.2.tgz#c42c63eeb1b5908dcfad25cab442a9407d4f32ac"
+  integrity sha512-Hauvvdbr+AxnFrke0KPwW4lmdGFPLlsL1utaKRUmCTsqKd6HIVrowgLhZNGsWI+D31uTeDyP8rjIUBXHeyzQcA==
 
-"@sudoo/neon@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.0.2.tgz#deb209ee7f22032b09700340364f436501c06cac"
-  integrity sha512-g38w3cpuT6Q9wHsC6i1F+g/M6JA4a6A5nsvzyoCdA6ipBzSfw1bg7cBCN3LHRPrnJYHyXJqHCUQVV0pXS9XHYg==
+"@sudoo/neon@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.2.0.tgz#2da5b86651f0bb9366c2c2d663c7bbf4d8dce30f"
+  integrity sha512-Ag5kxrDE/E43i4ktClgOPfeX0x6DZGlGAboJrg+D3yR2JD4as2aaPg9zZyBl67gUf1KJk7I4pHfdoGwkOItLVg==
   dependencies:
     jss "^10.0.0-alpha.7"
     jss-preset-default "^10.0.0-alpha.7"
 
-"@sudoo/redux@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/redux/-/redux-1.0.0.tgz#eee376a737959e458bfd38a761d30bbd91baa92f"
-  integrity sha512-pG3YtswepolKNLWXiccaY9op6DlGacSOb1ESF7Gump17c1wGGGwOKTC+kpPERUjIeJcy+6vBKIDNttZMi3yJhw==
+"@sudoo/react-force-dev@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/react-force-dev/-/react-force-dev-1.1.0.tgz#c2991ac3d899798cf5922bd1f274bd4f4781c189"
+  integrity sha512-gC3rF7865BLyd1C3r/KWZ4x9I1GsJyWsIBez+bcWiLpz2vPSfLJK6FXs6XbiD3fS23DmqLBWvR87i3+2LNCQpQ==
   dependencies:
-    "@sudoo/bark" "^1.2.1"
+    "@types/enzyme" "^3.1.15"
+    "@types/enzyme-adapter-react-16" "^1.0.3"
+    "@types/react" "^16.7.18"
+    "@types/react-dom" "^16.0.11"
+    enzyme "^3.8.0"
+    enzyme-adapter-react-16 "^1.7.1"
+
+"@sudoo/react-force@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/react-force/-/react-force-1.1.0.tgz#92a4b7c984b7cb95849139e587dd8bae67bf9e21"
+  integrity sha512-ljAYD71SuE7LyB1YvlXd62r7JoKarHChjMmvTgGHraZpUPgsy/jg8a6gU6a1bDw7gXMmA1FS8uyrKJYIUayswg==
+  dependencies:
+    react "^16.7.0"
+    react-dom "^16.7.0"
+
+"@sudoo/redux@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/redux/-/redux-1.3.0.tgz#0c2114799886938410b47bb0ed0f0720aa862c93"
+  integrity sha512-ClknAj/fKvOQu69Xj8QynYWWIKpgo/TdRgJLf2dzqI1/QMA+exP3ifDJiNqbtXCC9i7KqK84F845m2uhbHV+7Q==
+  dependencies:
+    "@sudoo/bark" "^1.2.2"
+    react-redux "^6.0.0"
     redux "^4.0.1"
 
 "@sudoo/triforce@^1.1.0":
@@ -51,10 +72,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/tslint-config/-/tslint-config-1.1.0.tgz#f8712fb5a5d26e531af911d25d4c5ce3618c9198"
   integrity sha512-nYvQthhovGpRSNz8YKTDy64ICJjINlDCJ0umqXifwZUwNAv9TEIpM4K5zsoBmLowMgg0XCZ2cyUV0DBAjqg26Q==
 
-"@sudoo/webpack-react@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-1.2.0.tgz#54c9f2ef35c14c5097ea4fe0123edbf270c81753"
-  integrity sha512-jqIMKeANYqI4sMQxH33N8EOZ7U0vivw7Jmo86h6iwyO0OCQ8sKdITmmbAkJhN+uXN7owYS0v6pLQ7VP/sE0tMw==
+"@sudoo/webpack-react@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-1.2.2.tgz#2bd40653355b398ca94cb7698211938182735c95"
+  integrity sha512-9JlFmdi1/n1yTFQevHKwl8hFmNaS01EwSFgK+mwCxUEHATZtmp/dFze4VtyyNFsWPXzZAi0a1I0UShTIQ4hHVw==
   dependencies:
     awesome-typescript-loader "^5.2.1"
     css-loader "^1.0.1"
@@ -110,13 +131,6 @@
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-5.2.5.tgz#8a4accfc403c124a0bafe8a9fc61a05ec1032073"
   integrity sha512-lAVp+Kj54ui/vLUFxsJTMtWvZraZxum3w3Nwkble2dNuV5VnPA+Mi2oGX9XYJAaIvZi3tn3cbjS/qcJXRb6Bww==
 
-"@types/node-sass@^3.10.32":
-  version "3.10.32"
-  resolved "https://registry.yarnpkg.com/@types/node-sass/-/node-sass-3.10.32.tgz#b296cce7144ffab77b84090caad4f1e4bbea8e09"
-  integrity sha1-spbM5xRP+rd7hAkMqtTx5Lvqjgk=
-  dependencies:
-    "@types/node" "*"
-
 "@types/node@*", "@types/node@^10.12.18":
   version "10.12.18"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
@@ -138,14 +152,6 @@
   integrity sha512-x6zUx9/42B5Kl2Vl9HlopV8JF64wLpX3c+Pst9kc1HgzrsH+mkehe/zmHMQTplIrR48H2gpU7ZqurQolYu8XBA==
   dependencies:
     "@types/react" "*"
-
-"@types/react-redux@^6.0.12":
-  version "6.0.12"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-6.0.12.tgz#f3e9a400b8d40db43ffd8949ce14db4aa17a53ce"
-  integrity sha512-fvcpm7cfW/JMflRdZgegCVbSGYt/hyEWQKriesaLZDRDjBGKQsAiui08VCQg5lBpocPmulVGKFhICtOAcMUPOQ==
-  dependencies:
-    "@types/react" "*"
-    redux "^4.0.0"
 
 "@types/react-router-dom@^4.3.1":
   version "4.3.1"
@@ -5556,7 +5562,7 @@ redent@^1.0.0:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
 
-redux@^4.0.0, redux@^4.0.1:
+redux@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
   integrity sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==

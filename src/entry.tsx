@@ -15,15 +15,17 @@ export class Entry extends React.Component {
 
     public render(): JSX.Element {
 
-        return (<div className={EntryStyle.container}>
-            <div className={EntryStyle.nav}>
-                <Route path="/" component={Nav} />
+        return (
+            <div className={EntryStyle.container}>
+                <div className={EntryStyle.nav}>
+                    <Route path="/" component={Nav} />
+                </div>
+                <div className={EntryStyle.content}>
+                    <Route path="/register" exact component={Register} />
+                    <Route path="/edit" exact component={Edit} />
+                </div>
             </div>
-            <div className={EntryStyle.content}>
-                <Route path="/register" exact component={Register} />
-                <Route path="/edit" exact component={Edit} />
-            </div>
-        </div>);
+        );
     }
 }
 

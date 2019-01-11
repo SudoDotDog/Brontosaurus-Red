@@ -4,12 +4,11 @@
  * @description Store
  */
 
-import { Store, SudooRedux } from '@sudoo/redux';
+import { SudooRedux } from '@sudoo/redux';
 import { ACTIONS, IStore } from './declare';
 
 export const PortalStore: IStore = {
 };
 
-export const getStore = (): Store<IStore> =>
-    SudooRedux.create<IStore, ACTIONS>(PortalStore)
-        .createStore();
+export const redux: SudooRedux<IStore, ACTIONS> =
+    SudooRedux.create<IStore, ACTIONS>(PortalStore);
