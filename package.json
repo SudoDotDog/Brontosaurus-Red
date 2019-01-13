@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/SudoDotDog/Brontosaurus-Red#readme",
   "dependencies": {
-    "@sudoo/neon": "^1.2.0",
+    "@sudoo/neon": "^1.5.0",
     "@sudoo/react-force": "^1.1.0",
     "@sudoo/redux": "^1.3.0",
     "react-router-dom": "^4.3.1"
@@ -29,7 +29,7 @@
   "devDependencies": {
     "@sudoo/triforce": "^1.1.0",
     "@sudoo/react-force-dev": "^1.1.0",
-    "@sudoo/webpack-react": "^1.2.2",
+    "@sudoo/webpack-react": "^1.3.0",
     "@types/node": "^10.12.18",
     "@types/react-router-dom": "^4.3.1",
     "react-hot-loader": "^4.6.3"
