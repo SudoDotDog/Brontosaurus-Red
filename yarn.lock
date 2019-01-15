@@ -9,6 +9,18 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
+"@brontosaurus/definition@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.2.0.tgz#5952e6fc48b289d9e71e456ad3a39a3d46b2e6e6"
+  integrity sha512-OlIrLch8z18Tzh15ZY7Fv9SGQQC9yA8BFBlz9i1yaSnOpDweeK8UcEirbyWqEe40yokqKpLWp1Dc4gaF9K+FeA==
+
+"@brontosaurus/web@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.0.2.tgz#203e014d15a3d875ee0f9ff6066528bf8fb22667"
+  integrity sha512-wJ7EcB0TbspSE/hp7TkICrYLcWuY8RaRLlc+0e/NQ21PsGb2Pa69j0O6ssXZSPjkfiSdkGri/hh6Q08ZwllJgg==
+  dependencies:
+    "@brontosaurus/definition" "^1.2.0"
+
 "@sudoo/bark@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-1.2.2.tgz#c42c63eeb1b5908dcfad25cab442a9407d4f32ac"

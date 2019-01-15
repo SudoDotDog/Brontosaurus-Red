@@ -4,6 +4,7 @@
  * @description Index
  */
 
+import { Brontosaurus } from "@brontosaurus/web";
 import { SudooProvider } from "@sudoo/redux";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
@@ -12,11 +13,10 @@ import { HashRouter } from "react-router-dom";
 import '../style/common/global.sass';
 import Entry from "./entry";
 import { redux } from "./state/store";
-import { Web } from "./sudoo/web";
 
 declare const module: any;
 
-Web.register('http://localhost:8083', true).setCallbackPath('http://localhost:8082');
+Brontosaurus.register('http://localhost:8081', 'BRONTOSAURUS_RED', 'http://localhost:8082/#/', true);
 
 const render: (App: any) => void = (App: any): void => {
 

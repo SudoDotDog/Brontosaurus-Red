@@ -4,6 +4,7 @@
  * @description Nav
  */
 
+import { Brontosaurus } from "@brontosaurus/web";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import * as React from "react";
@@ -14,7 +15,7 @@ type NavProp = {
 
 export const Nav: React.SFC<NavProp> = (props: NavProp) => {
 
-    console.log(props);
+    const username: string = Brontosaurus.token.username;
 
     return (<React.Fragment>
         <NeonButton
@@ -29,5 +30,6 @@ export const Nav: React.SFC<NavProp> = (props: NavProp) => {
         >
             Edit
         </NeonButton>
+        Hello {username}
     </React.Fragment>);
 };
