@@ -30,6 +30,12 @@ export const Nav: React.SFC<NavProp> = (props: NavProp) => {
         >
             Edit
         </NeonButton>
+        <NeonButton
+            size={SIZE.MEDIUM}
+            onClick={() => Brontosaurus.logout(true)}
+        >
+            Logout
+        </NeonButton>
         Hello {username}
     </React.Fragment>);
 };
