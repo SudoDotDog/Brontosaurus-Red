@@ -19,6 +19,7 @@ type RegisterState = {
 
     readonly infos: Array<{
         name: string;
+        type: string;
         value: string;
     }>;
 };
@@ -38,9 +39,16 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
 
     public async componentDidMount() {
 
-        const infos = await registerInfo();
+        const infos: Array<{
+            name: string;
+            type: string;
+        }> = await registerInfo();
         this.setState({
-            infos,
+            infos: infos.map((info) => ({
+                name: info.name,
+                type: info.type,
+                value: '',
+            })),
         });
     }
 
@@ -58,6 +66,8 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
                 value={this.state.password}
                 onChange={(value) => this.setState({ password: value })} />
 
+            {this._renderInfos()}
+
             <NeonButton
                 size={SIZE.MEDIUM}
                 width={WIDTH.FULL}
@@ -68,8 +78,46 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
         </div>);
     }
 
+    private _renderInfos() {
+
+        return this.state.infos.map((element: {
+            name: string;
+            type: string;
+            value: string;
+            // tslint:disable-next-line
+        }, index: number) => {
+
+            return (<NeonInput
+                key={element.name}
+                label={element.name}
+                margin={MARGIN.SMALL}
+                value={element.value}
+                onChange={(value) => {
+
+                    const currentInfo = [...this.state.infos];
+                    currentInfo[index].value = value;
+
+                    this.setState({
+                        infos: currentInfo,
+                    });
+                }} />);
+        });
+    }
+
     private async _submit() {
 
-        // const id: string =  await register(this.state.username, this.state.password)
+        const parsed: Record<string, string> = this.state.infos.reduce((previous: Record<string, string>, current: {
+            name: string;
+            type: string;
+            value: string;
+        }) => {
+
+            return {
+                ...previous,
+                [current.name]: current.value,
+            };
+        }, {} as Record<string, string>);
+        const id: string =  await register(this.state.username, this.state.password, parsed);
+        console.log(id);
     }
 }
