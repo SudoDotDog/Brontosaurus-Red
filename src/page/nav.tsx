@@ -26,9 +26,9 @@ export const Nav: React.SFC<NavProp> = (props: NavProp) => {
         </NeonButton>
         <NeonButton
             size={SIZE.MEDIUM}
-            onClick={() => props.history.push('/edit')}
+            onClick={() => props.history.push('/preference')}
         >
-            Edit
+            Preference
         </NeonButton>
         <NeonButton
             size={SIZE.MEDIUM}
