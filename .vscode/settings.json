@@ -7,5 +7,6 @@
         "triforce",
         "tshook"
     ],
-    "tslint.configFile": "typescript/tslint.json"
+    "tslint.configFile": "typescript/tslint.json",
+    "files.eol": "\n"
 }
