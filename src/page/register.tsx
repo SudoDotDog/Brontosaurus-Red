@@ -4,9 +4,9 @@
  * @description Register
  */
 
-import { NeonButton } from "@sudoo/neon/button";
-import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
-import { NeonInput } from "@sudoo/neon/input";
+import { MARGIN } from "@sudoo/neon/declare";
+import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { NeonThemeProvider } from "@sudoo/neon/theme";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { register } from "../repository/register";
@@ -14,13 +14,9 @@ import { registerInfo } from "../repository/register-infos";
 
 type RegisterState = {
 
-    readonly username: string;
-    readonly password: string;
-
     readonly infos: Array<{
         name: string;
         type: string;
-        value: string;
     }>;
 };
 
@@ -31,8 +27,6 @@ type RegisterProp = {
 export class Register extends React.Component<RegisterProp, RegisterState> {
 
     public state: RegisterState = {
-        username: '',
-        password: '',
 
         infos: [],
     };
@@ -47,76 +41,54 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             infos: infos.map((info) => ({
                 name: info.name,
                 type: info.type,
-                value: '',
             })),
         });
     }
 
     public render() {
-        return (<div>
 
-            <NeonInput
-                label="Username"
-                margin={MARGIN.SMALL}
-                value={this.state.username}
-                onChange={(value) => this.setState({ username: value })} />
-            <NeonInput
-                label="Password"
-                margin={MARGIN.SMALL}
-                value={this.state.password}
-                onChange={(value) => this.setState({ password: value })} />
-
-            {this._renderInfos()}
-
-            <NeonButton
-                size={SIZE.MEDIUM}
-                width={WIDTH.FULL}
-                onClick={this._submit.bind(this)}
-                margin={MARGIN.SMALL}>
-                Perform
-            </NeonButton>
-        </div>);
+        return (
+            <NeonThemeProvider value={{
+                margin: MARGIN.SMALL,
+            }}>
+                <NeonSmartForm
+                    form={this._getForm()}
+                    onSubmit={(response: any) => this._submit(response)}
+                />
+            </NeonThemeProvider>);
     }
 
-    private _renderInfos() {
+    private _getForm(): Record<string, INPUT_TYPE> {
 
-        return this.state.infos.map((element: {
-            name: string;
-            type: string;
-            value: string;
-        }, index: number) => {
+        return {
+            username: INPUT_TYPE.TEXT,
+            password: INPUT_TYPE.PASSWORD,
+            ...this.state.infos.reduce((previous: Record<string, INPUT_TYPE>, current: {
+                name: string;
+                type: string;
+            }) => {
 
-            return (<NeonInput
-                key={element.name}
-                label={element.name}
-                margin={MARGIN.SMALL}
-                value={element.value}
-                onChange={(value) => {
-
-                    const currentInfo = [...this.state.infos];
-                    currentInfo[index].value = value;
-
-                    this.setState({
-                        infos: currentInfo,
-                    });
-                }} />);
-        });
+                return {
+                    ...previous,
+                    [current.name]: INPUT_TYPE.TEXT,
+                };
+            }, {}),
+        };
     }
 
-    private async _submit() {
+    private async _submit(response: Record<string, any>) {
 
         const parsed: Record<string, string> = this.state.infos.reduce((previous: Record<string, string>, current: {
             name: string;
             type: string;
-            value: string;
         }) => {
 
             return {
                 ...previous,
-                [current.name]: current.value,
+                [current.name]: response[current.name] || '',
             };
         }, {} as Record<string, string>);
-        const id: string = await register(this.state.username, this.state.password, parsed);
+        const id: string = await register(response.username || '', response.password || '', parsed);
         console.log(id);
     }
 }
