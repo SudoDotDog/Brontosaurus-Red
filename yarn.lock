@@ -14,10 +14,10 @@
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.2.0.tgz#5952e6fc48b289d9e71e456ad3a39a3d46b2e6e6"
   integrity sha512-OlIrLch8z18Tzh15ZY7Fv9SGQQC9yA8BFBlz9i1yaSnOpDweeK8UcEirbyWqEe40yokqKpLWp1Dc4gaF9K+FeA==
 
-"@brontosaurus/web@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.0.4.tgz#e10139f3afdf3939a6921286c0d7a24db092d673"
-  integrity sha512-wzPBOdAoMUPPwMwYQFNrDbhyBKGmGjrLMAj70EnIzo/0vsZWwM+ZPEAjQSeUPIPi78fjRU6wXuRlRZuf4ACU9A==
+"@brontosaurus/web@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.0.5.tgz#558b430b3c7198013196c39729f0f5e36d68bbd5"
+  integrity sha512-m9sokExHFq86qXYtmYxUOoc2k8TGB1ZgvCvlSLpjkYzvmmXbUznTvj9AVMWwEhchm7jFj2QxfgURsEdoL+QlYg==
   dependencies:
     "@brontosaurus/definition" "^1.2.0"
 
@@ -26,10 +26,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-1.2.2.tgz#c42c63eeb1b5908dcfad25cab442a9407d4f32ac"
   integrity sha512-Hauvvdbr+AxnFrke0KPwW4lmdGFPLlsL1utaKRUmCTsqKd6HIVrowgLhZNGsWI+D31uTeDyP8rjIUBXHeyzQcA==
 
-"@sudoo/neon@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.5.0.tgz#e8b67cd16b9ca60a47eda2f50c0f5ea923a76174"
-  integrity sha512-ixX3v4c/M/NgFTmwHTtEk4VPRlwyJjEGGeMaJJXDwGevmd54bMw++4djARQfgJsEyOtdNn6VQTt3D/lpWLzanA==
+"@sudoo/neon@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.6.0.tgz#75f7d87751b239d4cb2828b067e1e15cd687a3a1"
+  integrity sha512-HBhuo2lEdpkA83tqz3pGb7jaHb7ZT3lOpIuz+cmvjI/LaYKbN9ioXtr9z7pm5L131euKma9UsgS5/eFRRQfnwg==
   dependencies:
     jss "^10.0.0-alpha.7"
     jss-preset-default "^10.0.0-alpha.7"
