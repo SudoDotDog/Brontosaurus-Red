@@ -26,10 +26,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-1.2.2.tgz#c42c63eeb1b5908dcfad25cab442a9407d4f32ac"
   integrity sha512-Hauvvdbr+AxnFrke0KPwW4lmdGFPLlsL1utaKRUmCTsqKd6HIVrowgLhZNGsWI+D31uTeDyP8rjIUBXHeyzQcA==
 
-"@sudoo/neon@^1.6.3":
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.6.3.tgz#55dde2f0f8247aeae0baceca932151c7c094f15c"
-  integrity sha512-vGWr2OmBzmhhn2p0iMaI8G8l2dXjeQcSQ9X4lpkB4IJ2tRPEAdxNFqguwLfR7HJFzr727ACJ59N9jOx6ZKXEbA==
+"@sudoo/neon@^1.6.4":
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.6.4.tgz#cf3eb7cedfdce976006873c382ea32a7ea4e9a5e"
+  integrity sha512-VRJtZ6nAFczZsjW8Q7EYel1hWc2VRJ2mtGeXwO7W+DJr54AKRJny2gU6E5ct8/MT+daT7TVi4J0pX9upu1hGsg==
   dependencies:
     jss "^10.0.0-alpha.7"
     jss-preset-default "^10.0.0-alpha.7"

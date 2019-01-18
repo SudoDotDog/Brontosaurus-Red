@@ -88,6 +88,7 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
                 [current.name]: response[current.name] || '',
             };
         }, {} as Record<string, string>);
+
         const id: string = await register(response.username || '', response.password || '', parsed);
         console.log(id);
     }

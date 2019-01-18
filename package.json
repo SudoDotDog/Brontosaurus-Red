@@ -22,7 +22,7 @@
   "homepage": "https://github.com/SudoDotDog/Brontosaurus-Red#readme",
   "dependencies": {
     "@brontosaurus/web": "^1.0.5",
-    "@sudoo/neon": "^1.6.3",
+    "@sudoo/neon": "^1.6.4",
     "@sudoo/react-force": "^1.1.0",
     "@sudoo/redux": "^1.3.0",
     "react-router-dom": "^4.3.1"
