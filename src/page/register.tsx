@@ -84,7 +84,6 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             name: string;
             type: string;
             value: string;
-            // tslint:disable-next-line
         }, index: number) => {
 
             return (<NeonInput
@@ -117,7 +116,7 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
                 [current.name]: current.value,
             };
         }, {} as Record<string, string>);
-        const id: string =  await register(this.state.username, this.state.password, parsed);
+        const id: string = await register(this.state.username, this.state.password, parsed);
         console.log(id);
     }
 }
