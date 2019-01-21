@@ -4,17 +4,40 @@
  * @description Nav
  */
 
-import { Brontosaurus } from "@brontosaurus/web";
+import { BrontosaurusProps, EnableForGroup, WithAuthComponent, withBrontosaurus } from "@brontosaurus/react";
+import { Brontosaurus, Token } from "@brontosaurus/web";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { EnableForGroup } from "../sudoo/group";
 
 type NavProp = {
-} & RouteComponentProps;
+} & RouteComponentProps & BrontosaurusProps;
 
-export const Nav: React.SFC<NavProp> = (props: NavProp) => {
+const renderAuthButton = (token: Token | null): React.ReactNode => {
+
+    if (token) {
+        return (
+            <NeonButton
+                size={SIZE.MEDIUM}
+                onClick={() => Brontosaurus.logout(true)}
+            >
+                Logout from {token.username}
+            </NeonButton>
+        );
+    }
+
+    return (
+        <NeonButton
+            size={SIZE.MEDIUM}
+            onClick={() => Brontosaurus.token()}
+        >
+            Sign-in
+        </NeonButton>
+    );
+};
+
+const NavBase: React.SFC<NavProp> = (props: NavProp) => {
 
     return (<React.Fragment>
 
@@ -32,11 +55,9 @@ export const Nav: React.SFC<NavProp> = (props: NavProp) => {
                 Preference
             </NeonButton>
         </EnableForGroup>
-        <NeonButton
-            size={SIZE.MEDIUM}
-            onClick={() => Brontosaurus.logout(true)}
-        >
-            Logout
-        </NeonButton>
+
+        {renderAuthButton(props.auth.visit())}
     </React.Fragment>);
 };
+
+export const Nav: WithAuthComponent<NavProp> = withBrontosaurus(NavBase);

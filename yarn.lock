@@ -14,6 +14,14 @@
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.2.0.tgz#5952e6fc48b289d9e71e456ad3a39a3d46b2e6e6"
   integrity sha512-OlIrLch8z18Tzh15ZY7Fv9SGQQC9yA8BFBlz9i1yaSnOpDweeK8UcEirbyWqEe40yokqKpLWp1Dc4gaF9K+FeA==
 
+"@brontosaurus/react@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-1.0.0.tgz#6a72de478552a16fba7e94d3bfa0b54be7caf0be"
+  integrity sha512-YuIL5NO3ECzl1gF2wYEmo5ATw/H4duV06Bbe4O3dg+A3fDy/kkCuvgUpW9dDfogt1YA8i72Mt2H7i5L96rCRtg==
+  dependencies:
+    "@brontosaurus/web" "^1.1.0"
+    "@sudoo/react-force" "^1.1.0"
+
 "@brontosaurus/web@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.1.0.tgz#bce7273230087fb5c6a5191071d6fb6752ee0672"
