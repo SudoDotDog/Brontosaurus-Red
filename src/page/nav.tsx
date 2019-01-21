@@ -15,7 +15,7 @@ type NavProp = {
 
 export const Nav: React.SFC<NavProp> = (props: NavProp) => {
 
-    const username: string = Brontosaurus.token.username;
+    const username: string = Brontosaurus.token().username;
 
     return (<React.Fragment>
         <NeonButton
