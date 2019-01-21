@@ -4,17 +4,16 @@
  * @description Declare
  */
 
-export enum BrontosaurusMode {
+import { Token } from "@brontosaurus/web";
+import * as React from "react";
 
-    VISITOR = "VISITOR",
-    STRICT = "STRICT",
-}
+export type BrontosaurusProps = {
 
-export type BrontosaurusInfo = {
-
-    mode: BrontosaurusMode;
+    readonly auth: {
+        readonly visit: () => (Token | null);
+        readonly strict: () => Token;
+    };
 };
 
-export const getDefaultInfo = (): BrontosaurusInfo => ({
-    mode: BrontosaurusMode.STRICT,
-});
+export type ExcludeAuth<T extends BrontosaurusProps> = Pick<T, Exclude<keyof T, 'brontosaurus'>>;
+export type WithAuthComponent<T extends BrontosaurusProps> = React.ComponentType<ExcludeAuth<T>>;

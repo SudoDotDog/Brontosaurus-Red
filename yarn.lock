@@ -14,10 +14,10 @@
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.2.0.tgz#5952e6fc48b289d9e71e456ad3a39a3d46b2e6e6"
   integrity sha512-OlIrLch8z18Tzh15ZY7Fv9SGQQC9yA8BFBlz9i1yaSnOpDweeK8UcEirbyWqEe40yokqKpLWp1Dc4gaF9K+FeA==
 
-"@brontosaurus/web@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.0.5.tgz#558b430b3c7198013196c39729f0f5e36d68bbd5"
-  integrity sha512-m9sokExHFq86qXYtmYxUOoc2k8TGB1ZgvCvlSLpjkYzvmmXbUznTvj9AVMWwEhchm7jFj2QxfgURsEdoL+QlYg==
+"@brontosaurus/web@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.0.7.tgz#375510e0edd6d687f9d76d998755a67c9ce0b948"
+  integrity sha512-uu9+ugdRdgOV15J10MJK4akX0X7ZBAVCCc+tF+QHZMpMvDmkHEAKTNv8AxseRS1XShUIoWsjiRjN1+fhmwrQUg==
   dependencies:
     "@brontosaurus/definition" "^1.2.0"
 
