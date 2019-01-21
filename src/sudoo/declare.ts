@@ -20,5 +20,5 @@ export type BrontosaurusEnabledForProps = {
     readonly visit: boolean;
 };
 
-export type ExcludeAuth<T extends BrontosaurusProps> = Pick<T, Exclude<keyof T, 'brontosaurus'>>;
+export type ExcludeAuth<T extends BrontosaurusProps> = Pick<T, Exclude<keyof T, 'auth'>>;
 export type WithAuthComponent<T extends BrontosaurusProps> = React.ComponentType<ExcludeAuth<T>>;

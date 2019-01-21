@@ -31,10 +31,10 @@ export const EnableForGroupBase: React.ComponentType<EnableForGroupProp> = (prop
             const groups: string[] = token.groups;
             const valid: boolean = props.group.some((value: string) => groups.includes(value));
 
-            return valid ? props.children : props.placeholder;
+            return valid ? props.children : (props.placeholder || null);
         }
 
-        return props.placeholder;
+        return props.placeholder || null;
     } else {
 
         const token: Token = props.auth.strict();
@@ -44,7 +44,7 @@ export const EnableForGroupBase: React.ComponentType<EnableForGroupProp> = (prop
             const groups: string[] = token.groups;
             const valid: boolean = props.group.some((value: string) => groups.includes(value));
 
-            return valid ? props.children : props.placeholder;
+            return valid ? props.children : (props.placeholder || null);
         }
 
         throw new Error('[Brontosaurus-React] Invalid Token');

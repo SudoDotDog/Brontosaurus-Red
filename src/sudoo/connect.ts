@@ -15,7 +15,7 @@ export const withBrontosaurus = <T extends BrontosaurusProps>(Component: any): R
         React.createElement(Component, {
             ...originProps,
             auth: {
-                visit: () => Brontosaurus.token(),
-                strict: () => Brontosaurus.rummage(),
+                visit: () => Brontosaurus.rummage(),
+                strict: () => Brontosaurus.token(),
             },
         });

@@ -9,33 +9,34 @@ import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { EnableForGroup } from "../sudoo/group";
 
 type NavProp = {
 } & RouteComponentProps;
 
 export const Nav: React.SFC<NavProp> = (props: NavProp) => {
 
-    const username: string = Brontosaurus.token().username;
-
     return (<React.Fragment>
-        <NeonButton
-            size={SIZE.MEDIUM}
-            onClick={() => props.history.push('/register')}
-        >
-            Register
-        </NeonButton>
-        <NeonButton
-            size={SIZE.MEDIUM}
-            onClick={() => props.history.push('/preference')}
-        >
-            Preference
-        </NeonButton>
+
+        <EnableForGroup visit group={['BRONTOSAURUS_SUPER_ADMIN']}>
+            <NeonButton
+                size={SIZE.MEDIUM}
+                onClick={() => props.history.push('/register')}
+            >
+                Register
+            </NeonButton>
+            <NeonButton
+                size={SIZE.MEDIUM}
+                onClick={() => props.history.push('/preference')}
+            >
+                Preference
+            </NeonButton>
+        </EnableForGroup>
         <NeonButton
             size={SIZE.MEDIUM}
             onClick={() => Brontosaurus.logout(true)}
         >
             Logout
         </NeonButton>
-        Hello {username}
     </React.Fragment>);
 };
