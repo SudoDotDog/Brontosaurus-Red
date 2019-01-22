@@ -8,7 +8,7 @@ import { NeonPaper } from "@sudoo/neon/paper";
 import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { Route } from "react-router-dom";
-import * as EntryStyle from "../style/route/entry.sass";
+import * as EntryStyle from "../style/route/entry.scss";
 import { Edit } from "./page/edit";
 import { Nav } from "./page/nav";
 import { Preference } from "./page/preference";
