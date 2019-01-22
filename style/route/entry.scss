@@ -4,6 +4,8 @@
  * @description Entry
  */
 
+@import '../common/color.sass';
+
 .container {
     margin: 2rem;
     display: grid;
@@ -24,10 +26,19 @@
 .nav {
 
     display: flex;
-    grid-area: nav;
+    align-items: flex-end;
 
-    &.menu {
-        flex: 1;
+    grid-area: nav;
+}
+
+.sign-in {
+
+    color: $navy;
+
+    &:hover {
+
+        cursor: pointer;
+        text-decoration: underline;
     }
 }
 

@@ -19,30 +19,19 @@ const renderAuthButton = (token: Token | null): React.ReactNode => {
 
     if (token) {
         return (
-            <NeonButton
-                size={SIZE.MEDIUM}
-                onClick={() => Brontosaurus.logout(true)}
-            >
-                Logout from {token.username}
-            </NeonButton>
+            <span>
+                Hello, {token.username} &nbsp;
+                <a className={EntryStyle.signIn} onClick={() => Brontosaurus.logout(true)}>Sign-out</a>
+            </span>
         );
     }
 
-    return (
-        <NeonButton
-            size={SIZE.MEDIUM}
-            onClick={() => Brontosaurus.token()}
-        >
-            Sign-in
-        </NeonButton>
-    );
+    return (<a className={EntryStyle.signIn} onClick={() => Brontosaurus.token()}>Sign-in</a>);
 };
 
 const NavBase: React.SFC<NavProp> = (props: NavProp) => {
 
     return (<React.Fragment>
-
-        <div></div>
         <EnableForGroup visit group={['BRONTOSAURUS_SUPER_ADMIN']}>
             <NeonButton
                 size={SIZE.MEDIUM}
@@ -57,7 +46,9 @@ const NavBase: React.SFC<NavProp> = (props: NavProp) => {
                 Preference
             </NeonButton>
         </EnableForGroup>
-        <div className={EntryStyle.menu}></div>
+        <div style={{
+            flex: 1,
+        }} />
         {renderAuthButton(props.auth.visit())}
     </React.Fragment>);
 };
