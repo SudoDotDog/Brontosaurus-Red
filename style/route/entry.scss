@@ -17,14 +17,21 @@
 }
 
 .title {
+
     grid-area: title;
 }
 
 .nav {
+
     display: flex;
     grid-area: nav;
+
+    &.menu {
+        flex: 1;
+    }
 }
 
 .content {
+
     grid-area: content;
 }

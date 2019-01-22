@@ -10,6 +10,7 @@ import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import * as EntryStyle from "../../style/route/entry.scss";
 
 type NavProp = {
 } & RouteComponentProps & BrontosaurusProps;
@@ -41,12 +42,13 @@ const NavBase: React.SFC<NavProp> = (props: NavProp) => {
 
     return (<React.Fragment>
 
+        <div></div>
         <EnableForGroup visit group={['BRONTOSAURUS_SUPER_ADMIN']}>
             <NeonButton
                 size={SIZE.MEDIUM}
                 onClick={() => props.history.push('/register')}
             >
-                Register
+                User
             </NeonButton>
             <NeonButton
                 size={SIZE.MEDIUM}
@@ -55,7 +57,7 @@ const NavBase: React.SFC<NavProp> = (props: NavProp) => {
                 Preference
             </NeonButton>
         </EnableForGroup>
-
+        <div className={EntryStyle.menu}></div>
         {renderAuthButton(props.auth.visit())}
     </React.Fragment>);
 };

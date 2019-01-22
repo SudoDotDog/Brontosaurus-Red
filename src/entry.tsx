@@ -28,9 +28,9 @@ export class Entry extends React.Component {
                 </div>
                 <div className={EntryStyle.content}>
                     <NeonPaper>
-                        <Route path="/edit" exact component={Edit} />
-                        <Route path="/preference" exact component={Preference} />
-                        <Route path="/register" exact component={Register} />
+                        <Route path="/edit" component={Edit} />
+                        <Route path="/preference" component={Preference} />
+                        <Route path="/register" component={Register} />
                     </NeonPaper>
                 </div>
             </div>

@@ -55,7 +55,8 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
                     form={this._getForm()}
                     onSubmit={(response: any) => this._submit(response)}
                 />
-            </NeonThemeProvider>);
+            </NeonThemeProvider>
+        );
     }
 
     private _getForm(): Record<string, INPUT_TYPE> {
