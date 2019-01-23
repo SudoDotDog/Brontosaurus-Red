@@ -11,8 +11,7 @@ import { Route } from "react-router-dom";
 import * as EntryStyle from "../style/route/entry.scss";
 import { Nav } from "./page/nav";
 import { Preference } from "./page/preference";
-import { Register } from "./page/register";
-import { UserRoute } from "./user/user";
+import { UserRoute } from "./user/route";
 
 export class Entry extends React.Component {
 
@@ -28,9 +27,8 @@ export class Entry extends React.Component {
                 </div>
                 <div className={EntryStyle.content}>
                     <NeonPaper>
-                        <Route path="/user" component={UserRoute} />
+                        <UserRoute />
                         <Route path="/preference" component={Preference} />
-                        <Route path="/register" component={Register} />
                     </NeonPaper>
                 </div>
             </div>
