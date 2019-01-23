@@ -9,10 +9,10 @@ import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { Route } from "react-router-dom";
 import * as EntryStyle from "../style/route/entry.scss";
-import { Edit } from "./page/edit";
 import { Nav } from "./page/nav";
 import { Preference } from "./page/preference";
 import { Register } from "./page/register";
+import { UserRoute } from "./user/user";
 
 export class Entry extends React.Component {
 
@@ -28,7 +28,7 @@ export class Entry extends React.Component {
                 </div>
                 <div className={EntryStyle.content}>
                     <NeonPaper>
-                        <Route path="/edit" component={Edit} />
+                        <Route path="/user" component={UserRoute} />
                         <Route path="/preference" component={Preference} />
                         <Route path="/register" component={Register} />
                     </NeonPaper>

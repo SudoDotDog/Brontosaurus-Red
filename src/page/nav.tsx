@@ -35,15 +35,9 @@ const NavBase: React.SFC<NavProp> = (props: NavProp) => {
         <EnableForGroup visit group={['BRONTOSAURUS_SUPER_ADMIN']}>
             <NeonButton
                 size={SIZE.MEDIUM}
-                onClick={() => props.history.push('/register')}
+                onClick={() => props.history.push('/user')}
             >
                 User
-            </NeonButton>
-            <NeonButton
-                size={SIZE.MEDIUM}
-                onClick={() => props.history.push('/preference')}
-            >
-                Preference
             </NeonButton>
         </EnableForGroup>
         <div style={{
