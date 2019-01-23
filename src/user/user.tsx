@@ -22,9 +22,15 @@ export class UserRoute extends React.Component<UserRouteProp> {
         return (
             <div className={__User.searchBar}>
                 <NeonApplicable
+                    className={__User.search}
+                    size={SIZE.MEDIUM}
                     label="Search"
                 />
-                <NeonButton size={SIZE.RELATIVE}>New</NeonButton>
+                <div style={{width: '1rem'}} />
+                <NeonButton
+                    className={__User.single}
+                    size={SIZE.RELATIVE}
+                >New</NeonButton>
             </div>
         );
     }
