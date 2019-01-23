@@ -6,7 +6,7 @@
 
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
-import { NeonInput } from "@sudoo/neon/input";
+import { NeonApplicable } from "@sudoo/neon/input";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as __User from "../../style/route/user.scss";
@@ -21,10 +21,10 @@ export class UserRoute extends React.Component<UserRouteProp> {
 
         return (
             <div className={__User.searchBar}>
-                <NeonInput style={{ flex: 1 }} label="Search" />
-                <NeonButton style={{ flex: 1, height: '100%' }}>
-                    New
-                </NeonButton>
+                <NeonApplicable
+                    label="Search"
+                />
+                <NeonButton size={SIZE.RELATIVE}>New</NeonButton>
             </div>
         );
     }
