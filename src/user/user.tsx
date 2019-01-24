@@ -5,7 +5,6 @@
  */
 
 import { NeonButton } from "@sudoo/neon/button";
-import { SIZE } from "@sudoo/neon/declare";
 import { NeonInput } from "@sudoo/neon/input";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
