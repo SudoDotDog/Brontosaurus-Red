@@ -7,6 +7,7 @@
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonApplicable } from "@sudoo/neon/input";
+import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as __User from "../../style/route/user.scss";
@@ -52,27 +53,34 @@ export class User extends React.Component<UserProp, UserState> {
 
                 </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Username</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this._renderUser()}
-                    </tbody>
-                </table>
+                {this.state.users.length === 0
+                    ? void 0
+                    : <NeonTable style={{ marginTop: '1rem' }}>
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Groups</th>
+                                <th>Infos</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this._renderUser()}
+                        </tbody>
+                    </NeonTable>}
             </div>
 
         );
     }
 
-    private _renderUser() {
+    private _renderUser(): JSX.Element[] {
 
-        console.log(this.state);
         return this.state.users.map((user: UserResponse) =>
             (<tr key={user.username}>
                 <td>{user.username}</td>
+                <td>{user.groups}</td>
+                <td>{JSON.stringify(user.infos, null, 2)}</td>
+                <td><NeonButton size={SIZE.RELATIVE}>Edit</NeonButton></td>
             </tr>),
         );
     }
