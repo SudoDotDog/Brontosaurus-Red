@@ -18,33 +18,37 @@ type NavProp = {
 const renderAuthButton = (token: Token | null): React.ReactNode => {
 
     if (token) {
-        return (
-            <span>
-                Hello, {token.username} &nbsp;
+        return (<span>
+            Hello, {token.username} &nbsp;
                 <a className={EntryStyle.signIn} onClick={() => Brontosaurus.logout(true)}>Sign-out</a>
-            </span>
-        );
+        </span>);
     }
 
-    return (<a className={EntryStyle.signIn} onClick={() => Brontosaurus.token()}>Sign-in</a>);
+    return (<a
+        className={EntryStyle.signIn}
+        onClick={() => Brontosaurus.token()}>
+        Sign-in
+        </a>);
 };
 
 const NavBase: React.SFC<NavProp> = (props: NavProp) => {
 
-    return (<React.Fragment>
-        <EnableForGroup visit group={['BRONTOSAURUS_SUPER_ADMIN']}>
-            <NeonButton
-                size={SIZE.MEDIUM}
-                onClick={() => props.history.push('/user/list')}
-            >
-                User
+    return (
+        <React.Fragment>
+            <EnableForGroup visit group={['BRONTOSAURUS_SUPER_ADMIN']}>
+                <NeonButton
+                    size={SIZE.MEDIUM}
+                    onClick={() => props.history.push('/user/list')}
+                >
+                    User
             </NeonButton>
-        </EnableForGroup>
-        <div style={{
-            flex: 1,
-        }} />
-        {renderAuthButton(props.auth.visit())}
-    </React.Fragment>);
+            </EnableForGroup>
+            <div style={{
+                flex: 1,
+            }} />
+            {renderAuthButton(props.auth.visit())}
+        </React.Fragment>
+    );
 };
 
 export const Nav: WithAuthComponent<NavProp> = withBrontosaurus(NavBase);

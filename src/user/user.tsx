@@ -21,12 +21,15 @@ export class User extends React.Component<UserProp> {
 
         return (
             <div className={__User.searchBar}>
+
                 <NeonApplicable
                     className={__User.search}
                     size={SIZE.MEDIUM}
                     label="Search"
                 />
+
                 <div style={{ width: '1rem' }} />
+
                 <NeonButton
                     className={__User.single}
                     size={SIZE.RELATIVE}

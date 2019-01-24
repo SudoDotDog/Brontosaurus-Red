@@ -4,7 +4,6 @@
  * @description Declare
  */
 
-
 export interface IStore {
 
     a?: string;

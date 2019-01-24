@@ -38,6 +38,7 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             name: string;
             type: string;
         }> = await registerInfo();
+
         this.setState({
             infos: infos.map((info) => ({
                 name: info.name,
@@ -48,18 +49,16 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
 
     public render() {
 
-        return (
-            <NeonThemeProvider value={{
-                margin: MARGIN.SMALL,
-            }}>
-                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
-                <NeonTitle>Register</NeonTitle>
-                <NeonSmartForm
-                    form={this._getForm()}
-                    onSubmit={(response: any) => this._submit(response)}
-                />
-            </NeonThemeProvider>
-        );
+        return (<NeonThemeProvider value={{
+            margin: MARGIN.SMALL,
+        }}>
+            <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
+            <NeonTitle>Register</NeonTitle>
+            <NeonSmartForm
+                form={this._getForm()}
+                onSubmit={(response: any) => this._submit(response)}
+            />
+        </NeonThemeProvider>);
     }
 
     private _getForm(): Record<string, INPUT_TYPE> {
