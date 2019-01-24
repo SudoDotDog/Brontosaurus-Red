@@ -23,22 +23,23 @@ export class User extends React.Component<UserProp> {
         return (
             <div className={__User.searchBar}>
 
-                <NeonApplicable
-                    className={__User.search}
-                    size={SIZE.MEDIUM}
-                    label="Search"
-                    onApply={(keyword: string) => fetchAccount(keyword)}
-                />
+                <div className={__User.search}>
+                    <NeonApplicable
+                        size={SIZE.MEDIUM}
+                        label="Search"
+                        onApply={(keyword: string) => fetchAccount(keyword)}
+                    />
+                </div>
 
-                <div style={{ width: '1rem' }} />
-
-                <NeonButton
-                    className={__User.single}
-                    size={SIZE.RELATIVE}
-                    onClick={() => this.props.history.push('/user/new')}
-                >
-                    New
+                <div className={__User.single}>
+                    <NeonButton
+                        size={SIZE.FULL}
+                        onClick={() => this.props.history.push('/user/new')}
+                    >
+                        New
                 </NeonButton>
+                </div>
+
             </div>
         );
     }
