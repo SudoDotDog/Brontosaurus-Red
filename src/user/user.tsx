@@ -10,37 +10,70 @@ import { NeonApplicable } from "@sudoo/neon/input";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as __User from "../../style/route/user.scss";
-import { fetchAccount } from "../repository/account-fetch";
+import { fetchAccount, UserResponse } from "../repository/account-fetch";
 
 type UserProp = {
 } & RouteComponentProps;
 
+type UserState = {
 
-export class User extends React.Component<UserProp> {
+    users: UserResponse[];
+};
+
+
+export class User extends React.Component<UserProp, UserState> {
+
+    public state: UserState = {
+        users: [],
+    };
 
     public render() {
 
         return (
-            <div className={__User.searchBar}>
+            <div>
+                <div className={__User.searchBar}>
 
-                <div className={__User.search}>
                     <NeonApplicable
+                        className={__User.search}
                         size={SIZE.MEDIUM}
                         label="Search"
-                        onApply={(keyword: string) => fetchAccount(keyword)}
+                        onApply={async (keyword: string) => this.setState({ users: await fetchAccount(keyword) })}
                     />
-                </div>
 
-                <div className={__User.single}>
+                    <div style={{ width: '0.5rem' }}></div>
+
                     <NeonButton
-                        size={SIZE.FULL}
+                        className={__User.single}
+                        size={SIZE.RELATIVE}
                         onClick={() => this.props.history.push('/user/new')}
                     >
                         New
-                </NeonButton>
+                    </NeonButton>
+
                 </div>
 
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this._renderUser()}
+                    </tbody>
+                </table>
             </div>
+
+        );
+    }
+
+    private _renderUser() {
+
+        console.log(this.state);
+        return this.state.users.map((user: UserResponse) =>
+            (<tr key={user.username}>
+                <td>{user.username}</td>
+            </tr>),
         );
     }
 }

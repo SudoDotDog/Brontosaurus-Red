@@ -6,18 +6,15 @@
 
 .search-bar {
 
-    display: grid;
-    grid-gap: 0.5rem;
-    grid-template-areas: 'search tool';
-    grid-template-columns: 5fr 1fr;
+    display: flex;
 }
 
 .search {
 
-    grid-area: search;
+    flex: 5;
 }
 
 .single {
 
-    grid-area: tool;
+    flex: 1;
 }

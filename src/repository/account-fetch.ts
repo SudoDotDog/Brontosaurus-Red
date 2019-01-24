@@ -7,9 +7,17 @@
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 
-export const fetchAccount = async (keyword: string): Promise<any> => {
+export type UserResponse = {
+    username: string;
+    groups: number;
+    infos: Record<string, any>;
+};
 
-    const response = await Fetch
+export const fetchAccount = async (keyword: string): Promise<UserResponse[]> => {
+
+    const response: {
+        accounts: UserResponse[];
+    } = await Fetch
         .post
         .json('http://localhost:8080/account/fetch')
         .bearer(Brontosaurus.raw)
@@ -18,4 +26,5 @@ export const fetchAccount = async (keyword: string): Promise<any> => {
         .fetch();
 
     console.log(response);
+    return response.accounts;
 };
