@@ -7,6 +7,7 @@
 import { MARGIN } from "@sudoo/neon/declare";
 import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
+import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { register } from "../repository/register";
@@ -51,6 +52,8 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             <NeonThemeProvider value={{
                 margin: MARGIN.SMALL,
             }}>
+                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
+                <NeonTitle>Register</NeonTitle>
                 <NeonSmartForm
                     form={this._getForm()}
                     onSubmit={(response: any) => this._submit(response)}

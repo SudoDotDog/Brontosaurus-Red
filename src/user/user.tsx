@@ -5,23 +5,33 @@
  */
 
 import { NeonButton } from "@sudoo/neon/button";
-import { NeonInput } from "@sudoo/neon/input";
+import { SIZE } from "@sudoo/neon/declare";
+import { NeonApplicable } from "@sudoo/neon/input";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as __User from "../../style/route/user.scss";
 
-type UserRouteProp = {
+type UserProp = {
 } & RouteComponentProps;
 
 
-export class UserRoute extends React.Component<UserRouteProp> {
+export class User extends React.Component<UserProp> {
 
     public render() {
 
         return (
             <div className={__User.searchBar}>
-                <NeonInput style={{ flex: 1 }} label="Search" />
-                <NeonButton style={{ flex: 1, height: '100%' }}>
+                <NeonApplicable
+                    className={__User.search}
+                    size={SIZE.MEDIUM}
+                    label="Search"
+                />
+                <div style={{ width: '1rem' }} />
+                <NeonButton
+                    className={__User.single}
+                    size={SIZE.RELATIVE}
+                    onClick={() => this.props.history.push('/user/new')}
+                >
                     New
                 </NeonButton>
             </div>
