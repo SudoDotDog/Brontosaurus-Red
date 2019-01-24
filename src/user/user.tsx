@@ -10,6 +10,7 @@ import { NeonApplicable } from "@sudoo/neon/input";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as __User from "../../style/route/user.scss";
+import { fetchAccount } from "../repository/account-fetch";
 
 type UserProp = {
 } & RouteComponentProps;
@@ -26,6 +27,7 @@ export class User extends React.Component<UserProp> {
                     className={__User.search}
                     size={SIZE.MEDIUM}
                     label="Search"
+                    onApply={(keyword: string) => fetchAccount(keyword)}
                 />
 
                 <div style={{ width: '1rem' }} />
