@@ -39,10 +39,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-1.1.0.tgz#cd0b01ff14cba39829bdc1aaf45cb4e011df1532"
   integrity sha512-QPabpHOlEDQX3Fbdji30brEbvlk4TzpMq6rHM2prTMp9nCkK03sY73ANlMV+CnROMLZKJjHc3EKM1McNNi0ISg==
 
-"@sudoo/neon@^1.8.1":
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.8.1.tgz#ed9bb132eb094b625b4b5c078bf6a7cd38198c7e"
-  integrity sha512-CuHSRWC+xuHY4rfmMWiRG1/bl07ElgaYJs2d4vTvuULw/7nXm08kocxRgAYbBvily3Jn4P4FlBlwvNzpAjowug==
+"@sudoo/neon@^1.8.2":
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.8.2.tgz#c244a56c55e5eaa43d70297b89f480d977bb12ee"
+  integrity sha512-dRH3iK4469amHocg6kwMDG3MQEwv47Pi8x/vSBT+jOUTSuv2STqiBSqSuP3gSS7+TvhiahDUdgQ6u5dDR/5Nmg==
   dependencies:
     jss "^10.0.0-alpha.7"
     jss-preset-default "^10.0.0-alpha.7"
