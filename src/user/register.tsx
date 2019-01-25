@@ -10,8 +10,8 @@ import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { register } from "../repository/register";
-import { registerInfo } from "../repository/register-infos";
+import { register } from "./repository/register";
+import { registerInfo } from "./repository/register-infos";
 
 type RegisterState = {
 

@@ -11,7 +11,7 @@ import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as __User from "../../style/route/user.scss";
-import { fetchAccount, UserResponse } from "../repository/account-fetch";
+import { fetchAccount, UserResponse } from "./repository/account-fetch";
 
 type UserProp = {
 } & RouteComponentProps;
@@ -80,7 +80,11 @@ export class User extends React.Component<UserProp, UserState> {
                 <td>{user.username}</td>
                 <td>{user.groups}</td>
                 <td>{JSON.stringify(user.infos, null, 2)}</td>
-                <td><NeonButton size={SIZE.RELATIVE}>Edit</NeonButton></td>
+                <td><NeonButton
+                    onClick={() => this.props.history.push('/user/e/' + user.username)}
+                    size={SIZE.RELATIVE}>
+                    Edit
+                </NeonButton></td>
             </tr>),
         );
     }

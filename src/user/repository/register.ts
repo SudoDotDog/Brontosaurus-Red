@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Repository
+ * @namespace User_Repository
  * @description Register
  */
 
