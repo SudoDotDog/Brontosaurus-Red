@@ -9,8 +9,9 @@ import { Fetch } from "@sudoo/fetch";
 
 export type SingleFetchResponse = {
     username: string;
-    groups: number;
+    beacons: Record<string, any>;
     infos: Record<string, any>;
+    groups: string[];
 };
 
 export const singleFetchRepository = async (username: string): Promise<SingleFetchResponse> => {

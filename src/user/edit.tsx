@@ -4,7 +4,9 @@
  * @description Edit
  */
 
-import { NeonSub } from "@sudoo/neon/typography";
+import { MARGIN, SIZE } from "@sudoo/neon/declare";
+import { NeonThemeProvider } from "@sudoo/neon/theme";
+import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
@@ -37,8 +39,29 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
         return (
             <div>
                 <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
-                {this.state.user ? JSON.stringify(this.state.user) : void 0}
+                {this._renderEditableInfos()}
             </div>
+        );
+    }
+
+    private _renderEditableInfos() {
+
+        if (!this.state.user) {
+            return null;
+        }
+
+        return (
+            <NeonThemeProvider value={{
+                margin: MARGIN.SMALL,
+            }} >
+                <NeonTitle>Edit: {this.state.user.username}</NeonTitle>
+                <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
+                {JSON.stringify(this.state.user.infos)}
+                <NeonTitle size={SIZE.MEDIUM}>Beacon</NeonTitle>
+                {JSON.stringify(this.state.user.beacons)}
+                <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
+                {JSON.stringify(this.state.user.groups)}
+            </NeonThemeProvider>
         );
     }
 
