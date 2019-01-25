@@ -76,13 +76,13 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
             return null;
         }
 
-        return _Map.keys(this.state.user.infos).map((key: string) => {
+        return _Map.keys(this.state.user.infos).map((key: string, index: number) => {
 
             const user: any = this.state.user;
             const value: string = user.infos[key];
 
             return (<div
-                key={key}
+                key={index}
                 style={{
                     display: 'flex',
                 }}>
@@ -107,26 +107,9 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
         if (!this.state.user) {
             return;
         }
+
         const info: Record<string, any> = this.state.user.infos;
-
-        const newInfo: Record<string, any> = _Map.keys(info).reduce((previous: Record<string, any>, key: string) => {
-
-            if (key === oldKey) {
-                if (oldKey === newKey) {
-                    return {
-                        ...previous,
-                        [key]: value,
-                    };
-                }
-
-                return {
-                    ...previous,
-                    [newKey]: value,
-                };
-            }
-
-            return { ...previous, [key]: info[key] };
-        }, {} as Record<string, any>);
+        const newInfo: Record<string, any> = _Map.lash_mutate(info, oldKey, value, newKey);
 
         this.setState({
             user: {
