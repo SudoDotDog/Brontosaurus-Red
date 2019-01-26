@@ -4,10 +4,9 @@
  * @description Edit
  */
 
-import { _Map } from "@sudoo/bark";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
-import { NeonEditable } from "@sudoo/neon/input";
+import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
@@ -59,64 +58,33 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
             }} >
                 <NeonTitle>Edit: {this.state.user.username}</NeonTitle>
                 <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
-                {this._renderInfos()}
+                <NeonSmartList
+                    list={this.state.user.infos}
+                    editableName
+                    editableValue
+                    onChange={(newInfo) => this.setState({
+                        user: {
+                            ...this.state.user as any,
+                            infos: newInfo,
+                        },
+                    })} />
                 <NeonTitle size={SIZE.MEDIUM}>Beacon</NeonTitle>
-                {JSON.stringify(this.state.user.beacons)}
+
+                <NeonSmartList
+                    list={this.state.user.beacons}
+                    editableValue
+                    onChange={(newBeacon) => this.setState({
+                        user: {
+                            ...this.state.user as any,
+                            beacons: newBeacon,
+                        },
+                    })} />
                 <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
                 {JSON.stringify(this.state.user.groups)}
 
                 <NeonButton size={SIZE.MEDIUM} width={WIDTH.FULL}>Save Change</NeonButton>
             </NeonThemeProvider>
         );
-    }
-
-    private _renderInfos() {
-
-        if (!this.state.user) {
-            return null;
-        }
-
-        return _Map.keys(this.state.user.infos).map((key: string, index: number) => {
-
-            const user: any = this.state.user;
-            const value: string = user.infos[key];
-
-            return (<div
-                key={index}
-                style={{
-                    display: 'flex',
-                }}>
-                <NeonEditable
-                    style={{ flex: 1 }}
-                    onChange={(newValue: string) => this._replaceInfoValue(key, newValue, value)}
-                    label="Key"
-                    value={key}
-                />
-                <NeonEditable
-                    style={{ flex: 4 }}
-                    onChange={(newValue: string) => this._replaceInfoValue(key, key, newValue)}
-                    label="Value"
-                    value={value}
-                />
-            </div>);
-        });
-    }
-
-    private _replaceInfoValue(oldKey: string, newKey: string, value: string): void {
-
-        if (!this.state.user) {
-            return;
-        }
-
-        const info: Record<string, any> = this.state.user.infos;
-        const newInfo: Record<string, any> = _Map.lash_mutate(info, oldKey, value, newKey);
-
-        this.setState({
-            user: {
-                ...this.state.user,
-                infos: newInfo,
-            },
-        });
     }
 
     private _getUsername(): string {
