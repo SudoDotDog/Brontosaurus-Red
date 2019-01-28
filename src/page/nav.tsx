@@ -40,8 +40,20 @@ const NavBase: React.SFC<NavProp> = (props: NavProp) => {
                     size={SIZE.MEDIUM}
                     onClick={() => props.history.push('/user/list')}
                 >
-                    User
-            </NeonButton>
+                    Account
+                </NeonButton>
+                <NeonButton
+                    size={SIZE.MEDIUM}
+                    onClick={() => props.history.push('/group')}
+                >
+                    Group
+                </NeonButton>
+                <NeonButton
+                    size={SIZE.MEDIUM}
+                    onClick={() => props.history.push('/preference')}
+                >
+                    Preference
+                </NeonButton>
             </EnableForGroup>
             <div style={{
                 flex: 1,
