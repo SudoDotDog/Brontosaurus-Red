@@ -52,7 +52,7 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                 </NeonButton>
                 <NeonButton
                     size={SIZE.MEDIUM}
-                    onClick={() => props.history.push('/application')}
+                    onClick={() => props.history.push('/application/list')}
                 >
                     Application
                 </NeonButton>

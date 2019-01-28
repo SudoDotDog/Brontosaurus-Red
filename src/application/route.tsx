@@ -7,10 +7,16 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
 import { Application } from "./application";
+import { ApplicationEdit } from "./edit";
 
 export const ApplicationRoute: React.FC = () => {
 
     return (
-        <Route path="/application" component={Application} />
+        <Route path="/application">
+            <React.Fragment>
+                <Route path="/application/list" component={Application} />
+                <Route path="/application/e/:application" component={ApplicationEdit} />
+            </React.Fragment>
+        </Route>
     );
 };
