@@ -6,11 +6,10 @@
 
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
-import { NeonApplicable } from "@sudoo/neon/input";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import * as __User from "../../style/route/user.scss";
+import { SearchNew } from "../components/search-new";
 import { fetchAccount, UserResponse } from "./repository/account-fetch";
 
 type UserProp = {
@@ -32,26 +31,12 @@ export class User extends React.Component<UserProp, UserState> {
 
         return (
             <div>
-                <div className={__User.searchBar}>
 
-                    <NeonApplicable
-                        className={__User.search}
-                        size={SIZE.MEDIUM}
-                        label="Search"
-                        onApply={async (keyword: string) => this.setState({ users: await fetchAccount(keyword) })}
-                    />
-
-                    <div style={{ width: '0.5rem' }}></div>
-
-                    <NeonButton
-                        className={__User.single}
-                        size={SIZE.RELATIVE}
-                        onClick={() => this.props.history.push('/user/new')}
-                    >
-                        New
-                    </NeonButton>
-
-                </div>
+                <SearchNew
+                    label="Account"
+                    onSearch={async (keyword: string) => this.setState({ users: await fetchAccount(keyword) })}
+                    onNew={() => this.props.history.push('/user/new')}
+                />
 
                 {this.state.users.length === 0
                     ? void 0
