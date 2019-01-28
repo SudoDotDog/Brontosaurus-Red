@@ -10,7 +10,7 @@ import { UserEdit } from "./edit";
 import { Register } from "./register";
 import { User } from "./user";
 
-export const UserRoute: React.SFC = () => {
+export const UserRoute: React.FC = () => {
 
     return (
         <Route path="/user">

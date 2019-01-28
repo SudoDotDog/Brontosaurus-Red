@@ -8,7 +8,7 @@ import * as React from "react";
 import { Route } from "react-router-dom";
 import { Application } from "./application";
 
-export const ApplicationRoute: React.SFC = () => {
+export const ApplicationRoute: React.FC = () => {
 
     return (
         <Route path="/application" component={Application} />

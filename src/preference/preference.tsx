@@ -11,7 +11,7 @@ type PreferenceProp = {
 } & RouteComponentProps;
 
 
-export const Preference: React.SFC<PreferenceProp> = (props: PreferenceProp) => {
+export const Preference: React.FC<PreferenceProp> = (props: PreferenceProp) => {
 
     return (<div>
         Preference

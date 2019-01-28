@@ -31,7 +31,7 @@ const renderAuthButton = (token: Token | null): React.ReactNode => {
         </a>);
 };
 
-const NavBase: React.SFC<NavProp> = (props: NavProp) => {
+const NavBase: React.FC<NavProp> = (props: NavProp) => {
 
     return (
         <React.Fragment>
