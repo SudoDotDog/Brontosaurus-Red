@@ -6,6 +6,7 @@
 
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
@@ -80,6 +81,10 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                     })} />
                 <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
                 {JSON.stringify(this.state.user.groups)} */}
+
+                <NeonSmartList
+                    list={this.state.application as any}
+                />
 
                 <NeonButton size={SIZE.MEDIUM} width={WIDTH.FULL}>Save Change</NeonButton>
             </NeonThemeProvider>

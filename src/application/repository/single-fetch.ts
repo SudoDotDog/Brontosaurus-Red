@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Appliaction_Repository
+ * @namespace Application_Repository
  * @description Single Fetch
  */
 
@@ -21,7 +21,7 @@ export const singleFetchApplicationRepository = async (key: string): Promise<Sin
         application: SingleApplicationFetchResponse;
     } = await Fetch
         .post
-        .json('http://localhost:8080/appliaction/single')
+        .json('http://localhost:8080/application/single')
         .bearer(Brontosaurus.raw)
         .add('key', key)
         .fetch();
