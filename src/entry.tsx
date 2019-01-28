@@ -10,8 +10,9 @@ import * as React from "react";
 import { Route } from "react-router-dom";
 import * as EntryStyle from "../style/route/entry.scss";
 import { UserRoute } from "./account/route";
+import { GroupRoute } from "./group/route";
 import { Nav } from "./page/nav";
-import { Preference } from "./page/preference";
+import { PreferenceRoute } from "./preference/route";
 
 export class Entry extends React.Component {
 
@@ -28,7 +29,8 @@ export class Entry extends React.Component {
                 <div className={EntryStyle.content}>
                     <NeonPaper>
                         <UserRoute />
-                        <Route path="/preference" component={Preference} />
+                        <GroupRoute />
+                        <PreferenceRoute />
                     </NeonPaper>
                 </div>
             </div>
