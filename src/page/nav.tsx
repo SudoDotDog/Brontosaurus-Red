@@ -52,6 +52,12 @@ const NavBase: React.SFC<NavProp> = (props: NavProp) => {
                 </NeonButton>
                 <NeonButton
                     size={SIZE.MEDIUM}
+                    onClick={() => props.history.push('/application')}
+                >
+                    Application
+                </NeonButton>
+                <NeonButton
+                    size={SIZE.MEDIUM}
                     onClick={() => props.history.push('/preference')}
                 >
                     Preference

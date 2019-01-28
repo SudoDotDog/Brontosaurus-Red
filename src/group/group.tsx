@@ -43,7 +43,6 @@ export class Group extends React.Component<GroupProp, GroupState> {
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,11 +59,6 @@ export class Group extends React.Component<GroupProp, GroupState> {
         return this.state.groups.map((group: GroupResponse) =>
             (<tr key={group.name}>
                 <td>{group.name}</td>
-                <td><NeonButton
-                    onClick={() => this.props.history.push('/group/e/' + group.name)}
-                    size={SIZE.RELATIVE}>
-                    Edit
-                </NeonButton></td>
             </tr>),
         );
     }
