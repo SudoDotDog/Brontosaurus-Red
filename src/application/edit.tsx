@@ -12,6 +12,7 @@ import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
+import { NeonPair } from "@sudoo/neon/input";
 
 type ApplicationEditProp = {
 } & RouteComponentProps;
@@ -57,6 +58,10 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                 margin: MARGIN.SMALL,
             }} >
                 <NeonTitle>Edit: {this.state.application.name}</NeonTitle>
+
+                <NeonPair label="name" editable value={this.state.application.name} onChange={() => {
+
+                }} />
                 {/* <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
                 <NeonSmartList
                     list={this.state.user.infos}
