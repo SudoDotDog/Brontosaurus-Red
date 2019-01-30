@@ -84,7 +84,7 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                 <NeonButton
                     size={SIZE.MEDIUM}
                     width={WIDTH.FULL}
-                    onClick={() => updateApplicationRepository(this.state.application)}
+                    onClick={() => this.state.application && updateApplicationRepository(this.state.application)}
                 >
                     Save Change
                 </NeonButton>
