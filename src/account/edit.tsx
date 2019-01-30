@@ -11,6 +11,7 @@ import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
 
 type UserEditProp = {
@@ -82,7 +83,16 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
                 {JSON.stringify(this.state.user.groups)}
 
-                <NeonButton size={SIZE.MEDIUM} width={WIDTH.FULL}>Save Change</NeonButton>
+                <NeonButton
+                    size={SIZE.MEDIUM}
+                    width={WIDTH.FULL}
+                    onClick={() => this.state.user && editAccountAdminRepository(this.state.user.username, {
+                        infos: this.state.user.infos,
+                        beacons: this.state.user.beacons,
+                    })}
+                >
+                    Save Change
+                </NeonButton>
             </NeonThemeProvider>
         );
     }

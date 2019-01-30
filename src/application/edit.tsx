@@ -66,7 +66,7 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                 <NeonPair
                     label="Avatar"
                     editable
-                    value={this.state.application.avatar}
+                    value={this.state.application.avatar || ''}
                     onChange={(value: string) => this._updateApplication('avatar', value)} />
 
                 <NeonPair
