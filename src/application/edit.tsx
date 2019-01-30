@@ -7,12 +7,12 @@
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonPair } from "@sudoo/neon/input";
-import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
+import { updateApplicationRepository } from "./repository/update";
 
 type ApplicationEditProp = {
 } & RouteComponentProps;
@@ -81,7 +81,13 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                     value={this.state.application.expire.toString()}
                     onChange={(value: string) => this._updateApplication('expire', Number(value))} />
 
-                <NeonButton size={SIZE.MEDIUM} width={WIDTH.FULL}>Save Change</NeonButton>
+                <NeonButton
+                    size={SIZE.MEDIUM}
+                    width={WIDTH.FULL}
+                    onClick={() => updateApplicationRepository(this.state.application)}
+                >
+                    Save Change
+                </NeonButton>
             </NeonThemeProvider>
         );
     }
