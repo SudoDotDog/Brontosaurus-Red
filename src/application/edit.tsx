@@ -6,13 +6,13 @@
 
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { NeonPair } from "@sudoo/neon/input";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
-import { NeonPair } from "@sudoo/neon/input";
 
 type ApplicationEditProp = {
 } & RouteComponentProps;
@@ -57,43 +57,43 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
             <NeonThemeProvider value={{
                 margin: MARGIN.SMALL,
             }} >
-                <NeonTitle>Edit: {this.state.application.name}</NeonTitle>
+                <NeonTitle>Edit: {this.state.application.key}</NeonTitle>
 
-                <NeonPair label="name" editable value={this.state.application.name} onChange={() => {
+                <NeonPair
+                    label="Key"
+                    value={this.state.application.key} />
 
-                }} />
-                {/* <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
-                <NeonSmartList
-                    list={this.state.user.infos}
-                    editableName
-                    editableValue
-                    onChange={(newInfo) => this.setState({
-                        user: {
-                            ...this.state.user as any,
-                            infos: newInfo,
-                        },
-                    })} />
-                <NeonTitle size={SIZE.MEDIUM}>Beacon</NeonTitle>
+                <NeonPair
+                    label="Avatar"
+                    editable
+                    value={this.state.application.avatar}
+                    onChange={(value: string) => this._updateApplication('avatar', value)} />
 
-                <NeonSmartList
-                    list={this.state.user.beacons}
-                    editableValue
-                    onChange={(newBeacon) => this.setState({
-                        user: {
-                            ...this.state.user as any,
-                            beacons: newBeacon,
-                        },
-                    })} />
-                <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
-                {JSON.stringify(this.state.user.groups)} */}
+                <NeonPair
+                    label="Name"
+                    editable
+                    value={this.state.application.name}
+                    onChange={(value: string) => this._updateApplication('name', value)} />
 
-                <NeonSmartList
-                    list={this.state.application as any}
-                />
+                <NeonPair
+                    label="Expire"
+                    editable
+                    value={this.state.application.expire.toString()}
+                    onChange={(value: string) => this._updateApplication('expire', Number(value))} />
 
                 <NeonButton size={SIZE.MEDIUM} width={WIDTH.FULL}>Save Change</NeonButton>
             </NeonThemeProvider>
         );
+    }
+
+    private _updateApplication<K extends keyof SingleApplicationFetchResponse>(key: K, value: SingleApplicationFetchResponse[K]): void {
+
+        this.setState({
+            application: {
+                ...this.state.application as SingleApplicationFetchResponse,
+                [key]: value,
+            },
+        });
     }
 
     private _getApplicationKey(): string {
