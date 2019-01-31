@@ -35,7 +35,17 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
 
     return (
         <React.Fragment>
+            <NeonButton
+                size={SIZE.MEDIUM}
+                onClick={() => props.history.push('/user/list')}
+            >
+                Me
+                </NeonButton>
+            <div style={{
+                width: '10px',
+            }} />
             <EnableForGroup
+
                 visit
                 group={['BRONTOSAURUS_SUPER_ADMIN']}>
                 <NeonButton
