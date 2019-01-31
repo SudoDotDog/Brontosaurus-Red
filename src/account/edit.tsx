@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace User
+ * @namespace Account
  * @description Edit
  */
 

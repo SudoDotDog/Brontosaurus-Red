@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Page
+ * @namespace Account
  * @description Register
  */
 

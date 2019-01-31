@@ -34,7 +34,7 @@ export class Group extends React.Component<GroupProp, GroupState> {
                 <SearchNew
                     label="Group"
                     onSearch={async (keyword: string) => this.setState({ groups: await fetchGroup(keyword) })}
-                    onNew={() => this.props.history.push('/group/new')}
+                    onNew={() => this.props.history.push('/group/create')}
                 />
 
                 {this.state.groups.length === 0
