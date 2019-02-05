@@ -19,16 +19,16 @@ export class CreateGroup extends React.Component<CreateGroupProp> {
 
     public render() {
 
-        return (<NeonThemeProvider value={{
-            margin: MARGIN.SMALL,
-        }}>
-            <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
-            <NeonTitle>Create Group</NeonTitle>
-            <NeonSmartForm
-                form={this._getForm()}
-                onSubmit={(response: any) => this._submit(response.name)}
-            />
-        </NeonThemeProvider>);
+        return (
+            <React.Fragment>
+                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
+                <NeonTitle>Create Group</NeonTitle>
+                <NeonSmartForm
+                    form={this._getForm()}
+                    onSubmit={(response: any) => this._submit(response.name)}
+                />
+            </React.Fragment>
+        );
     }
 
     private _getForm(): Record<string, INPUT_TYPE> {
