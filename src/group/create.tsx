@@ -21,9 +21,13 @@ export class CreateGroup extends React.Component<CreateGroupProp> {
 
         return (
             <React.Fragment>
-                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
-                <NeonTitle>Create Group</NeonTitle>
+                <NeonSub
+                    margin={MARGIN.SMALL}
+                    onClick={() => this.props.history.goBack()}>
+                    Go Back
+                </NeonSub>
                 <NeonSmartForm
+                    title="Create Group"
                     form={this._getForm()}
                     onSubmit={(response: any) => this._submit(response.name)}
                 />
