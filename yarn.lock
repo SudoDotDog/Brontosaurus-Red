@@ -29,10 +29,6 @@
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-1.3.0.tgz#329e21a16ac5f0c3ca9a8a998fddd3439970c6d3"
 
-"@sudoo/bark@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.0.1.tgz#3c696b69b5884905424e8d9d52f492c306dbd19b"
-
 "@sudoo/bark@^2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.1.0.tgz#0e061a7736eb90891fc732c89bb328aa40eadfc8"
@@ -41,11 +37,11 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-1.1.0.tgz#cd0b01ff14cba39829bdc1aaf45cb4e011df1532"
 
-"@sudoo/neon@^1.12.1":
-  version "1.12.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.12.1.tgz#b7e6c13a815c7688d8b0e82b83990ecdd161a9cb"
+"@sudoo/neon@^1.12.2":
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.12.2.tgz#70eab36d1718c6eeb51107398704eccdabceaa00"
   dependencies:
-    "@sudoo/bark" "^2.0.1"
+    "@sudoo/bark" "^2.1.0"
     jss "^10.0.0-alpha.9"
     jss-preset-default "^10.0.0-alpha.9"
 
