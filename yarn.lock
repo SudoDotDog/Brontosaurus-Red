@@ -37,9 +37,9 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-1.1.0.tgz#cd0b01ff14cba39829bdc1aaf45cb4e011df1532"
 
-"@sudoo/neon@^1.12.2":
-  version "1.12.2"
-  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.12.2.tgz#70eab36d1718c6eeb51107398704eccdabceaa00"
+"@sudoo/neon@^1.13.0":
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-1.13.0.tgz#b85e8dbeb9f70a2fad70f9a084c845ca94149274"
   dependencies:
     "@sudoo/bark" "^2.1.0"
     jss "^10.0.0-alpha.9"

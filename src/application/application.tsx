@@ -39,18 +39,10 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
 
                 {this.state.applications.length === 0
                     ? void 0
-                    : <NeonTable style={{ marginTop: '1rem' }}>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Key</th>
-                                <th>Expire</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this._renderApplication()}
-                        </tbody>
+                    : <NeonTable
+                        headers={['Name', 'Key', 'Expire', 'Action']}
+                        style={{ marginTop: '1rem' }}>
+                        {this._renderApplication()}
                     </NeonTable>}
             </div>
 

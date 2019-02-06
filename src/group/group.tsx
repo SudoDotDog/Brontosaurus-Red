@@ -39,15 +39,10 @@ export class Group extends React.Component<GroupProp, GroupState> {
 
                 {this.state.groups.length === 0
                     ? void 0
-                    : <NeonTable style={{ marginTop: '1rem' }}>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this._renderGroup()}
-                        </tbody>
+                    : <NeonTable
+                        headers={['Name']}
+                        style={{ marginTop: '1rem' }}>
+                        {this._renderGroup()}
                     </NeonTable>}
             </div>
 

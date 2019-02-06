@@ -40,18 +40,10 @@ export class User extends React.Component<UserProp, UserState> {
 
                 {this.state.users.length === 0
                     ? void 0
-                    : <NeonTable style={{ marginTop: '1rem' }}>
-                        <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Groups</th>
-                                <th>Infos</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this._renderUser()}
-                        </tbody>
+                    : <NeonTable
+                        headers={['Username', 'Groups', 'Infos', 'Action']}
+                        style={{ marginTop: '1rem' }}>
+                        {this._renderUser()}
                     </NeonTable>}
             </div>
 

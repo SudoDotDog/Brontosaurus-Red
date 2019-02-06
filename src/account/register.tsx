@@ -53,8 +53,8 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             margin: MARGIN.SMALL,
         }}>
             <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
-            <NeonTitle>Register</NeonTitle>
             <NeonSmartForm
+                title="Register"
                 form={this._getForm()}
                 onSubmit={(response: any) => this._submit(response)}
             />
