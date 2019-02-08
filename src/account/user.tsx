@@ -31,7 +31,6 @@ export class User extends React.Component<UserProp, UserState> {
 
         return (
             <div>
-
                 <SearchNew
                     label="Account"
                     onSearch={async (keyword: string) => this.setState({ users: await fetchAccount(keyword) })}
@@ -46,7 +45,6 @@ export class User extends React.Component<UserProp, UserState> {
                         {this._renderUser()}
                     </NeonTable>}
             </div>
-
         );
     }
 

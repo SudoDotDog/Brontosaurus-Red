@@ -12,6 +12,7 @@ import * as EntryStyle from "../style/route/entry.scss";
 import { UserRoute } from "./account/route";
 import { ApplicationRoute } from "./application/route";
 import { GroupRoute } from "./group/route";
+import { MeRoute } from "./me/route";
 import { Nav } from "./page/nav";
 import { PreferenceRoute } from "./preference/route";
 
@@ -29,6 +30,7 @@ export class Entry extends React.Component {
                 </div>
                 <div className={EntryStyle.content}>
                     <NeonPaper>
+                        <MeRoute />
                         <UserRoute />
                         <GroupRoute />
                         <ApplicationRoute />
