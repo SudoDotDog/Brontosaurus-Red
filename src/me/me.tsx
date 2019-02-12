@@ -5,6 +5,7 @@
  */
 
 import { NeonButton } from "@sudoo/neon/button";
+import { WIDTH } from "@sudoo/neon/declare";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 
@@ -27,7 +28,7 @@ export class Me extends React.Component<MeProp, MeState> {
         return (
             <div>
 
-                <NeonButton>Change Password</NeonButton>
+                <NeonButton width={WIDTH.FULL}>Change Password</NeonButton>
             </div>
 
         );

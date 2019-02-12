@@ -6,6 +6,7 @@
 
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
@@ -81,7 +82,11 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                         },
                     })} />
                 <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
-                {JSON.stringify(this.state.user.groups)}
+
+                <NeonPillGroup
+                    selected={this.state.user.groups}
+                    options={['hello', 'world']}
+                />
 
                 <NeonButton
                     size={SIZE.MEDIUM}
