@@ -85,7 +85,6 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
 
                 <NeonPillGroup
                     selected={this.state.user.groups}
-                    options={['hello', 'world']}
                 />
 
                 <NeonButton
