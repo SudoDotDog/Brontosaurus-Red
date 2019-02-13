@@ -9,6 +9,7 @@ import { WIDTH } from "@sudoo/neon/declare";
 import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { editPassword } from "./repository/change-password";
 
 type MeProp = {
 } & RouteComponentProps;
@@ -18,36 +19,34 @@ type MeState = {
     info: {};
 };
 
-export class Me extends React.Component<MeProp, MeState> {
+export const Me: React.FC<MeProp> = (props: MeProp) => {
 
-    public state: MeState = {
-        info: {},
-    };
+    const [loading, setLoading]: [boolean, (loading: boolean) => void] = React.useState(false);
 
-    public render() {
+    return (
+        <NeonSmartForm
+            loading={loading}
+            form={{
+                password: {
+                    type: INPUT_TYPE.PASSWORD,
+                    display: 'Password',
+                },
+                confirm: {
+                    type: INPUT_TYPE.PASSWORD,
+                    display: 'Confirm Password',
+                },
+            }}
+            title="Password Change"
+            submit="Update"
+            onSubmit={(result: any) => {
 
-        return (
-            <NeonSmartForm
-                form={{
-                    password: {
-                        type: INPUT_TYPE.PASSWORD,
-                        display: 'Password',
-                    },
-                    confirm: {
-                        type: INPUT_TYPE.PASSWORD,
-                        display: 'Confirm Password',
-                    },
-                }}
-                title="Password Change"
-                submit="Update"
-                onSubmit={(result: any) => {
-                    if (result.password === result.confirm) {
-                        console.log(true);
-                    } else {
-                        console.log('error');
-                    }
-                }}
-            />
-        );
-    }
-}
+                setLoading(true);
+                if (result.password === result.confirm) {
+                    editPassword(result.password);
+                } else {
+                    console.log('error');
+                }
+            }}
+        />
+    );
+};
