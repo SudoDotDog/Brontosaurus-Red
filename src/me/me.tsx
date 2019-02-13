@@ -6,6 +6,7 @@
 
 import { NeonButton } from "@sudoo/neon/button";
 import { WIDTH } from "@sudoo/neon/declare";
+import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 
@@ -26,11 +27,17 @@ export class Me extends React.Component<MeProp, MeState> {
     public render() {
 
         return (
-            <div>
-
-                <NeonButton width={WIDTH.FULL}>Change Password</NeonButton>
-            </div>
-
+            <NeonSmartForm
+                form={{
+                    password: INPUT_TYPE.PASSWORD,
+                    confirm: INPUT_TYPE.PASSWORD,
+                }}
+                title="Password Change"
+                submit="Update"
+                onSubmit={(result: any) => {
+                    console.log(result);
+                }}
+            />
         );
     }
 }
