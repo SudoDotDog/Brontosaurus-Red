@@ -4,8 +4,6 @@
  * @description Me
  */
 
-import { NeonButton } from "@sudoo/neon/button";
-import { WIDTH } from "@sudoo/neon/declare";
 import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -13,11 +11,6 @@ import { editPassword } from "./repository/change-password";
 
 type MeProp = {
 } & RouteComponentProps;
-
-type MeState = {
-
-    info: {};
-};
 
 export const Me: React.FC<MeProp> = (props: MeProp) => {
 
