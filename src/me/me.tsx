@@ -4,7 +4,8 @@
  * @description Me
  */
 
-import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { FLAG_TYPE } from "@sudoo/neon/flag";
+import { INPUT_TYPE, NeonSmartForm, NeonSmartFormShort } from "@sudoo/neon/form";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { editPassword } from "./repository/change-password";
@@ -14,7 +15,9 @@ type MeProp = {
 
 export const Me: React.FC<MeProp> = (props: MeProp) => {
 
-    const [loading, setLoading]: [boolean, (loading: boolean) => void] = React.useState(false);
+    const [loading, setLoading] = React.useState<boolean>(false);
+    const [cover, setCover] = React.useState<NeonSmartFormShort | undefined>(undefined);
+    const [flag, setFlag] = React.useState<NeonSmartFormShort | undefined>(undefined);
 
     return (
         <NeonSmartForm
@@ -31,19 +34,32 @@ export const Me: React.FC<MeProp> = (props: MeProp) => {
             }}
             title="Password Change"
             submit="Update"
+            cover={cover}
+            flag={flag}
             onSubmit={async (result: any) => {
+
+                setCover(undefined);
+                setFlag(undefined);
 
                 setLoading(true);
                 if (result.password === result.confirm) {
                     try {
                         await editPassword(result.password);
                     } catch (err) {
-                        console.log(err.message);
+                        setCover({
+                            type: FLAG_TYPE.ERROR,
+                            message: "Failed",
+                            info: err.message,
+                        });
                     }
-
                 } else {
-                    console.log('error');
+                    setFlag({
+                        type: FLAG_TYPE.ERROR,
+                        message: "Password not matched",
+                    });
                 }
+
+                setLoading(false);
             }}
         />
     );
