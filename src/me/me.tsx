@@ -31,11 +31,16 @@ export const Me: React.FC<MeProp> = (props: MeProp) => {
             }}
             title="Password Change"
             submit="Update"
-            onSubmit={(result: any) => {
+            onSubmit={async (result: any) => {
 
                 setLoading(true);
                 if (result.password === result.confirm) {
-                    editPassword(result.password);
+                    try {
+                        await editPassword(result.password);
+                    } catch (err) {
+                        console.log(err.message);
+                    }
+
                 } else {
                     console.log('error');
                 }
