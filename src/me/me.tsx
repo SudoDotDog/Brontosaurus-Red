@@ -4,8 +4,8 @@
  * @description Me
  */
 
-import { FLAG_TYPE } from "@sudoo/neon/flag";
-import { INPUT_TYPE, NeonSmartForm, NeonSmartFormShort } from "@sudoo/neon/form";
+import { FLAG_TYPE, NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
+import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { editPassword } from "./repository/change-password";
@@ -16,8 +16,8 @@ type MeProp = {
 export const Me: React.FC<MeProp> = (props: MeProp) => {
 
     const [loading, setLoading] = React.useState<boolean>(false);
-    const [cover, setCover] = React.useState<NeonSmartFormShort | undefined>(undefined);
-    const [flag, setFlag] = React.useState<NeonSmartFormShort | undefined>(undefined);
+    const [cover, setCover] = React.useState<NeonStickerCut | undefined>(undefined);
+    const [flag, setFlag] = React.useState<NeonFlagCut | undefined>(undefined);
 
     return (
         <NeonSmartForm
@@ -45,11 +45,28 @@ export const Me: React.FC<MeProp> = (props: MeProp) => {
                 if (result.password === result.confirm) {
                     try {
                         await editPassword(result.password);
+
+                        setCover({
+                            type: FLAG_TYPE.SUCCEED,
+                            title: "Succeed",
+
+                            peek: {
+                                text: "<-",
+                                expend: "Complete",
+                                onClick: props.history.goBack,
+                            },
+                        });
                     } catch (err) {
                         setCover({
                             type: FLAG_TYPE.ERROR,
-                            message: "Failed",
+                            title: "Failed",
                             info: err.message,
+
+                            peek: {
+                                text: "<-",
+                                expend: "Retry",
+                                onClick: () => setCover(undefined),
+                            },
                         });
                     }
                 } else {
