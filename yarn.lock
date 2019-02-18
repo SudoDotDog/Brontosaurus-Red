@@ -39,10 +39,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-1.1.0.tgz#cd0b01ff14cba39829bdc1aaf45cb4e011df1532"
   integrity sha512-QPabpHOlEDQX3Fbdji30brEbvlk4TzpMq6rHM2prTMp9nCkK03sY73ANlMV+CnROMLZKJjHc3EKM1McNNi0ISg==
 
-"@sudoo/neon@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-2.0.1.tgz#7a20579bf6b1a6a8f3e758437939a175691ae33e"
-  integrity sha512-nM99s9ii4+6cTLl24Zq5qooO9JHf2fxp7jdWdm8B3mofdBQ9mMqo4LbRZQC9MzHNF8sC+KwZMnxLFuHW/WkE6Q==
+"@sudoo/neon@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-2.1.0.tgz#65a469abeea26aa2b8d568efa14b3f7e0fa3f471"
+  integrity sha512-RXa+Z2S0sNB4stQpJexGpoxdhF7diGQmDZJcy3w+ONPhCxh/AX+xTlR3PdCRkNk0V+bW4vcpVaEU2c4/y6HOzQ==
   dependencies:
     "@sudoo/bark" "^2.1.0"
     jss "^10.0.0-alpha.10"
