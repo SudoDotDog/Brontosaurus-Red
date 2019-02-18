@@ -4,8 +4,6 @@
  * @description Group
  */
 
-import { NeonButton } from "@sudoo/neon/button";
-import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";

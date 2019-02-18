@@ -7,7 +7,7 @@
 import { MARGIN } from "@sudoo/neon/declare";
 import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { register } from "./repository/register";

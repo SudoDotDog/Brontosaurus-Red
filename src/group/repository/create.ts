@@ -7,7 +7,6 @@
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 
-
 export const createGroup = async (name: string): Promise<string> => {
 
     const response: {
