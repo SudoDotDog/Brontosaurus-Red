@@ -19,6 +19,7 @@ type RegisterState = {
         name: string;
         type: string;
     }>;
+    readonly current: any;
 };
 
 type RegisterProp = {
@@ -27,8 +28,9 @@ type RegisterProp = {
 
 export class Register extends React.Component<RegisterProp, RegisterState> {
 
-    public state: RegisterState = {
+    public readonly state: RegisterState = {
 
+        current: {},
         infos: [],
     };
 
@@ -56,7 +58,9 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             <NeonSmartForm
                 title="Register"
                 form={this._getForm()}
-                onSubmit={(response: any) => this._submit(response)}
+                value={this.state.current}
+                onChange={(value: any) => this.setState({ current: value })}
+                onSubmit={() => this._submit(this.state.current)}
             />
         </NeonThemeProvider>);
     }

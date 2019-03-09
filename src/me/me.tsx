@@ -4,7 +4,8 @@
  * @description Me
  */
 
-import { FLAG_TYPE, NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
+import { SIGNAL } from "@sudoo/neon/declare";
+import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -14,6 +15,8 @@ type MeProp = {
 } & RouteComponentProps;
 
 export const Me: React.FC<MeProp> = (props: MeProp) => {
+
+    const [current, setCurrent] = React.useState<any>({});
 
     const [loading, setLoading] = React.useState<boolean>(false);
     const [cover, setCover] = React.useState<NeonStickerCut | undefined>(undefined);
@@ -36,18 +39,22 @@ export const Me: React.FC<MeProp> = (props: MeProp) => {
             submit="Update"
             cover={cover}
             flag={flag}
-            onSubmit={async (result: any) => {
+            value={current}
+            onChange={(result: any) => {
+                setCurrent(result);
+            }}
+            onSubmit={async () => {
 
                 setCover(undefined);
                 setFlag(undefined);
 
                 setLoading(true);
-                if (result.password === result.confirm) {
+                if (current.password === current.confirm) {
                     try {
-                        await editPassword(result.password);
+                        await editPassword(current.password);
 
                         setCover({
-                            type: FLAG_TYPE.SUCCEED,
+                            type: SIGNAL.SUCCEED,
                             title: "Succeed",
 
                             peek: {
@@ -58,7 +65,7 @@ export const Me: React.FC<MeProp> = (props: MeProp) => {
                         });
                     } catch (err) {
                         setCover({
-                            type: FLAG_TYPE.ERROR,
+                            type: SIGNAL.ERROR,
                             title: "Failed",
                             info: err.message,
 
@@ -71,7 +78,7 @@ export const Me: React.FC<MeProp> = (props: MeProp) => {
                     }
                 } else {
                     setFlag({
-                        type: FLAG_TYPE.ERROR,
+                        type: SIGNAL.ERROR,
                         message: "Password not matched",
                     });
                 }

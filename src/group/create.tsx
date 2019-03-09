@@ -14,7 +14,15 @@ import { createGroup } from "./repository/create";
 type CreateGroupProp = {
 } & RouteComponentProps;
 
-export class CreateGroup extends React.Component<CreateGroupProp> {
+type CreateGroupStates = {
+    readonly current: any;
+};
+
+export class CreateGroup extends React.Component<CreateGroupProp, CreateGroupStates> {
+
+    public readonly state: CreateGroupStates = {
+        current: {},
+    };
 
     public render() {
 
@@ -28,7 +36,9 @@ export class CreateGroup extends React.Component<CreateGroupProp> {
                 <NeonSmartForm
                     title="Create Group"
                     form={this._getForm()}
-                    onSubmit={(response: any) => this._submit(response.name)}
+                    value={this.state.current}
+                    onChange={(value: any) => this.setState({ current: value })}
+                    onSubmit={() => this._submit(this.state.current.name)}
                 />
             </React.Fragment>
         );
