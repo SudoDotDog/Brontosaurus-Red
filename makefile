@@ -18,7 +18,7 @@ run:
 
 build:
 	@echo "[INFO] Starting build"
-	@NODE_ENV=production $(webpack) --config $(webpack_build)
+	@PORTAL_PATH=http://localhost:8080 NODE_ENV=production $(webpack) --config $(webpack_build)
 
 tests:
 	@echo "[INFO] Testing with Mocha"
