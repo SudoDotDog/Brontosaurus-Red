@@ -16,7 +16,9 @@ import { redux } from "./state/store";
 
 declare const module: any;
 
-Brontosaurus.register('http://localhost:8080', 'BRONTOSAURUS_RED', 'http://localhost:9000/#/', true);
+const portalPath: string = process.env.PORTAL_PATH as string;
+const root: string = location.protocol + '//' + location.host;
+Brontosaurus.register(portalPath, 'BRONTOSAURUS_RED', root, true);
 
 const render: (App: any) => void = (App: any): void => {
 
