@@ -16,7 +16,7 @@ import { redux } from "./state/store";
 
 declare const module: any;
 
-Brontosaurus.register('http://localhost:8080', 'BRONTOSAURUS_RED', 'http://localhost:8082/#/', true);
+Brontosaurus.register('http://localhost:8080', 'BRONTOSAURUS_RED', 'http://localhost:9000/#/', true);
 
 const render: (App: any) => void = (App: any): void => {
 
