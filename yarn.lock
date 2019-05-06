@@ -69,17 +69,19 @@
     jss "^10.0.0-alpha.12"
     jss-preset-default "^10.0.0-alpha.12"
 
-"@sudoo/react-force-dev@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/react-force-dev/-/react-force-dev-1.4.0.tgz#e40812f0815c5554dd1cdbf94afed39f3b5998b5"
-  integrity sha512-7yr62hnW7eEoNxfEsplreTQ20mm0V/9gDABVc4jbGBG7u6zhMwwxm74Tv7KisiubJit3Zy8Bd6FGEGZ893Qigw==
+"@sudoo/react-force-dev@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/react-force-dev/-/react-force-dev-1.5.0.tgz#d3a34b053865be8d90b9b06cac24a38536bda635"
+  integrity sha512-8SQ9PaJNr4GpGllnEPZKEAz9bflI1w4SnWfVUd5MZLGYY6x/O0f2e1/KA446qfVjvAw5qMeUgDsYrmJ8RETS8A==
   dependencies:
     "@types/enzyme" "3.9.0"
     "@types/enzyme-adapter-react-16" "1.0.5"
     "@types/react" "16.8.8"
     "@types/react-dom" "16.8.2"
+    "@types/react-router-dom" "^4.3.2"
     enzyme "3.9.0"
     enzyme-adapter-react-16 "1.11.2"
+    react-hot-loader "^4.8.4"
 
 "@sudoo/react-force@^1.3.0", "@sudoo/react-force@^1.4.0":
   version "1.4.0"
