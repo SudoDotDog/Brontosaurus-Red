@@ -5,24 +5,16 @@
  */
 
 import { Brontosaurus } from "@brontosaurus/web";
+import { Fetch } from "@sudoo/fetch";
+import { joinRoute } from "../../repository/route";
 
 export const registerInfo = async (): Promise<any> => {
 
-    const response: Response = await fetch('http://localhost:8080/preference/infos', {
-        method: "GET",
-        headers: {
-            'Authorization': 'Bearer ' + Brontosaurus.raw,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        mode: "cors",
-    });
+    const response: any = await Fetch
+        .get
+        .json(joinRoute('/preference/infos'))
+        .bearer(Brontosaurus.raw)
+        .fetch();
 
-    const data = await response.json();
-
-    if (response.ok) {
-        return data.registerInfos;
-    }
-
-    throw new Error(data);
+    return response.registerInfos;
 };

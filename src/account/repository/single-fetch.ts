@@ -6,6 +6,7 @@
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
+import { joinRoute } from "../../repository/route";
 
 export type SingleFetchResponse = {
     username: string;
@@ -20,7 +21,7 @@ export const singleFetchRepository = async (username: string): Promise<SingleFet
         account: SingleFetchResponse;
     } = await Fetch
         .post
-        .json('http://localhost:8080/account/single')
+        .json(joinRoute('/account/single'))
         .bearer(Brontosaurus.raw)
         .add('username', username)
         .fetch();

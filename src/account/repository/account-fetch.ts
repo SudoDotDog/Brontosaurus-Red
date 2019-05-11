@@ -6,6 +6,7 @@
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
+import { joinRoute } from "../../repository/route";
 
 export type UserResponse = {
     username: string;
@@ -19,7 +20,7 @@ export const fetchAccount = async (keyword: string): Promise<UserResponse[]> => 
         accounts: UserResponse[];
     } = await Fetch
         .post
-        .json('http://localhost:8080/account/fetch')
+        .json(joinRoute('/account/fetch'))
         .bearer(Brontosaurus.raw)
         .add('page', 0)
         .add('keyword', keyword)

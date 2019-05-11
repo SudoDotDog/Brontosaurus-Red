@@ -6,6 +6,7 @@
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
+import { joinRoute } from "../../repository/route";
 
 export const editAccountAdminRepository = async (username: string, account: Partial<{
     beacons: Record<string, any>;
@@ -14,7 +15,7 @@ export const editAccountAdminRepository = async (username: string, account: Part
 
     const response = await Fetch
         .post
-        .json('http://localhost:8080/account/edit/admin')
+        .json(joinRoute('/account/edit/admin'))
         .bearer(Brontosaurus.raw)
         .add('username', username)
         .add('account', account)
