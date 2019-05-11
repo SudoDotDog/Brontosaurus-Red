@@ -28,7 +28,7 @@ const renderAuthButton = (token: Token | null): React.ReactNode => {
         className={EntryStyle.signIn}
         onClick={() => Brontosaurus.token()}>
         Sign-in
-        </a>);
+    </a>);
 };
 
 const NavBase: React.FC<NavProp> = (props: NavProp) => {
@@ -40,7 +40,13 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                 onClick={() => props.history.push('/me')}
             >
                 Me
-                </NeonButton>
+            </NeonButton>
+            <NeonButton
+                size={SIZE.MEDIUM}
+                onClick={() => props.history.push('/me')}
+            >
+                123
+            </NeonButton>
             <div style={{
                 width: '10px',
             }} />
