@@ -56,6 +56,12 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                 </NeonButton>
                 <NeonButton
                     size={SIZE.MEDIUM}
+                    onClick={() => props.history.push('/organization/list')}
+                >
+                    Organization
+                </NeonButton>
+                <NeonButton
+                    size={SIZE.MEDIUM}
                     onClick={() => props.history.push('/group/list')}
                 >
                     Group

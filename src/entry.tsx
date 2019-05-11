@@ -13,6 +13,7 @@ import { UserRoute } from "./account/route";
 import { ApplicationRoute } from "./application/route";
 import { GroupRoute } from "./group/route";
 import { MeRoute } from "./me/route";
+import { OrganizationRoute } from "./organization/route";
 import { Nav } from "./page/nav";
 import { PreferenceRoute } from "./preference/route";
 
@@ -32,6 +33,7 @@ export class Entry extends React.Component {
                     <NeonPaper>
                         <MeRoute />
                         <UserRoute />
+                        <OrganizationRoute />
                         <GroupRoute />
                         <ApplicationRoute />
                         <PreferenceRoute />
