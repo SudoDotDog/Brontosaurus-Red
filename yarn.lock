@@ -25,35 +25,30 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@brontosaurus/definition@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.3.0.tgz#7af9a03713313f09f7622b6b049bbdc967b478f6"
-  integrity sha512-GlqnYOB4AQTH7Wtq7zEc6baSR3VmndnWLsacYXhaHf4t/e97Rvr4TskGItK+dPvx9aoM5ow18WeMnOSLwSS2+w==
-
 "@brontosaurus/definition@^1.4.3":
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.4.3.tgz#95898b2a2c9e02ec88de445d083873236e1e3901"
   integrity sha512-FdnuyLKTVNmvFsoruVyTENnBAoJZaevDCpMW3K8+qakVqpwgbdT+xnxv/lZPd8/K/go+A7/bTGNtefkcKnuh+A==
 
-"@brontosaurus/react@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-1.1.0.tgz#314ffd8da621dee55261a2ad83f7a98a22ad3dbc"
-  integrity sha512-9oZO5BB5gSb6TsI2C6li3c9xl+I5Cqawskb97F+K0irPDmmWaRlczWM+LD5ufI31xQum3T5XS6Mg3UQwyNkrAg==
-  dependencies:
-    "@brontosaurus/web" "^1.2.0"
-    "@sudoo/react-force" "^1.3.0"
-
-"@brontosaurus/web@^1.2.0":
+"@brontosaurus/react@^1.2.0":
   version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.2.0.tgz#e36e949a5f7325026301395e18287e6471db2c6c"
-  integrity sha512-SdqajH90XZ9wiCSpYp4kNEHi1Pp+SiyXUFTQJ1E8pnR+KUNwnxtxXUadqc+uuLOhxc8wWEBJ4TZPrW/fAyox/w==
+  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-1.2.0.tgz#f101d71565fea8beb08a3bcbc80c5eee326f50a9"
+  integrity sha512-VmgTTKzTZwHbBYzeOGo9bYOrGc90+NDx2a2sN8kfiXpKeJS+SfhMr5653uafbiOjzYCSQ75BvT2iNAfM1SIaww==
   dependencies:
-    "@brontosaurus/definition" "^1.3.0"
+    "@brontosaurus/web" "^1.3.0"
+    "@sudoo/react-force" "^1.5.0"
 
 "@brontosaurus/web@^1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.3.0.tgz#0ce4fda892208809d9ca4318ddf6ad0ecb3abccd"
   integrity sha512-TB8rGSnGnLkQYDxaHLpSbfRHkAjH7qFYFAbeTHZf2b5/FTq1372AdAAiXeoJay/2EyfojGEpKJ385Ze4dFMqEQ==
+  dependencies:
+    "@brontosaurus/definition" "^1.4.3"
+
+"@brontosaurus/web@^1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.3.2.tgz#35af51c76adb10e88b10b975082e6811dac01ed9"
+  integrity sha512-TseKSsa006zKtvILQmtAOTUIsiNTzDnB7/baZdye72G40qGUFUzka/Kov0pkLsga7u64FiL1nUDIaBYhaLxkKg==
   dependencies:
     "@brontosaurus/definition" "^1.4.3"
 
@@ -93,13 +88,22 @@
     enzyme "3.9.0"
     enzyme-adapter-react-16 "1.11.2"
 
-"@sudoo/react-force@^1.3.0", "@sudoo/react-force@^1.4.0":
+"@sudoo/react-force@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@sudoo/react-force/-/react-force-1.4.0.tgz#ca54026527032405f29223b2b8381a5a48305e0d"
   integrity sha512-MwdcOdjmeDOunL2JsZUVgFRYPtiMobjfDPYb+D/sv7Q2lJu2IdN5THUFbczghP9X94BPnGR1uaSVBiXmO7cspw==
   dependencies:
     react "16.8.4"
     react-dom "16.8.4"
+
+"@sudoo/react-force@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/react-force/-/react-force-1.5.0.tgz#c456b2fff2192c616e01af3a715ae3d555d90f21"
+  integrity sha512-H4DaM4+ieIx+kAJd/4zT9mOgBsCxFNs4rO2sJqSjlIWhgo48fj4hPxJuOilN6tYaqJHVUmq5AyAprgrkMDk6Hg==
+  dependencies:
+    react "16.8.4"
+    react-dom "16.8.4"
+    react-router-dom "^5.0.0"
 
 "@sudoo/redux@^1.3.3":
   version "1.3.3"
