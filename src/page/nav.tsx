@@ -33,6 +33,8 @@ const renderAuthButton = (token: Token | null): React.ReactNode => {
 
 const NavBase: React.FC<NavProp> = (props: NavProp) => {
 
+    const organization: string | undefined = Brontosaurus.hard().organization;
+
     return (
         <React.Fragment>
             <NeonButton
@@ -41,12 +43,15 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
             >
                 Me
             </NeonButton>
-            <NeonButton
-                size={SIZE.MEDIUM}
-                onClick={() => props.history.push('/me')}
-            >
-                123
-            </NeonButton>
+            {
+                organization &&
+                <NeonButton
+                    size={SIZE.MEDIUM}
+                    onClick={() => props.history.push('/me')}
+                >
+                    {organization}
+                </NeonButton>
+            }
             <div style={{
                 width: '10px',
             }} />

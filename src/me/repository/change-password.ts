@@ -6,6 +6,7 @@
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
+import { joinRoute } from "../../repository/route";
 
 export const editPassword = async (password: string): Promise<string> => {
 
@@ -13,7 +14,7 @@ export const editPassword = async (password: string): Promise<string> => {
         account: string;
     } = await Fetch
         .post
-        .json('http://localhost:8080/account/edit/password')
+        .json(joinRoute('/account/edit/password'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', Brontosaurus.hard().username)
         .add('password', password)

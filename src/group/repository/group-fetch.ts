@@ -6,6 +6,7 @@
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
+import { joinRoute } from "../../repository/route";
 
 export type GroupResponse = {
     name: string;
@@ -17,7 +18,7 @@ export const fetchGroup = async (keyword: string): Promise<GroupResponse[]> => {
         groups: GroupResponse[];
     } = await Fetch
         .post
-        .json('http://localhost:8080/group/fetch')
+        .json(joinRoute('/group/fetch'))
         .bearer(Brontosaurus.hard().raw)
         .add('page', 0)
         .add('keyword', keyword)

@@ -6,6 +6,7 @@
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
+import { joinRoute } from "../../repository/route";
 import { SingleApplicationFetchResponse } from "./single-fetch";
 
 export const updateApplicationRepository = async (application: {
@@ -16,7 +17,7 @@ export const updateApplicationRepository = async (application: {
         application: SingleApplicationFetchResponse;
     } = await Fetch
         .post
-        .json('http://localhost:8080/application/update')
+        .json(joinRoute('/application/update'))
         .bearer(Brontosaurus.hard().raw)
         .add('key', application.key)
         .add('application', application)

@@ -6,6 +6,7 @@
 
 import { Basics } from "@brontosaurus/definition";
 import { Brontosaurus } from "@brontosaurus/web";
+import { joinRoute } from "../../repository/route";
 
 export const register = async (username: string, password: string, infos: Record<string, Basics>): Promise<string> => {
 
@@ -15,7 +16,7 @@ export const register = async (username: string, password: string, infos: Record
         infos,
     });
 
-    const response: Response = await fetch('http://localhost:8080/account/register', {
+    const response: Response = await fetch(joinRoute('/account/register'), {
         method: "POST",
         headers: {
             'Authorization': 'Bearer ' + Brontosaurus.hard().raw,
