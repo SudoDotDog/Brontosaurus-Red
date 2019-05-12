@@ -20,7 +20,7 @@ export const fetchOrganization = async (keyword: string): Promise<OrganizationRe
     } = await Fetch
         .post
         .json(joinRoute('/organization/fetch'))
-        .bearer(Brontosaurus.raw)
+        .bearer(Brontosaurus.hard().raw)
         .add('page', 0)
         .add('keyword', keyword)
         .fetch();

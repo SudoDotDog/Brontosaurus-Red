@@ -13,7 +13,7 @@ export const registerInfo = async (): Promise<any> => {
     const response: any = await Fetch
         .get
         .json(joinRoute('/preference/infos'))
-        .bearer(Brontosaurus.raw)
+        .bearer(Brontosaurus.hard().raw)
         .fetch();
 
     return response.registerInfos;

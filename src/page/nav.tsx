@@ -26,7 +26,7 @@ const renderAuthButton = (token: Token | null): React.ReactNode => {
 
     return (<a
         className={EntryStyle.signIn}
-        onClick={() => Brontosaurus.token()}>
+        onClick={() => Brontosaurus.hard()}>
         Sign-in
     </a>);
 };

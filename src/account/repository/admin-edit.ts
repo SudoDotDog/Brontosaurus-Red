@@ -16,7 +16,7 @@ export const editAccountAdminRepository = async (username: string, account: Part
     const response = await Fetch
         .post
         .json(joinRoute('/account/edit/admin'))
-        .bearer(Brontosaurus.raw)
+        .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('account', account)
         .fetch();

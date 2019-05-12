@@ -22,7 +22,7 @@ export const singleFetchRepository = async (username: string): Promise<SingleFet
     } = await Fetch
         .post
         .json(joinRoute('/account/single'))
-        .bearer(Brontosaurus.raw)
+        .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .fetch();
 

@@ -18,7 +18,7 @@ export const fetchGroup = async (keyword: string): Promise<GroupResponse[]> => {
     } = await Fetch
         .post
         .json('http://localhost:8080/group/fetch')
-        .bearer(Brontosaurus.raw)
+        .bearer(Brontosaurus.hard().raw)
         .add('page', 0)
         .add('keyword', keyword)
         .fetch();

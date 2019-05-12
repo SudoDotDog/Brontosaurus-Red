@@ -21,7 +21,7 @@ export const fetchApplication = async (keyword: string): Promise<ApplicationResp
     } = await Fetch
         .post
         .json(joinRoute('/application/fetch'))
-        .bearer(Brontosaurus.raw)
+        .bearer(Brontosaurus.hard().raw)
         .add('page', 0)
         .add('keyword', keyword)
         .fetch();

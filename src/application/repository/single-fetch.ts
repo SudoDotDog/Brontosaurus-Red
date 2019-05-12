@@ -22,7 +22,7 @@ export const singleFetchApplicationRepository = async (key: string): Promise<Sin
     } = await Fetch
         .post
         .json('http://localhost:8080/application/single')
-        .bearer(Brontosaurus.raw)
+        .bearer(Brontosaurus.hard().raw)
         .add('key', key)
         .fetch();
 

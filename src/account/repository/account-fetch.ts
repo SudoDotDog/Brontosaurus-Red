@@ -21,7 +21,7 @@ export const fetchAccount = async (keyword: string): Promise<UserResponse[]> => 
     } = await Fetch
         .post
         .json(joinRoute('/account/fetch'))
-        .bearer(Brontosaurus.raw)
+        .bearer(Brontosaurus.hard().raw)
         .add('page', 0)
         .add('keyword', keyword)
         .fetch();

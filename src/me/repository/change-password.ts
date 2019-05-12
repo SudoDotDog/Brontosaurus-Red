@@ -14,8 +14,8 @@ export const editPassword = async (password: string): Promise<string> => {
     } = await Fetch
         .post
         .json('http://localhost:8080/account/edit/password')
-        .bearer(Brontosaurus.raw)
-        .add('username', Brontosaurus.username)
+        .bearer(Brontosaurus.hard().raw)
+        .add('username', Brontosaurus.hard().username)
         .add('password', password)
         .fetch();
 

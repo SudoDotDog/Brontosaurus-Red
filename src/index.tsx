@@ -18,7 +18,7 @@ declare const module: any;
 
 const portalPath: string = process.env.PORTAL_PATH as string;
 const root: string = location.protocol + '//' + location.host;
-Brontosaurus.register(portalPath, 'BRONTOSAURUS_RED', root, true);
+Brontosaurus.register(portalPath, 'BRONTOSAURUS_RED');
 
 const render: (App: any) => void = (App: any): void => {
 

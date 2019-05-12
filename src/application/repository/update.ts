@@ -17,7 +17,7 @@ export const updateApplicationRepository = async (application: {
     } = await Fetch
         .post
         .json('http://localhost:8080/application/update')
-        .bearer(Brontosaurus.raw)
+        .bearer(Brontosaurus.hard().raw)
         .add('key', application.key)
         .add('application', application)
         .fetch();

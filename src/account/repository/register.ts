@@ -18,7 +18,7 @@ export const register = async (username: string, password: string, infos: Record
     const response: Response = await fetch('http://localhost:8080/account/register', {
         method: "POST",
         headers: {
-            'Authorization': 'Bearer ' + Brontosaurus.raw,
+            'Authorization': 'Bearer ' + Brontosaurus.hard().raw,
             'Accept': 'application/json',
             'Content-Type': 'application/json',
         },
