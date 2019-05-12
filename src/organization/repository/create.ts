@@ -1,23 +1,23 @@
 /**
  * @author WMXPY
- * @namespace Group_Repository
- * @description Group Create
+ * @namespace Organization_Repository
+ * @description Organization Create
  */
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
-export const createGroup = async (name: string): Promise<string> => {
+export const createOrganization = async (name: string): Promise<string> => {
 
     const response: {
-        group: string;
+        organization: string;
     } = await Fetch
         .post
-        .json(joinRoute('/group/create'))
+        .json(joinRoute('/organization/create'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name)
         .fetch();
 
-    return response.group;
+    return response.organization;
 };

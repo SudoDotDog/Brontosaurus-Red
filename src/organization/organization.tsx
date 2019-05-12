@@ -34,7 +34,7 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                 <SearchNew
                     label="Organization"
                     onSearch={async (keyword: string) => this.setState({ organizations: await fetchOrganization(keyword) })}
-                    onNew={() => this.props.history.push('/organization/new')}
+                    onNew={() => this.props.history.push('/organization/create')}
                 />
 
                 {this.state.organizations.length === 0
