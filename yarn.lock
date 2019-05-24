@@ -50,10 +50,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.1.0.tgz#0e061a7736eb90891fc732c89bb328aa40eadfc8"
   integrity sha512-2JfmCgbc8IQRiKeCeCIlnZHlRzvZVUe5Arj2TDM5tfvhTL+XbEFv/14Fschgm2Oc0O72JTCULtmYTirdrPO6ew==
 
-"@sudoo/bark@^2.5.1":
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.5.1.tgz#b898c0c302a2ccf8cb881a57f15474569b91cf32"
-  integrity sha512-vVkZtwRFbx5jtZzyZI8ZcdDEWYJN3H1Tb/PwzoxpPIf8KkzNftQL4VW+9tVfrNiw/MHyY92HWQDjKsY4WONQGQ==
+"@sudoo/bark@^2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.6.1.tgz#04ec9a269c451abb7765915e2c710b0382e816fc"
+  integrity sha512-HTjzCNHqE6WFp9S4dhmAtWS7RE0UTV90EcnR6LM7X+SXCIjkBC0JhNhss8nptiT2sDTs76rRV4SCXs6QNExooQ==
 
 "@sudoo/fetch@^1.2.1":
   version "1.2.1"
@@ -69,25 +69,19 @@
     jss "^10.0.0-alpha.12"
     jss-preset-default "^10.0.0-alpha.12"
 
-"@sudoo/react-force-dev@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/react-force-dev/-/react-force-dev-1.4.0.tgz#e40812f0815c5554dd1cdbf94afed39f3b5998b5"
-  integrity sha512-7yr62hnW7eEoNxfEsplreTQ20mm0V/9gDABVc4jbGBG7u6zhMwwxm74Tv7KisiubJit3Zy8Bd6FGEGZ893Qigw==
+"@sudoo/react-force-dev@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/react-force-dev/-/react-force-dev-1.5.0.tgz#d3a34b053865be8d90b9b06cac24a38536bda635"
+  integrity sha512-8SQ9PaJNr4GpGllnEPZKEAz9bflI1w4SnWfVUd5MZLGYY6x/O0f2e1/KA446qfVjvAw5qMeUgDsYrmJ8RETS8A==
   dependencies:
     "@types/enzyme" "3.9.0"
     "@types/enzyme-adapter-react-16" "1.0.5"
     "@types/react" "16.8.8"
     "@types/react-dom" "16.8.2"
+    "@types/react-router-dom" "^4.3.2"
     enzyme "3.9.0"
     enzyme-adapter-react-16 "1.11.2"
-
-"@sudoo/react-force@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/react-force/-/react-force-1.4.0.tgz#ca54026527032405f29223b2b8381a5a48305e0d"
-  integrity sha512-MwdcOdjmeDOunL2JsZUVgFRYPtiMobjfDPYb+D/sv7Q2lJu2IdN5THUFbczghP9X94BPnGR1uaSVBiXmO7cspw==
-  dependencies:
-    react "16.8.4"
-    react-dom "16.8.4"
+    react-hot-loader "^4.8.4"
 
 "@sudoo/react-force@^1.5.0":
   version "1.5.0"
@@ -225,7 +219,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-router-dom@^4.3.3":
+"@types/react-router-dom@^4.3.2", "@types/react-router-dom@^4.3.3":
   version "4.3.3"
   resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-4.3.3.tgz#7837e3e9fefbc84a8f6c8a51dca004f4e83e94e3"
   integrity sha512-xj0DmFjgvAqRfh/kJPO7apD5G30yPQe+8slu/dugioQOkdKpyzc4Fgk4hoTelm6CSHz7pI2PPsW5+Y6GRBF2zw==
@@ -5449,10 +5443,10 @@ react-dom@16.8.4:
     prop-types "^15.6.2"
     scheduler "^0.13.4"
 
-react-hot-loader@^4.8.7:
-  version "4.8.7"
-  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.8.7.tgz#8bcec3105d4e0e3cba52aa59800568fc9fb3322d"
-  integrity sha512-ctWAu8iwp37qd4w1qhjN6neDA1e5bSmAUY46L2l5SeK+i8AfzX+7lrpaLW4TJVaiBv5MlqIzA1ClNnvlvsy5Lg==
+react-hot-loader@^4.8.4:
+  version "4.8.8"
+  resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.8.8.tgz#71e3c7ba301556aa24c52cef2f6ed0af82395eea"
+  integrity sha512-58bgeS7So8V93MhhnKogbraor8xdrTncil+b6IoIXkTIr3blJNAE7bU4tn/iJvy2J7rjxQmKFRaxKrWdKUZpqg==
   dependencies:
     fast-levenshtein "^2.0.6"
     global "^4.3.0"
