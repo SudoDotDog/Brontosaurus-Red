@@ -21,8 +21,5 @@ module.exports = SudooWebpack.create({
 
     APP_ENTRY_FILE_NAME: 'index.tsx',
 }, {
-    title: 'Red - Brontosaurus',
-    defines: {
-        'process.env.PORTAL_PATH': JSON.stringify(process.env.PORTAL_PATH),
-    },
-}).production();
+        title: 'Red - Brontosaurus',
+    }).production();

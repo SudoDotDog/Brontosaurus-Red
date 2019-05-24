@@ -1,10 +1,6 @@
 {
   "name": "@brontosaurus/red",
   "description": ":o: Red Button",
-  "main": "index.js",
-  "scripts": {
-    "test": "mocha"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SudoDotDog/Brontosaurus-Red.git"
@@ -41,7 +37,6 @@
       ".tsx"
     ],
     "include": [
-      "script/**/*.ts",
       "src/**/*.ts",
       "src/**/*.tsx"
     ],

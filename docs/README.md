@@ -6,13 +6,13 @@
 # Development
 
 ```sh
-make PP="localhost:9000"
+make
 ```
 
 # Build
 
 ```sh
-make build PP="localhost:9000"
+make build
 ```
 
 :o: Red Button

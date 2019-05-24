@@ -14,11 +14,11 @@ main: run
 
 run:
 	@echo "[INFO] Starting development"
-	@PORTAL_PATH=$(PP) NODE_ENV=development $(webpack_dev_server) --config $(webpack_dev) --open
+	@NODE_ENV=development $(webpack_dev_server) --config $(webpack_dev) --open
 
 build:
 	@echo "[INFO] Starting build"
-	@PORTAL_PATH=$(PP) NODE_ENV=production $(webpack) --config $(webpack_build)
+	@NODE_ENV=production $(webpack) --config $(webpack_build)
 
 tests:
 	@echo "[INFO] Testing with Mocha"
