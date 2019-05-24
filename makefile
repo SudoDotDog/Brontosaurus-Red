@@ -14,7 +14,7 @@ main: run
 
 run:
 	@echo "[INFO] Starting development"
-	@NODE_ENV=development $(webpack_dev_server) --config $(webpack_dev) --open
+	@PORTAL_PATH=$(PP) NODE_ENV=development $(webpack_dev_server) --config $(webpack_dev) --open
 
 build:
 	@echo "[INFO] Starting build"

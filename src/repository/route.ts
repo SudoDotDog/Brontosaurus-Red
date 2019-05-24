@@ -6,5 +6,5 @@
 
 export const joinRoute = (route: string) => {
 
-    return 'http://localhost:9000' + route;
+    return route;
 };

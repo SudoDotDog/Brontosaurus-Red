@@ -12,12 +12,12 @@ import { AppContainer } from "react-hot-loader";
 import { HashRouter } from "react-router-dom";
 import '../style/common/global.sass';
 import Entry from "./entry";
+import { getPortalPath } from "./repository/portal";
 import { redux } from "./state/store";
 
 declare const module: any;
 
-const portalPath: string = process.env.PORTAL_PATH as string;
-Brontosaurus.register(portalPath, 'BRONTOSAURUS_RED').check().validate();
+Brontosaurus.register(getPortalPath(), 'BRONTOSAURUS_RED').check().validate();
 
 const render: (App: any) => void = (App: any): void => {
 

@@ -6,7 +6,7 @@
 # Development
 
 ```sh
-make
+make PP=<...PORTAL PATH>
 ```
 
 # Build
