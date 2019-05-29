@@ -45,15 +45,10 @@
   dependencies:
     "@brontosaurus/definition" "^1.4.3"
 
-"@sudoo/bark@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.1.0.tgz#0e061a7736eb90891fc732c89bb328aa40eadfc8"
-  integrity sha512-2JfmCgbc8IQRiKeCeCIlnZHlRzvZVUe5Arj2TDM5tfvhTL+XbEFv/14Fschgm2Oc0O72JTCULtmYTirdrPO6ew==
-
-"@sudoo/bark@^2.6.1":
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.6.1.tgz#04ec9a269c451abb7765915e2c710b0382e816fc"
-  integrity sha512-HTjzCNHqE6WFp9S4dhmAtWS7RE0UTV90EcnR6LM7X+SXCIjkBC0JhNhss8nptiT2sDTs76rRV4SCXs6QNExooQ==
+"@sudoo/bark@^2.1.0", "@sudoo/bark@^2.6.4":
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.6.4.tgz#e2232edfa76dcfc362cd16da662a36a57b3bd1f2"
+  integrity sha512-kfRGRwG+KiUm4yl+PiE1mJs9/QPKQ3yrtdPN6LPbzfi7mNJ80ry28YGB709Od2qijA12nPN9zWnOCxd7qr1JAQ==
 
 "@sudoo/fetch@^1.2.1":
   version "1.2.1"
