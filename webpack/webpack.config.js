@@ -22,4 +22,6 @@ module.exports = SudooWebpack.create({
     APP_ENTRY_FILE_NAME: 'index.tsx',
 }, {
         title: 'Red - Brontosaurus',
+        mobile: false,
+        insertion: '<!-- Insertion Point -->',
     }).production();
