@@ -70,6 +70,7 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
         return {
             username: INPUT_TYPE.TEXT,
             password: INPUT_TYPE.PASSWORD,
+            organization: INPUT_TYPE.TEXT,
             ...this.state.infos.reduce((previous: Record<string, INPUT_TYPE>, current: {
                 name: string;
                 type: string;
@@ -96,7 +97,9 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             };
         }, {} as Record<string, string>);
 
-        const id: string = await register(response.username || '', response.password || '', parsed);
+        const organization: string = response.organization || undefined;
+
+        const id: string = await register(response.username || '', response.password || '', parsed, organization);
         console.log(id);
     }
 }
