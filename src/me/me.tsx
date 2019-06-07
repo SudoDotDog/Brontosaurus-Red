@@ -58,7 +58,7 @@ export const Me: React.FC<MeProp> = (props: MeProp) => {
                             title: "Succeed",
 
                             peek: {
-                                text: "<-",
+                                children: "<-",
                                 expend: "Complete",
                                 onClick: props.history.goBack,
                             },
@@ -70,7 +70,7 @@ export const Me: React.FC<MeProp> = (props: MeProp) => {
                             info: err.message,
 
                             peek: {
-                                text: "<-",
+                                children: "<-",
                                 expend: "Retry",
                                 onClick: () => setCover(undefined),
                             },
