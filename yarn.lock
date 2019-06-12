@@ -45,10 +45,10 @@
   dependencies:
     "@brontosaurus/definition" "^1.4.3"
 
-"@sudoo/bark@^2.1.0", "@sudoo/bark@^2.6.4":
-  version "2.6.4"
-  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.6.4.tgz#e2232edfa76dcfc362cd16da662a36a57b3bd1f2"
-  integrity sha512-kfRGRwG+KiUm4yl+PiE1mJs9/QPKQ3yrtdPN6LPbzfi7mNJ80ry28YGB709Od2qijA12nPN9zWnOCxd7qr1JAQ==
+"@sudoo/bark@^2.1.0", "@sudoo/bark@^2.6.4", "@sudoo/bark@^2.7.1":
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.7.1.tgz#84b9db0be3aa7b4d6896ced81d9fa9aac96578ef"
+  integrity sha512-0zBFbIQAtu3XNJkFPszdljYXXIPXzR63qypfTwFRupmu3gxgfBMtdPShbQebGuGG0KQEmXasGMBQVi2O0jWbbQ==
 
 "@sudoo/fetch@^1.2.2":
   version "1.2.2"
@@ -87,12 +87,12 @@
     react-dom "16.8.4"
     react-router-dom "^5.0.0"
 
-"@sudoo/redux@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/@sudoo/redux/-/redux-1.3.3.tgz#2a85e786f079cda5edd106adcd9ababb00d8f778"
-  integrity sha512-k/mRkVrM8qN+gXDGbhhJgT2YPN2ux7xcH4a1AEtMzvLaF5OW2XoW7S0gcM+gyCJIHHF0zCcblnqbFSHgNJpCJg==
+"@sudoo/redux@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/redux/-/redux-1.4.0.tgz#a80797fbf741210f9a68eba7abd184ff03b23bc0"
+  integrity sha512-7njSuIAMU+9lOa88JV2Xdl8zs5l+Na0oAScxo/aaCtSrowGMitKv0M9cWX532pKOBVG4dwCqQwx3X2Sx4Jb1Iw==
   dependencies:
-    "@sudoo/bark" "^2.1.0"
+    "@sudoo/bark" "^2.7.1"
     react-redux "^6.0.1"
     redux "^4.0.1"
 
