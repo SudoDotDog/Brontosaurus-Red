@@ -12,6 +12,7 @@ import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { fetchGroup, GroupResponse } from "../group/repository/group-fetch";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
 
@@ -21,20 +22,24 @@ type UserEditProp = {
 type UserEditState = {
 
     user: SingleFetchResponse | null;
+    groups: GroupResponse[];
 };
 
 export class UserEdit extends React.Component<UserEditProp, UserEditState> {
 
     public state: UserEditState = {
         user: null,
+        groups: [],
     };
 
     public async componentDidMount() {
 
         const response: SingleFetchResponse = await singleFetchRepository(this._getUsername());
+        const groups: GroupResponse[] = await fetchGroup();
 
         this.setState({
             user: response,
+            groups,
         });
     }
 
@@ -85,6 +90,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
 
                 <NeonPillGroup
                     selected={this.state.user.groups}
+                    options={this.state.groups.map((group: GroupResponse) => group.name)}
                 />
 
                 <NeonButton

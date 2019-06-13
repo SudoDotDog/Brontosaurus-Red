@@ -12,7 +12,7 @@ export type GroupResponse = {
     name: string;
 };
 
-export const fetchGroup = async (keyword: string): Promise<GroupResponse[]> => {
+export const fetchGroup = async (keyword: string = ''): Promise<GroupResponse[]> => {
 
     const response: {
         groups: GroupResponse[];
