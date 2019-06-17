@@ -4,7 +4,8 @@
  * @description Inplode
  */
 
-import { MARGIN } from "@sudoo/neon/declare";
+import { MARGIN, SIGNAL } from "@sudoo/neon/declare";
+import { NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
@@ -16,6 +17,9 @@ type InplodeOrganizationProp = {
 } & RouteComponentProps;
 
 type InplodeOrganizationStates = {
+
+    readonly loading: boolean;
+    readonly cover: NeonStickerCut | undefined;
     readonly infos: Array<{
         name: string;
         type: string;
@@ -27,6 +31,8 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
 
     public readonly state: InplodeOrganizationStates = {
 
+        loading: false,
+        cover: undefined,
         current: {},
         infos: [],
     };
@@ -56,6 +62,8 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
                     Go Back
                 </NeonSub>
                 <NeonSmartForm
+                    loading={this.state.loading}
+                    cover={this.state.cover}
                     title="Inplode Organization"
                     form={this._getForm()}
                     value={this.state.current}
@@ -87,6 +95,10 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
 
     private async _submit(response: Record<string, any>) {
 
+        this.setState({
+            loading: true,
+        });
+
         const parsed: Record<string, string> = this.state.infos.reduce((previous: Record<string, string>, current: {
             name: string;
             type: string;
@@ -98,12 +110,46 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
             };
         }, {} as Record<string, string>);
 
-        const id: string = await inplodeOrganization(
-            response.name || '',
-            response.username || '',
-            response.password || '',
-            parsed,
-        );
-        console.log(id);
+        try {
+            const id: string = await inplodeOrganization(
+                response.name || '',
+                response.username || '',
+                response.password || '',
+                parsed,
+            );
+
+            console.log(id);
+            this.setState({
+                cover: {
+                    type: SIGNAL.SUCCEED,
+                    title: "Succeed",
+
+                    peek: {
+                        children: "<-",
+                        expend: "Complete",
+                        onClick: this.props.history.goBack,
+                    },
+                },
+            });
+        } catch (err) {
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.ERROR,
+                    title: "Failed",
+                    info: err.message,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Retry",
+                        onClick: () => this.setState({ cover: undefined }),
+                    },
+                },
+            });
+        }
+
+        this.setState({
+            loading: false,
+        });
     }
 }
