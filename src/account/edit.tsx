@@ -89,10 +89,14 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
 
                 <NeonPillGroup
+                    style={{ flexWrap: 'wrap' }}
                     selected={this.state.user.groups}
                     onChange={(next: string[]) => {
                         this.setState({
-                            groups: next,
+                            user: {
+                                ...this.state.user as SingleFetchResponse,
+                                groups: next,
+                            },
                         });
                     }}
                     addable
@@ -104,7 +108,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                     width={WIDTH.FULL}
                     onClick={() => this.state.user && editAccountAdminRepository(
                         this.state.user.username,
-                        this.state.groups,
+                        this.state.user.groups,
                         {
                             infos: this.state.user.infos,
                             beacons: this.state.user.beacons,
