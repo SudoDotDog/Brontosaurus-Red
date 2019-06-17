@@ -4,7 +4,7 @@
  * @description Edit
  */
 
-import { NeonButton } from "@sudoo/neon/button";
+import { NeonButton, NeonCoin } from "@sudoo/neon/button";
 import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonSmartList } from "@sudoo/neon/table";
@@ -75,6 +75,23 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                             infos: newInfo,
                         },
                     })} />
+                <NeonCoin
+                    size={SIZE.NORMAL}
+                    onClick={() => {
+                        const user: any = this.state.user;
+                        this.setState({
+                            user: {
+                                ...user as any,
+                                infos: {
+                                    ...user.infos as any,
+                                    "NEW-INFO": "1",
+                                },
+                            },
+                        });
+                    }}
+                >
+                    +
+                </NeonCoin>
                 <NeonTitle size={SIZE.MEDIUM}>Beacon</NeonTitle>
 
                 <NeonSmartList
