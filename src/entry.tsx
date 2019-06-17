@@ -11,6 +11,7 @@ import { Route } from "react-router-dom";
 import * as EntryStyle from "../style/route/entry.scss";
 import { UserRoute } from "./account/route";
 import { ApplicationRoute } from "./application/route";
+import { CurrentRoute } from "./current/route";
 import { GroupRoute } from "./group/route";
 import { MeRoute } from "./me/route";
 import { OrganizationRoute } from "./organization/route";
@@ -32,6 +33,7 @@ export class Entry extends React.Component {
                 <div className={EntryStyle.content}>
                     <NeonPaper>
                         <MeRoute />
+                        <CurrentRoute />
                         <UserRoute />
                         <OrganizationRoute />
                         <GroupRoute />

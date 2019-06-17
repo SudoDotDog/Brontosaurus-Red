@@ -10,6 +10,7 @@ import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import * as NavStyle from "../../style/page/nav.scss";
 import * as EntryStyle from "../../style/route/entry.scss";
 
 type NavProp = {
@@ -46,8 +47,9 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
             {
                 organization &&
                 <NeonButton
+                    buttonClassName={NavStyle.organizationButton}
                     size={SIZE.MEDIUM}
-                    onClick={() => props.history.push('/me')}
+                    onClick={() => props.history.push('/current')}
                 >
                     {organization}
                 </NeonButton>
