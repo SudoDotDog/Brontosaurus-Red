@@ -38,7 +38,7 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
             loading={loading}
             form={form}
             title="Register Sub Account"
-            submit="Update"
+            submit="Register"
             cover={cover}
             flag={flag}
             value={current}
@@ -57,6 +57,17 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
                         current.username,
                         current.password,
                     );
+
+                    setCover({
+                        type: SIGNAL.SUCCEED,
+                        title: "Succeed",
+
+                        peek: {
+                            children: "<-",
+                            expend: "Complete",
+                            onClick: props.history.goBack,
+                        },
+                    });
                 } catch (err) {
                     setCover({
                         type: SIGNAL.ERROR,

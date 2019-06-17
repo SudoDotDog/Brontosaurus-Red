@@ -64,6 +64,8 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 margin: MARGIN.SMALL,
             }} >
                 <NeonTitle>Edit: {this.state.user.username}</NeonTitle>
+                <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
+                {this._renderOrganization()}
                 <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
                 <NeonSmartList
                     list={this.state.user.infos}
@@ -135,6 +137,16 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 </NeonButton>
             </NeonThemeProvider>
         );
+    }
+
+    private _renderOrganization() {
+
+        const user: any = this.state.user;
+        if (user.organization) {
+            return (<NeonSub>{user.organization}</NeonSub>);
+        } else {
+            return (<NeonSub>This user doesn't belong to any organization</NeonSub>);
+        }
     }
 
     private _getUsername(): string {

@@ -10,6 +10,7 @@ import { joinRoute } from "../../repository/route";
 
 export type SingleFetchResponse = {
     username: string;
+    organization?: string;
     beacons: Record<string, any>;
     infos: Record<string, any>;
     groups: string[];
