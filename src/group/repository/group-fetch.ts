@@ -24,6 +24,5 @@ export const fetchGroup = async (keyword: string = ''): Promise<GroupResponse[]>
         .add('keyword', keyword)
         .fetch();
 
-    console.log(response);
     return response.groups;
 };

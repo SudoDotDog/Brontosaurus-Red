@@ -22,7 +22,7 @@ type UserEditProp = {
 type UserEditState = {
 
     user: SingleFetchResponse | null;
-    groups: GroupResponse[];
+    groups: string[];
 };
 
 export class UserEdit extends React.Component<UserEditProp, UserEditState> {
@@ -39,7 +39,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
 
         this.setState({
             user: response,
-            groups,
+            groups: groups.map((res: GroupResponse) => res.name),
         });
     }
 
@@ -90,16 +90,25 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
 
                 <NeonPillGroup
                     selected={this.state.user.groups}
-                    options={this.state.groups.map((group: GroupResponse) => group.name)}
+                    onChange={(next: string[]) => {
+                        this.setState({
+                            groups: next,
+                        });
+                    }}
+                    addable
+                    options={this.state.groups}
                 />
 
                 <NeonButton
                     size={SIZE.MEDIUM}
                     width={WIDTH.FULL}
-                    onClick={() => this.state.user && editAccountAdminRepository(this.state.user.username, {
-                        infos: this.state.user.infos,
-                        beacons: this.state.user.beacons,
-                    })}
+                    onClick={() => this.state.user && editAccountAdminRepository(
+                        this.state.user.username,
+                        this.state.groups,
+                        {
+                            infos: this.state.user.infos,
+                            beacons: this.state.user.beacons,
+                        })}
                 >
                     Save Change
                 </NeonButton>
