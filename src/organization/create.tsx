@@ -38,7 +38,7 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
                     form={this._getForm()}
                     value={this.state.current}
                     onChange={(value: any) => this.setState({ current: value })}
-                    onSubmit={() => this._submit(this.state.current.name)}
+                    onSubmit={() => this._submit(this.state.current.name, this.state.current.owner)}
                 />
             </React.Fragment>
         );
@@ -48,12 +48,13 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
 
         return {
             name: INPUT_TYPE.TEXT,
+            owner: INPUT_TYPE.TEXT,
         };
     }
 
-    private async _submit(name: string) {
+    private async _submit(name: string, owner: string) {
 
-        const id: string = await createOrganization(name);
+        const id: string = await createOrganization(name, owner);
         console.log(id);
     }
 }

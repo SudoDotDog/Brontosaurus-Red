@@ -143,7 +143,12 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
 
         const user: any = this.state.user;
         if (user.organization) {
-            return (<NeonSub>{user.organization}</NeonSub>);
+            return (<NeonSmartList
+                list={{
+                    name: user.organization.name,
+                    owner: user.organization.owner,
+                }}
+            />);
         } else {
             return (<NeonSub>This user doesn't belong to any organization</NeonSub>);
         }

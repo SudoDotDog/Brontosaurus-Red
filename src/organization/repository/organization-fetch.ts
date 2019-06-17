@@ -11,6 +11,7 @@ import { joinRoute } from "../../repository/route";
 export type OrganizationResponse = {
 
     name: string;
+    owner: string;
 };
 
 export const fetchOrganization = async (keyword: string): Promise<OrganizationResponse[]> => {

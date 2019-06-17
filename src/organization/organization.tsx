@@ -40,7 +40,7 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                 {this.state.organizations.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name', 'Action']}
+                        headers={['Name', 'Owner', 'Action']}
                         style={{ marginTop: '1rem' }}>
                         {this._renderOrganizations()}
                     </NeonTable>}
@@ -54,6 +54,7 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
         return this.state.organizations.map((organization: OrganizationResponse) =>
             (<tr key={organization.name}>
                 <td>{organization.name}</td>
+                <td>{organization.owner}</td>
                 <td><NeonButton
                     onClick={() => this.props.history.push('/organization/e/' + organization.name)}
                     size={SIZE.RELATIVE}>
