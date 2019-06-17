@@ -9,7 +9,7 @@ import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { SearchNew } from "../components/search-new";
+import { SearchDoubleNew } from "../components/search-di-new";
 import { fetchOrganization, OrganizationResponse } from "./repository/organization-fetch";
 
 type OrganizationProps = {
@@ -31,10 +31,11 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
         return (
             <div>
 
-                <SearchNew
+                <SearchDoubleNew
                     label="Organization"
                     onSearch={async (keyword: string) => this.setState({ organizations: await fetchOrganization(keyword) })}
                     onNew={() => this.props.history.push('/organization/create')}
+                    onInplode={() => this.props.history.push('/organization/inplode')}
                 />
 
                 {this.state.organizations.length === 0
