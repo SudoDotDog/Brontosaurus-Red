@@ -60,7 +60,7 @@ export class CreateApplication extends React.Component<CreateApplicationProp, Cr
             current.name,
             current.key,
             Number(current.expire) || 360000,
-            current.token,
+            current.secret,
         );
         console.log(id);
     }
