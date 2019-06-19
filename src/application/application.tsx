@@ -34,7 +34,7 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
                 <SearchNew
                     label="Application"
                     onSearch={async (keyword: string) => this.setState({ applications: await fetchApplication(keyword) })}
-                    onNew={() => this.props.history.push('/application/new')}
+                    onNew={() => this.props.history.push('/application/create')}
                 />
 
                 {this.state.applications.length === 0

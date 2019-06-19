@@ -5,6 +5,7 @@
         "codecov",
         "devtool",
         "ifeq",
+        "inplode",
         "setx",
         "triforce",
         "tshook"
