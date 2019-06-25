@@ -50,10 +50,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.7.1.tgz#84b9db0be3aa7b4d6896ced81d9fa9aac96578ef"
   integrity sha512-0zBFbIQAtu3XNJkFPszdljYXXIPXzR63qypfTwFRupmu3gxgfBMtdPShbQebGuGG0KQEmXasGMBQVi2O0jWbbQ==
 
-"@sudoo/fetch@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-1.5.0.tgz#0bef2fb559d97192e437b8342f8a106d280473df"
-  integrity sha512-qcsbFXv0ukAUBfb2YVZGx+VdEZ8FBx0SZ6p0cf7rnOnN3fc5CRW5i05NqalIJNg8h9PkEIop7enY+gtKOvNv8Q==
+"@sudoo/fetch@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-1.5.2.tgz#c3c69ff0d6c93053aefcd5b1549df91bd9b2d047"
+  integrity sha512-S+sIRjXLI6rvKJebiMfnQrjt8KASBXeJCJgthcRB1en6fdBTzJlx2KnetUjuKtO5Qshi0+OkJxOYwpyoLut9KQ==
 
 "@sudoo/neon@^2.9.1":
   version "2.9.1"
