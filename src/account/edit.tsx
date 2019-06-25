@@ -119,6 +119,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                         });
                     }}
                     addable
+                    removable
                     options={this.state.groups}
                 />
 
