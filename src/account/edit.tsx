@@ -33,6 +33,13 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
         groups: [],
     };
 
+    public constructor(props: UserEditProp) {
+
+        super(props);
+
+        this._deactivateUser = this._deactivateUser.bind(this);
+    }
+
     public async componentDidMount() {
 
         const response: SingleFetchResponse = await singleFetchRepository(this._getUsername());
@@ -125,13 +132,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 />
 
                 <NeonTitle size={SIZE.MEDIUM}>Dangerous</NeonTitle>
-                <NeonButton onClick={async () => {
-                    const isConfirm: boolean = window.confirm('Are you sure to deactivate "' + this.state.user.username + '"?');
-                    if (isConfirm) {
-                        await deactivateAccount(this.state.user.username);
-                        this.props.history.goBack();
-                    }
-                }}>Deactivate</NeonButton>
+                <NeonButton onClick={this._deactivateUser}>Deactivate</NeonButton>
 
                 <NeonButton
                     size={SIZE.MEDIUM}
@@ -148,6 +149,18 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 </NeonButton>
             </NeonThemeProvider>
         );
+    }
+
+    private async _deactivateUser() {
+
+        if (!this.state.user) {
+            return;
+        }
+        const isConfirm: boolean = window.confirm('Are you sure to deactivate "' + this.state.user.username + '"?');
+        if (isConfirm) {
+            await deactivateAccount(this.state.user.username);
+            this.props.history.goBack();
+        }
     }
 
     private _renderOrganization() {
