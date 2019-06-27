@@ -40,7 +40,7 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
         <React.Fragment>
             <NeonButton
                 size={SIZE.MEDIUM}
-                onClick={() => props.history.push('/me')}
+                onClick={() => props.history.push('/me/menu')}
             >
                 Me
             </NeonButton>

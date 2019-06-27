@@ -1,0 +1,26 @@
+/**
+ * @author WMXPY
+ * @namespace Me
+ * @description Me
+ */
+
+ @import '../common/color.sass';
+
+.menu-grid {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   grid-gap: 1rem;
+}
+
+.menu-item {
+    border: 0.3rem solid $navy;
+    display: flex;
+    flex-direction: column;
+    height: 12rem;
+}
+
+.menu-description {
+
+    padding: 0.4rem;
+    flex: 1;
+}
