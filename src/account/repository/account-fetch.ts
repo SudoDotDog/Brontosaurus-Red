@@ -10,6 +10,7 @@ import { joinRoute } from "../../repository/route";
 
 export type UserResponse = {
     username: string;
+    twoFA: boolean;
     groups: number;
     infos: Record<string, any>;
 };
