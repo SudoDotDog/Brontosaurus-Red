@@ -6,6 +6,7 @@
         "devtool",
         "ifeq",
         "inplode",
+        "qrcode",
         "setx",
         "triforce",
         "tshook"
