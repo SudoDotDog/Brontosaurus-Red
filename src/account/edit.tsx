@@ -17,6 +17,7 @@ import { editAccountAdminRepository } from "./repository/admin-edit";
 import { deactivateAccount } from "./repository/deactivate";
 import { limboAccount, LimboAccountResponse } from "./repository/limbo";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
+import { removeTwoFAAccount } from "./repository/twoFARemove";
 
 type UserEditProp = {
 } & RouteComponentProps;
@@ -39,6 +40,8 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
         super(props);
 
         this._deactivateUser = this._deactivateUser.bind(this);
+        this._limboUser = this._limboUser.bind(this);
+        this._twoFARemoveUser = this._twoFARemoveUser.bind(this);
     }
 
     public async componentDidMount() {
@@ -145,6 +148,12 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 >
                     Reset
                 </NeonButton>
+                <NeonButton
+                    onClick={this._twoFARemoveUser}
+                    size={SIZE.MEDIUM}
+                >
+                    2FA Remove
+                </NeonButton>
 
                 <NeonButton
                     size={SIZE.MEDIUM}
@@ -184,6 +193,17 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
         if (isConfirm) {
             const response: LimboAccountResponse = await limboAccount(this.state.user.username);
             window.alert(`${this.state.user.username}'s temp new password is ${response.tempPassword}`);
+        }
+    }
+
+    private async _twoFARemoveUser() {
+
+        if (!this.state.user) {
+            return;
+        }
+        const isConfirm: boolean = window.confirm(`Are you sure to remove ${this.state.user.username}'s Two-Way authenticator?`);
+        if (isConfirm) {
+            await removeTwoFAAccount(this.state.user.username);
         }
     }
 
