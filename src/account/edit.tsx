@@ -15,7 +15,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { fetchGroup, GroupResponse } from "../group/repository/group-fetch";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { deactivateAccount } from "./repository/deactivate";
-import { limboAccount } from "./repository/limbo";
+import { limboAccount, LimboAccountResponse } from "./repository/limbo";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
 
 type UserEditProp = {
@@ -181,7 +181,8 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
         }
         const isConfirm: boolean = window.confirm(`Are you sure to reset ${this.state.user.username}'s password?`);
         if (isConfirm) {
-            await limboAccount(this.state.user.username);
+            const response: LimboAccountResponse = await limboAccount(this.state.user.username);
+            window.alert(`${this.state.user.username}'s temp new password is ${response.tempPassword}`);
         }
     }
 
