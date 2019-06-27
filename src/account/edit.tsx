@@ -136,24 +136,20 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 />
 
                 <NeonTitle size={SIZE.MEDIUM}>Dangerous</NeonTitle>
-                <NeonButton
-                    onClick={this._deactivateUser}
-                    size={SIZE.MEDIUM}
-                >
-                    Deactivate
-                </NeonButton>
-                <NeonButton
-                    onClick={this._limboUser}
-                    size={SIZE.MEDIUM}
-                >
-                    Reset
-                </NeonButton>
-                <NeonButton
-                    onClick={this._twoFARemoveUser}
-                    size={SIZE.MEDIUM}
-                >
-                    2FA Remove
-                </NeonButton>
+                <div style={{ display: 'flex' }}>
+                    <NeonButton
+                        onClick={this._deactivateUser}
+                        size={SIZE.MEDIUM}
+                    >Deactivate</NeonButton>
+                    <NeonButton
+                        onClick={this._limboUser}
+                        size={SIZE.MEDIUM}
+                    >Reset</NeonButton>
+                    <NeonButton
+                        onClick={this._twoFARemoveUser}
+                        size={SIZE.MEDIUM}
+                    >2FA Remove</NeonButton>
+                </div>
 
                 <NeonButton
                     size={SIZE.MEDIUM}
