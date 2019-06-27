@@ -15,6 +15,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { fetchGroup, GroupResponse } from "../group/repository/group-fetch";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { deactivateAccount } from "./repository/deactivate";
+import { limboAccount } from "./repository/limbo";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
 
 type UserEditProp = {
@@ -84,7 +85,8 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                             ...this.state.user as any,
                             infos: newInfo,
                         },
-                    })} />
+                    })}
+                />
                 <NeonCoin
                     size={SIZE.NORMAL}
                     onClick={() => {
@@ -99,9 +101,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                             },
                         });
                     }}
-                >
-                    +
-                </NeonCoin>
+                >+</NeonCoin>
                 <NeonTitle size={SIZE.MEDIUM}>Beacon</NeonTitle>
 
                 <NeonSmartList
@@ -138,6 +138,12 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 >
                     Deactivate
                 </NeonButton>
+                <NeonButton
+                    onClick={this._limboUser}
+                    size={SIZE.MEDIUM}
+                >
+                    Reset
+                </NeonButton>
 
                 <NeonButton
                     size={SIZE.MEDIUM}
@@ -161,10 +167,21 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
         if (!this.state.user) {
             return;
         }
-        const isConfirm: boolean = window.confirm('Are you sure to deactivate "' + this.state.user.username + '"?');
+        const isConfirm: boolean = window.confirm(`Are you sure to deactivate ${this.state.user.username}?`);
         if (isConfirm) {
             await deactivateAccount(this.state.user.username);
             this.props.history.goBack();
+        }
+    }
+
+    private async _limboUser() {
+
+        if (!this.state.user) {
+            return;
+        }
+        const isConfirm: boolean = window.confirm(`Are you sure to reset ${this.state.user.username}'s password?`);
+        if (isConfirm) {
+            await limboAccount(this.state.user.username);
         }
     }
 
