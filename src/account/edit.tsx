@@ -73,6 +73,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 margin: MARGIN.SMALL,
             }} >
                 <NeonTitle>Edit: {this.state.user.username}</NeonTitle>
+                <NeonSub>Two-Way Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
                 <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
                 {this._renderOrganization()}
                 <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
