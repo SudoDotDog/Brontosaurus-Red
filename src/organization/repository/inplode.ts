@@ -13,6 +13,8 @@ export const inplodeOrganization = async (
     name: string,
     username: string,
     password: string,
+    email: string,
+    phone: string,
     infos: Record<string, Basics>,
 ): Promise<string> => {
 
@@ -25,6 +27,8 @@ export const inplodeOrganization = async (
         .add('name', name)
         .add('username', username)
         .add('password', password)
+        .add('email', email)
+        .add('phone', phone)
         .add('infos', infos)
         .fetch();
 

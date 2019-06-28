@@ -5,7 +5,7 @@
  */
 
 import { MARGIN } from "@sudoo/neon/declare";
-import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -44,11 +44,17 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
         );
     }
 
-    private _getForm(): Record<string, INPUT_TYPE> {
+    private _getForm(): Record<string, INPUT_TYPE | FromElement> {
 
         return {
-            name: INPUT_TYPE.TEXT,
-            owner: INPUT_TYPE.TEXT,
+            name: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Organization Name',
+            },
+            owner: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Owner Username',
+            },
         };
     }
 

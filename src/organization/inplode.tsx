@@ -6,7 +6,7 @@
 
 import { MARGIN, SIGNAL } from "@sudoo/neon/declare";
 import { NeonStickerCut } from "@sudoo/neon/flag";
-import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -74,12 +74,29 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
         );
     }
 
-    private _getForm(): Record<string, INPUT_TYPE> {
+    private _getForm(): Record<string, INPUT_TYPE | FromElement> {
 
         return {
-            name: INPUT_TYPE.TEXT,
-            username: INPUT_TYPE.TEXT,
-            password: INPUT_TYPE.PASSWORD,
+            name: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Organization Name',
+            },
+            username: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Username',
+            },
+            password: {
+                type: INPUT_TYPE.PASSWORD,
+                display: 'Password',
+            },
+            email: {
+                type: INPUT_TYPE.EMAIL,
+                display: 'Email Address',
+            },
+            phone: {
+                type: INPUT_TYPE.NUMBER,
+                display: 'Phone Number',
+            },
             ...this.state.infos.reduce((previous: Record<string, INPUT_TYPE>, current: {
                 name: string;
                 type: string;
@@ -115,6 +132,8 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
                 response.name || '',
                 response.username || '',
                 response.password || '',
+                response.email,
+                response.phone,
                 parsed,
             );
 

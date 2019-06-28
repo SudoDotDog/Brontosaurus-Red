@@ -5,7 +5,7 @@
  */
 
 import { MARGIN } from "@sudoo/neon/declare";
-import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
@@ -65,12 +65,25 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
         </NeonThemeProvider>);
     }
 
-    private _getForm(): Record<string, INPUT_TYPE> {
+    private _getForm(): Record<string, INPUT_TYPE | FromElement> {
 
         return {
-            username: INPUT_TYPE.TEXT,
-            password: INPUT_TYPE.PASSWORD,
-            organization: INPUT_TYPE.TEXT,
+            username: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Username',
+            },
+            password: {
+                type: INPUT_TYPE.PASSWORD,
+                display: 'Password',
+            },
+            email: {
+                type: INPUT_TYPE.EMAIL,
+                display: 'Email Address',
+            },
+            phone: {
+                type: INPUT_TYPE.NUMBER,
+                display: 'Phone Number',
+            },
             ...this.state.infos.reduce((previous: Record<string, INPUT_TYPE>, current: {
                 name: string;
                 type: string;
@@ -97,9 +110,13 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             };
         }, {} as Record<string, string>);
 
-        const organization: string = response.organization || undefined;
-
-        const id: string = await register(response.username || '', response.password || '', parsed, organization);
+        const id: string = await register(
+            response.username || '',
+            response.password || '',
+            response.email,
+            response.phone,
+            parsed,
+        );
         console.log(id);
     }
 }
