@@ -10,6 +10,8 @@ import { joinRoute } from "../../repository/route";
 
 export const editAccountAdminRepository = async (
     username: string,
+    email: string | undefined,
+    phone: string | undefined,
     groups: string[],
     account: Partial<{
         beacons: Record<string, any>;
@@ -21,6 +23,8 @@ export const editAccountAdminRepository = async (
         .json(joinRoute('/account/edit/admin'))
         .bearer(Brontosaurus.hard().raw)
         .add('groups', groups)
+        .add('email', email)
+        .add('phone', phone)
         .add('username', username)
         .add('account', account)
         .fetch();

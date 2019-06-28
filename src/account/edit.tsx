@@ -79,12 +79,27 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 <NeonSub>Two-Way Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
                 <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
                 {this._renderOrganization()}
+                <NeonTitle size={SIZE.MEDIUM}>Contact</NeonTitle>
+                <NeonSmartList
+                    list={{
+                        Email: this.state.user.email || '',
+                        Phone: this.state.user.phone || '',
+                    }}
+                    editableValue
+                    onChange={(newInfo: Record<string, string>) => this.setState({
+                        user: {
+                            ...this.state.user as SingleFetchResponse,
+                            email: newInfo.Email,
+                            phone: newInfo.Phone,
+                        },
+                    })}
+                />
                 <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
                 <NeonSmartList
                     list={this.state.user.infos}
                     editableName
                     editableValue
-                    onChange={(newInfo) => this.setState({
+                    onChange={(newInfo: Record<string, string>) => this.setState({
                         user: {
                             ...this.state.user as any,
                             infos: newInfo,
@@ -156,6 +171,8 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                     width={WIDTH.FULL}
                     onClick={() => this.state.user && editAccountAdminRepository(
                         this.state.user.username,
+                        this.state.user.email,
+                        this.state.user.phone,
                         this.state.user.groups,
                         {
                             infos: this.state.user.infos,

@@ -10,6 +10,8 @@ import { joinRoute } from "../../repository/route";
 
 export type SingleFetchResponse = {
     username: string;
+    email?: string;
+    phone?: string;
     organization?: {
         name: string;
         owner: string;

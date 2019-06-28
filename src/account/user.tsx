@@ -40,7 +40,7 @@ export class User extends React.Component<UserProp, UserState> {
                 {this.state.users.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Username', 'Groups', '2FA', 'Infos', 'Action']}
+                        headers={['Username', 'Groups', '2FA', 'Email', "Phone", 'Action']}
                         style={{ marginTop: '1rem' }}>
                         {this._renderUser()}
                     </NeonTable>}
@@ -55,7 +55,8 @@ export class User extends React.Component<UserProp, UserState> {
                 <td>{user.username}</td>
                 <td>{user.groups}</td>
                 <td>{Boolean(user.twoFA).toString()}</td>
-                <td>{JSON.stringify(user.infos, null, 2)}</td>
+                <td>{user.email}</td>
+                <td>{user.phone}</td>
                 <td><NeonButton
                     onClick={() => this.props.history.push('/user/e/' + user.username)}
                     size={SIZE.RELATIVE}>

@@ -31,6 +31,14 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
             type: INPUT_TYPE.PASSWORD,
             display: 'Password',
         },
+        email: {
+            type: INPUT_TYPE.EMAIL,
+            display: 'Email Address',
+        },
+        phone: {
+            type: INPUT_TYPE.NUMBER,
+            display: 'Phone Number',
+        },
     };
 
     return (
@@ -56,6 +64,8 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
                     await registerForOrganization(
                         current.username,
                         current.password,
+                        current.email,
+                        current.phone,
                     );
 
                     setCover({

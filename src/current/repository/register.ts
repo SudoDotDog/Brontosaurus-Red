@@ -11,6 +11,8 @@ import { joinRoute } from "../../repository/route";
 export const registerForOrganization = async (
     username: string,
     password: string,
+    email?: string,
+    phone?: string,
 ): Promise<string> => {
 
     const response: {
@@ -21,6 +23,8 @@ export const registerForOrganization = async (
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('password', password)
+        .add('email', email)
+        .add('phone', phone)
         .add('infos', {})
         .fetch();
 
