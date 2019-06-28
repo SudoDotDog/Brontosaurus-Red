@@ -43,6 +43,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
         this._deactivateUser = this._deactivateUser.bind(this);
         this._limboUser = this._limboUser.bind(this);
         this._twoFARemoveUser = this._twoFARemoveUser.bind(this);
+        this._resetAttemptUser = this._resetAttemptUser.bind(this);
     }
 
     public async componentDidMount() {
