@@ -16,6 +16,7 @@ import { fetchGroup, GroupResponse } from "../group/repository/group-fetch";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { deactivateAccount } from "./repository/deactivate";
 import { limboAccount, LimboAccountResponse } from "./repository/limbo";
+import { resetAttemptAccount } from "./repository/reset-attempt";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
 import { removeTwoFAAccount } from "./repository/twoFARemove";
 
@@ -154,16 +155,24 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 <div style={{ display: 'flex' }}>
                     <NeonButton
                         onClick={this._deactivateUser}
+                        margin={MARGIN.TINY}
                         size={SIZE.MEDIUM}
                     >Deactivate</NeonButton>
                     <NeonButton
                         onClick={this._limboUser}
+                        margin={MARGIN.TINY}
                         size={SIZE.MEDIUM}
-                    >Reset</NeonButton>
+                    >Limbo</NeonButton>
                     <NeonButton
                         onClick={this._twoFARemoveUser}
+                        margin={MARGIN.TINY}
                         size={SIZE.MEDIUM}
                     >2FA Remove</NeonButton>
+                    <NeonButton
+                        onClick={this._resetAttemptUser}
+                        margin={MARGIN.TINY}
+                        size={SIZE.MEDIUM}
+                    >Recover</NeonButton>
                 </div>
 
                 <NeonButton
@@ -217,6 +226,17 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
         const isConfirm: boolean = window.confirm(`Are you sure to remove ${this.state.user.username}'s Two-Way authenticator?`);
         if (isConfirm) {
             await removeTwoFAAccount(this.state.user.username);
+        }
+    }
+
+    private async _resetAttemptUser() {
+
+        if (!this.state.user) {
+            return;
+        }
+        const isConfirm: boolean = window.confirm(`Are you sure to reset ${this.state.user.username}'s Sign-in attempt count?`);
+        if (isConfirm) {
+            await resetAttemptAccount(this.state.user.username);
         }
     }
 
