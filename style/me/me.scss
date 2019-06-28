@@ -7,12 +7,14 @@
  @import '../common/color.sass';
 
 .menu-grid {
+    
    display: grid;
    grid-template-columns: repeat(3, 1fr);
    grid-gap: 1rem;
 }
 
 .menu-item {
+
     border: 0.3rem solid $navy;
     display: flex;
     flex-direction: column;
