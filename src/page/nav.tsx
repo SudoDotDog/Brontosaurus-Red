@@ -49,7 +49,7 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                 <NeonButton
                     buttonClassName={NavStyle.organizationButton}
                     size={SIZE.MEDIUM}
-                    onClick={() => props.history.push('/current')}
+                    onClick={() => props.history.push('/current/menu')}
                 >
                     {organization}
                 </NeonButton>

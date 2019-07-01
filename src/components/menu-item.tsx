@@ -7,7 +7,7 @@
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE, WIDTH } from "@sudoo/neon/declare";
 import * as React from "react";
-import * as StyleMe from "../../../style/me/me.scss";
+import * as StyleMe from "../../style/components/menu.scss";
 
 export type MenuItemProps = {
 

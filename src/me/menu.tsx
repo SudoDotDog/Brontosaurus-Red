@@ -6,8 +6,8 @@
 
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import * as StyleMe from "../../style/me/me.scss";
-import { MenuItem } from "./components/menu-item";
+import * as StyleMe from "../../style/components/menu.scss";
+import { MenuItem } from "../components/menu-item";
 
 export type MeMenuProps = {
 } & RouteComponentProps;
