@@ -13,11 +13,10 @@ export const globalPreferenceRepository = async (
     globalBackgroundImages?: string[],
     globalHelpLink?: string,
     globalPrivacyPolicy?: string,
-): Promise<string> => {
+): Promise<number> => {
 
     const response: {
-        account: string;
-        tempPassword: string;
+        changed: number;
     } = await Fetch
         .post
         .json(joinRoute('/preference/global'))
@@ -28,5 +27,5 @@ export const globalPreferenceRepository = async (
         .add('globalPrivacyPolicy', globalPrivacyPolicy)
         .fetch();
 
-    return response.tempPassword;
+    return response.changed;
 };

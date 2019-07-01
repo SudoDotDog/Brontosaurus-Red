@@ -9,12 +9,12 @@ import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { namePreferenceRepository } from "./repository/names";
-import { readNamePreferenceRepository, ReadNamesRepositoryResponse } from "./repository/read-names";
+import { globalPreferenceRepository } from "./repository/global";
+import { readGlobalPreferenceRepository, ReadGlobalRepositoryResponse } from "./repository/read-global";
 
-export type NamesPreferenceStates = {
+export type GlobalPreferenceStates = {
 
-    readonly initial: ReadNamesRepositoryResponse | undefined;
+    readonly initial: ReadGlobalRepositoryResponse | undefined;
 
     readonly current: any;
     readonly loading: boolean;
@@ -22,12 +22,12 @@ export type NamesPreferenceStates = {
     readonly flag: NeonFlagCut | undefined;
 };
 
-export type NamesPreferenceProp = {
+export type GlobalPreferenceProp = {
 } & RouteComponentProps;
 
-export class NamesPreference extends React.Component<NamesPreferenceProp, NamesPreferenceStates> {
+export class GlobalPreference extends React.Component<GlobalPreferenceProp, GlobalPreferenceStates> {
 
-    public readonly state: NamesPreferenceStates = {
+    public readonly state: GlobalPreferenceStates = {
 
         initial: undefined,
 
@@ -37,7 +37,7 @@ export class NamesPreference extends React.Component<NamesPreferenceProp, NamesP
         flag: undefined,
     };
 
-    public constructor(props: NamesPreferenceProp) {
+    public constructor(props: GlobalPreferenceProp) {
 
         super(props);
 
@@ -46,7 +46,7 @@ export class NamesPreference extends React.Component<NamesPreferenceProp, NamesP
 
     public async componentDidMount() {
 
-        const response: ReadNamesRepositoryResponse = await readNamePreferenceRepository();
+        const response: ReadGlobalRepositoryResponse = await readGlobalPreferenceRepository();
         this.setState({
             initial: response,
         });
@@ -57,7 +57,7 @@ export class NamesPreference extends React.Component<NamesPreferenceProp, NamesP
         return (<NeonSmartForm
             loading={this.state.loading}
             form={this._getForm()}
-            title="Change Names Preference"
+            title="Change Global Preference"
             submit="Submit"
             cover={this.state.cover}
             flag={this.state.flag}
@@ -81,9 +81,11 @@ export class NamesPreference extends React.Component<NamesPreferenceProp, NamesP
         const current: any = this.state.current;
 
         try {
-            const changed: number = await namePreferenceRepository(
-                current.systemName,
-                current.accountName,
+            const changed: number = await globalPreferenceRepository(
+                current.globalAvatar,
+                undefined,
+                current.globalHelpLink,
+                current.globalPrivacyPolicy,
             );
 
             this.setState({
@@ -121,13 +123,17 @@ export class NamesPreference extends React.Component<NamesPreferenceProp, NamesP
     private _getForm(): NeonFromStructure {
 
         return {
-            systemName: {
+            globalAvatar: {
                 type: INPUT_TYPE.TEXT,
-                display: 'System Name',
+                display: 'Global Avatar',
             },
-            accountName: {
+            globalHelpLink: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Account Name',
+                display: 'Global Help Link',
+            },
+            globalPrivacyPolicy: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Global Privacy Policy',
             },
         };
     }

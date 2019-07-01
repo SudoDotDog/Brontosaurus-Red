@@ -23,5 +23,6 @@ export const namePreferenceRepository = async (
         .add('accountName', accountName)
         .fetch();
 
+    console.log(response.changed);
     return response.changed;
 };
