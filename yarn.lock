@@ -38,10 +38,10 @@
     "@brontosaurus/web" "^1.3.0"
     "@sudoo/react-force" "^1.5.0"
 
-"@brontosaurus/web@^1.3.0", "@brontosaurus/web@^1.3.4":
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.3.4.tgz#a6eaf02760947936736cd13dd519b01dcfed1b8e"
-  integrity sha512-3oC+7KSIsjbehPDOUPdEWQEIRF4p4kxv+jkhNrFAkobLfNR9aq9H03r1PV2tneA8agfqC00tNb1S/0OV1QYMHA==
+"@brontosaurus/web@^1.3.0", "@brontosaurus/web@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.4.1.tgz#b4a39f6d4997e748b0bb40edc8ebf7a5f240f0f3"
+  integrity sha512-cGclwcb+HgG6FAKs91Kw72m0+ai8/kpyFaaWKPYAZhOGPmvMowAPspN1A5NZgRRZ+bQNq250gP1cCdbYuRcsKw==
   dependencies:
     "@brontosaurus/definition" "^1.4.3"
 
