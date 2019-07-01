@@ -27,10 +27,6 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
             type: INPUT_TYPE.TEXT,
             display: 'Username',
         },
-        password: {
-            type: INPUT_TYPE.PASSWORD,
-            display: 'Password',
-        },
         email: {
             type: INPUT_TYPE.EMAIL,
             display: 'Email Address',
@@ -61,9 +57,8 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
                 setLoading(true);
 
                 try {
-                    await registerForOrganization(
+                    const tempPassword: string = await registerForOrganization(
                         current.username,
-                        current.password,
                         current.email,
                         current.phone,
                     );
@@ -78,6 +73,8 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
                             onClick: props.history.goBack,
                         },
                     });
+
+                    window.alert(`${current.username}'s temp new password is ${tempPassword}`);
                 } catch (err) {
                     setCover({
                         type: SIGNAL.ERROR,
