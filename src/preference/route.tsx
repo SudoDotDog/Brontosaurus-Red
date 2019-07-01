@@ -6,11 +6,15 @@
 
 import * as React from "react";
 import { Route } from "react-router-dom";
-import { Preference } from "./preference";
+import { PreferenceMenu } from "./menu";
+import { NamesPreference } from "./names";
 
 export const PreferenceRoute: React.FC = () => {
 
-    return (
-        <Route path="/preference" component={Preference} />
-    );
+    return (<Route path="/preference">
+        <React.Fragment>
+            <Route path="/preference/menu" component={PreferenceMenu} />
+            <Route path="/preference/names" component={NamesPreference} />
+        </React.Fragment>
+    </Route>);
 };
