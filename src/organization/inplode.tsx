@@ -85,10 +85,6 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
                 type: INPUT_TYPE.TEXT,
                 display: 'Username',
             },
-            password: {
-                type: INPUT_TYPE.PASSWORD,
-                display: 'Password',
-            },
             email: {
                 type: INPUT_TYPE.EMAIL,
                 display: 'Email Address',
@@ -128,16 +124,14 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
         }, {} as Record<string, string>);
 
         try {
-            const id: string = await inplodeOrganization(
+            const tempPassword: string = await inplodeOrganization(
                 response.name || '',
                 response.username || '',
-                response.password || '',
                 response.email,
                 response.phone,
                 parsed,
             );
 
-            console.log(id);
             this.setState({
                 cover: {
                     type: SIGNAL.SUCCEED,
@@ -150,6 +144,8 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
                     },
                 },
             });
+
+            window.alert(`${response.username}'s temp new password is ${tempPassword}`);
         } catch (err) {
 
             this.setState({

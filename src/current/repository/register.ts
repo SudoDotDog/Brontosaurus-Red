@@ -16,7 +16,6 @@ export const registerForOrganization = async (
 
     const response: {
         account: string;
-        organization: string;
         tempPassword: string;
     } = await Fetch
         .post

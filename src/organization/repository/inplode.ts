@@ -12,25 +12,25 @@ import { joinRoute } from "../../repository/route";
 export const inplodeOrganization = async (
     name: string,
     username: string,
-    password: string,
     email: string,
     phone: string,
     infos: Record<string, Basics>,
 ): Promise<string> => {
 
     const response: {
+        account: string;
         organization: string;
+        tempPassword: string;
     } = await Fetch
         .post
         .json(joinRoute('/organization/inplode'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name)
         .add('username', username)
-        .add('password', password)
         .add('email', email)
         .add('phone', phone)
         .add('infos', infos)
         .fetch();
 
-    return response.organization;
+    return response.tempPassword;
 };
