@@ -9,11 +9,12 @@ import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
 export type SingleApplicationFetchResponse = {
-    avatar?: string;
-    name: string;
-    key: string;
-    expire: number;
-    groups: string[];
+    readonly avatar?: string;
+    readonly name: string;
+    readonly key: string;
+    readonly expire: number;
+    readonly groups: string[];
+    readonly green: string;
 };
 
 export const singleFetchApplicationRepository = async (key: string): Promise<SingleApplicationFetchResponse> => {
@@ -27,6 +28,5 @@ export const singleFetchApplicationRepository = async (key: string): Promise<Sin
         .add('key', key)
         .fetch();
 
-    console.log(response);
     return response.application;
 };

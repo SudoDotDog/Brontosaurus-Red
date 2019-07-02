@@ -81,6 +81,10 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                     value={this.state.application.expire.toString()}
                     onChange={(value: string) => this._updateApplication('expire', Number(value))} />
 
+                {this.state.application.green && <NeonPair
+                    label="Green"
+                    value={this.state.application.green.toString()} />}
+
                 <NeonButton
                     size={SIZE.MEDIUM}
                     width={WIDTH.FULL}
