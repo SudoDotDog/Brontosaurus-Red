@@ -5,8 +5,10 @@
  */
 
 import { NeonButton, NeonCoin } from "@sudoo/neon/button";
-import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonPillGroup } from "@sudoo/neon/pill";
+import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
@@ -26,14 +28,19 @@ type UserEditProp = {
 
 type UserEditState = {
 
-    user: SingleFetchResponse | null;
-    groups: string[];
-    decorators: string[];
+    readonly loading: boolean;
+    readonly cover: any;
+    readonly user: SingleFetchResponse | null;
+    readonly groups: string[];
+    readonly decorators: string[];
 };
 
 export class UserEdit extends React.Component<UserEditProp, UserEditState> {
 
-    public state: UserEditState = {
+    public readonly state: UserEditState = {
+
+        loading: false,
+        cover: undefined,
         user: null,
         groups: [],
         decorators: [],
@@ -43,6 +50,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
 
         super(props);
 
+        this._submit = this._submit.bind(this);
         this._deactivateUser = this._deactivateUser.bind(this);
         this._limboUser = this._limboUser.bind(this);
         this._twoFARemoveUser = this._twoFARemoveUser.bind(this);
@@ -82,142 +90,244 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
             <NeonThemeProvider value={{
                 margin: MARGIN.SMALL,
             }} >
-                <NeonTitle>Edit: {this.state.user.username}</NeonTitle>
-                <NeonSub>Two-Way Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
-                <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
-                {this._renderOrganization()}
-                <NeonTitle size={SIZE.MEDIUM}>Contact</NeonTitle>
-                <NeonSmartList
-                    list={{
-                        Email: this.state.user.email || '',
-                        Phone: this.state.user.phone || '',
-                    }}
-                    editableValue
-                    onChange={(newInfo: Record<string, string>) => this.setState({
-                        user: {
-                            ...this.state.user as SingleFetchResponse,
-                            email: newInfo.Email,
-                            phone: newInfo.Phone,
-                        },
-                    })}
-                />
-                <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
-                <NeonSmartList
-                    list={this.state.user.infos}
-                    editableName
-                    editableValue
-                    onChange={(newInfo: Record<string, string>) => this.setState({
-                        user: {
-                            ...this.state.user as any,
-                            infos: newInfo,
-                        },
-                    })}
-                />
-                <NeonCoin
-                    size={SIZE.NORMAL}
-                    onClick={() => {
-                        const user: any = this.state.user;
-                        this.setState({
-                            user: {
-                                ...user as any,
-                                infos: {
-                                    ...user.infos as any,
-                                    "NEW-INFO": "1",
-                                },
-                            },
-                        });
-                    }}
-                >+</NeonCoin>
-
-                <NeonTitle size={SIZE.MEDIUM}>Beacon</NeonTitle>
-
-                <NeonSmartList
-                    list={this.state.user.beacons}
-                    editableValue
-                    onChange={(newBeacon) => this.setState({
-                        user: {
-                            ...this.state.user as any,
-                            beacons: newBeacon,
-                        },
-                    })} />
-                <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
-
-                <NeonPillGroup
-                    style={{ flexWrap: 'wrap' }}
-                    selected={this.state.user.groups}
-                    onChange={(next: string[]) => {
-                        this.setState({
-                            user: {
-                                ...this.state.user as SingleFetchResponse,
-                                groups: next,
-                            },
-                        });
-                    }}
-                    addable
-                    removable
-                    options={this.state.groups}
-                />
-
-                <NeonTitle size={SIZE.MEDIUM}>User Decorator</NeonTitle>
-
-                <NeonPillGroup
-                    style={{ flexWrap: 'wrap' }}
-                    selected={this.state.user.decorators}
-                    onChange={(next: string[]) => {
-                        this.setState({
-                            user: {
-                                ...this.state.user as SingleFetchResponse,
-                                decorators: next,
-                            },
-                        });
-                    }}
-                    addable
-                    removable
-                    options={this.state.decorators}
-                />
-
-                <NeonTitle size={SIZE.MEDIUM}>Dangerous</NeonTitle>
-                <div style={{ display: 'flex' }}>
-                    <NeonButton
-                        onClick={this._deactivateUser}
-                        margin={MARGIN.TINY}
-                        size={SIZE.MEDIUM}
-                    >Deactivate</NeonButton>
-                    <NeonButton
-                        onClick={this._limboUser}
-                        margin={MARGIN.TINY}
-                        size={SIZE.MEDIUM}
-                    >Limbo</NeonButton>
-                    <NeonButton
-                        onClick={this._twoFARemoveUser}
-                        margin={MARGIN.TINY}
-                        size={SIZE.MEDIUM}
-                    >2FA Remove</NeonButton>
-                    <NeonButton
-                        onClick={this._resetAttemptUser}
-                        margin={MARGIN.TINY}
-                        size={SIZE.MEDIUM}
-                    >Recover</NeonButton>
-                </div>
-
-                <NeonButton
-                    size={SIZE.MEDIUM}
-                    width={WIDTH.FULL}
-                    onClick={() => this.state.user && editAccountAdminRepository(
-                        this.state.user.username,
-                        this.state.user.email,
-                        this.state.user.phone,
-                        this.state.user.groups,
-                        this.state.user.decorators,
-                        {
-                            infos: this.state.user.infos,
-                            beacons: this.state.user.beacons,
-                        })}
+                <NeonIndicator
+                    loading={this.state.loading}
+                    covering={Boolean(this.state.cover)}
+                    cover={this._renderSticker()}
                 >
-                    Save Change
-                </NeonButton>
+                    <NeonTitle>Edit: {this.state.user.username}</NeonTitle>
+                    <NeonSub>Two-Way Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
+                    <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
+                    {this._renderOrganization()}
+                    {this._renderContact()}
+                    {this._renderInformation()}
+                    {this._renderBeacon()}
+                    {this._renderUserGroup()}
+                    {this._renderUserDecorator()}
+                    {this._renderDangerous()}
+                    <NeonButton
+                        size={SIZE.MEDIUM}
+                        width={WIDTH.FULL}
+                        onClick={this._submit}>
+                        Save Change
+                    </NeonButton>
+                </NeonIndicator>
             </NeonThemeProvider>
         );
+    }
+
+    private _renderContact() {
+
+        const user = this.state.user as SingleFetchResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>Contact</NeonTitle>
+            <NeonSmartList
+                list={{
+                    Email: user.email || '',
+                    Phone: user.phone || '',
+                }}
+                editableValue
+                onChange={(newInfo: Record<string, string>) => this.setState({
+                    user: {
+                        ...user,
+                        email: newInfo.Email,
+                        phone: newInfo.Phone,
+                    },
+                })}
+            />
+        </React.Fragment>);
+    }
+
+    private _renderInformation() {
+
+        const user = this.state.user as SingleFetchResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
+            <NeonSmartList
+                list={user.infos}
+                editableName
+                editableValue
+                onChange={(newInfo: Record<string, string>) => this.setState({
+                    user: {
+                        ...user,
+                        infos: newInfo,
+                    },
+                })}
+            />
+            <NeonCoin
+                size={SIZE.NORMAL}
+                onClick={() => {
+                    this.setState({
+                        user: {
+                            ...user,
+                            infos: {
+                                ...user.infos,
+                                "NEW-INFO": "1",
+                            },
+                        },
+                    });
+                }}
+            >+</NeonCoin>
+        </React.Fragment>);
+    }
+
+    private _renderBeacon() {
+
+        const user = this.state.user as SingleFetchResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>Beacon</NeonTitle>
+            <NeonSmartList
+                list={user.beacons}
+                editableValue
+                onChange={(newBeacon) => this.setState({
+                    user: {
+                        ...user,
+                        beacons: newBeacon,
+                    },
+                })} />
+        </React.Fragment>);
+    }
+
+    private _renderUserGroup() {
+
+        const user = this.state.user as SingleFetchResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
+            <NeonPillGroup
+                style={{ flexWrap: 'wrap' }}
+                selected={user.groups || []}
+                onChange={(next: string[]) => {
+                    this.setState({
+                        user: {
+                            ...user,
+                            groups: next,
+                        },
+                    });
+                }}
+                addable
+                removable
+                options={this.state.groups}
+            />
+        </React.Fragment>);
+    }
+
+    private _renderUserDecorator() {
+
+        const user = this.state.user as SingleFetchResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>User Decorator</NeonTitle>
+            <NeonPillGroup
+                style={{ flexWrap: 'wrap' }}
+                selected={user.decorators || []}
+                onChange={(next: string[]) => {
+                    this.setState({
+                        user: {
+                            ...user,
+                            decorators: next,
+                        },
+                    });
+                }}
+                addable
+                removable
+                options={this.state.decorators}
+            />
+        </React.Fragment>);
+    }
+
+    private _renderDangerous() {
+
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>Dangerous</NeonTitle>
+            <div style={{ display: 'flex', margin: '0.5rem' }}>
+                <NeonButton
+                    onClick={this._deactivateUser}
+                    margin={MARGIN.NONE}
+                    size={SIZE.MEDIUM}
+                >Deactivate</NeonButton>
+                <NeonButton
+                    onClick={this._limboUser}
+                    margin={MARGIN.NONE}
+                    size={SIZE.MEDIUM}
+                >Limbo</NeonButton>
+                <NeonButton
+                    onClick={this._twoFARemoveUser}
+                    margin={MARGIN.NONE}
+                    size={SIZE.MEDIUM}
+                >2FA Remove</NeonButton>
+                <NeonButton
+                    onClick={this._resetAttemptUser}
+                    margin={MARGIN.NONE}
+                    size={SIZE.MEDIUM}
+                >Recover</NeonButton>
+            </div>
+        </React.Fragment>);
+    }
+
+    private _renderSticker() {
+
+        if (!this.state.cover) {
+            return null;
+        }
+        return <NeonSticker {...this.state.cover} />;
+    }
+
+    private async _submit() {
+
+        if (!this.state.user) {
+            return;
+        }
+
+        this.setState({
+            loading: true,
+            cover: undefined,
+        });
+
+        try {
+
+            await editAccountAdminRepository(
+                this.state.user.username,
+                this.state.user.email,
+                this.state.user.phone,
+                this.state.user.groups,
+                this.state.user.decorators,
+                {
+                    infos: this.state.user.infos,
+                    beacons: this.state.user.beacons,
+                });
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.SUCCEED,
+                    title: "Succeed",
+
+                    peek: {
+                        children: "<-",
+                        expend: "Complete",
+                        onClick: this.props.history.goBack,
+                    },
+                },
+            });
+        } catch (err) {
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.ERROR,
+                    title: "Failed",
+                    info: err.message,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Retry",
+                        onClick: () => this.setState({ cover: undefined }),
+                    },
+                },
+            });
+        } finally {
+
+            this.setState({
+                loading: false,
+            });
+        }
     }
 
     private async _deactivateUser() {
