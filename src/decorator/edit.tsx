@@ -162,7 +162,7 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
 
             const name: string = await updateDecoratorRepository({
                 name: this.state.decorator.name,
-                description: this.state.decorator.description || undefined,
+                description: this.state.decorator.description,
                 addableGroups: this.state.decorator.addableGroups,
                 removableGroups: this.state.decorator.removableGroups,
             });

@@ -4,9 +4,10 @@
  * @description Global
  */
 
-import { SIGNAL } from "@sudoo/neon/declare";
+import { MARGIN, SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
+import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { globalPreferenceRepository } from "./repository/global";
@@ -54,20 +55,27 @@ export class GlobalPreference extends React.Component<GlobalPreferenceProp, Glob
 
     public render() {
 
-        return (<NeonSmartForm
-            loading={this.state.loading}
-            form={this._getForm()}
-            title="Change Global Preference"
-            submit="Submit"
-            cover={this.state.cover}
-            flag={this.state.flag}
-            value={{
-                ...this.state.initial,
-                ...this.state.current,
-            }}
-            onChange={(result: any) => this.setState({ current: result })}
-            onSubmit={this._handleSubmit}
-        />);
+        return (<div>
+            <NeonSub
+                margin={MARGIN.SMALL}
+                onClick={() => this.props.history.goBack()}>
+                Go Back
+            </NeonSub>
+            <NeonSmartForm
+                loading={this.state.loading}
+                form={this._getForm()}
+                title="Change Global Preference"
+                submit="Submit"
+                cover={this.state.cover}
+                flag={this.state.flag}
+                value={{
+                    ...this.state.initial,
+                    ...this.state.current,
+                }}
+                onChange={(result: any) => this.setState({ current: result })}
+                onSubmit={this._handleSubmit}
+            />
+        </div>);
     }
 
     private async _handleSubmit() {

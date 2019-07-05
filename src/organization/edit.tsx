@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Decorator
+ * @namespace Organization
  * @description Edit
  */
 
@@ -15,31 +15,31 @@ import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
-import { singleGroup, SingleGroupResponse } from "./repository/single";
-import { updateGroupRepository } from "./repository/update";
+import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
+import { updateOrganizationRepository } from "./repository/update";
 
-type GroupEditProp = {
+type OrganizationEditProp = {
 } & RouteComponentProps;
 
-type GroupEditState = {
+type OrganizationEditState = {
 
     readonly loading: boolean;
     readonly cover: any;
-    readonly group: SingleGroupResponse | null;
+    readonly organization: SingleOrganizationResponse | null;
     readonly decorators: string[];
 };
 
-export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
+export class OrganizationEdit extends React.Component<OrganizationEditProp, OrganizationEditState> {
 
-    public readonly state: GroupEditState = {
+    public readonly state: OrganizationEditState = {
 
         loading: false,
         cover: undefined,
-        group: null,
+        organization: null,
         decorators: [],
     };
 
-    public constructor(props: GroupEditProp) {
+    public constructor(props: OrganizationEditProp) {
 
         super(props);
 
@@ -48,11 +48,11 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
 
     public async componentDidMount() {
 
-        const response: SingleGroupResponse = await singleGroup(this._getGroupName());
+        const response: SingleOrganizationResponse = await singleOrganization(this._getOrganizationName());
         const decorators: AllDecoratorsResponse[] = await fetchAllDecorators();
 
         this.setState({
-            group: response,
+            organization: response,
             decorators: decorators.map((res: AllDecoratorsResponse) => res.name),
         });
     }
@@ -69,7 +69,7 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
 
     private _renderEditableInfos() {
 
-        if (!this.state.group) {
+        if (!this.state.organization) {
             return null;
         }
 
@@ -82,8 +82,8 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NeonTitle>Edit: {this.state.group.name}</NeonTitle>
-                    {this._renderDescription()}
+                    <NeonTitle>Edit: {this.state.organization.name}</NeonTitle>
+                    {this._renderOwner()}
                     {this._renderDecorators()}
                     <NeonButton
                         size={SIZE.MEDIUM}
@@ -96,38 +96,33 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
         );
     }
 
-    private _renderDescription() {
+    private _renderOwner() {
 
-        const group = this.state.group as SingleGroupResponse;
+        const organization = this.state.organization as SingleOrganizationResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Description</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>Owner Information</NeonTitle>
             <NeonSmartList
                 list={{
-                    Description: group.description || '',
+                    Username: organization.owner.username,
+                    Phone: organization.owner.phone,
+                    Email: organization.owner.email,
                 }}
-                editableValue
-                onChange={(newInfo: Record<string, string>) => this.setState({
-                    group: {
-                        ...group,
-                        description: newInfo.Description,
-                    },
-                })}
             />
         </React.Fragment>);
     }
 
     private _renderDecorators() {
 
-        const group = this.state.group as SingleGroupResponse;
+        const organization = this.state.organization as SingleOrganizationResponse;
         return (<React.Fragment>
             <NeonTitle size={SIZE.MEDIUM}>Decorators</NeonTitle>
             <NeonPillGroup
                 style={{ flexWrap: 'wrap' }}
-                selected={group.decorators || []}
+                selected={organization.decorators || []}
                 onChange={(next: string[]) => {
                     this.setState({
-                        group: {
-                            ...group,
+                        organization: {
+                            ...organization,
                             decorators: next,
                         },
                     });
@@ -149,7 +144,7 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
 
     private async _submit() {
 
-        if (!this.state.group) {
+        if (!this.state.organization) {
             return;
         }
 
@@ -160,10 +155,9 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
 
         try {
 
-            const name: string = await updateGroupRepository({
-                name: this.state.group.name,
-                description: this.state.group.description,
-                decorators: this.state.group.decorators,
+            const name: string = await updateOrganizationRepository({
+                name: this.state.organization.name,
+                decorators: this.state.organization.decorators,
             });
 
             this.setState({
@@ -202,9 +196,9 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
         }
     }
 
-    private _getGroupName(): string {
+    private _getOrganizationName(): string {
 
         const params: any = this.props.match.params;
-        return params.group;
+        return params.organization;
     }
 }
