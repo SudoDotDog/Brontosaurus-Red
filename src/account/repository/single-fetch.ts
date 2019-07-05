@@ -34,6 +34,5 @@ export const singleFetchRepository = async (username: string): Promise<SingleFet
         .add('username', username)
         .fetch();
 
-    console.log(response);
     return response.account;
 };

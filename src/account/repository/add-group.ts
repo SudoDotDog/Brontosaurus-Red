@@ -20,6 +20,5 @@ export const addGroup = async (username: string, group: string): Promise<string>
         .add('group', group)
         .fetch();
 
-    console.log(response);
     return response.account;
 };

@@ -20,6 +20,5 @@ export const editPassword = async (password: string): Promise<string> => {
         .add('password', password)
         .fetch();
 
-    console.log(response);
     return response.account;
 };
