@@ -4,8 +4,9 @@
  * @description Create
  */
 
-import { MARGIN } from "@sudoo/neon/declare";
-import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { MARGIN, SIGNAL } from "@sudoo/neon/declare";
+import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
+import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -15,6 +16,10 @@ type CreateDecoratorProp = {
 } & RouteComponentProps;
 
 type CreateDecoratorStates = {
+
+    readonly loading: boolean;
+    readonly cover: NeonStickerCut | undefined;
+    readonly flag: NeonFlagCut | undefined;
     readonly current: {
         name?: string;
         description?: string;
@@ -24,6 +29,10 @@ type CreateDecoratorStates = {
 export class CreateDecorator extends React.Component<CreateDecoratorProp, CreateDecoratorStates> {
 
     public readonly state: CreateDecoratorStates = {
+
+        loading: false,
+        cover: undefined,
+        flag: undefined,
         current: {},
     };
 
@@ -37,31 +46,82 @@ export class CreateDecorator extends React.Component<CreateDecoratorProp, Create
                     Go Back
                 </NeonSub>
                 <NeonSmartForm
+                    loading={this.state.loading}
+                    submit="Create"
+                    cover={this.state.cover}
+                    flag={this.state.flag}
                     title="Create Decorator"
                     form={this._getForm()}
                     value={this.state.current}
                     onChange={(value: any) => this.setState({ current: value })}
-                    onSubmit={() => this._submit(this.state.current.name, this.state.current.description)}
+                    onSubmit={() => this._submit(this.state.current.name as string, this.state.current.description)}
                 />
             </React.Fragment>
         );
     }
 
-    private _getForm(): Record<string, INPUT_TYPE> {
+    private _getForm(): Record<string, INPUT_TYPE | FromElement> {
 
         return {
-            name: INPUT_TYPE.TEXT,
-            description: INPUT_TYPE.TEXT,
+            name: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Name',
+            },
+            description: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Description',
+            },
         };
     }
 
-    private async _submit(name?: string, description?: string) {
+    private async _submit(name: string, description?: string) {
 
         if (!name) {
             window.alert('Name cannot be empty');
         }
 
-        const id: string = await createDecorator(name, description);
-        console.log(id);
+        this.setState({
+            loading: true,
+            cover: undefined,
+            flag: undefined,
+        });
+
+        try {
+
+            const id: string = await createDecorator(name, description);
+            this.setState({
+                cover: {
+                    type: SIGNAL.SUCCEED,
+                    title: "Succeed",
+                    info: id,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Complete",
+                        onClick: this.props.history.goBack,
+                    },
+                },
+            });
+        } catch (err) {
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.ERROR,
+                    title: "Failed",
+                    info: err.message,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Retry",
+                        onClick: () => this.setState({ cover: undefined }),
+                    },
+                },
+            });
+        } finally {
+
+            this.setState({
+                loading: false,
+            });
+        }
     }
 }
