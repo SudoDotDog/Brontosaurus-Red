@@ -1,0 +1,32 @@
+/**
+ * @author WMXPY
+ * @namespace Components
+ * @description Page Selector
+ */
+
+@import '../common/color.sass';
+
+.container {
+
+    display: flex;
+    margin-top: 0.2rem;
+    margin-left: -0.1rem;
+    margin-right: -0.1rem;
+}
+
+.coin {
+
+    font-size: 1rem !important;
+
+    height: 2.3rem !important;
+    width: 2.3rem !important;
+
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+}
+
+.coin-selected {
+
+    background-color: $lime !important;
+    color: $navy !important;
+}

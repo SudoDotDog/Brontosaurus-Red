@@ -17,18 +17,23 @@ export type UserResponse = {
     infos: Record<string, any>;
 };
 
-export const fetchAccount = async (keyword: string): Promise<UserResponse[]> => {
+export type FetchAccountResponse = {
+    pages: number;
+    accounts: UserResponse[];
+};
+
+export const fetchAccount = async (keyword: string, page: number): Promise<FetchAccountResponse> => {
 
     const response: {
         accounts: UserResponse[];
+        pages: number;
     } = await Fetch
         .post
         .json(joinRoute('/account/fetch'))
         .bearer(Brontosaurus.hard().raw)
-        .add('page', 0)
+        .add('page', page)
         .add('keyword', keyword)
         .fetch();
 
-    console.log(response);
-    return response.accounts;
+    return response;
 };

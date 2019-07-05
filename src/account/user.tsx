@@ -9,23 +9,35 @@ import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
-import { fetchAccount, UserResponse } from "./repository/account-fetch";
+import { fetchAccount, FetchAccountResponse, UserResponse } from "./repository/account-fetch";
 
-type UserProp = {
+export type UserProp = {
 } & RouteComponentProps;
 
-type UserState = {
+export type UserState = {
 
-    users: UserResponse[];
+    readonly users: UserResponse[];
+    readonly keyword: string;
+    readonly pages: number;
+    readonly page: number;
 };
-
 
 export class User extends React.Component<UserProp, UserState> {
 
-    public state: UserState = {
+    public readonly state: UserState = {
         users: [],
+        keyword: '',
+        pages: 0,
+        page: 0,
     };
+
+    public constructor(props: UserProp) {
+
+        super(props);
+        this._searchUser = this._searchUser.bind(this);
+    }
 
     public render() {
 
@@ -33,7 +45,7 @@ export class User extends React.Component<UserProp, UserState> {
             <div>
                 <SearchNew
                     label="Account"
-                    onSearch={async (keyword: string) => this.setState({ users: await fetchAccount(keyword) })}
+                    onSearch={(keyword: string) => this.setState({ keyword }, this._searchUser)}
                     onNew={() => this.props.history.push('/user/new')}
                 />
 
@@ -44,6 +56,12 @@ export class User extends React.Component<UserProp, UserState> {
                         style={{ marginTop: '1rem' }}>
                         {this._renderUser()}
                     </NeonTable>}
+
+                <PageSelector
+                    total={this.state.pages}
+                    selected={this.state.page}
+                    onClick={(page: number) => this.setState({ page }, this._searchUser)}
+                />
             </div>
         );
     }
@@ -64,5 +82,17 @@ export class User extends React.Component<UserProp, UserState> {
                 </NeonButton></td>
             </tr>),
         );
+    }
+
+    private async _searchUser() {
+
+        const response: FetchAccountResponse = await fetchAccount(
+            this.state.keyword,
+            this.state.page,
+        );
+        this.setState({
+            users: response.accounts,
+            pages: response.pages,
+        });
     }
 }
