@@ -4,6 +4,8 @@
  * @description Decorator
  */
 
+import { NeonButton } from "@sudoo/neon/button";
+import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -38,7 +40,7 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
                 {this.state.decorators.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name', 'Description']}
+                        headers={['Name', 'Description', 'Action']}
                         style={{ marginTop: '1rem' }}>
                         {this._renderDecorator()}
                     </NeonTable>}
@@ -53,6 +55,11 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
             (<tr key={decorator.name}>
                 <td>{decorator.name}</td>
                 <td>{decorator.description}</td>
+                <td><NeonButton
+                    onClick={() => this.props.history.push('/decorator/e/' + decorator.name)}
+                    size={SIZE.RELATIVE}>
+                    Edit
+                </NeonButton></td>
             </tr>),
         );
     }

@@ -97,7 +97,6 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 >
                     <NeonTitle>Edit: {this.state.user.username}</NeonTitle>
                     <NeonSub>Two-Way Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
-                    <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
                     {this._renderOrganization()}
                     {this._renderContact()}
                     {this._renderInformation()}
@@ -380,12 +379,15 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
 
         const user: any = this.state.user;
         if (user.organization) {
-            return (<NeonSmartList
-                list={{
-                    name: user.organization.name,
-                    owner: user.organization.owner,
-                }}
-            />);
+            return (<React.Fragment>
+                <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
+                <NeonSmartList
+                    list={{
+                        name: user.organization.name,
+                        owner: user.organization.owner,
+                    }}
+                />
+            </React.Fragment>);
         } else {
             return (<NeonSub>This user doesn't belong to any organization</NeonSub>);
         }
