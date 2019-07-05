@@ -27,6 +27,7 @@ export type UserState = {
 export class User extends React.Component<UserProp, UserState> {
 
     public readonly state: UserState = {
+
         users: [],
         keyword: '',
         pages: 0,
@@ -45,7 +46,7 @@ export class User extends React.Component<UserProp, UserState> {
             <div>
                 <SearchNew
                     label="Account"
-                    onSearch={(keyword: string) => this.setState({ keyword }, this._searchUser)}
+                    onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchUser)}
                     onNew={() => this.props.history.push('/user/new')}
                 />
 

@@ -47,7 +47,7 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
 
                 <SearchNew
                     label="Application"
-                    onSearch={(keyword: string) => this.setState({ keyword }, this._searchApplication)}
+                    onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchApplication)}
                     onNew={() => this.props.history.push('/application/create')}
                 />
 

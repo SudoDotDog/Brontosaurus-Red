@@ -9,31 +9,44 @@ import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
-import { DecoratorResponse, fetchDecorator } from "./repository/decorator-fetch";
+import { DecoratorResponse, fetchDecorator, FetchDecoratorResponse } from "./repository/decorator-fetch";
 
-type DecoratorProp = {
+export type DecoratorProp = {
 } & RouteComponentProps;
 
-type DecoratorState = {
+export type DecoratorState = {
 
-    decorators: DecoratorResponse[];
+    readonly decorators: DecoratorResponse[];
+    readonly keyword: string;
+    readonly pages: number;
+    readonly page: number;
 };
 
 export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
 
-    public state: DecoratorState = {
+    public readonly state: DecoratorState = {
+
         decorators: [],
+        keyword: '',
+        pages: 0,
+        page: 0,
     };
+
+    public constructor(props: DecoratorProp) {
+
+        super(props);
+        this._searchDecorator = this._searchDecorator.bind(this);
+    }
 
     public render() {
 
         return (
             <div>
-
                 <SearchNew
                     label="Decorator"
-                    onSearch={async (keyword: string) => this.setState({ decorators: await fetchDecorator(keyword) })}
+                    onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchDecorator)}
                     onNew={() => this.props.history.push('/decorator/create')}
                 />
 
@@ -44,6 +57,12 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
                         style={{ marginTop: '1rem' }}>
                         {this._renderDecorator()}
                     </NeonTable>}
+
+                <PageSelector
+                    total={this.state.pages}
+                    selected={this.state.page}
+                    onClick={(page: number) => this.setState({ page }, this._searchDecorator)}
+                />
             </div>
 
         );
@@ -62,5 +81,17 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
                 </NeonButton></td>
             </tr>),
         );
+    }
+
+    private async _searchDecorator() {
+
+        const response: FetchDecoratorResponse = await fetchDecorator(
+            this.state.keyword,
+            this.state.page,
+        );
+        this.setState({
+            decorators: response.decorators,
+            pages: response.pages,
+        });
     }
 }

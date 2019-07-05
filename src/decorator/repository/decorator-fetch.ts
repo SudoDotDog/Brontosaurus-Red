@@ -9,21 +9,26 @@ import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
 export type DecoratorResponse = {
-    name: string;
-    description?: string;
+
+    readonly name: string;
+    readonly description?: string;
 };
 
-export const fetchDecorator = async (keyword: string = ''): Promise<DecoratorResponse[]> => {
+export type FetchDecoratorResponse = {
 
-    const response: {
-        decorators: DecoratorResponse[];
-    } = await Fetch
+    readonly decorators: DecoratorResponse[];
+    readonly pages: number;
+};
+
+export const fetchDecorator = async (keyword: string, page: number): Promise<FetchDecoratorResponse> => {
+
+    const response: FetchDecoratorResponse = await Fetch
         .post
         .json(joinRoute('/decorator/fetch'))
         .bearer(Brontosaurus.hard().raw)
-        .add('page', 0)
+        .add('page', page)
         .add('keyword', keyword)
         .fetch();
 
-    return response.decorators;
+    return response;
 };

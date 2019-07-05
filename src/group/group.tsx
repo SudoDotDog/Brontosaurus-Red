@@ -9,31 +9,44 @@ import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
-import { fetchGroup, GroupResponse } from "./repository/group-fetch";
+import { fetchGroup, FetchGroupResponse, GroupResponse } from "./repository/group-fetch";
 
-type GroupProp = {
+export type GroupProps = {
 } & RouteComponentProps;
 
-type GroupState = {
+export type GroupStates = {
 
-    groups: GroupResponse[];
+    readonly groups: GroupResponse[];
+    readonly keyword: string;
+    readonly pages: number;
+    readonly page: number;
 };
 
-export class Group extends React.Component<GroupProp, GroupState> {
+export class Group extends React.Component<GroupProps, GroupStates> {
 
-    public state: GroupState = {
+    public readonly state: GroupStates = {
+
         groups: [],
+        keyword: '',
+        pages: 0,
+        page: 0,
     };
+
+    public constructor(props: GroupProps) {
+
+        super(props);
+        this._searchGroup = this._searchGroup.bind(this);
+    }
 
     public render() {
 
         return (
             <div>
-
                 <SearchNew
                     label="Group"
-                    onSearch={async (keyword: string) => this.setState({ groups: await fetchGroup(keyword) })}
+                    onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchGroup)}
                     onNew={() => this.props.history.push('/group/create')}
                 />
 
@@ -44,6 +57,12 @@ export class Group extends React.Component<GroupProp, GroupState> {
                         style={{ marginTop: '1rem' }}>
                         {this._renderGroup()}
                     </NeonTable>}
+
+                <PageSelector
+                    total={this.state.pages}
+                    selected={this.state.page}
+                    onClick={(page: number) => this.setState({ page }, this._searchGroup)}
+                />
             </div>
 
         );
@@ -62,5 +81,17 @@ export class Group extends React.Component<GroupProp, GroupState> {
                 </NeonButton></td>
             </tr>),
         );
+    }
+
+    private async _searchGroup() {
+
+        const response: FetchGroupResponse = await fetchGroup(
+            this.state.keyword,
+            this.state.page,
+        );
+        this.setState({
+            groups: response.groups,
+            pages: response.pages,
+        });
     }
 }

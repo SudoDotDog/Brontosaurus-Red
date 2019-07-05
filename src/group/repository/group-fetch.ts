@@ -9,21 +9,26 @@ import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
 export type GroupResponse = {
-    name: string;
-    description?: string;
+
+    readonly name: string;
+    readonly description?: string;
 };
 
-export const fetchGroup = async (keyword: string = ''): Promise<GroupResponse[]> => {
+export type FetchGroupResponse = {
 
-    const response: {
-        groups: GroupResponse[];
-    } = await Fetch
+    readonly groups: GroupResponse[];
+    readonly pages: number;
+};
+
+export const fetchGroup = async (keyword: string, page: number): Promise<FetchGroupResponse> => {
+
+    const response: FetchGroupResponse = await Fetch
         .post
         .json(joinRoute('/group/fetch'))
         .bearer(Brontosaurus.hard().raw)
-        .add('page', 0)
+        .add('page', page)
         .add('keyword', keyword)
         .fetch();
 
-    return response.groups;
+    return response;
 };

@@ -10,22 +10,25 @@ import { joinRoute } from "../../repository/route";
 
 export type OrganizationResponse = {
 
-    name: string;
-    owner: string;
+    readonly name: string;
+    readonly owner: string;
 };
 
-export const fetchOrganization = async (keyword: string): Promise<OrganizationResponse[]> => {
+export type FetchOrganizationResponse = {
 
-    const response: {
-        organizations: OrganizationResponse[];
-    } = await Fetch
+    readonly organizations: OrganizationResponse[];
+    readonly pages: number;
+};
+
+export const fetchOrganization = async (keyword: string, page: number): Promise<FetchOrganizationResponse> => {
+
+    const response: FetchOrganizationResponse = await Fetch
         .post
         .json(joinRoute('/organization/fetch'))
         .bearer(Brontosaurus.hard().raw)
-        .add('page', 0)
+        .add('page', page)
         .add('keyword', keyword)
         .fetch();
 
-    console.log(response);
-    return response.organizations;
+    return response;
 };
