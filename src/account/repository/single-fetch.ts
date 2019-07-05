@@ -19,6 +19,7 @@ export type SingleFetchResponse = {
     twoFA: boolean;
     beacons: Record<string, any>;
     infos: Record<string, any>;
+    decorators: string[];
     groups: string[];
 };
 

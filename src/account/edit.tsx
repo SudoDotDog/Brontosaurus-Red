@@ -12,7 +12,8 @@ import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { fetchGroup, GroupResponse } from "../group/repository/group-fetch";
+import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
+import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { deactivateAccount } from "./repository/deactivate";
 import { limboAccount, LimboAccountResponse } from "./repository/limbo";
@@ -27,6 +28,7 @@ type UserEditState = {
 
     user: SingleFetchResponse | null;
     groups: string[];
+    decorators: string[];
 };
 
 export class UserEdit extends React.Component<UserEditProp, UserEditState> {
@@ -34,6 +36,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
     public state: UserEditState = {
         user: null,
         groups: [],
+        decorators: [],
     };
 
     public constructor(props: UserEditProp) {
@@ -49,11 +52,13 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
     public async componentDidMount() {
 
         const response: SingleFetchResponse = await singleFetchRepository(this._getUsername());
-        const groups: GroupResponse[] = await fetchGroup();
+        const groups: AllGroupsResponse[] = await fetchAllGroups();
+        const decorators: AllDecoratorsResponse[] = await fetchAllDecorators();
 
         this.setState({
             user: response,
-            groups: groups.map((res: GroupResponse) => res.name),
+            groups: groups.map((res: AllGroupsResponse) => res.name),
+            decorators: decorators.map((res: AllDecoratorsResponse) => res.name),
         });
     }
 
@@ -123,6 +128,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                         });
                     }}
                 >+</NeonCoin>
+
                 <NeonTitle size={SIZE.MEDIUM}>Beacon</NeonTitle>
 
                 <NeonSmartList
@@ -150,6 +156,24 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                     addable
                     removable
                     options={this.state.groups}
+                />
+
+                <NeonTitle size={SIZE.MEDIUM}>User Decorator</NeonTitle>
+
+                <NeonPillGroup
+                    style={{ flexWrap: 'wrap' }}
+                    selected={this.state.user.decorators}
+                    onChange={(next: string[]) => {
+                        this.setState({
+                            user: {
+                                ...this.state.user as SingleFetchResponse,
+                                decorators: next,
+                            },
+                        });
+                    }}
+                    addable
+                    removable
+                    options={this.state.decorators}
                 />
 
                 <NeonTitle size={SIZE.MEDIUM}>Dangerous</NeonTitle>
@@ -184,6 +208,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                         this.state.user.email,
                         this.state.user.phone,
                         this.state.user.groups,
+                        this.state.user.decorators,
                         {
                             infos: this.state.user.infos,
                             beacons: this.state.user.beacons,
