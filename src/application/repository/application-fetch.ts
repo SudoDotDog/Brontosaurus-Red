@@ -14,18 +14,21 @@ export type ApplicationResponse = {
     name: string;
 };
 
-export const fetchApplication = async (keyword: string): Promise<ApplicationResponse[]> => {
+export type FetchApplicationResponse = {
 
-    const response: {
-        applications: ApplicationResponse[];
-    } = await Fetch
+    applications: ApplicationResponse[];
+    pages: number;
+};
+
+export const fetchApplication = async (keyword: string, page: number): Promise<FetchApplicationResponse> => {
+
+    const response: FetchApplicationResponse = await Fetch
         .post
         .json(joinRoute('/application/fetch'))
         .bearer(Brontosaurus.hard().raw)
-        .add('page', 0)
+        .add('page', page)
         .add('keyword', keyword)
         .fetch();
 
-    console.log(response);
-    return response.applications;
+    return response;
 };
