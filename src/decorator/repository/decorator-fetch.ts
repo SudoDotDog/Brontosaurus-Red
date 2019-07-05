@@ -1,29 +1,29 @@
 /**
  * @author WMXPY
- * @namespace Group_Repository
- * @description Group Fetch
+ * @namespace Decorator_Repository
+ * @description Decorator Fetch
  */
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
-export type GroupResponse = {
+export type DecoratorResponse = {
     name: string;
     description?: string;
 };
 
-export const fetchGroup = async (keyword: string = ''): Promise<GroupResponse[]> => {
+export const fetchDecorator = async (keyword: string = ''): Promise<DecoratorResponse[]> => {
 
     const response: {
-        groups: GroupResponse[];
+        decorators: DecoratorResponse[];
     } = await Fetch
         .post
-        .json(joinRoute('/group/fetch'))
+        .json(joinRoute('/decorator/fetch'))
         .bearer(Brontosaurus.hard().raw)
         .add('page', 0)
         .add('keyword', keyword)
         .fetch();
 
-    return response.groups;
+    return response.decorators;
 };

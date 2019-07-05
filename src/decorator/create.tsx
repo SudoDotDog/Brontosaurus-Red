@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Group
+ * @namespace Decorator
  * @description Create
  */
 
@@ -9,21 +9,21 @@ import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { createGroup } from "./repository/create";
+import { createDecorator } from "./repository/create";
 
-type CreateGroupProp = {
+type CreateDecoratorProp = {
 } & RouteComponentProps;
 
-type CreateGroupStates = {
+type CreateDecoratorStates = {
     readonly current: {
         name?: string;
         description?: string;
     };
 };
 
-export class CreateGroup extends React.Component<CreateGroupProp, CreateGroupStates> {
+export class CreateDecorator extends React.Component<CreateDecoratorProp, CreateDecoratorStates> {
 
-    public readonly state: CreateGroupStates = {
+    public readonly state: CreateDecoratorStates = {
         current: {},
     };
 
@@ -37,7 +37,7 @@ export class CreateGroup extends React.Component<CreateGroupProp, CreateGroupSta
                     Go Back
                 </NeonSub>
                 <NeonSmartForm
-                    title="Create Group"
+                    title="Create Decorator"
                     form={this._getForm()}
                     value={this.state.current}
                     onChange={(value: any) => this.setState({ current: value })}
@@ -61,7 +61,7 @@ export class CreateGroup extends React.Component<CreateGroupProp, CreateGroupSta
             window.alert('Name cannot be empty');
         }
 
-        const id: string = await createGroup(name, description);
+        const id: string = await createDecorator(name, description);
         console.log(id);
     }
 }

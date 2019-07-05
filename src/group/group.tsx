@@ -38,7 +38,7 @@ export class Group extends React.Component<GroupProp, GroupState> {
                 {this.state.groups.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name']}
+                        headers={['Name', 'Description']}
                         style={{ marginTop: '1rem' }}>
                         {this._renderGroup()}
                     </NeonTable>}
@@ -52,6 +52,7 @@ export class Group extends React.Component<GroupProp, GroupState> {
         return this.state.groups.map((group: GroupResponse) =>
             (<tr key={group.name}>
                 <td>{group.name}</td>
+                <td>{group.description}</td>
             </tr>),
         );
     }
