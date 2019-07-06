@@ -21,7 +21,7 @@ export const MeMenu: React.FC<MeMenuProps> = (props: MeMenuProps) => {
             onClick={() => props.history.push('/me/change-password')}
         />
         <MenuItem
-            description="Enable two way authorization for better account security"
+            description="Enable Two-Factor authorization for better account security"
             link="Enable 2FA"
             onClick={() => props.history.push('/me/2fa')}
         />

@@ -96,7 +96,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                     cover={this._renderSticker()}
                 >
                     <NeonTitle>Edit: {this.state.user.username}</NeonTitle>
-                    <NeonSub>Two-Way Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
+                    <NeonSub>Two-Factor Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
                     {this._renderOrganization()}
                     {this._renderContact()}
                     {this._renderInformation()}
@@ -358,7 +358,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
         if (!this.state.user) {
             return;
         }
-        const isConfirm: boolean = window.confirm(`Are you sure to remove ${this.state.user.username}'s Two-Way authenticator?`);
+        const isConfirm: boolean = window.confirm(`Are you sure to remove ${this.state.user.username}'s Two-Factor authenticator?`);
         if (isConfirm) {
             await removeTwoFAAccount(this.state.user.username);
         }
