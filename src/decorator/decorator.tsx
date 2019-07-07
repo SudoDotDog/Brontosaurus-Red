@@ -75,7 +75,7 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
                 <td>{decorator.name}</td>
                 <td>{decorator.description}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/decorator/e/' + decorator.name)}
+                    onClick={() => this.props.history.push('/decorator/e/' + encodeURIComponent(decorator.name))}
                     size={SIZE.RELATIVE}>
                     Edit
                 </NeonButton></td>

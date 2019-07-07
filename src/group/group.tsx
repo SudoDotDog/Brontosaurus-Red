@@ -75,7 +75,7 @@ export class Group extends React.Component<GroupProps, GroupStates> {
                 <td>{group.name}</td>
                 <td>{group.description}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/group/e/' + group.name)}
+                    onClick={() => this.props.history.push('/group/e/' + encodeURIComponent(group.name))}
                     size={SIZE.RELATIVE}>
                     Edit
                 </NeonButton></td>

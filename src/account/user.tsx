@@ -77,7 +77,7 @@ export class User extends React.Component<UserProp, UserState> {
                 <td>{user.email}</td>
                 <td>{user.phone}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/user/e/' + user.username)}
+                    onClick={() => this.props.history.push('/user/e/' + encodeURIComponent(user.username))}
                     size={SIZE.RELATIVE}>
                     Edit
                 </NeonButton></td>

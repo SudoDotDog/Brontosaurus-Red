@@ -75,7 +75,7 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                 <td>{organization.name}</td>
                 <td>{organization.owner}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/organization/e/' + organization.name)}
+                    onClick={() => this.props.history.push('/organization/e/' + encodeURIComponent(organization.name))}
                     size={SIZE.RELATIVE}>
                     Edit
                 </NeonButton></td>

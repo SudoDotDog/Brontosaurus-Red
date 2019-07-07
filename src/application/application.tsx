@@ -77,7 +77,7 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
                 <td>{application.key}</td>
                 <td>{application.expire}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/application/e/' + application.key)}
+                    onClick={() => this.props.history.push('/application/e/' + encodeURIComponent(application.key))}
                     size={SIZE.RELATIVE}>
                     Edit
                 </NeonButton></td>
