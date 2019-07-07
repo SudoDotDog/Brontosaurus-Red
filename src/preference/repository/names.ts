@@ -11,6 +11,7 @@ import { joinRoute } from "../../repository/route";
 export const namePreferenceRepository = async (
     systemName?: string,
     accountName?: string,
+    commandCenterName?: string,
 ): Promise<number> => {
 
     const response: {
@@ -21,6 +22,7 @@ export const namePreferenceRepository = async (
         .bearer(Brontosaurus.hard().raw)
         .add('systemName', systemName)
         .add('accountName', accountName)
+        .add('commandCenterName', commandCenterName)
         .fetch();
 
     return response.changed;

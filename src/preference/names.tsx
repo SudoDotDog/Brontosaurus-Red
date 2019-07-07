@@ -51,6 +51,8 @@ export class NamesPreference extends React.Component<NamesPreferenceProp, NamesP
         this.setState({
             initial: response,
         });
+
+        console.log(response);
     }
 
     public render() {
@@ -92,12 +94,14 @@ export class NamesPreference extends React.Component<NamesPreferenceProp, NamesP
             const changed: number = await namePreferenceRepository(
                 current.systemName,
                 current.accountName,
+                current.commandCenterName,
             );
 
             this.setState({
                 cover: {
                     type: SIGNAL.SUCCEED,
                     title: "Succeed",
+                    info: `${changed} Preferences Updated`,
 
                     peek: {
                         children: "<-",
@@ -136,6 +140,10 @@ export class NamesPreference extends React.Component<NamesPreferenceProp, NamesP
             accountName: {
                 type: INPUT_TYPE.TEXT,
                 display: 'Account Name',
+            },
+            commandCenterName: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Command Center Name',
             },
         };
     }

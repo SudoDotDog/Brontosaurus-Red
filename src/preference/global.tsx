@@ -92,6 +92,7 @@ export class GlobalPreference extends React.Component<GlobalPreferenceProp, Glob
             const changed: number = await globalPreferenceRepository(
                 current.globalAvatar,
                 undefined,
+                current.globalFavicon,
                 current.globalHelpLink,
                 current.globalPrivacyPolicy,
             );
@@ -100,6 +101,7 @@ export class GlobalPreference extends React.Component<GlobalPreferenceProp, Glob
                 cover: {
                     type: SIGNAL.SUCCEED,
                     title: "Succeed",
+                    info: `${changed} Preferences Updated`,
 
                     peek: {
                         children: "<-",
@@ -134,6 +136,10 @@ export class GlobalPreference extends React.Component<GlobalPreferenceProp, Glob
             globalAvatar: {
                 type: INPUT_TYPE.TEXT,
                 display: 'Global Avatar',
+            },
+            globalFavicon: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Global Favicon',
             },
             globalHelpLink: {
                 type: INPUT_TYPE.TEXT,

@@ -11,6 +11,7 @@ import { joinRoute } from "../../repository/route";
 export const globalPreferenceRepository = async (
     globalAvatar?: string,
     globalBackgroundImages?: string[],
+    globalFavicon?: string,
     globalHelpLink?: string,
     globalPrivacyPolicy?: string,
 ): Promise<number> => {
@@ -23,6 +24,7 @@ export const globalPreferenceRepository = async (
         .bearer(Brontosaurus.hard().raw)
         .add('globalAvatar', globalAvatar)
         .add('globalBackgroundImages', globalBackgroundImages)
+        .add('globalFavicon', globalFavicon)
         .add('globalHelpLink', globalHelpLink)
         .add('globalPrivacyPolicy', globalPrivacyPolicy)
         .fetch();
