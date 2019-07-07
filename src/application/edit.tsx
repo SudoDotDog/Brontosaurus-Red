@@ -5,8 +5,10 @@
  */
 
 import { NeonButton } from "@sudoo/neon/button";
-import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { NeonPair } from "@sudoo/neon/input";
+import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
@@ -19,14 +21,26 @@ type ApplicationEditProp = {
 
 type ApplicationEditState = {
 
-    application: SingleApplicationFetchResponse | null;
+    readonly loading: boolean;
+    readonly cover: NeonStickerCut | undefined;
+    readonly application: SingleApplicationFetchResponse | null;
 };
 
 export class ApplicationEdit extends React.Component<ApplicationEditProp, ApplicationEditState> {
 
     public state: ApplicationEditState = {
+
+        loading: false,
+        cover: undefined,
         application: null,
     };
+
+    public constructor(props: ApplicationEditProp) {
+
+        super(props);
+
+        this._submit = this._submit.bind(this);
+    }
 
     public async componentDidMount() {
 
@@ -57,43 +71,52 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
             <NeonThemeProvider value={{
                 margin: MARGIN.SMALL,
             }} >
-                <NeonTitle>Edit: {this.state.application.key}</NeonTitle>
 
-                <NeonPair
-                    label="Key"
-                    value={this.state.application.key} />
-
-                <NeonPair
-                    label="Avatar"
-                    editable
-                    value={this.state.application.avatar || ''}
-                    onChange={(value: string) => this._updateApplication('avatar', value)} />
-
-                <NeonPair
-                    label="Name"
-                    editable
-                    value={this.state.application.name}
-                    onChange={(value: string) => this._updateApplication('name', value)} />
-
-                <NeonPair
-                    label="Expire"
-                    editable
-                    value={this.state.application.expire.toString()}
-                    onChange={(value: string) => this._updateApplication('expire', Number(value))} />
-
-                {this.state.application.green && <NeonPair
-                    label="Green"
-                    value={this.state.application.green.toString()} />}
-
-                <NeonButton
-                    size={SIZE.MEDIUM}
-                    width={WIDTH.FULL}
-                    onClick={() => this.state.application && updateApplicationRepository(this.state.application)}
+                <NeonIndicator
+                    loading={this.state.loading}
+                    covering={Boolean(this.state.cover)}
+                    cover={this._renderSticker()}
                 >
-                    Save Change
-                </NeonButton>
+                    <NeonTitle>Edit: {this.state.application.key}</NeonTitle>
+                    <NeonPair
+                        label="Key"
+                        value={this.state.application.key} />
+                    <NeonPair
+                        label="Avatar"
+                        editable
+                        value={this.state.application.avatar || ''}
+                        onChange={(value: string) => this._updateApplication('avatar', value)} />
+                    <NeonPair
+                        label="Name"
+                        editable
+                        value={this.state.application.name}
+                        onChange={(value: string) => this._updateApplication('name', value)} />
+                    <NeonPair
+                        label="Expire"
+                        editable
+                        value={this.state.application.expire.toString()}
+                        onChange={(value: string) => this._updateApplication('expire', Number(value))} />
+                    {this.state.application.green && <NeonPair
+                        label="Green"
+                        value={this.state.application.green.toString()} />}
+                    <NeonButton
+                        size={SIZE.MEDIUM}
+                        width={WIDTH.FULL}
+                        onClick={this._submit}
+                    >
+                        Save Change
+                    </NeonButton>
+                </NeonIndicator>
             </NeonThemeProvider>
         );
+    }
+
+    private _renderSticker() {
+
+        if (!this.state.cover) {
+            return null;
+        }
+        return <NeonSticker {...this.state.cover} />;
     }
 
     private _updateApplication<K extends keyof SingleApplicationFetchResponse>(key: K, value: SingleApplicationFetchResponse[K]): void {
@@ -110,5 +133,56 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
 
         const params: any = this.props.match.params;
         return params.application;
+    }
+
+    private async _submit() {
+
+        if (!this.state.application) {
+            return;
+        }
+
+        this.setState({
+            loading: true,
+            cover: undefined,
+        });
+
+        try {
+
+            const name: string = await updateApplicationRepository(this.state.application);
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.SUCCEED,
+                    title: "Succeed",
+                    info: name,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Complete",
+                        onClick: this.props.history.goBack,
+                    },
+                },
+            });
+        } catch (err) {
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.ERROR,
+                    title: "Failed",
+                    info: err.message,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Retry",
+                        onClick: () => this.setState({ cover: undefined }),
+                    },
+                },
+            });
+        } finally {
+
+            this.setState({
+                loading: false,
+            });
+        }
     }
 }
