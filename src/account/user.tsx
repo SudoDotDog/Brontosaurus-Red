@@ -9,6 +9,7 @@ import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import * as MenuStyle from "../../style/components/menu.scss";
 import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
 import { fetchAccount, FetchAccountResponse, UserResponse } from "./repository/account-fetch";
@@ -76,11 +77,20 @@ export class User extends React.Component<UserProp, UserState> {
                 <td>{Boolean(user.twoFA).toString()}</td>
                 <td>{user.email}</td>
                 <td>{user.phone}</td>
-                <td><NeonButton
-                    onClick={() => this.props.history.push('/user/e/' + encodeURIComponent(user.username))}
-                    size={SIZE.RELATIVE}>
-                    Edit
-                </NeonButton></td>
+                <td className={MenuStyle.actionRaw}>
+                    <NeonButton
+                        className={MenuStyle.actionButton}
+                        onClick={() => this.props.history.push('/user/e/' + encodeURIComponent(user.username))}
+                        size={SIZE.RELATIVE}>
+                        Edit
+                    </NeonButton>
+                    <NeonButton
+                        className={MenuStyle.actionButton}
+                        onClick={() => this.props.history.push('/user/more/' + encodeURIComponent(user.username))}
+                        size={SIZE.RELATIVE}>
+                        More
+                    </NeonButton>
+                </td>
             </tr>),
         );
     }

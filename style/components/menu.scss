@@ -4,13 +4,13 @@
  * @description Menu
  */
 
- @import '../common/color.sass';
+@import '../common/color.sass';
 
 .menu-grid {
-    
-   display: grid;
-   grid-template-columns: repeat(3, 1fr);
-   grid-gap: 1rem;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
 }
 
 .menu-item {
@@ -24,5 +24,15 @@
 .menu-description {
 
     padding: 0.6rem;
+    flex: 1;
+}
+
+.action-raw {
+
+    display: flex;
+}
+
+.action-button {
+
     flex: 1;
 }
