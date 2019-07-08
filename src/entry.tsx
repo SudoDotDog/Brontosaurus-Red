@@ -34,17 +34,8 @@ export class Entry extends React.Component<{}, EntryStates> {
 
     public async componentDidMount() {
 
-        try {
-
-            const commandCenter: string | null = await getCommandCenterName();
-            this._setName(commandCenter);
-        } catch (err) {
-
-            await new Promise((resolve: () => void) => setTimeout(resolve, 800));
-
-            const commandCenter: string | null = await getCommandCenterName();
-            this._setName(commandCenter);
-        }
+        const commandCenter: string | null = await getCommandCenterName();
+        this._setName(commandCenter);
     }
 
     public render(): JSX.Element {
