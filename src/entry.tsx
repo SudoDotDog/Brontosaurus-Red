@@ -70,10 +70,12 @@ export class Entry extends React.Component<{}, EntryStates> {
             this.setState({
                 commandCenterName: name,
             });
+            document.title = name;
         } else {
             this.setState({
                 commandCenterName: 'Brontosaurus RED',
             });
+            document.title = 'Red - Brontosaurus';
         }
     }
 }
