@@ -389,7 +389,10 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
                 />
             </React.Fragment>);
         } else {
-            return (<NeonSub>This user doesn't belong to any organization</NeonSub>);
+            return (<React.Fragment>
+                <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
+                <NeonSub>This user doesn't belong to any organization</NeonSub>
+            </React.Fragment>);
         }
     }
 
