@@ -5,8 +5,10 @@
  */
 
 import { NeonButton } from "@sudoo/neon/button";
-import { MARGIN, SIZE } from "@sudoo/neon/declare";
+import { MARGIN, SIGNAL, SIZE } from "@sudoo/neon/declare";
+import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonApplicable } from "@sudoo/neon/input";
+import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
@@ -20,6 +22,9 @@ export type UserProp = {
 
 export type UserState = {
 
+    readonly loading: boolean;
+    readonly cover: any;
+
     readonly users: StandaloneAccountResponse[];
     readonly keyword: string;
     readonly pages: number;
@@ -29,6 +34,9 @@ export type UserState = {
 export class OrganizationAddAccount extends React.Component<UserProp, UserState> {
 
     public readonly state: UserState = {
+
+        loading: false,
+        cover: undefined,
 
         users: [],
         keyword: '',
@@ -45,7 +53,11 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
     public render() {
 
         return (
-            <div>
+            <NeonIndicator
+                loading={this.state.loading}
+                covering={Boolean(this.state.cover)}
+                cover={this._renderSticker()}
+            >
                 <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
                 <NeonTitle margin={MARGIN.SMALL}>Add account to Organization: {this._getOrganizationName()}</NeonTitle>
 
@@ -68,8 +80,16 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
                     selected={this.state.page}
                     onClick={(page: number) => this.setState({ page }, this._searchUser)}
                 />
-            </div>
+            </NeonIndicator>
         );
+    }
+
+    private _renderSticker() {
+
+        if (!this.state.cover) {
+            return null;
+        }
+        return <NeonSticker {...this.state.cover} />;
     }
 
     private _renderUser(): JSX.Element[] {
@@ -97,9 +117,48 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
         const organization: string = this._getOrganizationName();
         const validation: boolean = window.confirm(`Add "${username}" to "${organization}"?`);
 
+        this.setState({
+            loading: true,
+            cover: undefined,
+        });
+
         if (validation) {
-            await setOrganizationRepository(username, organization);
-            this.props.history.push('/user/e/' + username);
+            try {
+                const response = await setOrganizationRepository(username, organization);
+
+                this.setState({
+                    cover: {
+                        type: SIGNAL.SUCCEED,
+                        title: "Succeed",
+                        info: response.account + ' > ' + response.organization,
+
+                        peek: {
+                            children: "<-",
+                            expend: "Complete",
+                            onClick: () => this.props.history.push('/user/e/' + username),
+                        },
+                    },
+                });
+            } catch (err) {
+                this.setState({
+                    cover: {
+                        type: SIGNAL.ERROR,
+                        title: "Failed",
+                        info: err.message,
+
+                        peek: {
+                            children: "<-",
+                            expend: "Retry",
+                            onClick: () => this.setState({ cover: undefined }),
+                        },
+                    },
+                });
+            } finally {
+
+                this.setState({
+                    loading: false,
+                });
+            }
         }
     }
 

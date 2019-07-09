@@ -5,8 +5,10 @@
  */
 
 import { NeonButton } from "@sudoo/neon/button";
-import { MARGIN, SIZE } from "@sudoo/neon/declare";
+import { MARGIN, SIGNAL, SIZE } from "@sudoo/neon/declare";
+import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonApplicable } from "@sudoo/neon/input";
+import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
@@ -20,6 +22,9 @@ export type AccountOrganizationAssignProps = {
 
 export type AccountOrganizationAssignStates = {
 
+    readonly loading: boolean;
+    readonly cover: any;
+
     readonly organizations: OrganizationResponse[];
     readonly keyword: string;
     readonly pages: number;
@@ -29,6 +34,9 @@ export type AccountOrganizationAssignStates = {
 export class AccountOrganizationAssign extends React.Component<AccountOrganizationAssignProps, AccountOrganizationAssignStates> {
 
     public readonly state: AccountOrganizationAssignStates = {
+
+        loading: false,
+        cover: undefined,
 
         organizations: [],
         keyword: '',
@@ -45,7 +53,11 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
     public render() {
 
         return (
-            <div>
+            <NeonIndicator
+                loading={this.state.loading}
+                covering={Boolean(this.state.cover)}
+                cover={this._renderSticker()}
+            >
                 <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
                 <NeonTitle margin={MARGIN.SMALL}>Set {this._getUsername()}'s Organization</NeonTitle>
 
@@ -68,8 +80,16 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
                     selected={this.state.page}
                     onClick={(page: number) => this.setState({ page }, this._searchOrganization)}
                 />
-            </div>
+            </NeonIndicator>
         );
+    }
+
+    private _renderSticker() {
+
+        if (!this.state.cover) {
+            return null;
+        }
+        return <NeonSticker {...this.state.cover} />;
     }
 
     private _renderOrganizations(): JSX.Element[] {
@@ -92,12 +112,47 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
         const username: string = this._getUsername();
         const validation: boolean = window.confirm(`Assign "${username}" to "${organization}"?`);
 
+        this.setState({
+            loading: true,
+            cover: undefined,
+        });
+
         if (validation) {
             try {
-                await setOrganizationRepository(username, organization);
-                this.props.history.push('/user/e/' + username);
+                const response = await setOrganizationRepository(username, organization);
+
+                this.setState({
+                    cover: {
+                        type: SIGNAL.SUCCEED,
+                        title: "Succeed",
+                        info: response.account + ' > ' + response.organization,
+
+                        peek: {
+                            children: "<-",
+                            expend: "Complete",
+                            onClick: () => this.props.history.push('/user/e/' + username),
+                        },
+                    },
+                });
             } catch (err) {
-                window.alert(err);
+                this.setState({
+                    cover: {
+                        type: SIGNAL.ERROR,
+                        title: "Failed",
+                        info: err.message,
+
+                        peek: {
+                            children: "<-",
+                            expend: "Retry",
+                            onClick: () => this.setState({ cover: undefined }),
+                        },
+                    },
+                });
+            } finally {
+
+                this.setState({
+                    loading: false,
+                });
             }
         }
     }
