@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace User_Repository
+ * @namespace Account_Repository
  * @description Account Fetch
  */
 
@@ -14,7 +14,6 @@ export type UserResponse = {
     phone?: string;
     twoFA: boolean;
     groups: number;
-    infos: Record<string, any>;
 };
 
 export type FetchAccountResponse = {

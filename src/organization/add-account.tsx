@@ -10,7 +10,7 @@ import { NeonApplicable } from "@sudoo/neon/input";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { fetchAccount, FetchAccountResponse, UserResponse } from "../account/repository/account-fetch";
+import { fetchStandaloneAccount, FetchStandaloneAccountResponse, StandaloneAccountResponse } from "../account/repository/standalone-account-fetch";
 import { PageSelector } from "../components/page-selector";
 
 export type UserProp = {
@@ -18,7 +18,7 @@ export type UserProp = {
 
 export type UserState = {
 
-    readonly users: UserResponse[];
+    readonly users: StandaloneAccountResponse[];
     readonly keyword: string;
     readonly pages: number;
     readonly page: number;
@@ -69,7 +69,7 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
 
     private _renderUser(): JSX.Element[] {
 
-        return this.state.users.map((user: UserResponse) =>
+        return this.state.users.map((user: StandaloneAccountResponse) =>
             (<tr key={user.username}>
                 <td>{user.username}</td>
                 <td>{user.groups}</td>
@@ -89,7 +89,7 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
 
     private async _searchUser() {
 
-        const response: FetchAccountResponse = await fetchAccount(
+        const response: FetchStandaloneAccountResponse = await fetchStandaloneAccount(
             this.state.keyword,
             this.state.page,
         );

@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace User_Repository
+ * @namespace Account_Repository
  * @description Account Reset Attempt
  */
 
