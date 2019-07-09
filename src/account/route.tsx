@@ -6,7 +6,8 @@
 
 import * as React from "react";
 import { Route } from "react-router-dom";
-import { UserEdit } from "./edit";
+import { AccountOrganizationAssign } from "./assign";
+import { AccountEdit } from "./edit";
 import { AccountMore } from "./more";
 import { Register } from "./register";
 import { User } from "./user";
@@ -18,8 +19,8 @@ export const UserRoute: React.FC = () => {
             <React.Fragment>
                 <Route path="/user/list" component={User} />
                 <Route path="/user/new" component={Register} />
-                <Route path="/user/e/:username" component={UserEdit} />
-                <Route path="/user/o/:username" component={UserEdit} />
+                <Route path="/user/e/:username" component={AccountEdit} />
+                <Route path="/user/o/:username" component={AccountOrganizationAssign} />
                 <Route path="/user/more/:username" component={AccountMore} />
             </React.Fragment>
         </Route>

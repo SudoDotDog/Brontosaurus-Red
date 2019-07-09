@@ -23,10 +23,10 @@ import { resetAttemptAccount } from "./repository/reset-attempt";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
 import { removeTwoFAAccount } from "./repository/twoFARemove";
 
-type UserEditProp = {
+type AccountEditProp = {
 } & RouteComponentProps;
 
-type UserEditState = {
+type AccountEditState = {
 
     readonly loading: boolean;
     readonly cover: any;
@@ -35,9 +35,9 @@ type UserEditState = {
     readonly decorators: string[];
 };
 
-export class UserEdit extends React.Component<UserEditProp, UserEditState> {
+export class AccountEdit extends React.Component<AccountEditProp, AccountEditState> {
 
-    public readonly state: UserEditState = {
+    public readonly state: AccountEditState = {
 
         loading: false,
         cover: undefined,
@@ -46,7 +46,7 @@ export class UserEdit extends React.Component<UserEditProp, UserEditState> {
         decorators: [],
     };
 
-    public constructor(props: UserEditProp) {
+    public constructor(props: AccountEditProp) {
 
         super(props);
 
