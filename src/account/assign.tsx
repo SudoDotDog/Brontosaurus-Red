@@ -13,6 +13,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { PageSelector } from "../components/page-selector";
 import { fetchOrganization, FetchOrganizationResponse, OrganizationResponse } from "../organization/repository/organization-fetch";
+import { setOrganizationRepository } from "./repository/set-organization";
 
 export type AccountOrganizationAssignProps = {
 } & RouteComponentProps;
@@ -78,12 +79,23 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
                 <td>{organization.name}</td>
                 <td>{organization.owner}</td>
                 <td><NeonButton
-                    onClick={() => console.log(organization.name)}
+                    onClick={() => this._assign(organization.name)}
                     size={SIZE.RELATIVE}>
                     Assign To
                 </NeonButton></td>
             </tr>),
         );
+    }
+
+    private async _assign(organization: string) {
+
+        const username: string = this._getUsername();
+        const validation: boolean = window.confirm(`Assign "${username}" to "${organization}"?`);
+
+        if (validation) {
+            await setOrganizationRepository(this._getUsername(), organization);
+            this.props.history.push('/user/e/' + username);
+        }
     }
 
     private async _searchOrganization() {
