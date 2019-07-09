@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Account
+ * @namespace Organization
  * @description More
  */
 
@@ -10,10 +10,10 @@ import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { MenuItem } from "../components/menu-item";
 
-export type AccountMoreProps = {
+export type OrganizationMoreProps = {
 } & RouteComponentProps;
 
-export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps) => {
+export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: OrganizationMoreProps) => {
 
     const params: any = props.match.params;
 
@@ -21,9 +21,9 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
         <NeonSub onClick={() => props.history.goBack()}>Go Back</NeonSub>
         <div className={MenuStyle.menuGrid}>
             <MenuItem
-                description="Assign this account to an organization"
-                link="Assign"
-                onClick={() => props.history.push('/o/' + params.username)}
+                description="Add account to this organization"
+                link="Add"
+                onClick={() => props.history.push('/a/' + params.organization)}
             />
         </div>
     </div>);

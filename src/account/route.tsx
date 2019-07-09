@@ -20,8 +20,8 @@ export const UserRoute: React.FC = () => {
                 <Route path="/user/list" component={User} />
                 <Route path="/user/new" component={Register} />
                 <Route path="/user/e/:username" component={AccountEdit} />
-                <Route path="/user/o/:username" component={AccountOrganizationAssign} />
                 <Route path="/user/more/:username" component={AccountMore} />
+                <Route path="/user/o/:username" component={AccountOrganizationAssign} />
             </React.Fragment>
         </Route>
     );
