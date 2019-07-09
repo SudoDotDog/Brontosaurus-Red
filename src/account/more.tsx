@@ -10,9 +10,58 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { MenuItem } from "../components/menu-item";
+import { deactivateAccount } from "./repository/deactivate";
+import { limboAccount, LimboAccountResponse } from "./repository/limbo";
+import { resetAttemptAccount } from "./repository/reset-attempt";
+import { removeTwoFAAccount } from "./repository/twoFARemove";
+import { withdrawOrganizationAccountRepository } from "./repository/withdraw-organization";
 
 export type AccountMoreProps = {
 } & RouteComponentProps;
+
+
+const deactivateUser = async (username: string, goBack: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to deactivate ${username}?`);
+    if (isConfirm) {
+        await deactivateAccount(username);
+        goBack();
+    }
+};
+
+const limboUser = async (username: string) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to reset ${username}'s password?`);
+    if (isConfirm) {
+        const response: LimboAccountResponse = await limboAccount(username);
+        window.alert(`${username}'s temp new password is ${response.tempPassword}`);
+    }
+};
+
+const twoFARemoveUser = async (username: string) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to remove ${username}'s Two-Factor authenticator?`);
+    if (isConfirm) {
+        await removeTwoFAAccount(username);
+    }
+};
+
+const resetAttemptUser = async (username: string) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to reset ${username}'s Sign-in attempt count?`);
+    if (isConfirm) {
+        await resetAttemptAccount(username);
+    }
+};
+
+const withdrawOrganizationUser = async (username: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to remove ${username}'s organization?`);
+    if (isConfirm) {
+        await withdrawOrganizationAccountRepository(username);
+        next();
+    }
+};
 
 export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps) => {
 
@@ -24,9 +73,34 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
         <NeonTitle margin={MARGIN.SMALL}>More about Account: {username}</NeonTitle>
         <div className={MenuStyle.menuGrid}>
             <MenuItem
-                description="Assign this account to an organization"
+                description={`Assign ${username} to an (another) organization`}
                 link="Assign"
                 onClick={() => props.history.push('/user/o/' + encodeURIComponent(username))}
+            />
+            <MenuItem
+                description={`Deactivate ${username}`}
+                link="Deactivate"
+                onClick={() => deactivateUser(username, props.history.goBack)}
+            />
+            <MenuItem
+                description={`Reset ${username}'s password and assign a temporary password.`}
+                link="Limbo"
+                onClick={() => limboUser(username)}
+            />
+            <MenuItem
+                description={`Remove ${username}'s two-factoring authorization`}
+                link="Remove 2FA"
+                onClick={() => twoFARemoveUser(username)}
+            />
+            <MenuItem
+                description={`Reset ${username}'s login attempt points`}
+                link="Reset Attempt"
+                onClick={() => resetAttemptUser(username)}
+            />
+            <MenuItem
+                description={`Withdraw ${username}'s organization`}
+                link="Withdraw"
+                onClick={() => withdrawOrganizationUser(username, () => props.history.push('/user/e/' + username))}
             />
         </div>
     </div>);

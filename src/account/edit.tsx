@@ -17,11 +17,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { editAccountAdminRepository } from "./repository/admin-edit";
-import { deactivateAccount } from "./repository/deactivate";
-import { limboAccount, LimboAccountResponse } from "./repository/limbo";
-import { resetAttemptAccount } from "./repository/reset-attempt";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
-import { removeTwoFAAccount } from "./repository/twoFARemove";
 
 type AccountEditProp = {
 } & RouteComponentProps;
@@ -51,10 +47,6 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
         super(props);
 
         this._submit = this._submit.bind(this);
-        this._deactivateUser = this._deactivateUser.bind(this);
-        this._limboUser = this._limboUser.bind(this);
-        this._twoFARemoveUser = this._twoFARemoveUser.bind(this);
-        this._resetAttemptUser = this._resetAttemptUser.bind(this);
     }
 
     public async componentDidMount() {
@@ -103,7 +95,6 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     {this._renderBeacon()}
                     {this._renderUserGroup()}
                     {this._renderUserDecorator()}
-                    {this._renderDangerous()}
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
@@ -233,35 +224,6 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
         </React.Fragment>);
     }
 
-    private _renderDangerous() {
-
-        return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Dangerous</NeonTitle>
-            <div style={{ display: 'flex', margin: '0.5rem' }}>
-                <NeonButton
-                    onClick={this._deactivateUser}
-                    margin={MARGIN.NONE}
-                    size={SIZE.MEDIUM}
-                >Deactivate</NeonButton>
-                <NeonButton
-                    onClick={this._limboUser}
-                    margin={MARGIN.NONE}
-                    size={SIZE.MEDIUM}
-                >Limbo</NeonButton>
-                <NeonButton
-                    onClick={this._twoFARemoveUser}
-                    margin={MARGIN.NONE}
-                    size={SIZE.MEDIUM}
-                >2FA Remove</NeonButton>
-                <NeonButton
-                    onClick={this._resetAttemptUser}
-                    margin={MARGIN.NONE}
-                    size={SIZE.MEDIUM}
-                >Recover</NeonButton>
-            </div>
-        </React.Fragment>);
-    }
-
     private _renderSticker() {
 
         if (!this.state.cover) {
@@ -326,52 +288,6 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
             this.setState({
                 loading: false,
             });
-        }
-    }
-
-    private async _deactivateUser() {
-
-        if (!this.state.user) {
-            return;
-        }
-        const isConfirm: boolean = window.confirm(`Are you sure to deactivate ${this.state.user.username}?`);
-        if (isConfirm) {
-            await deactivateAccount(this.state.user.username);
-            this.props.history.goBack();
-        }
-    }
-
-    private async _limboUser() {
-
-        if (!this.state.user) {
-            return;
-        }
-        const isConfirm: boolean = window.confirm(`Are you sure to reset ${this.state.user.username}'s password?`);
-        if (isConfirm) {
-            const response: LimboAccountResponse = await limboAccount(this.state.user.username);
-            window.alert(`${this.state.user.username}'s temp new password is ${response.tempPassword}`);
-        }
-    }
-
-    private async _twoFARemoveUser() {
-
-        if (!this.state.user) {
-            return;
-        }
-        const isConfirm: boolean = window.confirm(`Are you sure to remove ${this.state.user.username}'s Two-Factor authenticator?`);
-        if (isConfirm) {
-            await removeTwoFAAccount(this.state.user.username);
-        }
-    }
-
-    private async _resetAttemptUser() {
-
-        if (!this.state.user) {
-            return;
-        }
-        const isConfirm: boolean = window.confirm(`Are you sure to reset ${this.state.user.username}'s Sign-in attempt count?`);
-        if (isConfirm) {
-            await resetAttemptAccount(this.state.user.username);
         }
     }
 
