@@ -24,8 +24,12 @@ const deactivateUser = async (username: string, goBack: () => void) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to deactivate ${username}?`);
     if (isConfirm) {
-        await deactivateAccount(username);
-        goBack();
+        try {
+            await deactivateAccount(username);
+            goBack();
+        } catch (err) {
+            window.alert(err);
+        }
     }
 };
 
@@ -33,8 +37,12 @@ const limboUser = async (username: string) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to reset ${username}'s password?`);
     if (isConfirm) {
-        const response: LimboAccountResponse = await limboAccount(username);
-        window.alert(`${username}'s temp new password is ${response.tempPassword}`);
+        try {
+            const response: LimboAccountResponse = await limboAccount(username);
+            window.alert(`${username}'s temp new password is ${response.tempPassword}`);
+        } catch (err) {
+            window.alert(err);
+        }
     }
 };
 
@@ -42,7 +50,11 @@ const twoFARemoveUser = async (username: string) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to remove ${username}'s Two-Factor authenticator?`);
     if (isConfirm) {
-        await removeTwoFAAccount(username);
+        try {
+            await removeTwoFAAccount(username);
+        } catch (err) {
+            window.alert(err);
+        }
     }
 };
 
@@ -50,7 +62,11 @@ const resetAttemptUser = async (username: string) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to reset ${username}'s Sign-in attempt count?`);
     if (isConfirm) {
-        await resetAttemptAccount(username);
+        try {
+            await resetAttemptAccount(username);
+        } catch (err) {
+            window.alert(err);
+        }
     }
 };
 
@@ -58,8 +74,12 @@ const withdrawOrganizationUser = async (username: string, next: () => void) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to remove ${username}'s organization?`);
     if (isConfirm) {
-        await withdrawOrganizationAccountRepository(username);
-        next();
+        try {
+            await withdrawOrganizationAccountRepository(username);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
     }
 };
 

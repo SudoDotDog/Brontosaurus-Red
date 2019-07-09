@@ -121,7 +121,10 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                 headers={['Username', 'Phone', 'Email']}
                 style={{ marginTop: '1rem' }}>
                 {organization.members.map((member) => (<tr key={member.username}>
-                    <td>{member.username}</td>
+                    <td>
+                        {member.username}
+                        {member.username === organization.owner.username && <span style={{ color: 'red' }}>&nbsp;(Owner)</span>}
+                    </td>
                     <td>{member.phone}</td>
                     <td>{member.email}</td>
                 </tr>))}

@@ -93,8 +93,12 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
         const validation: boolean = window.confirm(`Assign "${username}" to "${organization}"?`);
 
         if (validation) {
-            await setOrganizationRepository(username, organization);
-            this.props.history.push('/user/e/' + username);
+            try {
+                await setOrganizationRepository(username, organization);
+                this.props.history.push('/user/e/' + username);
+            } catch (err) {
+                window.alert(err);
+            }
         }
     }
 
