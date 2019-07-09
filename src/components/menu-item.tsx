@@ -14,6 +14,8 @@ export type MenuItemProps = {
     readonly description: any;
     readonly link: string;
     readonly onClick: () => void;
+
+    readonly disabled?: boolean;
 };
 
 export const MenuItem: React.FC<MenuItemProps> = (props: MenuItemProps) => {
@@ -23,6 +25,7 @@ export const MenuItem: React.FC<MenuItemProps> = (props: MenuItemProps) => {
             {props.description}
         </div>
         <NeonButton
+            disabled={props.disabled}
             size={SIZE.MEDIUM}
             width={WIDTH.FULL}
             onClick={props.onClick}

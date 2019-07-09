@@ -5,12 +5,13 @@
  */
 
 import { NeonButton } from "@sudoo/neon/button";
-import { SIZE } from "@sudoo/neon/declare";
+import { MARGIN, SIZE } from "@sudoo/neon/declare";
 import { NeonApplicable } from "@sudoo/neon/input";
 import { NeonTable } from "@sudoo/neon/table";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { setOrganizationRepository } from "../account/repository/set-organization";
 import { fetchStandaloneAccount, FetchStandaloneAccountResponse, StandaloneAccountResponse } from "../account/repository/standalone-account-fetch";
 import { PageSelector } from "../components/page-selector";
 
@@ -46,7 +47,7 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
         return (
             <div>
                 <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
-                <NeonTitle>Add account to Organization: {this._getOrganizationName()}</NeonTitle>
+                <NeonTitle margin={MARGIN.MEDIUM}>Add account to Organization: {this._getOrganizationName()}</NeonTitle>
 
                 <NeonApplicable
                     size={SIZE.MEDIUM}
@@ -82,13 +83,24 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
                 <td>{user.phone}</td>
                 <td>
                     <NeonButton
-                        onClick={() => console.log(user.username)}
+                        onClick={() => this._addTo(user.username)}
                         size={SIZE.RELATIVE}>
                         Add To
                     </NeonButton>
                 </td>
             </tr>),
         );
+    }
+
+    private async _addTo(username: string) {
+
+        const organization: string = this._getOrganizationName();
+        const validation: boolean = window.confirm(`Add "${username}" to "${organization}"?`);
+
+        if (validation) {
+            await setOrganizationRepository(username, organization);
+            this.props.history.push('/user/e/' + username);
+        }
     }
 
     private async _searchUser() {
@@ -106,6 +118,6 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
     private _getOrganizationName(): string {
 
         const params: any = this.props.match.params;
-        return params.organization;
+        return decodeURIComponent(params.organization);
     }
 }

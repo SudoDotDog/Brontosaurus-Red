@@ -16,7 +16,7 @@ export type OrganizationMoreProps = {
 export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: OrganizationMoreProps) => {
 
     const params: any = props.match.params;
-    const organization: string = params.organization;
+    const organization: string = decodeURIComponent(params.organization);
 
     return (<div>
         <NeonSub onClick={() => props.history.goBack()}>Go Back</NeonSub>
@@ -27,9 +27,10 @@ export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: Organiz
                 onClick={() => props.history.push('/organization/a/' + organization)}
             />
             <MenuItem
+                disabled
                 description={`Register new account for organization "${organization}"`}
                 link="Register"
-                onClick={() => props.history.push('/organization/a/' + organization)}
+                onClick={() => undefined}
             />
         </div>
     </div>);
