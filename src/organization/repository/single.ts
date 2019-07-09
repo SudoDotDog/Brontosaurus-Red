@@ -16,6 +16,11 @@ export type SingleOrganizationResponse = {
         readonly phone: string;
         readonly email: string;
     };
+    readonly members: Array<{
+        readonly username: string;
+        readonly phone: string;
+        readonly email: string;
+    }>;
     readonly decorators: string[];
 };
 

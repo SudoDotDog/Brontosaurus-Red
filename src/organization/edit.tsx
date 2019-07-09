@@ -9,7 +9,7 @@ import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
-import { NeonSmartList } from "@sudoo/neon/table";
+import { NeonSmartList, NeonTable } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
@@ -84,6 +84,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                 >
                     <NeonTitle>Edit: {this.state.organization.name}</NeonTitle>
                     {this._renderOwner()}
+                    {this._renderMembers()}
                     {this._renderDecorators()}
                     <NeonButton
                         size={SIZE.MEDIUM}
@@ -108,6 +109,23 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     Email: organization.owner.email,
                 }}
             />
+        </React.Fragment>);
+    }
+
+    private _renderMembers() {
+
+        const organization = this.state.organization as SingleOrganizationResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>Members Information</NeonTitle>
+            <NeonTable
+                headers={['Username', 'Phone', 'Email']}
+                style={{ marginTop: '1rem' }}>
+                {organization.members.map((member) => (<tr key={member.username}>
+                    <td>{member.username}</td>
+                    <td>{member.phone}</td>
+                    <td>{member.email}</td>
+                </tr>))}
+            </NeonTable>
         </React.Fragment>);
     }
 
