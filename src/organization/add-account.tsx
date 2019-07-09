@@ -8,6 +8,7 @@ import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonApplicable } from "@sudoo/neon/input";
 import { NeonTable } from "@sudoo/neon/table";
+import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { fetchStandaloneAccount, FetchStandaloneAccountResponse, StandaloneAccountResponse } from "../account/repository/standalone-account-fetch";
@@ -44,6 +45,9 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
 
         return (
             <div>
+                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
+                <NeonTitle>Add account to Organization: {this._getOrganizationName()}</NeonTitle>
+
                 <NeonApplicable
                     size={SIZE.MEDIUM}
                     label={'Search Accounts'}
@@ -97,5 +101,11 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
             users: response.accounts,
             pages: response.pages,
         });
+    }
+
+    private _getOrganizationName(): string {
+
+        const params: any = this.props.match.params;
+        return params.organization;
     }
 }

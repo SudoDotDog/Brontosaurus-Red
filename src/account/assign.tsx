@@ -8,6 +8,7 @@ import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonApplicable } from "@sudoo/neon/input";
 import { NeonTable } from "@sudoo/neon/table";
+import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { PageSelector } from "../components/page-selector";
@@ -44,6 +45,9 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
 
         return (
             <div>
+                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
+                <NeonTitle>Set {this._getUsername()}'s Organization</NeonTitle>
+
                 <NeonApplicable
                     size={SIZE.MEDIUM}
                     label={'Search Target Organization'}
@@ -92,5 +96,11 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
             organizations: response.organizations,
             pages: response.pages,
         });
+    }
+
+    private _getUsername(): string {
+
+        const params: any = this.props.match.params;
+        return params.username;
     }
 }
