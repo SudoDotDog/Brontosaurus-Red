@@ -26,7 +26,7 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
             <MenuItem
                 description="Assign this account to an organization"
                 link="Assign"
-                onClick={() => props.history.push('/user/o/' + username)}
+                onClick={() => props.history.push('/user/o/' + encodeURIComponent(username))}
             />
         </div>
     </div>);
