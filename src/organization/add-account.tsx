@@ -47,7 +47,7 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
         return (
             <div>
                 <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
-                <NeonTitle margin={MARGIN.MEDIUM}>Add account to Organization: {this._getOrganizationName()}</NeonTitle>
+                <NeonTitle margin={MARGIN.SMALL}>Add account to Organization: {this._getOrganizationName()}</NeonTitle>
 
                 <NeonApplicable
                     size={SIZE.MEDIUM}

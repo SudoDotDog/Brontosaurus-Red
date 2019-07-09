@@ -47,7 +47,7 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
         return (
             <div>
                 <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
-                <NeonTitle margin={MARGIN.MEDIUM}>Set {this._getUsername()}'s Organization</NeonTitle>
+                <NeonTitle margin={MARGIN.SMALL}>Set {this._getUsername()}'s Organization</NeonTitle>
 
                 <NeonApplicable
                     size={SIZE.MEDIUM}
