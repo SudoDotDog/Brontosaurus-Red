@@ -16,14 +16,20 @@ export type OrganizationMoreProps = {
 export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: OrganizationMoreProps) => {
 
     const params: any = props.match.params;
+    const organization: string = params.organization;
 
     return (<div>
         <NeonSub onClick={() => props.history.goBack()}>Go Back</NeonSub>
         <div className={MenuStyle.menuGrid}>
             <MenuItem
-                description="Add account to this organization"
+                description={`Add exist account to "${organization}" organization.`}
                 link="Add"
-                onClick={() => props.history.push('/a/' + params.organization)}
+                onClick={() => props.history.push('/a/' + organization)}
+            />
+            <MenuItem
+                description={`Register new account for organization "${organization}"`}
+                link="Register"
+                onClick={() => props.history.push('/a/' + organization)}
             />
         </div>
     </div>);
