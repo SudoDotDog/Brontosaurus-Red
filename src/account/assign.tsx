@@ -5,7 +5,7 @@
  */
 
 import { NeonButton } from "@sudoo/neon/button";
-import { SIZE } from "@sudoo/neon/declare";
+import { MARGIN, SIZE } from "@sudoo/neon/declare";
 import { NeonApplicable } from "@sudoo/neon/input";
 import { NeonTable } from "@sudoo/neon/table";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
@@ -46,7 +46,7 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
         return (
             <div>
                 <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
-                <NeonTitle>Set {this._getUsername()}'s Organization</NeonTitle>
+                <NeonTitle margin={MARGIN.MEDIUM}>Set {this._getUsername()}'s Organization</NeonTitle>
 
                 <NeonApplicable
                     size={SIZE.MEDIUM}

@@ -19,7 +19,7 @@ export const registerForOrganization = async (
         tempPassword: string;
     } = await Fetch
         .post
-        .json(joinRoute('/organization/register'))
+        .json(joinRoute('/organization/flat/register'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('email', email)

@@ -24,12 +24,12 @@ export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: Organiz
             <MenuItem
                 description={`Add exist account to "${organization}" organization.`}
                 link="Add"
-                onClick={() => props.history.push('/a/' + organization)}
+                onClick={() => props.history.push('/organization/a/' + organization)}
             />
             <MenuItem
                 description={`Register new account for organization "${organization}"`}
                 link="Register"
-                onClick={() => props.history.push('/a/' + organization)}
+                onClick={() => props.history.push('/organization/a/' + organization)}
             />
         </div>
     </div>);
