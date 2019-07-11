@@ -22,6 +22,7 @@ export type SingleOrganizationResponse = {
         readonly email: string;
     }>;
     readonly decorators: string[];
+    readonly tags: string[];
 };
 
 export const singleOrganization = async (name: string): Promise<SingleOrganizationResponse> => {

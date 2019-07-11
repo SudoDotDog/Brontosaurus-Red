@@ -17,12 +17,12 @@ export type AllTagsResponse = {
 export const fetchAllTags = async (): Promise<AllTagsResponse[]> => {
 
     const response: {
-        groups: AllTagsResponse[];
+        tags: AllTagsResponse[];
     } = await Fetch
         .get
         .json(joinRoute('/tag/all'))
         .bearer(Brontosaurus.hard().raw)
         .fetch();
 
-    return response.groups;
+    return response.tags;
 };

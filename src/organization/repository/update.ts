@@ -12,6 +12,7 @@ export type UpdateOrganizationRequest = {
 
     readonly name: string;
     readonly decorators: string[];
+    readonly tags: string[];
 };
 
 export const updateOrganizationRepository = async (request: UpdateOrganizationRequest): Promise<string> => {

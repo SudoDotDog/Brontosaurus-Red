@@ -9,18 +9,20 @@ import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
 export type SingleFetchResponse = {
-    username: string;
-    email?: string;
-    phone?: string;
-    organization?: {
-        name: string;
-        owner: string;
+
+    readonly username: string;
+    readonly email?: string;
+    readonly phone?: string;
+    readonly organization?: {
+        readonly name: string;
+        readonly owner: string;
     };
-    twoFA: boolean;
-    beacons: Record<string, any>;
-    infos: Record<string, any>;
-    decorators: string[];
-    groups: string[];
+    readonly twoFA: boolean;
+    readonly beacons: Record<string, any>;
+    readonly infos: Record<string, any>;
+    readonly decorators: string[];
+    readonly tags: string[];
+    readonly groups: string[];
 };
 
 export const singleFetchRepository = async (username: string): Promise<SingleFetchResponse> => {

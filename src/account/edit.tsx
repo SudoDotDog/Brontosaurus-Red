@@ -16,6 +16,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
+import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
 
@@ -28,6 +29,7 @@ type AccountEditState = {
     readonly cover: any;
     readonly user: SingleFetchResponse | null;
     readonly groups: string[];
+    readonly tags: string[];
     readonly decorators: string[];
 };
 
@@ -39,6 +41,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
         cover: undefined,
         user: null,
         groups: [],
+        tags: [],
         decorators: [],
     };
 
@@ -54,11 +57,13 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
         const response: SingleFetchResponse = await singleFetchRepository(this._getUsername());
         const groups: AllGroupsResponse[] = await fetchAllGroups();
         const decorators: AllDecoratorsResponse[] = await fetchAllDecorators();
+        const tags: AllTagsResponse[] = await fetchAllTags();
 
         this.setState({
             user: response,
             groups: groups.map((res: AllGroupsResponse) => res.name),
             decorators: decorators.map((res: AllDecoratorsResponse) => res.name),
+            tags: tags.map((res: AllTagsResponse) => res.name),
         });
     }
 
@@ -95,6 +100,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     {this._renderBeacon()}
                     {this._renderUserGroup()}
                     {this._renderUserDecorator()}
+                    {this._renderUserTag()}
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
@@ -224,6 +230,29 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
         </React.Fragment>);
     }
 
+    private _renderUserTag() {
+
+        const user = this.state.user as SingleFetchResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>User Tag</NeonTitle>
+            <NeonPillGroup
+                style={{ flexWrap: 'wrap' }}
+                selected={user.tags || []}
+                onChange={(next: string[]) => {
+                    this.setState({
+                        user: {
+                            ...user,
+                            tags: next,
+                        },
+                    });
+                }}
+                addable
+                removable
+                options={this.state.tags}
+            />
+        </React.Fragment>);
+    }
+
     private _renderSticker() {
 
         if (!this.state.cover) {
@@ -250,6 +279,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                 this.state.user.email,
                 this.state.user.phone,
                 this.state.user.groups,
+                this.state.user.tags,
                 this.state.user.decorators,
                 {
                     infos: this.state.user.infos,

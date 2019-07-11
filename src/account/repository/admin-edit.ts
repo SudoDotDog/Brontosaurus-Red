@@ -13,6 +13,7 @@ export const editAccountAdminRepository = async (
     email: string | undefined,
     phone: string | undefined,
     groups: string[],
+    tags: string[],
     decorators: string[],
     account: Partial<{
         beacons: Record<string, any>;
@@ -24,6 +25,7 @@ export const editAccountAdminRepository = async (
         .json(joinRoute('/account/edit/admin'))
         .bearer(Brontosaurus.hard().raw)
         .add('groups', groups)
+        .add('tags', tags)
         .add('decorators', decorators)
         .add('email', email)
         .add('phone', phone)

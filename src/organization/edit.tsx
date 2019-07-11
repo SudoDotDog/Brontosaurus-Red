@@ -15,6 +15,7 @@ import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
+import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
 import { updateOrganizationRepository } from "./repository/update";
 
@@ -27,6 +28,7 @@ type OrganizationEditState = {
     readonly cover: any;
     readonly organization: SingleOrganizationResponse | null;
     readonly decorators: string[];
+    readonly tags: string[];
 };
 
 export class OrganizationEdit extends React.Component<OrganizationEditProp, OrganizationEditState> {
@@ -37,6 +39,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
         cover: undefined,
         organization: null,
         decorators: [],
+        tags: [],
     };
 
     public constructor(props: OrganizationEditProp) {
@@ -50,10 +53,12 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
 
         const response: SingleOrganizationResponse = await singleOrganization(this._getOrganizationName());
         const decorators: AllDecoratorsResponse[] = await fetchAllDecorators();
+        const tags: AllTagsResponse[] = await fetchAllTags();
 
         this.setState({
             organization: response,
             decorators: decorators.map((res: AllDecoratorsResponse) => res.name),
+            tags: tags.map((res: AllTagsResponse) => res.name),
         });
     }
 
@@ -86,6 +91,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     {this._renderOwner()}
                     {this._renderMembers()}
                     {this._renderDecorators()}
+                    {this._renderTags()}
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
@@ -155,6 +161,29 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
         </React.Fragment>);
     }
 
+    private _renderTags() {
+
+        const organization = this.state.organization as SingleOrganizationResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>Tags</NeonTitle>
+            <NeonPillGroup
+                style={{ flexWrap: 'wrap' }}
+                selected={organization.tags || []}
+                onChange={(next: string[]) => {
+                    this.setState({
+                        organization: {
+                            ...organization,
+                            tags: next,
+                        },
+                    });
+                }}
+                addable
+                removable
+                options={this.state.tags}
+            />
+        </React.Fragment>);
+    }
+
     private _renderSticker() {
 
         if (!this.state.cover) {
@@ -179,6 +208,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
             const name: string = await updateOrganizationRepository({
                 name: this.state.organization.name,
                 decorators: this.state.organization.decorators,
+                tags: this.state.organization.tags,
             });
 
             this.setState({
