@@ -9,6 +9,7 @@ import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
 import { ApplicationResponse, fetchApplication, FetchApplicationResponse } from "./repository/application-fetch";
@@ -73,7 +74,13 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
 
         return this.state.applications.map((application: ApplicationResponse) =>
             (<tr key={application.key}>
-                <td>{application.name}</td>
+                <td>
+                    <ClickableSpan
+                        onClick={() => this.props.history.push('/application/e/' + encodeURIComponent(application.key))}
+                    >
+                        {application.name}
+                    </ClickableSpan>
+                </td>
                 <td>{application.key}</td>
                 <td>{application.expire}</td>
                 <td><NeonButton

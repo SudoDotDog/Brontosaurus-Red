@@ -9,6 +9,7 @@ import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
 import { fetchTagRepository, FetchTagResponse, TagResponse } from "./repository/tag-fetch";
@@ -72,7 +73,13 @@ export class Tags extends React.Component<TagsProp, TagsState> {
 
         return this.state.tags.map((tag: TagResponse) =>
             (<tr key={tag.name}>
-                <td>{tag.name}</td>
+                <td>
+                    <ClickableSpan
+                        onClick={() => this.props.history.push('/tag/e/' + encodeURIComponent(tag.name))}
+                    >
+                        {tag.name}
+                    </ClickableSpan>
+                </td>
                 <td>{tag.description}</td>
                 <td><NeonButton
                     onClick={() => this.props.history.push('/tag/e/' + encodeURIComponent(tag.name))}

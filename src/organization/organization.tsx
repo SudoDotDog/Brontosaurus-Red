@@ -10,6 +10,7 @@ import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
+import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchDoubleNew } from "../components/search-di-new";
 import { fetchOrganization, FetchOrganizationResponse, OrganizationResponse } from "./repository/organization-fetch";
@@ -55,7 +56,7 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                 {this.state.organizations.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name', 'Owner', 'Action']}
+                        headers={['Name', 'Owner', 'Decorators', 'Tags', 'Action']}
                         style={{ marginTop: '1rem' }}>
                         {this._renderOrganizations()}
                     </NeonTable>}
@@ -73,8 +74,22 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
 
         return this.state.organizations.map((organization: OrganizationResponse) =>
             (<tr key={organization.name}>
-                <td>{organization.name}</td>
-                <td>{organization.owner}</td>
+                <td>
+                    <ClickableSpan
+                        onClick={() => this.props.history.push('/organization/e/' + encodeURIComponent(organization.name))}
+                    >
+                        {organization.name}
+                    </ClickableSpan>
+                </td>
+                <td>
+                    <ClickableSpan
+                        onClick={() => this.props.history.push('/user/e/' + encodeURIComponent(organization.owner))}
+                    >
+                        {organization.owner}
+                    </ClickableSpan>
+                </td>
+                <td>{organization.decorators}</td>
+                <td>{organization.tags}</td>
                 <td className={MenuStyle.actionRaw}>
                     <NeonButton
                         className={MenuStyle.actionButton}

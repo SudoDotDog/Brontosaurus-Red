@@ -12,6 +12,8 @@ export type OrganizationResponse = {
 
     readonly name: string;
     readonly owner: string;
+    readonly decorators: number;
+    readonly tags: number;
 };
 
 export type FetchOrganizationResponse = {

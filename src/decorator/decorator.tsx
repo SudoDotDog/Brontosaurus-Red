@@ -9,6 +9,7 @@ import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
 import { DecoratorResponse, fetchDecorator, FetchDecoratorResponse } from "./repository/decorator-fetch";
@@ -72,7 +73,13 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
 
         return this.state.decorators.map((decorator: DecoratorResponse) =>
             (<tr key={decorator.name}>
-                <td>{decorator.name}</td>
+                <td>
+                    <ClickableSpan
+                        onClick={() => this.props.history.push('/decorator/e/' + encodeURIComponent(decorator.name))}
+                    >
+                        {decorator.name}
+                    </ClickableSpan>
+                </td>
                 <td>{decorator.description}</td>
                 <td><NeonButton
                     onClick={() => this.props.history.push('/decorator/e/' + encodeURIComponent(decorator.name))}

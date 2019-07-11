@@ -16,6 +16,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
+import { ClickableSpan } from "../components/clickable-span";
 import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
 import { updateOrganizationRepository } from "./repository/update";
 
@@ -128,7 +129,11 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                 style={{ marginTop: '1rem' }}>
                 {organization.members.map((member) => (<tr key={member.username}>
                     <td>
-                        {member.username}
+                        <ClickableSpan
+                            onClick={() => this.props.history.push('/user/e/' + encodeURIComponent(member.username))}
+                        >
+                            {member.username}
+                        </ClickableSpan>
                         {member.username === organization.owner.username && <span style={{ color: 'red' }}>&nbsp;(Owner)</span>}
                     </td>
                     <td>{member.phone}</td>

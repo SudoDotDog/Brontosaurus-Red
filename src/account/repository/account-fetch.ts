@@ -9,11 +9,14 @@ import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
 export type UserResponse = {
+
     username: string;
     email?: string;
     phone?: string;
     twoFA: boolean;
     groups: number;
+    decorators: number;
+    tags: number;
 };
 
 export type FetchAccountResponse = {

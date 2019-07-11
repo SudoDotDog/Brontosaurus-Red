@@ -17,6 +17,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
+import { ClickableSpan } from "../components/clickable-span";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
 
@@ -329,8 +330,12 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                 <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
                 <NeonSmartList
                     list={{
-                        name: user.organization.name,
-                        owner: user.organization.owner,
+                        Name: <ClickableSpan
+                            onClick={() => this.props.history.push('/organization/e/' + encodeURIComponent(user.organization.name))}
+                        >
+                            {user.organization.name}
+                        </ClickableSpan> as any,
+                        Owner: user.organization.owner,
                     }}
                 />
             </React.Fragment>);

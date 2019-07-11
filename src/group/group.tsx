@@ -9,6 +9,7 @@ import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
 import { fetchGroup, FetchGroupResponse, GroupResponse } from "./repository/group-fetch";
@@ -53,7 +54,7 @@ export class Group extends React.Component<GroupProps, GroupStates> {
                 {this.state.groups.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name', 'Description', 'Action']}
+                        headers={['Name', 'Description', 'Decorators', 'Action']}
                         style={{ marginTop: '1rem' }}>
                         {this._renderGroup()}
                     </NeonTable>}
@@ -72,8 +73,15 @@ export class Group extends React.Component<GroupProps, GroupStates> {
 
         return this.state.groups.map((group: GroupResponse) =>
             (<tr key={group.name}>
-                <td>{group.name}</td>
+                <td>
+                    <ClickableSpan
+                        onClick={() => this.props.history.push('/group/e/' + encodeURIComponent(group.name))}
+                    >
+                        {group.name}
+                    </ClickableSpan>
+                </td>
                 <td>{group.description}</td>
+                <td>{group.decorators}</td>
                 <td><NeonButton
                     onClick={() => this.props.history.push('/group/e/' + encodeURIComponent(group.name))}
                     size={SIZE.RELATIVE}>
