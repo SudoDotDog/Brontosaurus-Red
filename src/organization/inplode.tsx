@@ -4,13 +4,17 @@
  * @description Inplode
  */
 
-import { MARGIN, SIGNAL } from "@sudoo/neon/declare";
-import { NeonStickerCut } from "@sudoo/neon/flag";
+import { NeonButton } from "@sudoo/neon/button";
+import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
-import { NeonSub } from "@sudoo/neon/typography";
+import { NeonPillGroup } from "@sudoo/neon/pill";
+import { NeonIndicator } from "@sudoo/neon/spinner";
+import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { registerInfo } from "../account/repository/register-infos";
+import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { inplodeOrganization } from "./repository/inplode";
 
 type InplodeOrganizationProp = {
@@ -24,6 +28,8 @@ type InplodeOrganizationStates = {
         name: string;
         type: string;
     }>;
+    readonly tags: string[];
+    readonly selected: string[];
     readonly current: any;
 };
 
@@ -34,6 +40,8 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
         loading: false,
         cover: undefined,
         current: {},
+        tags: [],
+        selected: [],
         infos: [],
     };
 
@@ -43,12 +51,14 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
             name: string;
             type: string;
         }> = await registerInfo();
+        const tags: AllTagsResponse[] = await fetchAllTags();
 
         this.setState({
             infos: infos.map((info) => ({
                 name: info.name,
                 type: info.type,
             })),
+            tags: tags.map((res: AllTagsResponse) => res.name),
         });
     }
 
@@ -61,15 +71,36 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
                     onClick={() => this.props.history.goBack()}>
                     Go Back
                 </NeonSub>
-                <NeonSmartForm
+                <NeonIndicator
                     loading={this.state.loading}
-                    cover={this.state.cover}
-                    title="Inplode Organization"
-                    form={this._getForm()}
-                    value={this.state.current}
-                    onChange={(value: any) => this.setState({ current: value })}
-                    onSubmit={() => this._submit(this.state.current)}
-                />
+                    covering={Boolean(this.state.cover)}
+                    cover={this._renderSticker()}
+                >
+                    <NeonTitle>Inplode Organization</NeonTitle>
+                    <NeonSub margin={MARGIN.SMALL}>Organization and User</NeonSub>
+                    <NeonSmartForm
+                        form={this._getForm()}
+                        value={this.state.current}
+                        onChange={(value: any) => this.setState({ current: value })}
+                    />
+                    <NeonSub margin={MARGIN.SMALL}>Tags</NeonSub>
+                    <NeonPillGroup
+                        margin={MARGIN.SMALL}
+                        style={{ flexWrap: 'wrap' }}
+                        selected={this.state.selected}
+                        onChange={(next: string[]) => this.setState({ selected: next })}
+                        addable
+                        removable
+                        options={this.state.tags}
+                    />
+                    <NeonButton
+                        onClick={() => this._submit(this.state.current)}
+                        width={WIDTH.FULL}
+                        size={SIZE.MEDIUM}
+                        margin={MARGIN.SMALL}>
+                        Submit
+                    </NeonButton>
+                </NeonIndicator>
             </React.Fragment>
         );
     }
@@ -130,6 +161,7 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
                 response.email,
                 response.phone,
                 parsed,
+                this.state.selected,
             );
 
             this.setState({
@@ -166,5 +198,13 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
         this.setState({
             loading: false,
         });
+    }
+
+    private _renderSticker() {
+
+        if (!this.state.cover) {
+            return null;
+        }
+        return <NeonSticker {...this.state.cover} />;
     }
 }

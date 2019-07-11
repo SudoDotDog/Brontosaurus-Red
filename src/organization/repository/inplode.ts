@@ -15,6 +15,7 @@ export const inplodeOrganization = async (
     email: string,
     phone: string,
     infos: Record<string, Basics>,
+    tags: string[],
 ): Promise<string> => {
 
     const response: {
@@ -30,6 +31,7 @@ export const inplodeOrganization = async (
         .add('email', email)
         .add('phone', phone)
         .add('infos', infos)
+        .add('tags', tags)
         .fetch();
 
     return response.tempPassword;
