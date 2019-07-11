@@ -88,6 +88,12 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                 </NeonButton>
                 <NeonButton
                     size={SIZE.MEDIUM}
+                    onClick={() => props.history.push('/tag/list')}
+                >
+                    Tag
+                </NeonButton>
+                <NeonButton
+                    size={SIZE.MEDIUM}
                     onClick={() => props.history.push('/application/list')}
                 >
                     Application

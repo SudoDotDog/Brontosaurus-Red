@@ -19,6 +19,7 @@ import { OrganizationRoute } from "./organization/route";
 import { Nav } from "./page/nav";
 import { PreferenceRoute } from "./preference/route";
 import { getCommandCenterName } from "./repository/command-center";
+import { TagRoute } from "./tag/route";
 
 export type EntryStates = {
 
@@ -56,6 +57,7 @@ export class Entry extends React.Component<{}, EntryStates> {
                         <OrganizationRoute />
                         <GroupRoute />
                         <DecoratorRoute />
+                        <TagRoute />
                         <ApplicationRoute />
                         <PreferenceRoute />
                     </NeonPaper>

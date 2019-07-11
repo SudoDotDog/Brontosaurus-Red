@@ -25,25 +25,24 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@brontosaurus/definition@^1.4.3":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.4.3.tgz#95898b2a2c9e02ec88de445d083873236e1e3901"
-  integrity sha512-FdnuyLKTVNmvFsoruVyTENnBAoJZaevDCpMW3K8+qakVqpwgbdT+xnxv/lZPd8/K/go+A7/bTGNtefkcKnuh+A==
+"@brontosaurus/definition@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.5.0.tgz#3b0357b3804f014f5a56eb8a247f9d632f61fa54"
+  integrity sha512-6QNrQbBcRcI/ODyNc8CCvNZ0lJewDIywQX+638EOmp/BKuNwzoOmV979JOg3AClZJ95cAZQn7OTxuQXZ8J7oCw==
 
-"@brontosaurus/react@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-1.2.0.tgz#f101d71565fea8beb08a3bcbc80c5eee326f50a9"
-  integrity sha512-VmgTTKzTZwHbBYzeOGo9bYOrGc90+NDx2a2sN8kfiXpKeJS+SfhMr5653uafbiOjzYCSQ75BvT2iNAfM1SIaww==
+"@brontosaurus/react@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-1.3.0.tgz#29bcc715de7b1f40e676eb94cd0fabcfde5bea27"
+  integrity sha512-J09vCeJ600TNw6zids1tx1a6rl9MDPgHhMVBmXQXPatWpNd4jJUDmtp6clA/e68pOp+y2CHaO/McAeIsnnm87g==
   dependencies:
-    "@brontosaurus/web" "^1.3.0"
-    "@sudoo/react-force" "^1.5.0"
+    "@brontosaurus/web" "^1.5.0"
 
-"@brontosaurus/web@^1.3.0", "@brontosaurus/web@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.4.1.tgz#b4a39f6d4997e748b0bb40edc8ebf7a5f240f0f3"
-  integrity sha512-cGclwcb+HgG6FAKs91Kw72m0+ai8/kpyFaaWKPYAZhOGPmvMowAPspN1A5NZgRRZ+bQNq250gP1cCdbYuRcsKw==
+"@brontosaurus/web@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.5.0.tgz#fb054a5762d2c3151c55e29639a07a57a9b8556b"
+  integrity sha512-uDDhve+7oISkQpuEcZKicBj3JNp1JdrN4tG9EGSgEr22n5QMZ7DEgpjKnIIj70glR8g/XU0hPY4/PBtOivek/g==
   dependencies:
-    "@brontosaurus/definition" "^1.4.3"
+    "@brontosaurus/definition" "^1.5.0"
 
 "@sudoo/bark@^2.1.0", "@sudoo/bark@^2.7.1":
   version "2.7.1"
