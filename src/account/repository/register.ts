@@ -6,34 +6,38 @@
 
 import { Basics } from "@brontosaurus/definition";
 import { Brontosaurus } from "@brontosaurus/web";
+import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
-export const register = async (username: string, password: string, email: string, phone: string, infos: Record<string, Basics>): Promise<string> => {
+export type RegisterRepositoryResponse = {
 
-    const payload: string = JSON.stringify({
-        username,
-        password,
-        email,
-        phone,
-        infos,
-    });
+    readonly account: string;
+};
 
-    const response: Response = await fetch(joinRoute('/account/register'), {
-        method: "POST",
-        headers: {
-            'Authorization': 'Bearer ' + Brontosaurus.hard().raw,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        mode: "cors",
-        body: payload,
-    });
+export const registerRepository = async (
+    username: string,
+    password: string,
+    email: string,
+    phone: string,
+    infos: Record<string, Basics>,
+    tags: string[],
+    groups: string[],
+): Promise<string> => {
 
-    const data = await response.json();
+    const response: RegisterRepositoryResponse = await Fetch
+        .post
+        .json(joinRoute('/account/register'))
+        .bearer(Brontosaurus.hard().raw)
+        .migrate({
+            username,
+            password,
+            email,
+            phone,
+            infos,
+            tags,
+            groups,
+        })
+        .fetch();
 
-    if (response.ok) {
-        return data.account;
-    }
-
-    throw new Error(data);
+    return response.account;
 };

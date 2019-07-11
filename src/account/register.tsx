@@ -4,31 +4,52 @@
  * @description Register
  */
 
-import { MARGIN } from "@sudoo/neon/declare";
+import { NeonButton } from "@sudoo/neon/button";
+import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
-import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonSub } from "@sudoo/neon/typography";
+import { NeonPillGroup } from "@sudoo/neon/pill";
+import { NeonIndicator } from "@sudoo/neon/spinner";
+import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { register } from "./repository/register";
+import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
+import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
+import { registerRepository } from "./repository/register";
 import { registerInfo } from "./repository/register-infos";
 
-type RegisterState = {
+export type RegisterState = {
+
+    readonly loading: boolean;
+    readonly cover: NeonStickerCut | undefined;
 
     readonly infos: Array<{
         name: string;
         type: string;
     }>;
     readonly current: any;
+
+    readonly tags: string[];
+    readonly selectedTags: string[];
+    readonly groups: string[];
+    readonly selectedGroups: string[];
 };
 
-type RegisterProp = {
+export type RegisterProp = {
 } & RouteComponentProps;
 
 
 export class Register extends React.Component<RegisterProp, RegisterState> {
 
     public readonly state: RegisterState = {
+
+        loading: false,
+        cover: undefined,
+
+        tags: [],
+        selectedTags: [],
+        groups: [],
+        selectedGroups: [],
 
         current: {},
         infos: [],
@@ -40,6 +61,8 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             name: string;
             type: string;
         }> = await registerInfo();
+        this._fetchTags();
+        this._fetchGroups();
 
         this.setState({
             infos: infos.map((info) => ({
@@ -51,18 +74,53 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
 
     public render() {
 
-        return (<NeonThemeProvider value={{
-            margin: MARGIN.SMALL,
-        }}>
-            <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
-            <NeonSmartForm
-                title="Register"
-                form={this._getForm()}
-                value={this.state.current}
-                onChange={(value: any) => this.setState({ current: value })}
-                onSubmit={() => this._submit(this.state.current)}
-            />
-        </NeonThemeProvider>);
+        return (<React.Fragment>
+            <NeonSub
+                margin={MARGIN.SMALL}
+                onClick={() => this.props.history.goBack()}>
+                Go Back
+                </NeonSub>
+            <NeonIndicator
+                loading={this.state.loading}
+                covering={Boolean(this.state.cover)}
+                cover={this._renderSticker()}
+            >
+                <NeonTitle>Register Account</NeonTitle>
+                <NeonSub margin={MARGIN.SMALL}>Information</NeonSub>
+                <NeonSmartForm
+                    form={this._getForm()}
+                    value={this.state.current}
+                    onChange={(value: any) => this.setState({ current: value })}
+                />
+                <NeonSub margin={MARGIN.SMALL}>Tags</NeonSub>
+                <NeonPillGroup
+                    margin={MARGIN.SMALL}
+                    style={{ flexWrap: 'wrap' }}
+                    selected={this.state.selectedTags}
+                    onChange={(next: string[]) => this.setState({ selectedTags: next })}
+                    addable
+                    removable
+                    options={this.state.tags}
+                />
+                <NeonSub margin={MARGIN.SMALL}>Groups</NeonSub>
+                <NeonPillGroup
+                    margin={MARGIN.SMALL}
+                    style={{ flexWrap: 'wrap' }}
+                    selected={this.state.selectedGroups}
+                    onChange={(next: string[]) => this.setState({ selectedGroups: next })}
+                    addable
+                    removable
+                    options={this.state.groups}
+                />
+                <NeonButton
+                    onClick={() => this._submit(this.state.current)}
+                    width={WIDTH.FULL}
+                    size={SIZE.MEDIUM}
+                    margin={MARGIN.SMALL}>
+                    Submit
+                    </NeonButton>
+            </NeonIndicator>
+        </React.Fragment>);
     }
 
     private _getForm(): Record<string, INPUT_TYPE | FromElement> {
@@ -97,7 +155,35 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
         };
     }
 
+    private _renderSticker() {
+
+        if (!this.state.cover) {
+            return null;
+        }
+        return <NeonSticker {...this.state.cover} />;
+    }
+
+    private async _fetchTags() {
+
+        const tags: AllTagsResponse[] = await fetchAllTags();
+        this.setState({
+            tags: tags.map((res: AllTagsResponse) => res.name),
+        });
+    }
+
+    private async _fetchGroups() {
+
+        const groups: AllGroupsResponse[] = await fetchAllGroups();
+        this.setState({
+            groups: groups.map((res: AllTagsResponse) => res.name),
+        });
+    }
+
     private async _submit(response: Record<string, any>) {
+
+        this.setState({
+            loading: true,
+        });
 
         const parsed: Record<string, string> = this.state.infos.reduce((previous: Record<string, string>, current: {
             name: string;
@@ -110,13 +196,49 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             };
         }, {} as Record<string, string>);
 
-        const id: string = await register(
-            response.username || '',
-            response.password || '',
-            response.email,
-            response.phone,
-            parsed,
-        );
-        console.log(id);
+        try {
+            const id: string = await registerRepository(
+                response.username || '',
+                response.password || '',
+                response.email,
+                response.phone,
+                parsed,
+                this.state.selectedTags,
+                this.state.selectedGroups,
+            );
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.SUCCEED,
+                    title: "Succeed",
+                    info: id,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Complete",
+                        onClick: this.props.history.goBack,
+                    },
+                },
+            });
+        } catch (err) {
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.ERROR,
+                    title: "Failed",
+                    info: err.message,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Retry",
+                        onClick: () => this.setState({ cover: undefined }),
+                    },
+                },
+            });
+        }
+
+        this.setState({
+            loading: false,
+        });
     }
 }

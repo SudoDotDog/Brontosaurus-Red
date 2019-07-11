@@ -51,58 +51,55 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
             name: string;
             type: string;
         }> = await registerInfo();
-        const tags: AllTagsResponse[] = await fetchAllTags();
+        this._fetchTags();
 
         this.setState({
             infos: infos.map((info) => ({
                 name: info.name,
                 type: info.type,
             })),
-            tags: tags.map((res: AllTagsResponse) => res.name),
         });
     }
 
     public render() {
 
-        return (
-            <React.Fragment>
-                <NeonSub
-                    margin={MARGIN.SMALL}
-                    onClick={() => this.props.history.goBack()}>
-                    Go Back
+        return (<React.Fragment>
+            <NeonSub
+                margin={MARGIN.SMALL}
+                onClick={() => this.props.history.goBack()}>
+                Go Back
                 </NeonSub>
-                <NeonIndicator
-                    loading={this.state.loading}
-                    covering={Boolean(this.state.cover)}
-                    cover={this._renderSticker()}
-                >
-                    <NeonTitle>Inplode Organization</NeonTitle>
-                    <NeonSub margin={MARGIN.SMALL}>Organization and User</NeonSub>
-                    <NeonSmartForm
-                        form={this._getForm()}
-                        value={this.state.current}
-                        onChange={(value: any) => this.setState({ current: value })}
-                    />
-                    <NeonSub margin={MARGIN.SMALL}>Tags</NeonSub>
-                    <NeonPillGroup
-                        margin={MARGIN.SMALL}
-                        style={{ flexWrap: 'wrap' }}
-                        selected={this.state.selected}
-                        onChange={(next: string[]) => this.setState({ selected: next })}
-                        addable
-                        removable
-                        options={this.state.tags}
-                    />
-                    <NeonButton
-                        onClick={() => this._submit(this.state.current)}
-                        width={WIDTH.FULL}
-                        size={SIZE.MEDIUM}
-                        margin={MARGIN.SMALL}>
-                        Submit
+            <NeonIndicator
+                loading={this.state.loading}
+                covering={Boolean(this.state.cover)}
+                cover={this._renderSticker()}
+            >
+                <NeonTitle>Inplode Organization</NeonTitle>
+                <NeonSub margin={MARGIN.SMALL}>Organization and User</NeonSub>
+                <NeonSmartForm
+                    form={this._getForm()}
+                    value={this.state.current}
+                    onChange={(value: any) => this.setState({ current: value })}
+                />
+                <NeonSub margin={MARGIN.SMALL}>Tags</NeonSub>
+                <NeonPillGroup
+                    margin={MARGIN.SMALL}
+                    style={{ flexWrap: 'wrap' }}
+                    selected={this.state.selected}
+                    onChange={(next: string[]) => this.setState({ selected: next })}
+                    addable
+                    removable
+                    options={this.state.tags}
+                />
+                <NeonButton
+                    onClick={() => this._submit(this.state.current)}
+                    width={WIDTH.FULL}
+                    size={SIZE.MEDIUM}
+                    margin={MARGIN.SMALL}>
+                    Submit
                     </NeonButton>
-                </NeonIndicator>
-            </React.Fragment>
-        );
+            </NeonIndicator>
+        </React.Fragment>);
     }
 
     private _getForm(): Record<string, INPUT_TYPE | FromElement> {
@@ -135,6 +132,14 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
                 };
             }, {}),
         };
+    }
+
+    private async _fetchTags() {
+
+        const tags: AllTagsResponse[] = await fetchAllTags();
+        this.setState({
+            tags: tags.map((res: AllTagsResponse) => res.name),
+        });
     }
 
     private async _submit(response: Record<string, any>) {
