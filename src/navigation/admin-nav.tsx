@@ -13,6 +13,12 @@ export const AdminNav: React.FC<RouteComponentProps> = (props: RouteComponentPro
     return (<React.Fragment>
 
         <SubButton
+            selected={props.location.pathname === '/admin'}
+            onClick={() => props.history.push('/admin')}
+        >
+            Admin Panel
+        </SubButton>
+        <SubButton
             selected={props.location.pathname.indexOf('/admin/user') === 0}
             onClick={() => props.history.push('/admin/user')}
         >

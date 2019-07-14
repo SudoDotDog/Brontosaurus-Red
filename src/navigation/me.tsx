@@ -13,6 +13,12 @@ export const MeMenu: React.FC<RouteComponentProps> = (props: RouteComponentProps
     return (<React.Fragment>
 
         <SubButton
+            selected={props.location.pathname === '/me'}
+            onClick={() => props.history.push('/me')}
+        >
+            My Account
+        </SubButton>
+        <SubButton
             selected={props.location.pathname.indexOf('/me/change-password') === 0}
             onClick={() => props.history.push('/me/change-password')}
         >
