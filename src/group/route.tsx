@@ -13,11 +13,11 @@ import { Group } from "./group";
 export const GroupRoute: React.FC = () => {
 
     return (
-        <Route path="/group">
+        <Route path="/admin/group">
             <React.Fragment>
-                <Route path="/group/list" component={Group} />
-                <Route path="/group/create" component={CreateGroup} />
-                <Route path="/group/e/:group" component={GroupEdit} />
+                <Route path="/admin/group/list" component={Group} />
+                <Route path="/admin/group/create" component={CreateGroup} />
+                <Route path="/admin/group/e/:group" component={GroupEdit} />
             </React.Fragment>
         </Route>
     );

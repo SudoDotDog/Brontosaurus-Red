@@ -4,7 +4,42 @@
  * @description Nav
  */
 
- @import '../common/color.sass';
+@import '../common/color.sass';
+
+.nav-wrapper {
+
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+        'main out'
+        'sub out';
+    grid-template-columns:
+        auto auto;
+    grid-template-rows:
+        1fr auto;
+}
+
+.main-area {
+
+    grid-area: main;
+    display: flex;
+}
+
+.sub-area {
+
+    grid-area: sub;
+    display: flex;
+}
+
+.out-area {
+
+    grid-area: out;
+    display: flex;
+    align-items: flex-end;
+    align-content: flex-end;
+    justify-content: flex-end;
+    justify-items: flex-end;
+}
 
 .organization-button {
     width: auto !important;

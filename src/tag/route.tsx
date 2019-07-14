@@ -13,11 +13,11 @@ import { Tags } from "./tag";
 export const TagRoute: React.FC = () => {
 
     return (
-        <Route path="/tag">
+        <Route path="/admin/tag">
             <React.Fragment>
-                <Route path="/tag/list" component={Tags} />
-                <Route path="/tag/create" component={CreateTag} />
-                <Route path="/tag/e/:tag" component={TagEdit} />
+                <Route path="/admin/tag/list" component={Tags} />
+                <Route path="/admin/tag/create" component={CreateTag} />
+                <Route path="/admin/tag/e/:tag" component={TagEdit} />
             </React.Fragment>
         </Route>
     );

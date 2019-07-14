@@ -15,13 +15,13 @@ import { User } from "./user";
 export const UserRoute: React.FC = () => {
 
     return (
-        <Route path="/user">
+        <Route path="/admin/user">
             <React.Fragment>
-                <Route path="/user/list" component={User} />
-                <Route path="/user/new" component={Register} />
-                <Route path="/user/e/:username" component={AccountEdit} />
-                <Route path="/user/more/:username" component={AccountMore} />
-                <Route path="/user/o/:username" component={AccountOrganizationAssign} />
+                <Route path="/admin/user/list" component={User} />
+                <Route path="/admin/user/new" component={Register} />
+                <Route path="/admin/user/e/:username" component={AccountEdit} />
+                <Route path="/admin/user/more/:username" component={AccountMore} />
+                <Route path="/admin/user/o/:username" component={AccountOrganizationAssign} />
             </React.Fragment>
         </Route>
     );
