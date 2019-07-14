@@ -14,9 +14,9 @@
         'main out'
         'sub out';
     grid-template-columns:
-        auto auto;
+        auto 1fr;
     grid-template-rows:
-        1fr auto;
+        auto auto;
 }
 
 .main-area {
@@ -27,6 +27,7 @@
 
 .sub-area {
 
+    border-top: 0.2rem solid $navy;
     grid-area: sub;
     display: flex;
 }
@@ -59,7 +60,7 @@
 
     font-size: 1rem;
     height: 2rem;
-    border-top: 0.2rem solid $navy;
+    border-top: 0.2rem solid $trans;
     border-bottom: 0.2rem solid $trans;
 
     &:hover {
