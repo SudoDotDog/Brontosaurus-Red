@@ -95,7 +95,7 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
             <MenuItem
                 description={`Assign ${username} to an (another) organization`}
                 link="Assign"
-                onClick={() => props.history.push('/user/o/' + encodeURIComponent(username))}
+                onClick={() => props.history.push('/admin/user/o/' + encodeURIComponent(username))}
             />
             <MenuItem
                 description={`Deactivate ${username}`}
@@ -120,7 +120,7 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
             <MenuItem
                 description={`Withdraw ${username}'s organization`}
                 link="Withdraw"
-                onClick={() => withdrawOrganizationUser(username, () => props.history.push('/user/e/' + username))}
+                onClick={() => withdrawOrganizationUser(username, () => props.history.push('/admin/user/e/' + username))}
             />
         </div>
     </div>);

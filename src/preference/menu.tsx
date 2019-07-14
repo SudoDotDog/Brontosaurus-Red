@@ -18,12 +18,12 @@ export const PreferenceMenu: React.FC<PreferenceMenuProps> = (props: PreferenceM
         <MenuItem
             description="View and manage global preference setting"
             link="Global"
-            onClick={() => props.history.push('/preference/global')}
+            onClick={() => props.history.push('/admin/preference/global')}
         />
         <MenuItem
             description="View and manage names preference setting"
             link="Names"
-            onClick={() => props.history.push('/preference/names')}
+            onClick={() => props.history.push('/admin/preference/names')}
         />
     </div>);
 };

@@ -48,7 +48,7 @@ export class Tags extends React.Component<TagsProp, TagsState> {
                 <SearchNew
                     label="Tags"
                     onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchTags)}
-                    onNew={() => this.props.history.push('/tag/create')}
+                    onNew={() => this.props.history.push('/admin/tag/create')}
                 />
 
                 {this.state.tags.length === 0
@@ -75,14 +75,14 @@ export class Tags extends React.Component<TagsProp, TagsState> {
             (<tr key={tag.name}>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/tag/e/' + encodeURIComponent(tag.name))}
+                        onClick={() => this.props.history.push('/admin/tag/e/' + encodeURIComponent(tag.name))}
                     >
                         {tag.name}
                     </ClickableSpan>
                 </td>
                 <td>{tag.description}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/tag/e/' + encodeURIComponent(tag.name))}
+                    onClick={() => this.props.history.push('/admin/tag/e/' + encodeURIComponent(tag.name))}
                     size={SIZE.RELATIVE}>
                     Edit
                 </NeonButton></td>

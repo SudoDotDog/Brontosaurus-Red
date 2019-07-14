@@ -41,6 +41,35 @@
     justify-items: flex-end;
 }
 
+.sub-button {
+
+    cursor: pointer;
+    transition: all 0.2s;
+    color: $navy;
+    background-color: $trans;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+
+    font-size: 1rem;
+    font-weight: bold;
+    height: 2rem;
+    outline: 0;
+    border: 0;
+    border-top: 0.2rem solid $navy;
+    border-bottom: 0.2rem solid $trans;
+
+    &:hover {
+
+        border-bottom: 0.2rem solid $lime;
+    }
+
+    &.selected {
+
+        background-color: $navy;
+        color: $white;
+    }
+}
+
 .organization-button {
     width: auto !important;
     padding-left: 1rem !important;

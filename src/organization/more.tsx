@@ -26,7 +26,7 @@ export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: Organiz
             <MenuItem
                 description={`Add exist account to "${organization}" organization.`}
                 link="Add"
-                onClick={() => props.history.push('/organization/a/' + encodeURIComponent(organization))}
+                onClick={() => props.history.push('/admin/organization/a/' + encodeURIComponent(organization))}
             />
             <MenuItem
                 disabled

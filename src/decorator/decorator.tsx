@@ -48,7 +48,7 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
                 <SearchNew
                     label="Decorator"
                     onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchDecorator)}
-                    onNew={() => this.props.history.push('/decorator/create')}
+                    onNew={() => this.props.history.push('/admin/decorator/create')}
                 />
 
                 {this.state.decorators.length === 0
@@ -75,14 +75,14 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
             (<tr key={decorator.name}>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/decorator/e/' + encodeURIComponent(decorator.name))}
+                        onClick={() => this.props.history.push('/admin/decorator/e/' + encodeURIComponent(decorator.name))}
                     >
                         {decorator.name}
                     </ClickableSpan>
                 </td>
                 <td>{decorator.description}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/decorator/e/' + encodeURIComponent(decorator.name))}
+                    onClick={() => this.props.history.push('/admin/decorator/e/' + encodeURIComponent(decorator.name))}
                     size={SIZE.RELATIVE}>
                     Edit
                 </NeonButton></td>

@@ -49,7 +49,7 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
                 <SearchNew
                     label="Application"
                     onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchApplication)}
-                    onNew={() => this.props.history.push('/application/create')}
+                    onNew={() => this.props.history.push('/admin/application/create')}
                 />
 
                 {this.state.applications.length === 0
@@ -76,7 +76,7 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
             (<tr key={application.key}>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/application/e/' + encodeURIComponent(application.key))}
+                        onClick={() => this.props.history.push('/admin/application/e/' + encodeURIComponent(application.key))}
                     >
                         {application.name}
                     </ClickableSpan>
@@ -84,7 +84,7 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
                 <td>{application.key}</td>
                 <td>{application.expire}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/application/e/' + encodeURIComponent(application.key))}
+                    onClick={() => this.props.history.push('/admin/application/e/' + encodeURIComponent(application.key))}
                     size={SIZE.RELATIVE}>
                     Edit
                 </NeonButton></td>

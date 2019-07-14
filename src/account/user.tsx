@@ -49,7 +49,7 @@ export class User extends React.Component<UserProp, UserState> {
                 <SearchNew
                     label="Account"
                     onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchUser)}
-                    onNew={() => this.props.history.push('/user/new')}
+                    onNew={() => this.props.history.push('/admin/user/new')}
                 />
 
                 {this.state.users.length === 0
@@ -74,7 +74,7 @@ export class User extends React.Component<UserProp, UserState> {
         return this.state.users.map((user: UserResponse) =>
             (<tr key={user.username}>
                 <td>
-                    <ClickableSpan onClick={() => this.props.history.push('/user/e/' + encodeURIComponent(user.username))}>
+                    <ClickableSpan onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(user.username))}>
                         {user.username}
                     </ClickableSpan>
                 </td>
@@ -87,13 +87,13 @@ export class User extends React.Component<UserProp, UserState> {
                 <td className={MenuStyle.actionRaw}>
                     <NeonButton
                         className={MenuStyle.actionButton}
-                        onClick={() => this.props.history.push('/user/e/' + encodeURIComponent(user.username))}
+                        onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(user.username))}
                         size={SIZE.RELATIVE}>
                         Edit
                     </NeonButton>
                     <NeonButton
                         className={MenuStyle.actionButton}
-                        onClick={() => this.props.history.push('/user/more/' + encodeURIComponent(user.username))}
+                        onClick={() => this.props.history.push('/admin/user/more/' + encodeURIComponent(user.username))}
                         size={SIZE.RELATIVE}>
                         More
                     </NeonButton>

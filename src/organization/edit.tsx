@@ -130,7 +130,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                 {organization.members.map((member) => (<tr key={member.username}>
                     <td>
                         <ClickableSpan
-                            onClick={() => this.props.history.push('/user/e/' + encodeURIComponent(member.username))}
+                            onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(member.username))}
                         >
                             {member.username}
                         </ClickableSpan>

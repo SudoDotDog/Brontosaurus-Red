@@ -130,7 +130,7 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
                         peek: {
                             children: "<-",
                             expend: "Complete",
-                            onClick: () => this.props.history.push('/user/e/' + username),
+                            onClick: () => this.props.history.push('/admin/user/e/' + username),
                         },
                     },
                 });

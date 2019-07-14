@@ -49,8 +49,8 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                 <SearchDoubleNew
                     label="Organization"
                     onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchOrganization)}
-                    onNew={() => this.props.history.push('/organization/create')}
-                    onInplode={() => this.props.history.push('/organization/inplode')}
+                    onNew={() => this.props.history.push('/admin/organization/create')}
+                    onInplode={() => this.props.history.push('/admin/organization/inplode')}
                 />
 
                 {this.state.organizations.length === 0
@@ -76,14 +76,14 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
             (<tr key={organization.name}>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/organization/e/' + encodeURIComponent(organization.name))}
+                        onClick={() => this.props.history.push('/admin/organization/e/' + encodeURIComponent(organization.name))}
                     >
                         {organization.name}
                     </ClickableSpan>
                 </td>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/user/e/' + encodeURIComponent(organization.owner))}
+                        onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(organization.owner))}
                     >
                         {organization.owner}
                     </ClickableSpan>
@@ -93,13 +93,13 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                 <td className={MenuStyle.actionRaw}>
                     <NeonButton
                         className={MenuStyle.actionButton}
-                        onClick={() => this.props.history.push('/organization/e/' + encodeURIComponent(organization.name))}
+                        onClick={() => this.props.history.push('/admin/organization/e/' + encodeURIComponent(organization.name))}
                         size={SIZE.RELATIVE}>
                         Edit
                     </NeonButton>
                     <NeonButton
                         className={MenuStyle.actionButton}
-                        onClick={() => this.props.history.push('/organization/more/' + encodeURIComponent(organization.name))}
+                        onClick={() => this.props.history.push('/admin/organization/more/' + encodeURIComponent(organization.name))}
                         size={SIZE.RELATIVE}>
                         More
                     </NeonButton>

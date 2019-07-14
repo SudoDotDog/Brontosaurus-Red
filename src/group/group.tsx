@@ -48,7 +48,7 @@ export class Group extends React.Component<GroupProps, GroupStates> {
                 <SearchNew
                     label="Group"
                     onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchGroup)}
-                    onNew={() => this.props.history.push('/group/create')}
+                    onNew={() => this.props.history.push('/admin/group/create')}
                 />
 
                 {this.state.groups.length === 0
@@ -75,7 +75,7 @@ export class Group extends React.Component<GroupProps, GroupStates> {
             (<tr key={group.name}>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/group/e/' + encodeURIComponent(group.name))}
+                        onClick={() => this.props.history.push('/admin/group/e/' + encodeURIComponent(group.name))}
                     >
                         {group.name}
                     </ClickableSpan>
@@ -83,7 +83,7 @@ export class Group extends React.Component<GroupProps, GroupStates> {
                 <td>{group.description}</td>
                 <td>{group.decorators}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/group/e/' + encodeURIComponent(group.name))}
+                    onClick={() => this.props.history.push('/admin/group/e/' + encodeURIComponent(group.name))}
                     size={SIZE.RELATIVE}>
                     Edit
                 </NeonButton></td>
