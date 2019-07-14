@@ -42,7 +42,12 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
     return (
         <div className={NavStyle.navWrapper}>
             <div className={NavStyle.mainArea}>
-
+                <NavButton
+                    selected={props.location.pathname === '/'}
+                    onClick={() => props.history.push('/')}
+                >
+                    ~
+                </NavButton>
                 <NavButton
                     selected={props.location.pathname.indexOf('/me') === 0}
                     onClick={() => props.history.push('/me')}

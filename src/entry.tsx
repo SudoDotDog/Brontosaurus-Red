@@ -56,8 +56,9 @@ export class Entry extends React.Component<{}, EntryStates> {
                 </div>
                 <div className={EntryStyle.content}>
                     <NeonPaper>
-                        <Route path="/" exact render={() =>
+                        <Route path="/" exact render={(props: any) =>
                             <IndexMenu
+                                {...props}
                                 accountName={this.state.accountName}
                                 commandCenterName={this.state.commandCenterName}
                             />}

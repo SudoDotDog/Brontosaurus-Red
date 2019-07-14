@@ -9,6 +9,7 @@ import * as React from "react";
 import { Route } from "react-router-dom";
 import { AdminNav } from "./admin-nav";
 import { CurrentMenu } from "./current";
+import { IndexNav } from "./index-nav";
 import { MeMenu } from "./me";
 
 export const SubMenuRoute: React.FC = () => {
@@ -20,6 +21,7 @@ export const SubMenuRoute: React.FC = () => {
                 group={['BRONTOSAURUS_SUPER_ADMIN']}>
                 <Route path="/admin" component={AdminNav} />
             </EnableForGroup>
+            <Route path={['/']} exact component={IndexNav} />
             <Route path="/current" component={CurrentMenu} />
             <Route path="/me" component={MeMenu} />
         </React.Fragment>
