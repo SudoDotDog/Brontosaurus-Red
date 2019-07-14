@@ -6,12 +6,11 @@
 
 import { BrontosaurusProps, EnableForGroup, WithAuthComponent, withBrontosaurus } from "@brontosaurus/react";
 import { Brontosaurus, Token } from "@brontosaurus/web";
-import { NeonButton } from "@sudoo/neon/button";
-import { SIZE } from "@sudoo/neon/declare";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as NavStyle from "../../style/page/nav.scss";
 import * as EntryStyle from "../../style/route/entry.scss";
+import { NavButton } from "./nav-button";
 import { SubMenuRoute } from "./sub-menu";
 
 type NavProp = {
@@ -42,33 +41,31 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
         <div className={NavStyle.navWrapper}>
             <div className={NavStyle.mainArea}>
 
-                <NeonButton
-                    size={SIZE.MEDIUM}
+                <NavButton
+                    selected={props.location.pathname.indexOf('/me') === 0}
                     onClick={() => props.history.push('/me/menu')}
                 >
                     {username}
-                </NeonButton>
+                </NavButton>
                 {
                     organization &&
-                    <NeonButton
-                        buttonClassName={NavStyle.organizationButton}
-                        size={SIZE.MEDIUM}
+                    <NavButton
+                        selected={props.location.pathname.indexOf('/current') === 0}
                         onClick={() => props.history.push('/current/menu')}
                     >
                         {organization}
-                    </NeonButton>
+                    </NavButton>
                 }
                 <EnableForGroup
 
                     visit
                     group={['BRONTOSAURUS_SUPER_ADMIN']}>
-                    <NeonButton
-                        buttonClassName={NavStyle.organizationButton}
-                        size={SIZE.MEDIUM}
+                    <NavButton
+                        selected={props.location.pathname.indexOf('/admin') === 0}
                         onClick={() => props.history.push('/admin')}
                     >
                         Admin
-                    </NeonButton>
+                    </NavButton>
                 </EnableForGroup>
             </div>
             <div className={NavStyle.subArea}>

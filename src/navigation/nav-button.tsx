@@ -1,14 +1,14 @@
 /**
  * @author WMXPY
  * @namespace Page
- * @description Sub Button
+ * @description Nav Button
  */
 
 import * as React from "react";
 import * as NavStyle from "../../style/page/nav.scss";
 import { combineClasses } from "../util/style";
 
-export type SubButtonProps = {
+export type NavButtonProps = {
 
     readonly onClick: () => void;
     readonly selected: boolean;
@@ -16,12 +16,12 @@ export type SubButtonProps = {
     readonly children?: any;
 };
 
-export const SubButton: React.FC<SubButtonProps> = (props: SubButtonProps) => {
+export const NavButton: React.FC<NavButtonProps> = (props: NavButtonProps) => {
 
     return (<button
         className={combineClasses(
             NavStyle.commonButton,
-            NavStyle.subButton,
+            NavStyle.navButton,
             props.selected ? NavStyle.selected : null,
         )}
         onClick={props.onClick}

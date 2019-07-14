@@ -41,32 +41,65 @@
     justify-items: flex-end;
 }
 
-.sub-button {
+.common-button {
 
     cursor: pointer;
     transition: all 0.2s;
-    color: $navy;
+    font-weight: bold;
+
+    outline: 0;
+    border: 0;
+}
+
+.sub-button {
+
     background-color: $trans;
     padding-left: 0.6rem;
     padding-right: 0.6rem;
 
     font-size: 1rem;
-    font-weight: bold;
     height: 2rem;
-    outline: 0;
-    border: 0;
     border-top: 0.2rem solid $navy;
     border-bottom: 0.2rem solid $trans;
 
     &:hover {
-
         border-bottom: 0.2rem solid $lime;
     }
 
     &.selected {
-
         background-color: $navy;
         color: $white;
+    }
+
+    &:active {
+        border-bottom: 0.2rem solid $navy;
+    }
+}
+
+.nav-button {
+
+    font-size: 1.1rem;
+    height: 3rem;
+    background-color: $white;
+    color: $navy;
+
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+
+    border-top: 0.3rem solid $trans;
+    border-bottom: 0.3rem solid $trans;
+
+    &:hover {
+        border-bottom: 0.3rem solid $lime;
+    }
+
+    &.selected {
+        color: $white;
+        background-color: $navy;
+    }
+
+    &:active {
+        border-bottom: 0.3rem solid $navy;
     }
 }
 
