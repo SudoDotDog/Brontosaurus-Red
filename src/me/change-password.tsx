@@ -4,12 +4,12 @@
  * @description Me
  */
 
-import { MARGIN, SIGNAL } from "@sudoo/neon/declare";
+import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
-import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { GoBack } from "../components/go-back";
 import { editPassword } from "./repository/change-password";
 
 type MeChangePasswordProp = {
@@ -25,11 +25,7 @@ export const MeChangePassword: React.FC<MeChangePasswordProp> = (props: MeChange
 
     return (
         <div>
-            <NeonSub
-                margin={MARGIN.SMALL}
-                onClick={() => props.history.goBack()}>
-                Go Back
-            </NeonSub>
+            <GoBack />
             <NeonSmartForm
                 loading={loading}
                 form={{

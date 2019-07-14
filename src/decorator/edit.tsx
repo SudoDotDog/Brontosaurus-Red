@@ -11,10 +11,11 @@ import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
+import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { singleDecorator, SingleDecoratorResponse } from "./repository/single";
 import { updateDecoratorRepository } from "./repository/update";
@@ -63,7 +64,7 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
 
         return (
             <div>
-                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
+                <GoBack />
                 {this._renderEditableInfos()}
             </div>
         );

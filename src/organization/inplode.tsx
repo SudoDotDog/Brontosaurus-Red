@@ -15,6 +15,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { registerInfo } from "../account/repository/register-infos";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
+import { GoBack } from "../components/go-back";
 import { inplodeOrganization } from "./repository/inplode";
 
 type InplodeOrganizationProp = {
@@ -64,11 +65,7 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
     public render() {
 
         return (<React.Fragment>
-            <NeonSub
-                margin={MARGIN.SMALL}
-                onClick={() => this.props.history.goBack()}>
-                Go Back
-                </NeonSub>
+            <GoBack />
             <NeonIndicator
                 loading={this.state.loading}
                 covering={Boolean(this.state.cover)}

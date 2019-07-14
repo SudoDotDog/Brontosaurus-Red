@@ -10,9 +10,10 @@ import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonApplicable } from "@sudoo/neon/input";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
-import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
 import { fetchOrganization, FetchOrganizationResponse, OrganizationResponse } from "../organization/repository/organization-fetch";
 import { setOrganizationRepository } from "./repository/set-organization";
@@ -58,7 +59,7 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
                 covering={Boolean(this.state.cover)}
                 cover={this._renderSticker()}
             >
-                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
+                <GoBack />
                 <NeonTitle margin={MARGIN.SMALL}>Set {this._getUsername()}'s Organization</NeonTitle>
 
                 <NeonApplicable

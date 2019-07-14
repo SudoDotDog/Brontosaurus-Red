@@ -11,12 +11,13 @@ import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList, NeonTable } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
+import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
 import { updateOrganizationRepository } from "./repository/update";
@@ -68,7 +69,10 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
 
         return (
             <div>
-                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
+                <GoBack
+                    right="More"
+                    onClickRight={() => this.props.history.push('/admin/organization/more/' + encodeURIComponent(this._getOrganizationName()))}
+                />
                 {this._renderEditableInfos()}
             </div>
         );

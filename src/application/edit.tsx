@@ -10,9 +10,9 @@ import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { NeonPair } from "@sudoo/neon/input";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
 import { updateApplicationRepository } from "./repository/update";
@@ -56,7 +56,7 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
 
         return (
             <div>
-                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
+                <GoBack />
                 {this._renderEditableInfos()}
             </div>
         );

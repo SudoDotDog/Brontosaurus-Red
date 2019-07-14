@@ -18,6 +18,7 @@ import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
+import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
@@ -73,7 +74,10 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
 
         return (
             <div>
-                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
+                <GoBack
+                    right="More"
+                    onClickRight={() => this.props.history.push('/admin/user/more/' + encodeURIComponent(this._getUsername()))}
+                />
                 {this._renderEditableInfos()}
             </div>
         );

@@ -4,10 +4,10 @@
  * @description More
  */
 
-import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
+import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 
@@ -20,7 +20,10 @@ export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: Organiz
     const organization: string = decodeURIComponent(params.organization);
 
     return (<div>
-        <NeonSub onClick={() => props.history.goBack()}>Go Back</NeonSub>
+        <GoBack
+            right="Edit"
+            onClickRight={() => props.history.push('/admin/organization/e/' + encodeURIComponent(organization))}
+        />
         <NamedTitle about="More About Organization">
             {organization}
         </NamedTitle>

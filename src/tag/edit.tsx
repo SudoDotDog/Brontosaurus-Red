@@ -10,9 +10,10 @@ import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { singleTagRepository, SingleTagResponse } from "./repository/single";
 import { updateTagRepository } from "./repository/update";
@@ -56,7 +57,7 @@ export class TagEdit extends React.Component<TagEditProp, TagEditState> {
 
         return (
             <div>
-                <NeonSub onClick={() => this.props.history.goBack()}>Go Back</NeonSub>
+                <GoBack />
                 {this._renderEditableInfos()}
             </div>
         );

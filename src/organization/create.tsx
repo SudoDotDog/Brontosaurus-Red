@@ -4,11 +4,10 @@
  * @description Create
  */
 
-import { MARGIN } from "@sudoo/neon/declare";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
-import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { GoBack } from "../components/go-back";
 import { createOrganization } from "./repository/create";
 
 type CreateOrganizationProp = {
@@ -28,11 +27,7 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
 
         return (
             <React.Fragment>
-                <NeonSub
-                    margin={MARGIN.SMALL}
-                    onClick={() => this.props.history.goBack()}>
-                    Go Back
-                </NeonSub>
+                <GoBack />
                 <NeonSmartForm
                     title="Create Organization"
                     form={this._getForm()}

@@ -4,12 +4,12 @@
  * @description Global
  */
 
-import { MARGIN, SIGNAL } from "@sudoo/neon/declare";
+import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
-import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { GoBack } from "../components/go-back";
 import { namePreferenceRepository } from "./repository/names";
 import { readNamePreferenceRepository, ReadNamesRepositoryResponse } from "./repository/read-names";
 
@@ -58,11 +58,7 @@ export class NamesPreference extends React.Component<NamesPreferenceProp, NamesP
     public render() {
 
         return (<div>
-            <NeonSub
-                margin={MARGIN.SMALL}
-                onClick={() => this.props.history.goBack()}>
-                Go Back
-            </NeonSub>
+            <GoBack />
             <NeonSmartForm
                 loading={this.state.loading}
                 form={this._getForm()}

@@ -9,6 +9,7 @@ import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { GoBack } from "../components/go-back";
 import { enable2FA } from "./repository/enable-2fa";
 
 type MeEnable2FAProp = {
@@ -20,11 +21,7 @@ export const MeEnable2FA: React.FC<MeEnable2FAProp> = (props: MeEnable2FAProp) =
 
     return (
         <div>
-            <NeonSub
-                margin={MARGIN.SMALL}
-                onClick={() => props.history.goBack()}>
-                Go Back
-            </NeonSub>
+            <GoBack />
             <NeonTitle margin={MARGIN.SMALL}>Two-factor Authenticator</NeonTitle>
 
             {

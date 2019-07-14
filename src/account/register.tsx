@@ -15,6 +15,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
+import { GoBack } from "../components/go-back";
 import { registerRepository } from "./repository/register";
 import { registerInfo } from "./repository/register-infos";
 
@@ -75,11 +76,7 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
     public render() {
 
         return (<React.Fragment>
-            <NeonSub
-                margin={MARGIN.SMALL}
-                onClick={() => this.props.history.goBack()}>
-                Go Back
-                </NeonSub>
+            <GoBack />
             <NeonIndicator
                 loading={this.state.loading}
                 covering={Boolean(this.state.cover)}
