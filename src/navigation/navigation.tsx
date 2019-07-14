@@ -34,8 +34,10 @@ const renderAuthButton = (token: Token | null): React.ReactNode => {
 
 const NavBase: React.FC<NavProp> = (props: NavProp) => {
 
-    const organization: string | undefined = Brontosaurus.hard().organization;
-    const username: string | undefined = Brontosaurus.hard().username;
+    const token: Token = Brontosaurus.hard();
+
+    const username: string = token.username;
+    const organization: string | undefined = token.organization;
 
     return (
         <div className={NavStyle.navWrapper}>
@@ -47,15 +49,16 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                 >
                     {username}
                 </NavButton>
-                {
-                    organization &&
+                <EnableForGroup
+                    visit={false}
+                    group={['BRONTOSAURUS_ORGANIZATION_CONTROL']}>
                     <NavButton
                         selected={props.location.pathname.indexOf('/current') === 0}
                         onClick={() => props.history.push('/current')}
                     >
                         {organization}
                     </NavButton>
-                }
+                </EnableForGroup>
                 <EnableForGroup
                     visit={false}
                     group={['BRONTOSAURUS_SUPER_ADMIN']}>

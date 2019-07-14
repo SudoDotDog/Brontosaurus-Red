@@ -8,20 +8,21 @@ import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "./route";
 
-export const getCommandCenterName = async (): Promise<string | null> => {
+export type GetCommandCenterNameResponse = {
 
-    const response: {
-        exist: boolean;
-        commandCenterName?: string;
-    } = await Fetch
+    readonly existAccountName: string;
+    readonly existCommandCenterName: string;
+    readonly commandCenterName?: string;
+    readonly accountName?: string;
+};
+
+export const getCommandCenterName = async (): Promise<GetCommandCenterNameResponse> => {
+
+    const response: GetCommandCenterNameResponse = await Fetch
         .get
         .json(joinRoute('/preference/command-center'))
         .bearer(Brontosaurus.hard().raw)
         .fetch();
 
-    if (response.exist) {
-        return response.commandCenterName as string;
-    }
-
-    return null;
+    return response;
 };
