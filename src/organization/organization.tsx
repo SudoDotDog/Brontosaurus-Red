@@ -93,12 +93,6 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                 <td className={MenuStyle.actionRaw}>
                     <NeonButton
                         className={MenuStyle.actionButton}
-                        onClick={() => this.props.history.push('/admin/organization/e/' + encodeURIComponent(organization.name))}
-                        size={SIZE.RELATIVE}>
-                        Edit
-                    </NeonButton>
-                    <NeonButton
-                        className={MenuStyle.actionButton}
                         onClick={() => this.props.history.push('/admin/organization/more/' + encodeURIComponent(organization.name))}
                         size={SIZE.RELATIVE}>
                         More

@@ -4,9 +4,10 @@
  * @description Register
  */
 
-import { SIGNAL } from "@sudoo/neon/declare";
+import { MARGIN, SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
+import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { registerForOrganization } from "./repository/register";
@@ -38,58 +39,65 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
     };
 
     return (
-        <NeonSmartForm
-            loading={loading}
-            form={form}
-            title="Register Sub Account"
-            submit="Register"
-            cover={cover}
-            flag={flag}
-            value={current}
-            onChange={(result: any) => {
-                setCurrent(result);
-            }}
-            onSubmit={async () => {
+        <React.Fragment>
+            <NeonSub
+                margin={MARGIN.SMALL}
+                onClick={() => props.history.goBack()}>
+                Go Back
+            </NeonSub>
+            <NeonSmartForm
+                loading={loading}
+                form={form}
+                title="Register Sub Account"
+                submit="Register"
+                cover={cover}
+                flag={flag}
+                value={current}
+                onChange={(result: any) => {
+                    setCurrent(result);
+                }}
+                onSubmit={async () => {
 
-                setCover(undefined);
-                setFlag(undefined);
+                    setCover(undefined);
+                    setFlag(undefined);
 
-                setLoading(true);
+                    setLoading(true);
 
-                try {
-                    const tempPassword: string = await registerForOrganization(
-                        current.username,
-                        current.email,
-                        current.phone,
-                    );
+                    try {
+                        const tempPassword: string = await registerForOrganization(
+                            current.username,
+                            current.email,
+                            current.phone,
+                        );
 
-                    setCover({
-                        type: SIGNAL.SUCCEED,
-                        title: "Succeed",
+                        setCover({
+                            type: SIGNAL.SUCCEED,
+                            title: "Succeed",
 
-                        peek: {
-                            children: "<-",
-                            expend: "Complete",
-                            onClick: props.history.goBack,
-                        },
-                    });
+                            peek: {
+                                children: "<-",
+                                expend: "Complete",
+                                onClick: props.history.goBack,
+                            },
+                        });
 
-                    window.alert(`${current.username}'s temp new password is ${tempPassword}`);
-                } catch (err) {
-                    setCover({
-                        type: SIGNAL.ERROR,
-                        title: "Failed",
-                        info: err.message,
+                        window.alert(`${current.username}'s temp new password is ${tempPassword}`);
+                    } catch (err) {
+                        setCover({
+                            type: SIGNAL.ERROR,
+                            title: "Failed",
+                            info: err.message,
 
-                        peek: {
-                            children: "<-",
-                            expend: "Retry",
-                            onClick: () => setCover(undefined),
-                        },
-                    });
-                }
-                setLoading(false);
-            }}
-        />
+                            peek: {
+                                children: "<-",
+                                expend: "Retry",
+                                onClick: () => setCover(undefined),
+                            },
+                        });
+                    }
+                    setLoading(false);
+                }}
+            />
+        </React.Fragment>
     );
 };

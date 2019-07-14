@@ -87,12 +87,6 @@ export class User extends React.Component<UserProp, UserState> {
                 <td className={MenuStyle.actionRaw}>
                     <NeonButton
                         className={MenuStyle.actionButton}
-                        onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(user.username))}
-                        size={SIZE.RELATIVE}>
-                        Edit
-                    </NeonButton>
-                    <NeonButton
-                        className={MenuStyle.actionButton}
                         onClick={() => this.props.history.push('/admin/user/more/' + encodeURIComponent(user.username))}
                         size={SIZE.RELATIVE}>
                         More
