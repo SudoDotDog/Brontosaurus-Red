@@ -68,12 +68,7 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                 </EnableForGroup>
             </div>
             <div className={NavStyle.subArea}>
-                <EnableForGroup
-
-                    visit
-                    group={['BRONTOSAURUS_SUPER_ADMIN']}>
-                    <SubMenuRoute />
-                </EnableForGroup>
+                <SubMenuRoute />
             </div>
             <div className={NavStyle.outArea}>
                 {renderAuthButton(props.auth.visit())}
