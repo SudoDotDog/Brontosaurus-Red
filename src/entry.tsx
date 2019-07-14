@@ -4,6 +4,8 @@
  * @description Provider
  */
 
+import { EnableForGroup } from "@brontosaurus/react";
+import { Token } from "@brontosaurus/web";
 import { NeonPaper } from "@sudoo/neon/paper";
 import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
@@ -64,15 +66,28 @@ export class Entry extends React.Component<{}, EntryStates> {
                             />}
                         />
                         <Route path="/admin" exact component={AdminMenu} />
-                        <MeRoute />
-                        <CurrentRoute />
-                        <UserRoute />
-                        <OrganizationRoute />
-                        <GroupRoute />
-                        <DecoratorRoute />
-                        <TagRoute />
-                        <ApplicationRoute />
-                        <PreferenceRoute />
+                        <EnableForGroup
+                            visit={false}
+                            group={['BRONTOSAURUS_SELF_CONTROL']}>
+                            <MeRoute />
+                        </EnableForGroup>
+                        <EnableForGroup
+                            visit={false}
+                            validation={(token: Token | null) => Boolean(token && token.organization)}
+                            group={['BRONTOSAURUS_ORGANIZATION_CONTROL']}>
+                            <CurrentRoute />
+                        </EnableForGroup>
+                        <EnableForGroup
+                            visit={false}
+                            group={['BRONTOSAURUS_SUPER_ADMIN']}>
+                            <UserRoute />
+                            <OrganizationRoute />
+                            <GroupRoute />
+                            <DecoratorRoute />
+                            <TagRoute />
+                            <ApplicationRoute />
+                            <PreferenceRoute />
+                        </EnableForGroup>
                     </NeonPaper>
                 </div>
             </div>

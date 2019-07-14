@@ -48,14 +48,19 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                 >
                     ~
                 </NavButton>
-                <NavButton
-                    selected={props.location.pathname.indexOf('/me') === 0}
-                    onClick={() => props.history.push('/me')}
-                >
-                    {username}
-                </NavButton>
                 <EnableForGroup
                     visit={false}
+                    group={['BRONTOSAURUS_SELF_CONTROL']}>
+                    <NavButton
+                        selected={props.location.pathname.indexOf('/me') === 0}
+                        onClick={() => props.history.push('/me')}
+                    >
+                        {username}
+                    </NavButton>
+                </EnableForGroup>
+                <EnableForGroup
+                    visit={false}
+                    validation={() => Boolean(token.organization)}
                     group={['BRONTOSAURUS_ORGANIZATION_CONTROL']}>
                     <NavButton
                         selected={props.location.pathname.indexOf('/current') === 0}

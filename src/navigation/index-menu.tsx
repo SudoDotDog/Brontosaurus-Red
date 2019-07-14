@@ -34,13 +34,18 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
             {welcomeMessage}
         </NamedTitle>
         <div className={MenuStyle.menuGrid}>
-            <MenuItem
-                description={`As a ${props.accountName} User, change ${username}'s password or modify account settings`}
-                link="My Account"
-                onClick={() => props.history.push('/me')}
-            />
             <EnableForGroup
                 visit={false}
+                group={['BRONTOSAURUS_SELF_CONTROL']}>
+                <MenuItem
+                    description={`As a ${props.accountName} User, change ${username}'s password or modify account settings`}
+                    link="My Account"
+                    onClick={() => props.history.push('/me')}
+                />
+            </EnableForGroup>
+            <EnableForGroup
+                visit={false}
+                validation={() => Boolean(token.organization)}
                 group={['BRONTOSAURUS_ORGANIZATION_CONTROL']}>
                 <MenuItem
                     description={`As a organization manager, create account for ${organization} or change ${organization}'s setting`}
