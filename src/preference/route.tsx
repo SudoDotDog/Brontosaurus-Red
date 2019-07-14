@@ -12,11 +12,9 @@ import { NamesPreference } from "./names";
 
 export const PreferenceRoute: React.FC = () => {
 
-    return (<Route path="/admin/preference">
-        <React.Fragment>
-            <Route path="/admin/preference/menu" component={PreferenceMenu} />
-            <Route path="/admin/preference/names" component={NamesPreference} />
-            <Route path="/admin/preference/global" component={GlobalPreference} />
-        </React.Fragment>
-    </Route>);
+    return (<React.Fragment>
+        <Route path="/admin/preference" exact component={PreferenceMenu} />
+        <Route path="/admin/preference/names" exact component={NamesPreference} />
+        <Route path="/admin/preference/global" exact component={GlobalPreference} />
+    </React.Fragment>);
 };

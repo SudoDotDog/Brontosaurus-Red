@@ -12,11 +12,9 @@ import { CurrentRegister } from "./register";
 export const CurrentRoute: React.FC = () => {
 
     return (
-        <Route path="/current">
-            <React.Fragment>
-                <Route path="/current/menu" component={CurrentMenu} />
-                <Route path="/current/register" component={CurrentRegister} />
-            </React.Fragment>
-        </Route>
+        <React.Fragment>
+            <Route path="/current" exact component={CurrentMenu} />
+            <Route path="/current/register" component={CurrentRegister} />
+        </React.Fragment>
     );
 };

@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Page
+ * @namespace Navigation
  * @description Navigation
  */
 
@@ -43,7 +43,7 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
 
                 <NavButton
                     selected={props.location.pathname.indexOf('/me') === 0}
-                    onClick={() => props.history.push('/me/menu')}
+                    onClick={() => props.history.push('/me')}
                 >
                     {username}
                 </NavButton>
@@ -51,14 +51,13 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                     organization &&
                     <NavButton
                         selected={props.location.pathname.indexOf('/current') === 0}
-                        onClick={() => props.history.push('/current/menu')}
+                        onClick={() => props.history.push('/current')}
                     >
                         {organization}
                     </NavButton>
                 }
                 <EnableForGroup
-
-                    visit
+                    visit={false}
                     group={['BRONTOSAURUS_SUPER_ADMIN']}>
                     <NavButton
                         selected={props.location.pathname.indexOf('/admin') === 0}

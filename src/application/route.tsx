@@ -12,13 +12,9 @@ import { ApplicationEdit } from "./edit";
 
 export const ApplicationRoute: React.FC = () => {
 
-    return (
-        <Route path="/admin/application">
-            <React.Fragment>
-                <Route path="/admin/application/list" component={Application} />
-                <Route path="/admin/application/create" component={CreateApplication} />
-                <Route path="/admin/application/e/:application" component={ApplicationEdit} />
-            </React.Fragment>
-        </Route>
-    );
+    return (<React.Fragment>
+        <Route path="/admin/application" exact component={Application} />
+        <Route path="/admin/application/create" exact component={CreateApplication} />
+        <Route path="/admin/application/e/:application" exact component={ApplicationEdit} />
+    </React.Fragment>);
 };

@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Page
+ * @namespace Navigation
  * @description Sub Button
  */
 

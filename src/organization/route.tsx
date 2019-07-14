@@ -15,16 +15,12 @@ import { Organization } from "./organization";
 
 export const OrganizationRoute: React.FC = () => {
 
-    return (
-        <Route path="/admin/organization">
-            <React.Fragment>
-                <Route path="/admin/organization/list" component={Organization} />
-                <Route path="/admin/organization/create" component={CreateOrganization} />
-                <Route path="/admin/organization/inplode" component={InplodeOrganization} />
-                <Route path="/admin/organization/e/:organization" component={OrganizationEdit} />
-                <Route path="/admin/organization/more/:organization" component={OrganizationMore} />
-                <Route path="/admin/organization/a/:organization" component={OrganizationAddAccount} />
-            </React.Fragment>
-        </Route>
-    );
+    return (<React.Fragment>
+        <Route path="/admin/organization" exact component={Organization} />
+        <Route path="/admin/organization/create" exact component={CreateOrganization} />
+        <Route path="/admin/organization/inplode" exact component={InplodeOrganization} />
+        <Route path="/admin/organization/e/:organization" exact component={OrganizationEdit} />
+        <Route path="/admin/organization/more/:organization" exact component={OrganizationMore} />
+        <Route path="/admin/organization/a/:organization" exact component={OrganizationAddAccount} />
+    </React.Fragment>);
 };

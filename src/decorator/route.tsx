@@ -12,13 +12,9 @@ import { DecoratorEdit } from "./edit";
 
 export const DecoratorRoute: React.FC = () => {
 
-    return (
-        <Route path="/admin/decorator">
-            <React.Fragment>
-                <Route path="/admin/decorator/list" component={Decorator} />
-                <Route path="/admin/decorator/create" component={CreateDecorator} />
-                <Route path="/admin/decorator/e/:decorator" component={DecoratorEdit} />
-            </React.Fragment>
-        </Route>
-    );
+    return (<React.Fragment>
+        <Route path="/admin/decorator" exact component={Decorator} />
+        <Route path="/admin/decorator/create" exact component={CreateDecorator} />
+        <Route path="/admin/decorator/e/:decorator" exact component={DecoratorEdit} />
+    </React.Fragment>);
 };

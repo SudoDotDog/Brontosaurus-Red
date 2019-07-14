@@ -12,11 +12,9 @@ import { MeEnable2FA } from "./twoFA";
 
 export const MeRoute: React.FC = () => {
 
-    return (<Route path="/me">
-        <React.Fragment>
-            <Route path="/me/menu" component={MeMenu} />
-            <Route path="/me/change-password" component={MeChangePassword} />
-            <Route path="/me/2fa" component={MeEnable2FA} />
-        </React.Fragment>
-    </Route>);
+    return (<React.Fragment>
+        <Route path="/me" exact component={MeMenu} />
+        <Route path="/me/change-password" component={MeChangePassword} />
+        <Route path="/me/2fa" component={MeEnable2FA} />
+    </React.Fragment>);
 };

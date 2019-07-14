@@ -15,6 +15,7 @@ import { CurrentRoute } from "./current/route";
 import { DecoratorRoute } from "./decorator/route";
 import { GroupRoute } from "./group/route";
 import { MeRoute } from "./me/route";
+import { AdminMenu } from "./navigation/admin-menu";
 import { Nav } from "./navigation/navigation";
 import { OrganizationRoute } from "./organization/route";
 import { PreferenceRoute } from "./preference/route";
@@ -51,6 +52,7 @@ export class Entry extends React.Component<{}, EntryStates> {
                 </div>
                 <div className={EntryStyle.content}>
                     <NeonPaper>
+                        <Route path="/admin" exact component={AdminMenu} />
                         <MeRoute />
                         <CurrentRoute />
                         <UserRoute />

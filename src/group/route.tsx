@@ -12,13 +12,9 @@ import { Group } from "./group";
 
 export const GroupRoute: React.FC = () => {
 
-    return (
-        <Route path="/admin/group">
-            <React.Fragment>
-                <Route path="/admin/group/list" component={Group} />
-                <Route path="/admin/group/create" component={CreateGroup} />
-                <Route path="/admin/group/e/:group" component={GroupEdit} />
-            </React.Fragment>
-        </Route>
-    );
+    return (<React.Fragment>
+        <Route path="/admin/group" exact component={Group} />
+        <Route path="/admin/group/create" exact component={CreateGroup} />
+        <Route path="/admin/group/e/:group" exact component={GroupEdit} />
+    </React.Fragment>);
 };
