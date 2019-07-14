@@ -17,6 +17,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
+import { NamedTitle } from "../components/named-title";
 import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
 import { updateOrganizationRepository } from "./repository/update";
 
@@ -88,7 +89,9 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NeonTitle>Edit: {this.state.organization.name}</NeonTitle>
+                    <NamedTitle about="Editing Organization">
+                        {this.state.organization.name}
+                    </NamedTitle>
                     {this._renderOwner()}
                     {this._renderMembers()}
                     {this._renderDecorators()}

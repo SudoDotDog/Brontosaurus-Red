@@ -4,12 +4,12 @@
  * @description More
  */
 
-import { MARGIN } from "@sudoo/neon/declare";
-import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { MenuItem } from "../components/menu-item";
+import { NamedTitle } from "../components/named-title";
 import { deactivateAccount } from "./repository/deactivate";
 import { limboAccount, LimboAccountResponse } from "./repository/limbo";
 import { resetAttemptAccount } from "./repository/reset-attempt";
@@ -90,7 +90,9 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
 
     return (<div>
         <NeonSub onClick={() => props.history.goBack()}>Go Back</NeonSub>
-        <NeonTitle margin={MARGIN.SMALL}>More about Account: {username}</NeonTitle>
+        <NamedTitle about="More About Account">
+            {username}
+        </NamedTitle>
         <div className={MenuStyle.menuGrid}>
             <MenuItem
                 description={`Assign ${username} to an (another) organization`}

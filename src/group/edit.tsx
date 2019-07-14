@@ -15,6 +15,7 @@ import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
+import { NamedTitle } from "../components/named-title";
 import { singleGroup, SingleGroupResponse } from "./repository/single";
 import { updateGroupRepository } from "./repository/update";
 
@@ -82,7 +83,9 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NeonTitle>Edit: {this.state.group.name}</NeonTitle>
+                    <NamedTitle about="Editing Group">
+                        {this.state.group.name}
+                    </NamedTitle>
                     {this._renderDescription()}
                     {this._renderDecorators()}
                     <NeonButton

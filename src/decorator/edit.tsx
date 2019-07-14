@@ -15,6 +15,7 @@ import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
+import { NamedTitle } from "../components/named-title";
 import { singleDecorator, SingleDecoratorResponse } from "./repository/single";
 import { updateDecoratorRepository } from "./repository/update";
 
@@ -83,7 +84,9 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NeonTitle>Edit: {this.state.decorator.name}</NeonTitle>
+                    <NamedTitle about="Editing Decorator">
+                        {this.state.decorator.name}
+                    </NamedTitle>
                     {this._renderDescription()}
                     <NeonButton
                         size={SIZE.MEDIUM}

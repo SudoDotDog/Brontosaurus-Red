@@ -4,3 +4,6 @@ export const menuDescription: string;
 export const actionRaw: string;
 export const actionButton: string;
 export const clickableSpan: string;
+export const namedTitle: string;
+export const namedTitleAbout: string;
+export const namedTitleName: string;

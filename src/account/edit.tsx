@@ -18,6 +18,7 @@ import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
+import { NamedTitle } from "../components/named-title";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
 
@@ -93,7 +94,9 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NeonTitle>Edit: {this.state.user.username}</NeonTitle>
+                    <NamedTitle about="Editing Account">
+                        {this.state.user.username}
+                    </NamedTitle>
                     <NeonSub>Two-Factor Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
                     {this._renderOrganization()}
                     {this._renderContact()}

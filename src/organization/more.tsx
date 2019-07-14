@@ -4,12 +4,12 @@
  * @description More
  */
 
-import { MARGIN } from "@sudoo/neon/declare";
-import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { NeonSub } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { MenuItem } from "../components/menu-item";
+import { NamedTitle } from "../components/named-title";
 
 export type OrganizationMoreProps = {
 } & RouteComponentProps;
@@ -21,7 +21,9 @@ export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: Organiz
 
     return (<div>
         <NeonSub onClick={() => props.history.goBack()}>Go Back</NeonSub>
-        <NeonTitle margin={MARGIN.SMALL}>More about Organization: {organization}</NeonTitle>
+        <NamedTitle about="More About Organization">
+            {organization}
+        </NamedTitle>
         <div className={MenuStyle.menuGrid}>
             <MenuItem
                 description={`Add exist account to "${organization}" organization.`}

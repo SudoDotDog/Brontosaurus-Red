@@ -13,6 +13,7 @@ import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { NamedTitle } from "../components/named-title";
 import { singleTagRepository, SingleTagResponse } from "./repository/single";
 import { updateTagRepository } from "./repository/update";
 
@@ -76,7 +77,9 @@ export class TagEdit extends React.Component<TagEditProp, TagEditState> {
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NeonTitle>Edit: {this.state.tag.name}</NeonTitle>
+                    <NamedTitle about="Editing Tag">
+                        {this.state.tag.name}
+                    </NamedTitle>
                     {this._renderDescription()}
                     <NeonButton
                         size={SIZE.MEDIUM}
