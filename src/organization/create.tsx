@@ -4,6 +4,8 @@
  * @description Create
  */
 
+import { SIGNAL } from "@sudoo/neon/declare";
+import { NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -14,12 +16,18 @@ type CreateOrganizationProp = {
 } & RouteComponentProps;
 
 type CreateOrganizationStates = {
+
+    readonly loading: boolean;
+    readonly cover: NeonStickerCut | undefined;
     readonly current: any;
 };
 
 export class CreateOrganization extends React.Component<CreateOrganizationProp, CreateOrganizationStates> {
 
     public readonly state: CreateOrganizationStates = {
+
+        loading: false,
+        cover: undefined,
         current: {},
     };
 
@@ -29,6 +37,8 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
             <React.Fragment>
                 <GoBack />
                 <NeonSmartForm
+                    loading={this.state.loading}
+                    cover={this.state.cover}
                     title="Create Organization"
                     form={this._getForm()}
                     value={this.state.current}
@@ -55,7 +65,46 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
 
     private async _submit(name: string, owner: string) {
 
-        const id: string = await createOrganization(name, owner);
-        console.log(id);
+        this.setState({
+            loading: true,
+        });
+
+        try {
+
+            const id: string = await createOrganization(name, owner);
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.SUCCEED,
+                    title: "Succeed",
+                    info: id,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Complete",
+                        onClick: this.props.history.goBack,
+                    },
+                },
+            });
+        } catch (err) {
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.ERROR,
+                    title: "Failed",
+                    info: err.message,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Retry",
+                        onClick: () => this.setState({ cover: undefined }),
+                    },
+                },
+            });
+        }
+
+        this.setState({
+            loading: false,
+        });
     }
 }

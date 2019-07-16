@@ -21,6 +21,7 @@ export type SingleOrganizationResponse = {
         readonly phone: string;
         readonly email: string;
     }>;
+    readonly limit: number;
     readonly decorators: string[];
     readonly tags: string[];
 };

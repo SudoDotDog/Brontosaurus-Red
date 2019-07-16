@@ -11,6 +11,7 @@ import { joinRoute } from "../../repository/route";
 export type UpdateOrganizationRequest = {
 
     readonly name: string;
+    readonly limit: number;
     readonly decorators: string[];
     readonly tags: string[];
 };

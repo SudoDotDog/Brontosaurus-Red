@@ -7,6 +7,7 @@
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
+import { NeonPair } from "@sudoo/neon/input";
 import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList, NeonTable } from "@sudoo/neon/table";
@@ -97,6 +98,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                         {this.state.organization.name}
                     </NamedTitle>
                     {this._renderOwner()}
+                    {this._renderLimit()}
                     {this._renderMembers()}
                     {this._renderDecorators()}
                     {this._renderTags()}
@@ -118,10 +120,37 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
             <NeonTitle size={SIZE.MEDIUM}>Owner Information</NeonTitle>
             <NeonSmartList
                 list={{
-                    Username: organization.owner.username,
+                    Username: (<ClickableSpan
+                        onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(organization.owner.username))}
+                    >
+                        {organization.owner.username}
+                    </ClickableSpan> as any),
                     Phone: organization.owner.phone,
                     Email: organization.owner.email,
                 }}
+            />
+        </React.Fragment>);
+    }
+
+    private _renderLimit() {
+
+        const organization = this.state.organization as SingleOrganizationResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>Account Limit</NeonTitle>
+            <NeonPair
+                label="Used"
+                value={organization.members.length.toString()}
+            />
+            <NeonPair
+                label="Limit"
+                editable
+                value={organization.limit.toString()}
+                onChange={(value: string) => this.setState({
+                    organization: {
+                        ...organization,
+                        limit: Number(value) || organization.limit,
+                    },
+                })}
             />
         </React.Fragment>);
     }
@@ -219,6 +248,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
 
             const name: string = await updateOrganizationRepository({
                 name: this.state.organization.name,
+                limit: this.state.organization.limit,
                 decorators: this.state.organization.decorators,
                 tags: this.state.organization.tags,
             });
