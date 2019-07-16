@@ -12,6 +12,7 @@ export type OrganizationResponse = {
 
     readonly name: string;
     readonly owner: string;
+    readonly ownerDisplayName?: string;
     readonly decorators: number;
     readonly tags: number;
 };

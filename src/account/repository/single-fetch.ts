@@ -11,6 +11,7 @@ import { joinRoute } from "../../repository/route";
 export type SingleFetchResponse = {
 
     readonly username: string;
+    readonly displayName?: string;
     readonly email?: string;
     readonly phone?: string;
     readonly organization?: {

@@ -10,6 +10,7 @@ import { joinRoute } from "../../repository/route";
 
 export const editAccountAdminRepository = async (
     username: string,
+    displayName: string | undefined,
     email: string | undefined,
     phone: string | undefined,
     groups: string[],
@@ -27,6 +28,7 @@ export const editAccountAdminRepository = async (
         .add('groups', groups)
         .add('tags', tags)
         .add('decorators', decorators)
+        .add('displayName', displayName)
         .add('email', email)
         .add('phone', phone)
         .add('username', username)

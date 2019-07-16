@@ -85,7 +85,7 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                     <ClickableSpan
                         onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(organization.owner))}
                     >
-                        {organization.owner}
+                        {this._getOwnerDisplayName(organization.owner, organization.ownerDisplayName)}
                     </ClickableSpan>
                 </td>
                 <td>{organization.decorators}</td>
@@ -100,6 +100,14 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                 </td>
             </tr>),
         );
+    }
+
+    private _getOwnerDisplayName(username: string, displayName?: string) {
+
+        if (displayName) {
+            return `${username} (${displayName})`;
+        }
+        return username;
     }
 
     private async _searchOrganization() {

@@ -103,7 +103,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     </NamedTitle>
                     <NeonSub>Two-Factor Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
                     {this._renderOrganization()}
-                    {this._renderContact()}
+                    {this._renderDetail()}
                     {this._renderInformation()}
                     {this._renderBeacon()}
                     {this._renderUserGroup()}
@@ -120,13 +120,14 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
         );
     }
 
-    private _renderContact() {
+    private _renderDetail() {
 
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Contact</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>Detail</NeonTitle>
             <NeonSmartList
                 list={{
+                    'Display Name': user.displayName || '',
                     Email: user.email || '',
                     Phone: user.phone || '',
                 }}
@@ -134,6 +135,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                 onChange={(newInfo: Record<string, string>) => this.setState({
                     user: {
                         ...user,
+                        displayName: newInfo['Display Name'],
                         email: newInfo.Email,
                         phone: newInfo.Phone,
                     },
@@ -284,6 +286,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
 
             await editAccountAdminRepository(
                 this.state.user.username,
+                this.state.user.displayName,
                 this.state.user.email,
                 this.state.user.phone,
                 this.state.user.groups,

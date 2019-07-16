@@ -11,6 +11,7 @@ import { joinRoute } from "../../repository/route";
 export type UserResponse = {
 
     username: string;
+    displayName?: string;
     email?: string;
     phone?: string;
     twoFA: boolean;
