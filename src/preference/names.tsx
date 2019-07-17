@@ -51,8 +51,6 @@ export class NamesPreference extends React.Component<NamesPreferenceProp, NamesP
         this.setState({
             initial: response,
         });
-
-        console.log(response);
     }
 
     public render() {

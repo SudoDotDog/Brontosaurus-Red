@@ -10,9 +10,24 @@ import { joinRoute } from "../../repository/route";
 
 export const registerForOrganization = async (
     username: string,
+    displayName?: string,
     email?: string,
     phone?: string,
 ): Promise<string> => {
+
+    const obj: Record<string, any> = {
+        username,
+    };
+
+    if (displayName && displayName.length > 0) {
+        obj.displayName = displayName;
+    }
+    if (email && email.length > 0) {
+        obj.email = email;
+    }
+    if (phone && phone.length > 0) {
+        obj.phone = phone;
+    }
 
     const response: {
         account: string;
@@ -21,9 +36,7 @@ export const registerForOrganization = async (
         .post
         .json(joinRoute('/organization/flat/register'))
         .bearer(Brontosaurus.hard().raw)
-        .add('username', username)
-        .add('email', email)
-        .add('phone', phone)
+        .migrate(obj)
         .add('infos', {})
         .fetch();
 

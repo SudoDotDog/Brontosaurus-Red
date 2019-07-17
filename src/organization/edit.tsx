@@ -161,7 +161,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
         return (<React.Fragment>
             <NeonTitle size={SIZE.MEDIUM}>Members Information</NeonTitle>
             <NeonTable
-                headers={['Username', 'Phone', 'Email']}
+                headers={['Username', 'Display', 'Phone', 'Email']}
                 style={{ marginTop: '1rem' }}>
                 {organization.members.map((member) => (<tr key={member.username}>
                     <td>
@@ -172,6 +172,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                         </ClickableSpan>
                         {member.username === organization.owner.username && <span style={{ color: 'red' }}>&nbsp;(Owner)</span>}
                     </td>
+                    <td>{member.displayName}</td>
                     <td>{member.phone}</td>
                     <td>{member.email}</td>
                 </tr>))}

@@ -19,9 +19,11 @@ export const editAccountAdminRepository = async (
     account: Partial<{
         beacons: Record<string, any>;
         infos: Record<string, any>;
-    }>): Promise<void> => {
+    }>): Promise<string> => {
 
-    const response = await Fetch
+    const response: {
+        readonly account: string;
+    } = await Fetch
         .post
         .json(joinRoute('/account/edit/admin'))
         .bearer(Brontosaurus.hard().raw)
@@ -35,5 +37,5 @@ export const editAccountAdminRepository = async (
         .add('account', account)
         .fetch();
 
-    console.log(response);
+    return response.account;
 };

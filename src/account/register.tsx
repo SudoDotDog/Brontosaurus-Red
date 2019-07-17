@@ -127,6 +127,10 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
                 type: INPUT_TYPE.TEXT,
                 display: 'Username',
             },
+            displayName: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Display Name',
+            },
             password: {
                 type: INPUT_TYPE.PASSWORD,
                 display: 'Password',
@@ -196,6 +200,7 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
         try {
             const id: string = await registerRepository(
                 response.username || '',
+                response.displayName,
                 response.password || '',
                 response.email,
                 response.phone,

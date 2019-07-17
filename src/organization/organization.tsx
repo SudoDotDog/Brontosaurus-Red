@@ -56,7 +56,7 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                 {this.state.organizations.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name', 'Owner', 'Decorators', 'Tags', 'Action']}
+                        headers={['Name', 'Owner', 'Owner Display', 'Decorators', 'Tags', 'Action']}
                         style={{ marginTop: '1rem' }}>
                         {this._renderOrganizations()}
                     </NeonTable>}
@@ -85,9 +85,10 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                     <ClickableSpan
                         onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(organization.owner))}
                     >
-                        {this._getOwnerDisplayName(organization.owner, organization.ownerDisplayName)}
+                        {organization.owner}
                     </ClickableSpan>
                 </td>
+                <td>{organization.ownerDisplayName}</td>
                 <td>{organization.decorators}</td>
                 <td>{organization.tags}</td>
                 <td className={MenuStyle.actionRaw}>
@@ -100,14 +101,6 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                 </td>
             </tr>),
         );
-    }
-
-    private _getOwnerDisplayName(username: string, displayName?: string) {
-
-        if (displayName) {
-            return `${username} (${displayName})`;
-        }
-        return username;
     }
 
     private async _searchOrganization() {

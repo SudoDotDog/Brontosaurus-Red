@@ -18,6 +18,7 @@ export type SingleOrganizationResponse = {
     };
     readonly members: Array<{
         readonly username: string;
+        readonly displayName: string;
         readonly phone: string;
         readonly email: string;
     }>;

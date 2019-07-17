@@ -108,15 +108,19 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
             },
             username: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Username',
+                display: 'Owner Username',
+            },
+            displayName: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Owner Display Name',
             },
             email: {
                 type: INPUT_TYPE.EMAIL,
-                display: 'Email Address',
+                display: 'Owner Email Address',
             },
             phone: {
                 type: INPUT_TYPE.NUMBER,
-                display: 'Phone Number',
+                display: 'Owner Phone Number',
             },
             ...this.state.infos.reduce((previous: Record<string, INPUT_TYPE>, current: {
                 name: string;
@@ -160,6 +164,7 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
             const tempPassword: string = await inplodeOrganization(
                 response.name || '',
                 response.username || '',
+                response.displayName,
                 response.email,
                 response.phone,
                 parsed,
