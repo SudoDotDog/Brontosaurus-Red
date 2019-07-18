@@ -25,36 +25,24 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@brontosaurus/definition@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.5.0.tgz#3b0357b3804f014f5a56eb8a247f9d632f61fa54"
-  integrity sha512-6QNrQbBcRcI/ODyNc8CCvNZ0lJewDIywQX+638EOmp/BKuNwzoOmV979JOg3AClZJ95cAZQn7OTxuQXZ8J7oCw==
-
-"@brontosaurus/definition@^1.6.0":
+"@brontosaurus/definition@^1.6.1":
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.6.1.tgz#88ac9ff85066b68a0409c3c2946e45e228bbc3b2"
   integrity sha512-FNJX31Y+nnNIbC47b7JKPPXQ4iN1CZ5lvNUlBpl3Lt8D1zUlr6sUMcpDKUXXVWZg/uHF39rQgqHb2FaksvLOhQ==
 
-"@brontosaurus/react@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-1.3.1.tgz#56f484988704eb40157e0e857e8c8f8d134e7514"
-  integrity sha512-4ZtfvIeSVaKGlKveop7q5Q2rU5S3bepZY0hmo+rAZrra8cWY4DeFuq6vbHvTLb5ZaoX5cAc7MxgMfptvtiSGlQ==
+"@brontosaurus/react@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-1.4.0.tgz#ec3a5f6f1d70cb62b042eb3189422721c77582f5"
+  integrity sha512-tXtEhiErBGwUWbT01mW7Zl1D0gHv5t18c/KEMEV+my5pTddq9gofYY/0g98F7MCk0nMH0YDzwLSfn6fNci2Kng==
   dependencies:
-    "@brontosaurus/web" "^1.5.0"
+    "@brontosaurus/web" "^1.6.1"
 
-"@brontosaurus/web@^1.5.0":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.5.1.tgz#a43c49eabbaff8612db9a0e521fb97aa33ad573c"
-  integrity sha512-RXjNfLfzU1dlVNgapNYUVxdrIvl86VYfug11n0/jkBdHLXqKoz8S+iNb+eICmWfDzuPk5p7WvtrNABRfO+B1uQ==
+"@brontosaurus/web@^1.6.0", "@brontosaurus/web@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.6.1.tgz#831919289f806db8166750e3bf7de969fafee5d2"
+  integrity sha512-lNe22Mc1meN9bRGA3f/9m8s9dcdfwYNLJF1nmWWwR3wbNZF1LyQu8Ipb5fURJhZ9tNEkY8l/FEeGGTaZmzJa0A==
   dependencies:
-    "@brontosaurus/definition" "^1.5.0"
-
-"@brontosaurus/web@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.6.0.tgz#0ca129b6831c9e597e741b48fcceedf97847ea43"
-  integrity sha512-R6phRibMbpcMxTCak0TP2+H221iQkOWe9OWUlHJ1QzZhL9lbE7ZqI5dlNFb6cKenZd7SvxZhfCammS6nwe7pBQ==
-  dependencies:
-    "@brontosaurus/definition" "^1.6.0"
+    "@brontosaurus/definition" "^1.6.1"
 
 "@sudoo/bark@^2.7.1":
   version "2.7.1"
