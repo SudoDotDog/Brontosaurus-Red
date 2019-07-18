@@ -127,7 +127,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
             <NeonTitle size={SIZE.MEDIUM}>Detail</NeonTitle>
             <NeonSmartList
                 list={{
-                    'Display Name': user.displayName || '',
+                    ['Display Name']: user.displayName || '',
                     Email: user.email || '',
                     Phone: user.phone || '',
                 }}
@@ -284,7 +284,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
 
         try {
 
-            await editAccountAdminRepository(
+            const account: string = await editAccountAdminRepository(
                 this.state.user.username,
                 this.state.user.displayName,
                 this.state.user.email,
@@ -301,6 +301,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                 cover: {
                     type: SIGNAL.SUCCEED,
                     title: "Succeed",
+                    info: account,
 
                     peek: {
                         children: "<-",

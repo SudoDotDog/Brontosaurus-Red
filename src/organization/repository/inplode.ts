@@ -12,11 +12,29 @@ import { joinRoute } from "../../repository/route";
 export const inplodeOrganization = async (
     name: string,
     username: string,
-    email: string,
-    phone: string,
+    displayName: string | undefined,
+    email: string | undefined,
+    phone: string | undefined,
     infos: Record<string, Basics>,
     tags: string[],
 ): Promise<string> => {
+
+    const obj: Record<string, any> = {
+        name,
+        username,
+        infos,
+        tags,
+    };
+
+    if (displayName && displayName.length > 0) {
+        obj.displayName = displayName;
+    }
+    if (email && email.length > 0) {
+        obj.email = email;
+    }
+    if (phone && phone.length > 0) {
+        obj.phone = phone;
+    }
 
     const response: {
         account: string;
@@ -26,12 +44,7 @@ export const inplodeOrganization = async (
         .post
         .json(joinRoute('/organization/inplode'))
         .bearer(Brontosaurus.hard().raw)
-        .add('name', name)
-        .add('username', username)
-        .add('email', email)
-        .add('phone', phone)
-        .add('infos', infos)
-        .add('tags', tags)
+        .migrate(obj)
         .fetch();
 
     return response.tempPassword;

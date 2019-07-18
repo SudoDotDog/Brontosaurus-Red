@@ -28,6 +28,10 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
             type: INPUT_TYPE.TEXT,
             display: 'Username',
         },
+        displayName: {
+            type: INPUT_TYPE.TEXT,
+            display: 'Display Name',
+        },
         email: {
             type: INPUT_TYPE.EMAIL,
             display: 'Email Address',
@@ -62,6 +66,7 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
                     try {
                         const tempPassword: string = await registerForOrganization(
                             current.username,
+                            current.displayName,
                             current.email,
                             current.phone,
                         );

@@ -16,6 +16,7 @@ export type RegisterRepositoryResponse = {
 
 export const registerRepository = async (
     username: string,
+    displayName: string | undefined,
     password: string,
     email: string,
     phone: string,
@@ -24,19 +25,25 @@ export const registerRepository = async (
     groups: string[],
 ): Promise<string> => {
 
+    const obj: Record<string, any> = {
+        username,
+        password,
+        email,
+        phone,
+        infos,
+        tags,
+        groups,
+    };
+
+    if (displayName && displayName.length > 0) {
+        obj.displayName = displayName;
+    }
+
     const response: RegisterRepositoryResponse = await Fetch
         .post
         .json(joinRoute('/account/register'))
         .bearer(Brontosaurus.hard().raw)
-        .migrate({
-            username,
-            password,
-            email,
-            phone,
-            infos,
-            tags,
-            groups,
-        })
+        .migrate(obj)
         .fetch();
 
     return response.account;
