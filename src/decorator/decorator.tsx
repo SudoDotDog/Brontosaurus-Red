@@ -75,7 +75,7 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
             (<tr key={decorator.name}>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/admin/decorator/e/' + encodeURIComponent(decorator.name))}
+                        to={'/admin/decorator/e/' + encodeURIComponent(decorator.name)}
                     >
                         {decorator.name}
                     </ClickableSpan>

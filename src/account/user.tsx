@@ -74,7 +74,7 @@ export class User extends React.Component<UserProp, UserState> {
         return this.state.users.map((user: UserResponse) =>
             (<tr key={user.username}>
                 <td>
-                    <ClickableSpan onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(user.username))}>
+                    <ClickableSpan to={'/admin/user/e/' + encodeURIComponent(user.username)}>
                         {user.username}
                     </ClickableSpan>
                 </td>

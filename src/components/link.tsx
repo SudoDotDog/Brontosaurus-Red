@@ -1,31 +1,31 @@
 /**
  * @author WMXPY
  * @namespace Component
- * @description Clickable Span
+ * @description Link
  */
 
 import * as React from "react";
-import { Link } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { combineClasses } from "../util/style";
 
-export type ClickableSpanProps = {
+export type LinkProps = {
 
-    readonly to: string;
+    readonly href: string;
     readonly className?: string;
 
     readonly children?: any;
 };
 
-export const ClickableSpan: React.FC<ClickableSpanProps> = (props: ClickableSpanProps) => {
+export const Link: React.FC<LinkProps> = (props: LinkProps) => {
 
-    return (<Link
-        to={props.to}
+    return (<a
+        target="_blank"
+        href={props.href}
         className={combineClasses(
             props.className,
             MenuStyle.clickableSpan,
         )}
     >
         {props.children}
-    </Link>);
+    </a>);
 };

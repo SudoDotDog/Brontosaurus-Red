@@ -76,14 +76,14 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
             (<tr key={organization.name}>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/admin/organization/e/' + encodeURIComponent(organization.name))}
+                        to={'/admin/organization/e/' + encodeURIComponent(organization.name)}
                     >
                         {organization.name}
                     </ClickableSpan>
                 </td>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(organization.owner))}
+                        to={'/admin/user/e/' + encodeURIComponent(organization.owner)}
                     >
                         {organization.owner}
                     </ClickableSpan>

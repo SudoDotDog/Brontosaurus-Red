@@ -75,7 +75,7 @@ export class Group extends React.Component<GroupProps, GroupStates> {
             (<tr key={group.name}>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/admin/group/e/' + encodeURIComponent(group.name))}
+                        to={'/admin/group/e/' + encodeURIComponent(group.name)}
                     >
                         {group.name}
                     </ClickableSpan>

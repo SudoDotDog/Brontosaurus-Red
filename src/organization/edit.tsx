@@ -121,7 +121,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
             <NeonSmartList
                 list={{
                     Username: (<ClickableSpan
-                        onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(organization.owner.username))}
+                        to={'/admin/user/e/' + encodeURIComponent(organization.owner.username)}
                     >
                         {organization.owner.username}
                     </ClickableSpan> as any),
@@ -166,7 +166,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                 {organization.members.map((member) => (<tr key={member.username}>
                     <td>
                         <ClickableSpan
-                            onClick={() => this.props.history.push('/admin/user/e/' + encodeURIComponent(member.username))}
+                            to={'/admin/user/e/' + encodeURIComponent(member.username)}
                         >
                             {member.username}
                         </ClickableSpan>

@@ -75,7 +75,7 @@ export class Tags extends React.Component<TagsProp, TagsState> {
             (<tr key={tag.name}>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/admin/tag/e/' + encodeURIComponent(tag.name))}
+                        to={'/admin/tag/e/' + encodeURIComponent(tag.name)}
                     >
                         {tag.name}
                     </ClickableSpan>

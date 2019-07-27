@@ -342,7 +342,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                 <NeonSmartList
                     list={{
                         Name: <ClickableSpan
-                            onClick={() => this.props.history.push('/admin/organization/e/' + encodeURIComponent(user.organization.name))}
+                            to={'/admin/organization/e/' + encodeURIComponent(user.organization.name)}
                         >
                             {user.organization.name}
                         </ClickableSpan> as any,

@@ -76,7 +76,7 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
             (<tr key={application.key}>
                 <td>
                     <ClickableSpan
-                        onClick={() => this.props.history.push('/admin/application/e/' + encodeURIComponent(application.key))}
+                        to={'/admin/application/e/' + encodeURIComponent(application.key)}
                     >
                         {application.name}
                     </ClickableSpan>
