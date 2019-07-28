@@ -117,10 +117,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/tslint-config/-/tslint-config-1.2.0.tgz#00f02d8b1ec73eedfc9ad89a19293c858f5f6ea2"
   integrity sha512-0kCb5BO9YcG+eE9MLLFz2GAlDdFY9v3xEYQbyouMAC8FedPky+tYB8/2jfvpnKdidF/lQXK7tfrN34EBX1fX8A==
 
-"@sudoo/webpack-react@^2.2.7":
-  version "2.2.7"
-  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-2.2.7.tgz#a353203fe75680ef6d85af9b03a6a092b7fa4598"
-  integrity sha512-knNw0Wj4apERObMzojPZ6FysAW7WMm6dZ2ANJnHYR1970kjkV8aNUXIKnHVkjoSG/caGAlJH4LHnTHL7zayTzA==
+"@sudoo/webpack-react@^2.2.9":
+  version "2.2.9"
+  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-2.2.9.tgz#9bcde93d5b0c52993083eaec54ae721bcee1ce8a"
+  integrity sha512-c4++BL2Chxei5bZHdikqP9y7E7JBx+zOi4CWj+NSUQilMc6oxF4NGM5jFjpz5o/vZ+xw6rGRfvmWJugvZfgIZg==
   dependencies:
     awesome-typescript-loader "^5.2.1"
     css-loader "^1.0.1"
