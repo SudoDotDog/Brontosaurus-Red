@@ -24,4 +24,5 @@ module.exports = SudooWebpack.create({
         title: 'Red - Brontosaurus',
         mobile: false,
         insertion: '<!-- Insertion Point -->',
+        favicon: '/favicon.png',
     }).production();
