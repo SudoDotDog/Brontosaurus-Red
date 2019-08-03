@@ -10,9 +10,23 @@ import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { deactivateOrganizationRepository } from "./repository/deactivate";
 
 export type OrganizationMoreProps = {
 } & RouteComponentProps;
+
+const deactivateOrganization = async (organization: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to deactivate "${organization}"?`);
+    if (isConfirm) {
+        try {
+            await deactivateOrganizationRepository(organization);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
 
 export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: OrganizationMoreProps) => {
 
@@ -34,10 +48,14 @@ export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: Organiz
                 onClick={() => props.history.push('/admin/organization/a/' + encodeURIComponent(organization))}
             />
             <MenuItem
-                disabled
                 description={`Register new account for organization "${organization}"`}
                 link="Register"
-                onClick={() => undefined}
+                onClick={() => props.history.push('/admin/organization/register/' + encodeURIComponent(organization))}
+            />
+            <MenuItem
+                description={`Deactivate "${organization}"`}
+                link="Deactivate"
+                onClick={() => deactivateOrganization(organization, () => props.history.replace('/admin/organization'))}
             />
         </div>
     </div>);
