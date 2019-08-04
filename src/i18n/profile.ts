@@ -7,4 +7,5 @@
 export enum PROFILE {
 
     ACCOUNT = "ACCOUNT",
+    ADMIN = "ADMIN",
 }

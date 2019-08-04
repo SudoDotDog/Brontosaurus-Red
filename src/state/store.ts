@@ -6,7 +6,7 @@
 
 import { Redux } from '@sudoo/redux';
 import { ACTIONS, IStore } from './declare';
-import { getDefaultPreference } from './preference/preference';
+import { getDefaultPreference, preferenceReducers } from './preference/preference';
 
 export const RedStore: IStore = {
 
@@ -14,4 +14,5 @@ export const RedStore: IStore = {
 };
 
 export const redux: Redux<IStore, ACTIONS> =
-    Redux.create<IStore, ACTIONS>(RedStore);
+    Redux.create<IStore, ACTIONS>(RedStore)
+        .reducers(preferenceReducers);

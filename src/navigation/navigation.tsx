@@ -13,6 +13,7 @@ import { RouteComponentProps } from "react-router-dom";
 import * as NavStyle from "../../style/page/nav.scss";
 import * as EntryStyle from "../../style/route/entry.scss";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { NavButton } from "./nav-button";
 import { SubMenuRoute } from "./sub-menu";
@@ -40,11 +41,7 @@ const renderAuthButton = (token: Token): React.ReactNode => {
         </span>);
     }
 
-    return (<a
-        className={EntryStyle.signIn}
-        onClick={() => Brontosaurus.hard()}>
-        Sign-in
-    </a>);
+    return null;
 };
 
 const NavBase: React.FC<NavProp> = (props: NavProp) => {
@@ -91,7 +88,7 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                         selected={props.location.pathname.indexOf('/admin') === 0}
                         onClick={() => props.history.push('/admin')}
                     >
-                        Admin
+                        {props.language.get(PROFILE.ADMIN)}
                     </NavButton>
                 </EnableForGroup>
             </div>

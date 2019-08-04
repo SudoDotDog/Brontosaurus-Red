@@ -13,6 +13,7 @@ import { Route } from "react-router-dom";
 import * as EntryStyle from "../style/route/entry.scss";
 import { UserRoute } from "./account/route";
 import { ApplicationRoute } from "./application/route";
+import { ConnectedLanguage } from "./components/language";
 import { CurrentRoute } from "./current/route";
 import { DecoratorRoute } from "./decorator/route";
 import { GroupRoute } from "./group/route";
@@ -90,6 +91,7 @@ export class Entry extends React.Component<{}, EntryStates> {
                         </EnableForGroup>
                     </NeonPaper>
                 </div>
+                <ConnectedLanguage className={EntryStyle.languageSetting} />
             </div>
         );
     }
