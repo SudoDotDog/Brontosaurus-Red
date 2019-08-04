@@ -4,19 +4,34 @@
  * @description Navigation
  */
 
-import { BrontosaurusProps, EnableForGroup, WithAuthComponent, withBrontosaurus } from "@brontosaurus/react";
+import { EnableForGroup } from "@brontosaurus/react";
 import { Brontosaurus, Token } from "@brontosaurus/web";
+import { SudooFormat } from "@sudoo/internationalization";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as NavStyle from "../../style/page/nav.scss";
 import * as EntryStyle from "../../style/route/entry.scss";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { NavButton } from "./nav-button";
 import { SubMenuRoute } from "./sub-menu";
 
-type NavProp = {
-} & RouteComponentProps & BrontosaurusProps;
+type ConnectedNavStates = {
 
-const renderAuthButton = (token: Token | null): React.ReactNode => {
+    readonly language: SudooFormat;
+};
+
+type NavProp = {
+} & RouteComponentProps & ConnectedNavStates;
+
+const connector = Connector.create<IStore, ConnectedNavStates>()
+    .connectStates(({ preference }: IStore) => ({
+
+        language: intl.format(preference.language),
+    }));
+
+const renderAuthButton = (token: Token): React.ReactNode => {
 
     if (token) {
         return (<span>
@@ -84,10 +99,10 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                 <SubMenuRoute />
             </div>
             <div className={NavStyle.outArea}>
-                {renderAuthButton(props.auth.visit())}
+                {renderAuthButton(token)}
             </div>
         </div>
     );
 };
 
-export const Nav: WithAuthComponent<NavProp> = withBrontosaurus(NavBase);
+export const Nav: React.ComponentType<{}> = connector.connect(NavBase);
