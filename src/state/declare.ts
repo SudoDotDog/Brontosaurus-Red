@@ -4,13 +4,15 @@
  * @description Declare
  */
 
+import { PreferenceStore } from "./preference/type";
+
 export interface IStore {
 
-    a?: string;
+    preference: PreferenceStore;
 }
 
 export enum ACTIONS {
 
-    // form
-    SET_USERNAME_AND_PASSWORD = 'SET_USERNAME_AND_PASSWORD',
+    // preference
+    SET_LANGUAGE = 'SET_LANGUAGE',
 }

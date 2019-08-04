@@ -6,9 +6,12 @@
 
 import { Redux } from '@sudoo/redux';
 import { ACTIONS, IStore } from './declare';
+import { getDefaultPreference } from './preference/preference';
 
-export const PortalStore: IStore = {
+export const RedStore: IStore = {
+
+    preference: getDefaultPreference(),
 };
 
 export const redux: Redux<IStore, ACTIONS> =
-    Redux.create<IStore, ACTIONS>(PortalStore);
+    Redux.create<IStore, ACTIONS>(RedStore);
