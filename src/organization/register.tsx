@@ -92,19 +92,19 @@ export class OrganizationSubRegister extends React.Component<OrganizationSubRegi
         return {
             username: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Owner Username',
+                display: 'Username',
             },
             displayName: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Owner Display Name',
+                display: 'Display Name',
             },
             email: {
                 type: INPUT_TYPE.EMAIL,
-                display: 'Owner Email Address',
+                display: 'Email Address',
             },
             phone: {
                 type: INPUT_TYPE.NUMBER,
-                display: 'Owner Phone Number',
+                display: 'Phone Number',
             },
             ...this.state.infos.reduce((previous: Record<string, INPUT_TYPE>, current: {
                 name: string;
