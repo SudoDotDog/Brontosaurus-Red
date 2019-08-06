@@ -12,7 +12,6 @@ export const createApplication = async (
     name: string,
     key: string,
     expire: number,
-    token: string,
 ): Promise<string> => {
 
     const response: {
@@ -25,7 +24,6 @@ export const createApplication = async (
             name,
             key,
             expire,
-            token,
         })
         .fetch();
 

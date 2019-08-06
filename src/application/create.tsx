@@ -64,10 +64,6 @@ export class CreateApplication extends React.Component<CreateApplicationProp, Cr
                 type: INPUT_TYPE.NUMBER,
                 display: 'Expire Time',
             },
-            secret: {
-                type: INPUT_TYPE.TEXT,
-                display: 'Application Secret',
-            },
         };
     }
 
@@ -82,7 +78,6 @@ export class CreateApplication extends React.Component<CreateApplicationProp, Cr
                 current.name,
                 current.key,
                 Number(current.expire) || 360000,
-                current.secret,
             );
 
             this.setState({
