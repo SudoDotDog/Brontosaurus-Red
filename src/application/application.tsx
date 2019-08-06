@@ -43,31 +43,27 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
 
     public render() {
 
-        return (
-            <div>
+        return (<div>
+            <SearchNew
+                label="Application"
+                onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchApplication)}
+                onNew={() => this.props.history.push('/admin/application/create')}
+            />
 
-                <SearchNew
-                    label="Application"
-                    onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchApplication)}
-                    onNew={() => this.props.history.push('/admin/application/create')}
-                />
+            {this.state.applications.length === 0
+                ? void 0
+                : <NeonTable
+                    headers={['Name', 'Key', 'Expire', 'Action']}
+                    style={{ marginTop: '1rem' }}>
+                    {this._renderApplication()}
+                </NeonTable>}
 
-                {this.state.applications.length === 0
-                    ? void 0
-                    : <NeonTable
-                        headers={['Name', 'Key', 'Expire', 'Action']}
-                        style={{ marginTop: '1rem' }}>
-                        {this._renderApplication()}
-                    </NeonTable>}
-
-                <PageSelector
-                    total={this.state.pages}
-                    selected={this.state.page}
-                    onClick={(page: number) => this.setState({ page }, this._searchApplication)}
-                />
-            </div>
-
-        );
+            <PageSelector
+                total={this.state.pages}
+                selected={this.state.page}
+                onClick={(page: number) => this.setState({ page }, this._searchApplication)}
+            />
+        </div>);
     }
 
     private _renderApplication(): JSX.Element[] {

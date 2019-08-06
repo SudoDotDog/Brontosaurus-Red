@@ -12,6 +12,7 @@ import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import * as ApplicationEditStyle from "../../style/application/edit.scss";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
@@ -102,6 +103,14 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                     {this.state.application.green && <NeonPair
                         label="Green"
                         value={this.state.application.green.toString()} />}
+                    <div className={ApplicationEditStyle.container}>
+                        <div className={ApplicationEditStyle.label}>
+                            Public Key
+                        </div>
+                        <div className={ApplicationEditStyle.display}>
+                            {this.state.application.publicKey.toString()}
+                        </div>
+                    </div>
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}

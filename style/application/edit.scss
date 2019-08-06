@@ -1,0 +1,33 @@
+/**
+ * @author WMXPY
+ * @namespace Application
+ * @description Edit
+ */
+
+@import "../common/color.sass";
+
+.container {
+	display: flex;
+	margin: 0.5rem;
+	background-color: $navy;
+	align-items: center;
+}
+
+.label {
+	font-family: system-ui;
+
+	color: $white;
+	font-weight: bold;
+	text-align: right;
+	padding-top: 0.2rem;
+	padding-left: 0.6rem;
+	padding-right: 0.6rem;
+	flex: 1;
+}
+
+.display {
+	flex: 5;
+	background-color: $white;
+	padding: 0.2rem;
+	border: 0.2rem solid $navy;
+}

@@ -15,6 +15,7 @@ export type SingleApplicationFetchResponse = {
     readonly expire: number;
     readonly groups: string[];
     readonly green: string;
+    readonly publicKey: string;
 };
 
 export const singleFetchApplicationRepository = async (key: string): Promise<SingleApplicationFetchResponse> => {
