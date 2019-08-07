@@ -57,7 +57,10 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
 
         return (
             <div>
-                <GoBack />
+                <GoBack
+                    right="More"
+                    onClickRight={() => this.props.history.push('/admin/application/more/' + encodeURIComponent(this._getApplicationName()))}
+                />
                 {this._renderEditableInfos()}
             </div>
         );
@@ -73,7 +76,6 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
             <NeonThemeProvider value={{
                 margin: MARGIN.SMALL,
             }} >
-
                 <NeonIndicator
                     loading={this.state.loading}
                     covering={Boolean(this.state.cover)}
@@ -108,7 +110,11 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                             Public Key
                         </div>
                         <div className={ApplicationEditStyle.display}>
-                            {this.state.application.publicKey.toString()}
+                            {this.state.application.publicKey.split('\n').map((part: string, index: number) => {
+                                return (<div key={index}>
+                                    {part}
+                                </div>);
+                            })}
                         </div>
                     </div>
                     <NeonButton
@@ -196,5 +202,11 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                 loading: false,
             });
         }
+    }
+
+    private _getApplicationName(): string {
+
+        const params: any = this.props.match.params;
+        return params.application;
     }
 }

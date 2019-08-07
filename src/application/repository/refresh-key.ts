@@ -1,20 +1,20 @@
 /**
  * @author WMXPY
  * @namespace Application_Repository
- * @description Refresh Green
+ * @description Refresh Key
  */
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
-export const refreshGreenRepository = async (key: string): Promise<string> => {
+export const refreshKeyRepository = async (key: string): Promise<string> => {
 
     const response: {
         application: string;
     } = await Fetch
         .post
-        .json(joinRoute('/application/refresh-green'))
+        .json(joinRoute('/application/refresh-key'))
         .bearer(Brontosaurus.hard().raw)
         .add('key', key)
         .fetch();
