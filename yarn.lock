@@ -25,24 +25,24 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@brontosaurus/definition@^1.6.1":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-1.6.1.tgz#88ac9ff85066b68a0409c3c2946e45e228bbc3b2"
-  integrity sha512-FNJX31Y+nnNIbC47b7JKPPXQ4iN1CZ5lvNUlBpl3Lt8D1zUlr6sUMcpDKUXXVWZg/uHF39rQgqHb2FaksvLOhQ==
+"@brontosaurus/definition@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-2.1.1.tgz#037206586856bc3d6a5218d2ce47881eb4b11a34"
+  integrity sha512-xOta4GCbFaHmSIbn+thqTcqfS2koUiUkOsEblK8y13xQM2Eg3ziuJYboIIN6bVlEGj8wBUif4UcMs/8xGRYa8w==
 
-"@brontosaurus/react@^1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-1.4.2.tgz#2a9255a84084855aca8ed0f6c6806e8c1b1f932c"
-  integrity sha512-oxFnwPGclDRU2CIwHZI5uxcO0XAWKCLBfPscdRwTL7S6V+Lxb2b2AiSTMNjJ37vUIFNXVMYbxRPSfjBWXDs0pw==
+"@brontosaurus/react@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-1.5.0.tgz#0936683ff9107b89894ef1869e3f4a62838d2118"
+  integrity sha512-psydwzq3Lj4IqwvOb82zej1zsSQzI0Ymtwvq9mwpXFCSQw+0U9WyNywCxSQhDBAtcJecLW61Grd4Uh9udbhTkg==
   dependencies:
-    "@brontosaurus/web" "^1.6.2"
+    "@brontosaurus/web" "^1.7.0"
 
-"@brontosaurus/web@^1.6.2":
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.6.2.tgz#d43a99a2e770ebd47885430b0f524e5f68e69a4b"
-  integrity sha512-HFzG4PdK4evZwLuHl7k1rh98ZNVWxsvAM+fs5N3Vr+2hMKQJw2nUM+NUce+IDT3BRxDvKXuh5L7ullf2gQbxvQ==
+"@brontosaurus/web@^1.6.2", "@brontosaurus/web@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-1.7.0.tgz#3b32765abec82efb9256603e2d38171e752c25e5"
+  integrity sha512-/zTR6fNsk45JuOnKpCys1nTRmFV8geq8M16NGg2InBrae/vQFEhRJQ62V1R6Nx2Udqod8vb+4MAtW8OR1ryR1A==
   dependencies:
-    "@brontosaurus/definition" "^1.6.1"
+    "@brontosaurus/definition" "^2.1.1"
 
 "@sudoo/bark@^2.7.1":
   version "2.7.1"
