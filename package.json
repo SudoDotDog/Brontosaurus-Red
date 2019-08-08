@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@sudoo/react-force-dev": "^1.5.0",
-    "@sudoo/triforce": "^1.6.0",
+    "@sudoo/triforce": "^1.8.0",
     "@sudoo/webpack-react": "^2.2.10",
     "@types/react-router-dom": "^4.3.4"
   },
