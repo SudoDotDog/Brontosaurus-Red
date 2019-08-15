@@ -11,7 +11,6 @@ import { joinRoute } from "../../repository/route";
 export type SetOwnerResponse = {
 
     readonly account: string;
-    readonly organization: string;
 };
 
 export const setOwnerRepository = async (username: string, organization: string): Promise<SetOwnerResponse> => {

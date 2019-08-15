@@ -21,9 +21,9 @@ import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
+import { setOwnerRepository } from "./repository/set-owner";
 import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
 import { updateOrganizationRepository } from "./repository/update";
-import { setOwnerRepository } from "./repository/set-owner";
 
 type OrganizationEditProp = {
 } & RouteComponentProps;
