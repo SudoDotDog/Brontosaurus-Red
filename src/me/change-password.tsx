@@ -21,13 +21,11 @@ type MeChangePasswordProp = {
 } & RouteComponentProps & ConnectedStates;
 
 type ConnectedStates = {
-
     readonly language: SudooFormat;
 };
 
 const connector = Connector.create<IStore, ConnectedStates>()
     .connectStates(({ preference }: IStore) => ({
-
         language: intl.format(preference.language),
     }));
 
