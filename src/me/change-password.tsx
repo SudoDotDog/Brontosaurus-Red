@@ -74,23 +74,23 @@ export const MeChangePasswordBase: React.FC<MeChangePasswordProp> = (props: MeCh
 
                             setCover({
                                 type: SIGNAL.SUCCEED,
-                                title: "Succeed",
+                                title: props.language.get(PROFILE.SUCCEED),
 
                                 peek: {
                                     children: "<-",
-                                    expend: "Complete",
+                                    expend: props.language.get(PROFILE.COMPLETE),
                                     onClick: props.history.goBack,
                                 },
                             });
                         } catch (err) {
                             setCover({
                                 type: SIGNAL.ERROR,
-                                title: "Failed",
+                                title: props.language.get(PROFILE.FAILED),
                                 info: err.message,
 
                                 peek: {
                                     children: "<-",
-                                    expend: "Retry",
+                                    expend: props.language.get(PROFILE.RETRY),
                                     onClick: () => setCover(undefined),
                                 },
                             });
@@ -98,7 +98,7 @@ export const MeChangePasswordBase: React.FC<MeChangePasswordProp> = (props: MeCh
                     } else {
                         setFlag({
                             type: SIGNAL.ERROR,
-                            message: "Password not matched",
+                            message: props.language.get(PROFILE.PASSWORD_NOT_MATCHED),
                         });
                     }
 
