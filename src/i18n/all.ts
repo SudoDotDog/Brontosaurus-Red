@@ -8,28 +8,28 @@ import { PROFILE } from "./profile";
 
 export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
 
-    [PROFILE.ADMIN]: 'Admin',
-
-    [PROFILE.ADMIN_PANEL]: 'Admin Panel',
     [PROFILE.ACCOUNT]: 'Account',
-    [PROFILE.ORGANIZATION]: 'Organization',
-    [PROFILE.GROUP]: 'Group',
-    [PROFILE.DECORATOR]: 'Decorator',
-    [PROFILE.TAG]: 'Tag',
+    [PROFILE.ADMIN]: 'Admin',
+    [PROFILE.ADMIN_PANEL]: 'Admin Panel',
     [PROFILE.APPLICATION]: 'Application',
+    [PROFILE.DECORATOR]: 'Decorator',
+    [PROFILE.GROUP]: 'Group',
     [PROFILE.PREFERENCE]: 'Preference',
+    [PROFILE.ORGANIZATION]: 'Organization',
+    [PROFILE.TAG]: 'Tag',
+    [PROFILE.WELCOME]: 'Welcome!',
 };
 
 export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
 
-    [PROFILE.ADMIN]: '管理',
-
-    [PROFILE.ADMIN_PANEL]: '管理面板',
     [PROFILE.ACCOUNT]: '账户',
-    [PROFILE.ORGANIZATION]: '组织',
-    [PROFILE.GROUP]: '用户组',
-    [PROFILE.DECORATOR]: '装饰器',
-    [PROFILE.TAG]: '标记',
+    [PROFILE.ADMIN]: '管理',
+    [PROFILE.ADMIN_PANEL]: '管理面板',
     [PROFILE.APPLICATION]: '应用',
+    [PROFILE.DECORATOR]: '装饰器',
+    [PROFILE.GROUP]: '用户组',
+    [PROFILE.ORGANIZATION]: '组织',
     [PROFILE.PREFERENCE]: '偏好',
+    [PROFILE.TAG]: '标记',
+    [PROFILE.WELCOME]: '欢迎！',
 };

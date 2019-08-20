@@ -6,11 +6,16 @@
 
 import { EnableForGroup } from "@brontosaurus/react";
 import { Brontosaurus, Token } from "@brontosaurus/web";
+import { SudooFormat } from "@sudoo/internationalization";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
 
 export type IndexMenuBaseProps = {
 
@@ -18,7 +23,18 @@ export type IndexMenuBaseProps = {
     readonly commandCenterName: string;
 };
 
-export type IndexMenuProps = IndexMenuBaseProps & RouteComponentProps;
+type IndexMenuBaseStates = {
+
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, IndexMenuBaseStates>()
+    .connectStates(({ preference }: IStore) => ({
+
+        language: intl.format(preference.language),
+    }));
+
+export type IndexMenuProps = IndexMenuBaseProps & RouteComponentProps & IndexMenuBaseStates;
 
 export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) => {
 
@@ -30,7 +46,7 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
     const welcomeMessage = organization ? `${username} - ${organization}` : username;
 
     return (<div>
-        <NamedTitle about="Welcome!">
+        <NamedTitle about={props.language.get(PROFILE.WELCOME)}>
             {welcomeMessage}
         </NamedTitle>
         <div className={MenuStyle.menuGrid}>
@@ -66,4 +82,4 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
     </div>);
 };
 
-export const IndexMenu: React.ComponentType<IndexMenuBaseProps> = IndexMenuBase as any;
+export const IndexMenu: React.ComponentType<IndexMenuBaseProps> = connector.connect(IndexMenuBase);
