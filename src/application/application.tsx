@@ -4,18 +4,20 @@
  * @description Application
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
 import { ApplicationResponse, fetchApplication, FetchApplicationResponse } from "./repository/application-fetch";
-
-export type ApplicationProp = {
-} & RouteComponentProps;
 
 export type ApplicationState = {
 
@@ -25,7 +27,18 @@ export type ApplicationState = {
     readonly page: number;
 };
 
-export class Application extends React.Component<ApplicationProp, ApplicationState> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+type ConnectedProps = RouteComponentProps & ConnectedStates;
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export class ApplicationBase extends React.Component<ConnectedProps, ApplicationState> {
 
     public readonly state: ApplicationState = {
 
@@ -35,7 +48,7 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
         page: 0,
     };
 
-    public constructor(props: ApplicationProp) {
+    public constructor(props: ConnectedProps) {
 
         super(props);
         this._searchApplication = this._searchApplication.bind(this);
@@ -53,7 +66,12 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
             {this.state.applications.length === 0
                 ? void 0
                 : <NeonTable
-                    headers={['Name', 'Key', 'Expire', 'Action']}
+                    headers={[
+                        this.props.language.get(PROFILE.NAME),
+                        this.props.language.get(PROFILE.KEY),
+                        this.props.language.get(PROFILE.EXPIRE),
+                        this.props.language.get(PROFILE.ACTION),
+                    ]}
                     style={{ marginTop: '1rem' }}>
                     {this._renderApplication()}
                 </NeonTable>}
@@ -82,7 +100,7 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
                 <td><NeonButton
                     onClick={() => this.props.history.push('/admin/application/more/' + encodeURIComponent(application.key))}
                     size={SIZE.RELATIVE}>
-                    More
+                    {this.props.language.get(PROFILE.MORE)}
                 </NeonButton></td>
             </tr>),
         );
@@ -100,3 +118,5 @@ export class Application extends React.Component<ApplicationProp, ApplicationSta
         });
     }
 }
+
+export const Application: React.ComponentType<{}> = connector.connect(ApplicationBase);

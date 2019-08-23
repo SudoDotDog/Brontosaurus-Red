@@ -4,18 +4,20 @@
  * @description Tags
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
 import { fetchTagRepository, FetchTagResponse, TagResponse } from "./repository/tag-fetch";
-
-export type TagsProp = {
-} & RouteComponentProps;
 
 export type TagsState = {
 
@@ -25,7 +27,18 @@ export type TagsState = {
     readonly page: number;
 };
 
-export class Tags extends React.Component<TagsProp, TagsState> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+type ConnectedProps = RouteComponentProps & ConnectedStates;
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export class TagsBase extends React.Component<ConnectedProps, TagsState> {
 
     public readonly state: TagsState = {
 
@@ -35,7 +48,7 @@ export class Tags extends React.Component<TagsProp, TagsState> {
         page: 0,
     };
 
-    public constructor(props: TagsProp) {
+    public constructor(props: ConnectedProps) {
 
         super(props);
         this._searchTags = this._searchTags.bind(this);
@@ -54,7 +67,11 @@ export class Tags extends React.Component<TagsProp, TagsState> {
                 {this.state.tags.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name', 'Description', 'Action']}
+                        headers={[
+                            this.props.language.get(PROFILE.NAME),
+                            this.props.language.get(PROFILE.DESCRIPTION),
+                            this.props.language.get(PROFILE.ACTION),
+                        ]}
                         style={{ marginTop: '1rem' }}>
                         {this._renderTags()}
                     </NeonTable>}
@@ -84,7 +101,7 @@ export class Tags extends React.Component<TagsProp, TagsState> {
                 <td><NeonButton
                     onClick={() => this.props.history.push('/admin/tag/e/' + encodeURIComponent(tag.name))}
                     size={SIZE.RELATIVE}>
-                    Edit
+                    {this.props.language.get(PROFILE.EDIT)}
                 </NeonButton></td>
             </tr>),
         );
@@ -102,3 +119,5 @@ export class Tags extends React.Component<TagsProp, TagsState> {
         });
     }
 }
+
+export const Tags: React.ComponentType<{}> = connector.connect(TagsBase);
