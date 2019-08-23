@@ -4,18 +4,20 @@
  * @description Decorator
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
 import { DecoratorResponse, fetchDecorator, FetchDecoratorResponse } from "./repository/decorator-fetch";
-
-export type DecoratorProp = {
-} & RouteComponentProps;
 
 export type DecoratorState = {
 
@@ -25,7 +27,18 @@ export type DecoratorState = {
     readonly page: number;
 };
 
-export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+type ConnectedProps = RouteComponentProps & ConnectedStates;
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export class DecoratorBase extends React.Component<ConnectedProps, DecoratorState> {
 
     public readonly state: DecoratorState = {
 
@@ -35,7 +48,7 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
         page: 0,
     };
 
-    public constructor(props: DecoratorProp) {
+    public constructor(props: ConnectedProps) {
 
         super(props);
         this._searchDecorator = this._searchDecorator.bind(this);
@@ -54,7 +67,11 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
                 {this.state.decorators.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name', 'Description', 'Action']}
+                        headers={[
+                            this.props.language.get(PROFILE.NAME),
+                            this.props.language.get(PROFILE.DESCRIPTION),
+                            this.props.language.get(PROFILE.ACTION),
+                        ]}
                         style={{ marginTop: '1rem' }}>
                         {this._renderDecorator()}
                     </NeonTable>}
@@ -84,7 +101,7 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
                 <td><NeonButton
                     onClick={() => this.props.history.push('/admin/decorator/e/' + encodeURIComponent(decorator.name))}
                     size={SIZE.RELATIVE}>
-                    Edit
+                    {this.props.language.get(PROFILE.EDIT)}
                 </NeonButton></td>
             </tr>),
         );
@@ -102,3 +119,5 @@ export class Decorator extends React.Component<DecoratorProp, DecoratorState> {
         });
     }
 }
+
+export const Decorator: React.ComponentType<{}> = connector.connect(DecoratorBase);

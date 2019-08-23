@@ -4,18 +4,20 @@
  * @description Group
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
 import { fetchGroup, FetchGroupResponse, GroupResponse } from "./repository/group-fetch";
-
-export type GroupProps = {
-} & RouteComponentProps;
 
 export type GroupStates = {
 
@@ -25,7 +27,18 @@ export type GroupStates = {
     readonly page: number;
 };
 
-export class Group extends React.Component<GroupProps, GroupStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+type ConnectedProps = RouteComponentProps & ConnectedStates;
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
 
     public readonly state: GroupStates = {
 
@@ -35,7 +48,7 @@ export class Group extends React.Component<GroupProps, GroupStates> {
         page: 0,
     };
 
-    public constructor(props: GroupProps) {
+    public constructor(props: ConnectedProps) {
 
         super(props);
         this._searchGroup = this._searchGroup.bind(this);
@@ -54,7 +67,12 @@ export class Group extends React.Component<GroupProps, GroupStates> {
                 {this.state.groups.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name', 'Description', 'Decorators', 'Action']}
+                        headers={[
+                            this.props.language.get(PROFILE.NAME),
+                            this.props.language.get(PROFILE.DESCRIPTION),
+                            this.props.language.get(PROFILE.DECORATORS),
+                            this.props.language.get(PROFILE.ACTION),
+                        ]}
                         style={{ marginTop: '1rem' }}>
                         {this._renderGroup()}
                     </NeonTable>}
@@ -85,7 +103,7 @@ export class Group extends React.Component<GroupProps, GroupStates> {
                 <td><NeonButton
                     onClick={() => this.props.history.push('/admin/group/e/' + encodeURIComponent(group.name))}
                     size={SIZE.RELATIVE}>
-                    Edit
+                    {this.props.language.get(PROFILE.EDIT)}
                 </NeonButton></td>
             </tr>),
         );
@@ -103,3 +121,5 @@ export class Group extends React.Component<GroupProps, GroupStates> {
         });
     }
 }
+
+export const Group: React.ComponentType<{}> = connector.connect(GroupBase);
