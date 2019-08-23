@@ -35,6 +35,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.MORE]: 'More',
     [PROFILE.MY_ACCOUNT]: 'My Account',
     [PROFILE.NAME]: 'Name',
+    [PROFILE.NO]: 'No',
     [PROFILE.ORGANIZATION]: 'Organization',
     [PROFILE.OWNER]: 'Owner',
     [PROFILE.OWNER_DISPLAY]: "Owner Display",
@@ -46,6 +47,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.TAG]: 'Tag',
     [PROFILE.TAGS]: 'Tags',
     [PROFILE.TWO_FACTOR_AUTHORIZATION]: 'Two-Factor Authorization',
+    [PROFILE.TWO_FACTOR_AUTHORIZATION_LITE]: '2FA',
     [PROFILE.TWO_FACTOR_ENABLED]: 'Two-factor Authenticator has been enabled on your account, please scan the following QRCode with your mobile device. This information will only available for you once.',
     [PROFILE.TWO_FACTOR_INTRO]: 'Click the following button to enable or reset 2FA for your account.',
     [PROFILE.SEARCH]: 'Search',
@@ -53,6 +55,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.UPDATE]: 'Update',
     [PROFILE.USERNAME]: 'Username',
     [PROFILE.WELCOME]: 'Welcome!',
+    [PROFILE.YES]: 'Yes',
 };
 
 export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
@@ -84,6 +87,7 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.MORE]: '更多',
     [PROFILE.MY_ACCOUNT]: '我的账户',
     [PROFILE.NAME]: '名字',
+    [PROFILE.NO]: '否',
     [PROFILE.ORGANIZATION]: '组织',
     [PROFILE.OWNER]: '所有者',
     [PROFILE.OWNER_DISPLAY]: "所有者显示名",
@@ -95,6 +99,7 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.TAG]: '标记',
     [PROFILE.TAGS]: '标记',
     [PROFILE.TWO_FACTOR_AUTHORIZATION]: '两步验证',
+    [PROFILE.TWO_FACTOR_AUTHORIZATION_LITE]: '两步验证',
     [PROFILE.TWO_FACTOR_ENABLED]: '两步验证机制已经在您的账号上启用，请使用您的两步验证设备扫描下方所示的二维码，这个二维码只会在这里显示一次。',
     [PROFILE.TWO_FACTOR_INTRO]: '如果要启用两步验证机制，请点击下方的按钮。',
     [PROFILE.SEARCH]: '搜索',
@@ -102,4 +107,5 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.UPDATE]: '更新',
     [PROFILE.USERNAME]: '用户名',
     [PROFILE.WELCOME]: '欢迎！',
+    [PROFILE.YES]: '是',
 };

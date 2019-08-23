@@ -75,7 +75,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                             this.props.language.get(PROFILE.GROUPS),
                             this.props.language.get(PROFILE.DECORATORS),
                             this.props.language.get(PROFILE.TAGS),
-                            '2FA',
+                            this.props.language.get(PROFILE.TWO_FACTOR_AUTHORIZATION_LITE),
                             this.props.language.get(PROFILE.EMAIL),
                             this.props.language.get(PROFILE.PHONE),
                             this.props.language.get(PROFILE.ACTION),
@@ -95,8 +95,13 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
 
     private _renderUser(): JSX.Element[] {
 
-        return this.state.users.map((user: UserResponse) =>
-            (<tr key={user.username}>
+        return this.state.users.map((user: UserResponse) => {
+
+            const twoFA: string = this.props.language.get(
+                Boolean(user.twoFA) ? PROFILE.YES : PROFILE.NO,
+            );
+
+            return (<tr key={user.username}>
                 <td>
                     <ClickableSpan to={'/admin/user/e/' + encodeURIComponent(user.username)}>
                         {user.username}
@@ -106,7 +111,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                 <td>{user.groups}</td>
                 <td>{user.decorators}</td>
                 <td>{user.tags}</td>
-                <td>{Boolean(user.twoFA).toString()}</td>
+                <td>{twoFA}</td>
                 <td>{user.email}</td>
                 <td>{user.phone}</td>
                 <td className={MenuStyle.actionRaw}>
@@ -117,8 +122,8 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                         {this.props.language.get(PROFILE.MORE)}
                     </NeonButton>
                 </td>
-            </tr>),
-        );
+            </tr>);
+        });
     }
 
     private async _searchUser() {
