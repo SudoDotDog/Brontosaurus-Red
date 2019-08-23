@@ -4,19 +4,21 @@
  * @description User
  */
 
+import { SudooFormat } from "@sudoo/internationalization/dist/format";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
 import { fetchAccount, FetchAccountResponse, UserResponse } from "./repository/account-fetch";
-
-export type UserProp = {
-} & RouteComponentProps;
 
 export type UserState = {
 
@@ -26,7 +28,18 @@ export type UserState = {
     readonly page: number;
 };
 
-export class User extends React.Component<UserProp, UserState> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+type ConnectedProps = RouteComponentProps & ConnectedStates;
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export class UserBase extends React.Component<ConnectedProps, UserState> {
 
     public readonly state: UserState = {
 
@@ -36,9 +49,10 @@ export class User extends React.Component<UserProp, UserState> {
         page: 0,
     };
 
-    public constructor(props: UserProp) {
+    public constructor(props: ConnectedProps) {
 
         super(props);
+
         this._searchUser = this._searchUser.bind(this);
     }
 
@@ -55,7 +69,17 @@ export class User extends React.Component<UserProp, UserState> {
                 {this.state.users.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Username', 'Display', 'Groups', 'Decorators', 'Tags', '2FA', 'Email', "Phone", 'Action']}
+                        headers={[
+                            this.props.language.get(PROFILE.USERNAME),
+                            this.props.language.get(PROFILE.DISPLAY_NAME),
+                            this.props.language.get(PROFILE.GROUPS),
+                            this.props.language.get(PROFILE.DECORATORS),
+                            this.props.language.get(PROFILE.TAGS),
+                            '2FA',
+                            this.props.language.get(PROFILE.EMAIL),
+                            this.props.language.get(PROFILE.PHONE),
+                            this.props.language.get(PROFILE.ACTION),
+                        ]}
                         style={{ marginTop: '1rem' }}>
                         {this._renderUser()}
                     </NeonTable>}
@@ -90,7 +114,7 @@ export class User extends React.Component<UserProp, UserState> {
                         className={MenuStyle.actionButton}
                         onClick={() => this.props.history.push('/admin/user/more/' + encodeURIComponent(user.username))}
                         size={SIZE.RELATIVE}>
-                        More
+                        {this.props.language.get(PROFILE.MORE)}
                     </NeonButton>
                 </td>
             </tr>),
@@ -109,3 +133,5 @@ export class User extends React.Component<UserProp, UserState> {
         });
     }
 }
+
+export const User: React.ComponentType<{}> = connector.connect(UserBase);

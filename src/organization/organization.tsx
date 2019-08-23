@@ -4,19 +4,21 @@
  * @description Organization
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchDoubleNew } from "../components/search-di-new";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
 import { fetchOrganization, FetchOrganizationResponse, OrganizationResponse } from "./repository/organization-fetch";
-
-export type OrganizationProps = {
-} & RouteComponentProps;
 
 export type OrganizationStates = {
 
@@ -26,7 +28,18 @@ export type OrganizationStates = {
     readonly page: number;
 };
 
-export class Organization extends React.Component<OrganizationProps, OrganizationStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+type ConnectedProps = RouteComponentProps & ConnectedStates;
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export class OrganizationBase extends React.Component<ConnectedProps, OrganizationStates> {
 
     public readonly state: OrganizationStates = {
 
@@ -36,7 +49,7 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
         page: 0,
     };
 
-    public constructor(props: OrganizationProps) {
+    public constructor(props: ConnectedProps) {
 
         super(props);
         this._searchOrganization = this._searchOrganization.bind(this);
@@ -56,7 +69,14 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                 {this.state.organizations.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name', 'Owner', 'Owner Display', 'Decorators', 'Tags', 'Action']}
+                        headers={[
+                            this.props.language.get(PROFILE.NAME),
+                            this.props.language.get(PROFILE.OWNER),
+                            this.props.language.get(PROFILE.OWNER_DISPLAY),
+                            this.props.language.get(PROFILE.DECORATORS),
+                            this.props.language.get(PROFILE.TAGS),
+                            this.props.language.get(PROFILE.ACTION),
+                        ]}
                         style={{ marginTop: '1rem' }}>
                         {this._renderOrganizations()}
                     </NeonTable>}
@@ -96,7 +116,7 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
                         className={MenuStyle.actionButton}
                         onClick={() => this.props.history.push('/admin/organization/more/' + encodeURIComponent(organization.name))}
                         size={SIZE.RELATIVE}>
-                        More
+                        {this.props.language.get(PROFILE.MORE)}
                     </NeonButton>
                 </td>
             </tr>),
@@ -115,3 +135,5 @@ export class Organization extends React.Component<OrganizationProps, Organizatio
         });
     }
 }
+
+export const Organization: React.ComponentType<{}> = connector.connect(OrganizationBase);

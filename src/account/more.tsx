@@ -19,7 +19,6 @@ import { withdrawOrganizationAccountRepository } from "./repository/withdraw-org
 export type AccountMoreProps = {
 } & RouteComponentProps;
 
-
 const deactivateUser = async (username: string, goBack: () => void) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to deactivate ${username}?`);
