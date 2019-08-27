@@ -55,7 +55,7 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
                 group={['BRONTOSAURUS_SELF_CONTROL']}>
                 <MenuItem
                     description={`As a ${props.accountName} User, change ${username}'s password or modify account settings`}
-                    link="My Account"
+                    link={props.language.get(PROFILE.MY_ACCOUNT)}
                     onClick={() => props.history.push('/me')}
                 />
             </EnableForGroup>
@@ -65,7 +65,7 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
                 group={['BRONTOSAURUS_ORGANIZATION_CONTROL']}>
                 <MenuItem
                     description={`As a organization manager, create account for ${organization} or change ${organization}'s setting`}
-                    link="My Organization"
+                    link={props.language.get(PROFILE.MY_ORGANIZATION)}
                     onClick={() => props.history.push('/current')}
                 />
             </EnableForGroup>
@@ -74,7 +74,7 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
                 group={['BRONTOSAURUS_SUPER_ADMIN']}>
                 <MenuItem
                     description={`As a ${props.commandCenterName} super administrator, access Admin Panel`}
-                    link="Admin Panel"
+                    link={props.language.get(PROFILE.ADMIN_PANEL)}
                     onClick={() => props.history.push('/admin')}
                 />
             </EnableForGroup>

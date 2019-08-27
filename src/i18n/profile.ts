@@ -32,6 +32,7 @@ export enum PROFILE {
     KEY = "KEY",
     MORE = "MORE",
     MY_ACCOUNT = "MY_ACCOUNT",
+    MY_ORGANIZATION = "MY_ORGANIZATION",
     NAME = "NAME",
     NO = "NO",
     ORGANIZATION = "ORGANIZATION",
