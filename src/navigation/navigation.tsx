@@ -32,12 +32,17 @@ const connector = Connector.create<IStore, ConnectedNavStates>()
         language: intl.format(preference.language),
     }));
 
-const renderAuthButton = (token: Token): React.ReactNode => {
+const renderAuthButton = (token: Token, language: SudooFormat): React.ReactNode => {
 
     if (token) {
         return (<span>
             Hello, {token.username} &nbsp;
-                <a className={EntryStyle.signIn} onClick={() => Brontosaurus.logout(true)}>Sign-out</a>
+            <a
+                className={EntryStyle.signIn}
+                onClick={() => Brontosaurus.logout(true)}
+            >
+                {language.get(PROFILE.SIGN_OUT)}
+            </a>
         </span>);
     }
 
@@ -96,7 +101,7 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                 <SubMenuRoute />
             </div>
             <div className={NavStyle.outArea}>
-                {renderAuthButton(token)}
+                {renderAuthButton(token, props.language)}
             </div>
         </div>
     );
