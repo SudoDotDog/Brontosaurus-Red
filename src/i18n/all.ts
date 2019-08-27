@@ -56,6 +56,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.UPDATE]: 'Update',
     [PROFILE.USERNAME]: 'Username',
     [PROFILE.WELCOME]: 'Welcome!',
+    [PROFILE.WELCOME_HELLO]: 'Hello, {}',
     [PROFILE.YES]: 'Yes',
 };
 
@@ -109,5 +110,6 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.UPDATE]: '更新',
     [PROFILE.USERNAME]: '用户名',
     [PROFILE.WELCOME]: '欢迎！',
+    [PROFILE.WELCOME_HELLO]: '嗨，{}',
     [PROFILE.YES]: '是',
 };

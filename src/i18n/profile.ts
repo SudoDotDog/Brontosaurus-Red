@@ -54,5 +54,6 @@ export enum PROFILE {
     UPDATE = "UPDATE",
     USERNAME = "USERNAME",
     WELCOME = "WELCOME",
+    WELCOME_HELLO = "WELCOME_HELLO",
     YES = "YES",
 }
