@@ -39,7 +39,7 @@ const renderAuthButton = (token: Token, language: SudooFormat): React.ReactNode 
             Hello, {token.username} &nbsp;
             <a
                 className={EntryStyle.signIn}
-                onClick={() => Brontosaurus.logout(true)}
+                onClick={() => Brontosaurus.logout()}
             >
                 {language.get(PROFILE.SIGN_OUT)}
             </a>
