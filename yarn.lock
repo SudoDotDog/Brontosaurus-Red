@@ -30,17 +30,17 @@
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-2.3.0.tgz#519bc1ea020c3e0f9ae15837af720520a151d8a4"
   integrity sha512-varRpzKFUyvj1B6ftBvMbBubCp5mVVgTHqy/ll9ig0ZeXux05q6xSOjKKWlcb/g3/xTem9H6/SGYEJpjvBvS0g==
 
-"@brontosaurus/react@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-2.0.0.tgz#055d231de4f3e9e88101be6b948d123b3f1f162a"
-  integrity sha512-eEp3ULCTAfoTaAhjxuRV5chP266DChTn3ROnGYV9+i2zkK73yaqOX+pYmvJhw5BH9rD2OI4nEOGkgGGgzRgh2g==
+"@brontosaurus/react@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-2.0.1.tgz#79bb80bee401c2ed94d7f5f74db4fafa896a9c89"
+  integrity sha512-RT/kjFL8QWm+W+s7zoWu+yfL6MGwKK44dTxPmtBtORlDAoBV0T2oWh7cWUqtiGfVAH69Qpl1VzvPHKjTU3TwBw==
   dependencies:
-    "@brontosaurus/web" "^2.0.0"
+    "@brontosaurus/web" "^2.0.1"
 
-"@brontosaurus/web@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-2.0.0.tgz#9b8880f9239f9dd0ff704f82fe8a867dfc7f48a6"
-  integrity sha512-aKGTRgrQEGrRFBaNNuKkebrH7BhiCnAvg6A6BdkJXYOycUZxbOiKn5kUxGn1pMIPZqPjafaLiLstCHhyLMMfgw==
+"@brontosaurus/web@^2.0.0", "@brontosaurus/web@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-2.0.1.tgz#dd996c89c1c045888cdbb0c6be6061175cf99b76"
+  integrity sha512-SWyOFWKC9w9vpZiJrgiAqRiJkOvcUj/YcFtjZgqvrhNzDz4DiK+pBbKdvUyvkJpUr6qGOwUNmo3/Qd0NYbzywQ==
   dependencies:
     "@brontosaurus/definition" "^2.3.0"
 
