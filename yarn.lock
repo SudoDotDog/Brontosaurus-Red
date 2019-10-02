@@ -30,12 +30,17 @@
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-2.3.0.tgz#519bc1ea020c3e0f9ae15837af720520a151d8a4"
   integrity sha512-varRpzKFUyvj1B6ftBvMbBubCp5mVVgTHqy/ll9ig0ZeXux05q6xSOjKKWlcb/g3/xTem9H6/SGYEJpjvBvS0g==
 
-"@brontosaurus/react@^2.0.6":
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-2.0.6.tgz#417e9e22537ac1c326f64fb9dc5252b9cef304cc"
-  integrity sha512-A0BpUBnbxW4JZodlNJObQjBaMezFklYT3HPID4JRQGdIy9zHp6JrJLnnln+tmGq2iScJrZuQNtWalBYnHu+Lww==
+"@brontosaurus/definition@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-3.0.0.tgz#363293f1a7b7e1310f33325aeb6a32236cbbbdd7"
+  integrity sha512-7S8DnlKgOE8pmZKBoD2pm7pkTZzmkaT6ML0WxxuvtuQhalbUKIq2C8U4YGxlY62UUF7TlElsptFvVwlKH0JStg==
+
+"@brontosaurus/react@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-3.0.0.tgz#c375ef6a1e451631beb3ac73cfed64d61bea7dc6"
+  integrity sha512-szm2Brfxd7PSJy4t82Z+rv96Njp9Mu/08ip8enIefobiAIqHucV1ZhgETDhwMjvFDCoDDl17OmO3S++PEtz5XQ==
   dependencies:
-    "@brontosaurus/web" "^2.0.4"
+    "@brontosaurus/web" "^3.0.0"
 
 "@brontosaurus/web@^2.0.4":
   version "2.0.4"
@@ -43,6 +48,13 @@
   integrity sha512-SllqSQqbDpSdabLXtYlLoS9LukVTx2ramSIVGT1huwgQ2L2xtK7lr7WPQRXk3NdienjfQVs8HuUg9M0lctH47g==
   dependencies:
     "@brontosaurus/definition" "^2.3.0"
+
+"@brontosaurus/web@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-3.0.0.tgz#054262adf3d982a28f38cb717c06e33d24bb7e52"
+  integrity sha512-bm3vh5LnZlg9e45UyBb46EuwxJUSJ/dyHhwEtDdQaA3oV4SolVkSEczzxoFCT2iXZ0iAWoOnNZUUylpXnKERdw==
+  dependencies:
+    "@brontosaurus/definition" "^3.0.0"
 
 "@sudoo/bark@^2.7.1":
   version "2.7.1"
@@ -5652,6 +5664,19 @@ react-router-dom@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.1.1.tgz#53caa089c291f64c1d597a52827b978b54d7c25d"
   integrity sha512-r8R8H0Vt2ISqpk02rR6VZBLk+JZdR6pZV+h9K1y0ISh3/G4GGByNevYBS69x6czcOcWVRcZmXjwY8l9UBCKV+w==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    history "^4.9.0"
+    loose-envify "^1.3.1"
+    prop-types "^15.6.2"
+    react-router "5.1.2"
+    tiny-invariant "^1.0.2"
+    tiny-warning "^1.0.0"
+
+react-router-dom@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.1.2.tgz#06701b834352f44d37fbb6311f870f84c76b9c18"
+  integrity sha512-7BPHAaIwWpZS074UKaw1FjVdZBSVWEk8IuDXdB+OkLb8vd/WRQIpA4ag9WQk61aEfQs47wHyjWUoUGGZxpQXew==
   dependencies:
     "@babel/runtime" "^7.1.2"
     history "^4.9.0"
