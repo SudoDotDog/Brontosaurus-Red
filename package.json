@@ -16,8 +16,8 @@
   },
   "homepage": "https://github.com/SudoDotDog/Brontosaurus-Red#readme",
   "dependencies": {
-    "@brontosaurus/react": "^2.0.6",
-    "@brontosaurus/web": "^2.0.4",
+    "@brontosaurus/react": "^3.0.0",
+    "@brontosaurus/web": "^3.0.0",
     "@sudoo/bark": "^2.7.1",
     "@sudoo/fetch": "^1.13.1",
     "@sudoo/internationalization": "^1.2.0",
