@@ -61,8 +61,6 @@ export class OrganizationSubRegister extends React.Component<OrganizationSubRegi
 
     public render() {
 
-        const organization: string = decodeURIComponent(this._getOrganizationName());
-
         return (<React.Fragment>
             <GoBack />
             <NeonIndicator
@@ -70,7 +68,7 @@ export class OrganizationSubRegister extends React.Component<OrganizationSubRegi
                 covering={Boolean(this.state.cover)}
                 cover={this._renderSticker()}
             >
-                <NeonTitle>Register Sub Account for {organization}</NeonTitle>
+                <NeonTitle>Register Sub Account for {this._getOrganizationName()}</NeonTitle>
                 <NeonSmartForm
                     form={this._getForm()}
                     value={this.state.current}
@@ -193,6 +191,6 @@ export class OrganizationSubRegister extends React.Component<OrganizationSubRegi
     private _getOrganizationName(): string {
 
         const params: any = this.props.match.params;
-        return params.organization;
+        return decodeURIComponent(params.organization);
     }
 }
