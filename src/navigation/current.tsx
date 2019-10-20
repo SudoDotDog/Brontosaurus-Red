@@ -18,11 +18,11 @@ export const CurrentMenu: React.FC<RouteComponentProps> = (props: RouteComponent
         >
             My Organization
         </SubButton>
-        {/* <SubButton
+        <SubButton
             selected={props.location.pathname.indexOf('/current/register') === 0}
             onClick={() => props.history.push('/current/register')}
         >
             Register Sub Account
-        </SubButton> */}
+        </SubButton>
     </React.Fragment>);
 };

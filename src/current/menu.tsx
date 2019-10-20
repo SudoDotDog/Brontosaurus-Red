@@ -18,7 +18,6 @@ export const CurrentMenu: React.FC<CurrentMenuProps> = (props: CurrentMenuProps)
         <MenuItem
             description="Register sub account for your organization"
             link="Register"
-            disabled
             onClick={() => props.history.push('/current/register')}
         />
     </div>);
