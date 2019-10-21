@@ -59,12 +59,12 @@ export const ApplicationMore: React.FC<ApplicationMoreProps> = (props: Applicati
             <MenuItem
                 description={`Refresh "${application}"'s Green Token`}
                 link="Refresh"
-                onClick={() => refreshGreen(application, () => props.history.replace('/admin/application/e/' + params.application))}
+                onClick={() => refreshGreen(application, () => props.history.replace(`/admin/application/e/${params.application}`))}
             />
             <MenuItem
                 description={`Reset "${application}"'s RSA-SHA256 Key`}
                 link="Reset"
-                onClick={() => refreshKey(application, () => props.history.replace('/admin/application/e/' + params.application))}
+                onClick={() => refreshKey(application, () => props.history.replace(`/admin/application/e/${params.application}`))}
             />
         </div>
     </div>);

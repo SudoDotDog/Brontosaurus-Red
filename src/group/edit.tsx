@@ -64,7 +64,10 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
 
         return (
             <div>
-                <GoBack />
+                <GoBack
+                    right="More"
+                    onClickRight={() => this.props.history.push('/admin/group/more/' + encodeURIComponent(this._getGroupName()))}
+                />
                 {this._renderEditableInfos()}
             </div>
         );
