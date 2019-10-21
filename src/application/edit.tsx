@@ -8,11 +8,14 @@ import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { NeonPair } from "@sudoo/neon/input";
+import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
+import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as ApplicationEditStyle from "../../style/application/edit.scss";
+import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
@@ -26,6 +29,7 @@ type ApplicationEditState = {
     readonly loading: boolean;
     readonly cover: NeonStickerCut | undefined;
     readonly application: SingleApplicationFetchResponse | null;
+    readonly groups: string[];
 };
 
 export class ApplicationEdit extends React.Component<ApplicationEditProp, ApplicationEditState> {
@@ -35,6 +39,7 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
         loading: false,
         cover: undefined,
         application: null,
+        groups: [],
     };
 
     public constructor(props: ApplicationEditProp) {
@@ -47,9 +52,11 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
     public async componentDidMount() {
 
         const response: SingleApplicationFetchResponse = await singleFetchApplicationRepository(this._getApplicationKey());
+        const groups: AllGroupsResponse[] = await fetchAllGroups();
 
         this.setState({
             application: response,
+            groups: groups.map((group) => group.name),
         });
     }
 
@@ -117,6 +124,15 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                             })}
                         </div>
                     </div>
+                    <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
+                    <NeonPillGroup
+                        style={{ flexWrap: 'wrap' }}
+                        selected={this.state.application.groups}
+                        onChange={(next: string[]) => this._updateApplication('groups', next)}
+                        addable
+                        removable
+                        options={this.state.groups}
+                    />
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}

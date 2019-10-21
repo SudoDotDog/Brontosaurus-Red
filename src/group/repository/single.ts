@@ -11,6 +11,12 @@ import { joinRoute } from "../../repository/route";
 export type SingleGroupResponse = {
 
     readonly name: string;
+    readonly members: Array<{
+        readonly username: string;
+        readonly displayName: string;
+        readonly phone: string;
+        readonly email: string;
+    }>;
     readonly description?: string;
     readonly decorators: string[];
 };
