@@ -17,6 +17,7 @@ import { redux } from "./state/store";
 
 declare const module: any;
 
+Brontosaurus.enableFallback();
 Brontosaurus.register(getPortalPath(), 'BRONTOSAURUS_RED').check().validate();
 
 const render: (App: any) => void = (App: any): void => {
