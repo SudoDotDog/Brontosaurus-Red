@@ -109,9 +109,12 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                         editable
                         value={this.state.application.expire.toString()}
                         onChange={(value: string) => this._updateApplication('expire', Number(value))} />
-                    {this.state.application.green && <NeonPair
+                    <NeonPair
                         label="Green"
-                        value={this.state.application.green.toString()} />}
+                        value={this.state.application.green.toString()} />
+                    <NeonPair
+                        label="Green Access"
+                        value={this.state.application.greenAccess ? 'Yes' : 'No'} />
                     <div className={ApplicationEditStyle.container}>
                         <div className={ApplicationEditStyle.label}>
                             Public Key

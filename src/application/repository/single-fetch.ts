@@ -9,12 +9,14 @@ import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
 export type SingleApplicationFetchResponse = {
+
     readonly avatar?: string;
     readonly name: string;
     readonly key: string;
     readonly expire: number;
     readonly groups: string[];
     readonly green: string;
+    readonly greenAccess: boolean;
     readonly publicKey: string;
 };
 

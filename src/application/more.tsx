@@ -12,16 +12,17 @@ import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { refreshGreenRepository } from "./repository/refresh-green";
 import { refreshKeyRepository } from "./repository/refresh-key";
+import { toggleGreenAccessRepository } from "./repository/toggle-green-access";
 
 export type ApplicationMoreProps = {
 } & RouteComponentProps;
 
-const refreshGreen = async (organization: string, next: () => void) => {
+const refreshGreen = async (applicationKey: string, next: () => void) => {
 
-    const isConfirm: boolean = window.confirm(`Are you sure to refresh "${organization}"'s green token?`);
+    const isConfirm: boolean = window.confirm(`Are you sure to refresh "${applicationKey}"'s green token?`);
     if (isConfirm) {
         try {
-            await refreshGreenRepository(organization);
+            await refreshGreenRepository(applicationKey);
             next();
         } catch (err) {
             window.alert(err);
@@ -29,12 +30,25 @@ const refreshGreen = async (organization: string, next: () => void) => {
     }
 };
 
-const refreshKey = async (organization: string, next: () => void) => {
+const refreshKey = async (applicationKey: string, next: () => void) => {
 
-    const isConfirm: boolean = window.confirm(`Are you sure to refresh "${organization}"'s secret key?`);
+    const isConfirm: boolean = window.confirm(`Are you sure to refresh "${applicationKey}"'s secret key?`);
     if (isConfirm) {
         try {
-            await refreshKeyRepository(organization);
+            await refreshKeyRepository(applicationKey);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
+
+const toggleGreenAccess = async (applicationKey: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to toggle "${applicationKey}"'s green access?`);
+    if (isConfirm) {
+        try {
+            await toggleGreenAccessRepository(applicationKey);
             next();
         } catch (err) {
             window.alert(err);
@@ -65,6 +79,11 @@ export const ApplicationMore: React.FC<ApplicationMoreProps> = (props: Applicati
                 description={`Reset "${application}"'s RSA-SHA256 Key`}
                 link="Reset"
                 onClick={() => refreshKey(application, () => props.history.replace(`/admin/application/e/${params.application}`))}
+            />
+            <MenuItem
+                description={`Toggle Green Access for "${application}"`}
+                link="Toggle Green Access"
+                onClick={() => toggleGreenAccess(application, () => props.history.replace(`/admin/application/e/${params.application}`))}
             />
         </div>
     </div>);
