@@ -13,6 +13,7 @@ import { NamedTitle } from "../components/named-title";
 import { refreshGreenRepository } from "./repository/refresh-green";
 import { refreshKeyRepository } from "./repository/refresh-key";
 import { toggleGreenAccessRepository } from "./repository/toggle-green-access";
+import { togglePortalAccessRepository } from "./repository/toggle-portal-access";
 
 export type ApplicationMoreProps = {
 } & RouteComponentProps;
@@ -56,6 +57,19 @@ const toggleGreenAccess = async (applicationKey: string, next: () => void) => {
     }
 };
 
+const togglePortalAccess = async (applicationKey: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to toggle "${applicationKey}"'s portal access?`);
+    if (isConfirm) {
+        try {
+            await togglePortalAccessRepository(applicationKey);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
+
 export const ApplicationMore: React.FC<ApplicationMoreProps> = (props: ApplicationMoreProps) => {
 
     const params: any = props.match.params;
@@ -84,6 +98,11 @@ export const ApplicationMore: React.FC<ApplicationMoreProps> = (props: Applicati
                 description={`Toggle Green Access for "${application}"`}
                 link="Toggle Green Access"
                 onClick={() => toggleGreenAccess(application, () => props.history.replace(`/admin/application/e/${params.application}`))}
+            />
+            <MenuItem
+                description={`Toggle Portal Access for "${application}"`}
+                link="Toggle Portal Access"
+                onClick={() => togglePortalAccess(application, () => props.history.replace(`/admin/application/e/${params.application}`))}
             />
         </div>
     </div>);
