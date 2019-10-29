@@ -93,28 +93,38 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                     </NamedTitle>
                     <NeonPair
                         label="Key"
-                        value={this.state.application.key} />
+                        value={this.state.application.key}
+                    />
                     <NeonPair
                         label="Avatar"
                         editable
                         value={this.state.application.avatar || ''}
-                        onChange={(value: string) => this._updateApplication('avatar', value)} />
+                        onChange={(value: string) => this._updateApplication('avatar', value)}
+                    />
                     <NeonPair
                         label="Name"
                         editable
                         value={this.state.application.name}
-                        onChange={(value: string) => this._updateApplication('name', value)} />
+                        onChange={(value: string) => this._updateApplication('name', value)}
+                    />
                     <NeonPair
                         label="Expire"
                         editable
                         value={this.state.application.expire.toString()}
-                        onChange={(value: string) => this._updateApplication('expire', Number(value))} />
+                        onChange={(value: string) => this._updateApplication('expire', Number(value))}
+                    />
                     <NeonPair
                         label="Green"
-                        value={this.state.application.green.toString()} />
+                        value={this.state.application.green.toString()}
+                    />
                     <NeonPair
                         label="Green Access"
-                        value={this.state.application.greenAccess ? 'Yes' : 'No'} />
+                        value={this.state.application.greenAccess ? 'Yes' : 'No'}
+                    />
+                    <NeonPair
+                        label="Portal Access"
+                        value={this.state.application.portalAccess ? 'Yes' : 'No'}
+                    />
                     <div className={ApplicationEditStyle.container}>
                         <div className={ApplicationEditStyle.label}>
                             Public Key
