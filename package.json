@@ -19,7 +19,7 @@
     "@brontosaurus/react": "^3.0.4",
     "@brontosaurus/web": "^3.0.4",
     "@sudoo/bark": "^2.7.1",
-    "@sudoo/fetch": "^1.14.0",
+    "@sudoo/fetch": "^1.14.1",
     "@sudoo/internationalization": "^1.2.0",
     "@sudoo/neon": "^2.10.3",
     "@sudoo/react-force": "^1.6.0",
