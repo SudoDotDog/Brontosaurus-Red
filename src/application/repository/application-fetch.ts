@@ -12,6 +12,8 @@ export type ApplicationResponse = {
     expire: number;
     key: string;
     name: string;
+    greenAccess: boolean;
+    portalAccess: boolean;
 };
 
 export type FetchApplicationResponse = {
