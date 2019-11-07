@@ -10,6 +10,7 @@ import { joinRoute } from "../../repository/route";
 
 export type UserResponse = {
 
+    active: boolean;
     username: string;
     displayName?: string;
     email?: string;

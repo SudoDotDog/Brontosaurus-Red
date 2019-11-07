@@ -12,6 +12,7 @@ import { combineClasses } from "../util/style";
 export type ClickableSpanProps = {
 
     readonly to: string;
+    readonly red?: boolean;
     readonly className?: string;
 
     readonly children?: any;
@@ -24,6 +25,7 @@ export const ClickableSpan: React.FC<ClickableSpanProps> = (props: ClickableSpan
         className={combineClasses(
             props.className,
             MenuStyle.clickableSpan,
+            props.red ? MenuStyle.clickableSpanRed : null,
         )}
     >
         {props.children}

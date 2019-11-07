@@ -4,74 +4,68 @@
  * @description Menu
  */
 
-@import '../common/color.sass';
+@import "../common/color.sass";
 
 .menu-grid {
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1rem;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 1rem;
 }
 
 .menu-item {
-
-    border: 0.3rem solid $navy;
-    display: flex;
-    flex-direction: column;
-    height: 12rem;
+	border: 0.3rem solid $navy;
+	display: flex;
+	flex-direction: column;
+	height: 12rem;
 }
 
 .menu-description {
-
-    padding: 0.6rem;
-    flex: 1;
+	padding: 0.6rem;
+	flex: 1;
 }
 
 .action-raw {
-
-    display: flex;
+	display: flex;
 }
 
 .action-button {
-
-    flex: 1;
+	flex: 1;
 }
 
 .clickable-span {
+	color: $blue;
+	cursor: pointer;
+	text-decoration: none;
 
-    color: $blue;
-    cursor: pointer;
-    text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
+}
 
-    &:hover {
-        text-decoration: underline;
-    }
+.clickable-span-red {
+	color: $red;
 }
 
 .named-title {
-
-    border-left: 0.4rem solid $navy;
-    padding-left: 0.6rem;
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
-    margin: 0.5rem;
+	border-left: 0.4rem solid $navy;
+	padding-left: 0.6rem;
+	padding-top: 0.2rem;
+	padding-bottom: 0.2rem;
+	margin: 0.5rem;
 }
 
 .named-title-about {
-
-    font-size: 1.2rem;
-    color: $darkGray;
+	font-size: 1.2rem;
+	color: $darkGray;
 }
 
 .named-title-name {
-
-    font-size: 2rem;
-    font-weight: bold;
-    color: $navy;
+	font-size: 2rem;
+	font-weight: bold;
+	color: $navy;
 }
 
 .go-back {
-
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }

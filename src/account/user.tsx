@@ -103,7 +103,10 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
 
             return (<tr key={user.username}>
                 <td>
-                    <ClickableSpan to={'/admin/user/e/' + encodeURIComponent(user.username)}>
+                    <ClickableSpan
+                        to={'/admin/user/e/' + encodeURIComponent(user.username)}
+                        red={!user.active}
+                    >
                         {user.username}
                     </ClickableSpan>
                 </td>

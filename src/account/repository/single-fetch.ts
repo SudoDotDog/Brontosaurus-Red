@@ -10,6 +10,7 @@ import { joinRoute } from "../../repository/route";
 
 export type SingleFetchResponse = {
 
+    readonly active: boolean;
     readonly username: string;
     readonly displayName?: string;
     readonly email?: string;

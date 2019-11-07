@@ -102,6 +102,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                         {this.state.user.username}
                     </NamedTitle>
                     <NeonSub>Two-Factor Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
+                    <NeonSub>Account {this.state.user.active ? "Active" : "Deactivated"}</NeonSub>
                     {this._renderOrganization()}
                     {this._renderDetail()}
                     {this._renderInformation()}
