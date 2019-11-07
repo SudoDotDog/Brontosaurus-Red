@@ -10,13 +10,16 @@ import { joinRoute } from "../../repository/route";
 
 export type SingleOrganizationResponse = {
 
+    readonly active: boolean;
     readonly name: string;
     readonly owner: {
+        readonly active: boolean;
         readonly username: string;
         readonly phone: string;
         readonly email: string;
     };
     readonly members: Array<{
+        readonly active: boolean;
         readonly username: string;
         readonly displayName: string;
         readonly phone: string;

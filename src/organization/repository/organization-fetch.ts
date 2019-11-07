@@ -10,8 +10,10 @@ import { joinRoute } from "../../repository/route";
 
 export type OrganizationResponse = {
 
+    readonly active: string;
     readonly name: string;
     readonly owner: string;
+    readonly ownerActive: boolean;
     readonly ownerDisplayName?: string;
     readonly decorators: number;
     readonly tags: number;

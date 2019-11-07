@@ -12,7 +12,7 @@ import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList, NeonTable } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonTitle } from "@sudoo/neon/typography";
+import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
@@ -99,6 +99,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     <NamedTitle about="Editing Organization">
                         {this.state.organization.name}
                     </NamedTitle>
+                    <NeonSub>Organization {this.state.organization.active ? "Active" : "Deactivated"}</NeonSub>
                     {this._renderOwner()}
                     {this._renderLimit()}
                     {this._renderMembers()}
@@ -124,6 +125,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                 list={{
                     Username: (<ClickableSpan
                         to={'/admin/user/e/' + encodeURIComponent(organization.owner.username)}
+                        red={!organization.owner.active}
                     >
                         {organization.owner.username}
                     </ClickableSpan> as any),
@@ -172,6 +174,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                         <td>
                             <ClickableSpan
                                 to={'/admin/user/e/' + encodeURIComponent(member.username)}
+                                red={!member.active}
                             >
                                 {member.username}
                             </ClickableSpan>

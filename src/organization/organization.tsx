@@ -97,6 +97,7 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
                 <td>
                     <ClickableSpan
                         to={'/admin/organization/e/' + encodeURIComponent(organization.name)}
+                        red={!organization.active}
                     >
                         {organization.name}
                     </ClickableSpan>
@@ -104,6 +105,7 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
                 <td>
                     <ClickableSpan
                         to={'/admin/user/e/' + encodeURIComponent(organization.owner)}
+                        red={!organization.ownerActive}
                     >
                         {organization.owner}
                     </ClickableSpan>
