@@ -119,6 +119,7 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
                         <td>
                             <ClickableSpan
                                 to={'/admin/user/e/' + encodeURIComponent(member.username)}
+                                red={!member.active}
                             >
                                 {member.username}
                             </ClickableSpan>

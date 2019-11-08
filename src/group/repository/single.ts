@@ -12,6 +12,7 @@ export type SingleGroupResponse = {
 
     readonly name: string;
     readonly members: Array<{
+        readonly active: boolean;
         readonly username: string;
         readonly displayName: string;
         readonly phone: string;
