@@ -17,6 +17,7 @@ export type SingleFetchResponse = {
     readonly phone?: string;
     readonly organization?: {
         readonly name: string;
+        readonly active: boolean;
         readonly owner: string;
     };
     readonly twoFA: boolean;

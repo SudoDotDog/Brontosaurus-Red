@@ -336,7 +336,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
 
     private _renderOrganization() {
 
-        const user: any = this.state.user;
+        const user: SingleFetchResponse = this.state.user as SingleFetchResponse;
         if (user.organization) {
             return (<React.Fragment>
                 <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
@@ -344,6 +344,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     list={{
                         Name: <ClickableSpan
                             to={'/admin/organization/e/' + encodeURIComponent(user.organization.name)}
+                            red={!user.organization.active}
                         >
                             {user.organization.name}
                         </ClickableSpan> as any,
