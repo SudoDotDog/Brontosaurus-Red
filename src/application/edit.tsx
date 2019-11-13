@@ -146,6 +146,15 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                         removable
                         options={this.state.groups}
                     />
+                    <NeonTitle size={SIZE.MEDIUM}>Requires</NeonTitle>
+                    <NeonPillGroup
+                        style={{ flexWrap: 'wrap' }}
+                        selected={this.state.application.requires}
+                        onChange={(next: string[]) => this._updateApplication('requires', next)}
+                        addable
+                        removable
+                        options={this.state.groups}
+                    />
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
