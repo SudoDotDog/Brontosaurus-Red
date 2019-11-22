@@ -10,6 +10,7 @@ import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { activateAccount } from "./repository/activate";
 import { deactivateAccount } from "./repository/deactivate";
 import { limboAccount, LimboAccountResponse } from "./repository/limbo";
 import { resetAttemptAccount } from "./repository/reset-attempt";
@@ -18,6 +19,19 @@ import { withdrawOrganizationAccountRepository } from "./repository/withdraw-org
 
 export type AccountMoreProps = {
 } & RouteComponentProps;
+
+const activateUser = async (username: string, goBack: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to activate ${username}?`);
+    if (isConfirm) {
+        try {
+            await activateAccount(username);
+            goBack();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
 
 const deactivateUser = async (username: string, goBack: () => void) => {
 
@@ -100,6 +114,11 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
                 description={`Assign ${username} to an (another) organization`}
                 link="Assign"
                 onClick={() => props.history.push('/admin/user/o/' + encodeURIComponent(username))}
+            />
+            <MenuItem
+                description={`Activate ${username}`}
+                link="Activate"
+                onClick={() => activateUser(username, props.history.goBack)}
             />
             <MenuItem
                 description={`Deactivate ${username}`}

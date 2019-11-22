@@ -54,12 +54,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-1.14.1.tgz#a2ace7e12ef7d3060982a091303525378cedf1e3"
   integrity sha512-tqfuRwpzd30RNq6UoaTESKRAfskRXbdAtbwIzrSqOy5JWMxNqLMnaPJIs9Di+iuG/aT+ZiuJfLVeceLJYUsRww==
 
-"@sudoo/internationalization@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/internationalization/-/internationalization-1.2.0.tgz#a3f777218f9424d1d7f7d5019c0d90ff48446a2e"
-  integrity sha512-EMzgpAdplfKB2rIv20CtxWEf+BpmwmbHR9/W+WFn4VdnkrmoFRisV8T8no3Rvs+UyUu5I2KC90WOX/xVH+zUxg==
-  dependencies:
-    "@sudoo/bark" "^2.7.1"
+"@sudoo/internationalization@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@sudoo/internationalization/-/internationalization-1.2.1.tgz#7699959e564956a0865f2d6a2c69baef316edf05"
+  integrity sha512-11lBmDKcgozQo+Ig8YPPyoB3aHAJOgLT/34Kybx6OHCjvoqryK4uUjif/AIaoa3q02S3W8kORBEuJ8KHKmfnxA==
 
 "@sudoo/neon@^2.10.3":
   version "2.10.3"
