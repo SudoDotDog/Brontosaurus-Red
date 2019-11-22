@@ -23,7 +23,7 @@
     "@sudoo/internationalization": "^1.2.1",
     "@sudoo/neon": "^2.10.3",
     "@sudoo/react-force": "^1.6.1",
-    "@sudoo/redux": "^1.4.1",
+    "@sudoo/redux": "^1.4.2",
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
