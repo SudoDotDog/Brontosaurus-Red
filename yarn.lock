@@ -37,10 +37,10 @@
   dependencies:
     "@brontosaurus/web" "^3.0.4"
 
-"@brontosaurus/web@^3.0.4":
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-3.0.4.tgz#8353d44b4879b3418219d57577e0735df72e7caf"
-  integrity sha512-LEKzHsvOkOarNJMcwY5+FvpEXzyxVNU1HMkLscIQ03qkkbOUgApY0KDZo0aecMOOyWYjLLV6/caQ+aIZ8jVMLw==
+"@brontosaurus/web@^3.0.4", "@brontosaurus/web@^3.0.5":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-3.0.5.tgz#99125b947fbb54aad93b0cfc7879e83cdc2063ce"
+  integrity sha512-4MbeKbBgoIgZOpYg2JTdv/EWbYP3YF7ns3CfEu7qbIOvp0VJoYS+rPlZXZjZrkCPSozRdGfMhFq3TDz9MNxo7A==
   dependencies:
     "@brontosaurus/definition" "^3.0.0"
 
