@@ -68,28 +68,28 @@
     jss "^10.0.0-alpha.17"
     jss-preset-default "^10.0.0-alpha.17"
 
-"@sudoo/react-force-dev@^1.6.1":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/react-force-dev/-/react-force-dev-1.6.1.tgz#88a95fe56cc229f0d34f2fc59eda40691ab26c45"
-  integrity sha512-97MyCj0yk1izz/MrYW20Iye8KZBtzbqnccAYJ2WjxUiWUgCT0OESNX5ZaEx5Ijn7ml9dGYHB7ynqUndbVEC0VA==
+"@sudoo/react-force-dev@^1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/react-force-dev/-/react-force-dev-1.6.2.tgz#ecdb32eaca571b99dfe610b426c916471a064293"
+  integrity sha512-0paYyy1DohKksWjL7EScqHx7sjlTgmFwHmB9oK6UT1csA7boZ09UQ5pwsmo+Z0Aum1Kwytsim8g7+7jZU8rEDw==
   dependencies:
     "@types/enzyme" "3.10.3"
     "@types/enzyme-adapter-react-16" "1.0.5"
-    "@types/react" "16.9.11"
-    "@types/react-dom" "16.9.3"
-    "@types/react-router-dom" "^5.1.1"
+    "@types/react" "16.9.15"
+    "@types/react-dom" "16.9.4"
+    "@types/react-router-dom" "^5.1.3"
     enzyme "3.10.0"
     enzyme-adapter-react-16 "1.15.1"
-    react-hot-loader "^4.12.15"
+    react-hot-loader "^4.12.18"
 
-"@sudoo/react-force@^1.6.1":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/react-force/-/react-force-1.6.1.tgz#40d642c3922e2c1a9b5a2cbe84752b9dd1e661bb"
-  integrity sha512-yuHM7pKBYi6LxnvMlQ6A2lHNttovNGuNEmBzr8uLr5buY8HyQg0gw+JCyMc1SIPSg8Ldw4ma/rhhWfSk0MkWXw==
+"@sudoo/react-force@^1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/react-force/-/react-force-1.6.2.tgz#78aba136511a2a8afc64441df627959c2b158982"
+  integrity sha512-Qq54C5/jav6n/m6e34jOL96zNXSXDpcOfueSjwZpTrfeul2JHyXFQdOZxzg23DguBfkH0YHtbD8/fTs8JjhxgQ==
   dependencies:
-    react "16.11.0"
-    react-dom "16.11.0"
-    react-router-dom "^5.1.0"
+    react "16.12.0"
+    react-dom "16.12.0"
+    react-router-dom "^5.1.2"
 
 "@sudoo/redux@^1.4.1":
   version "1.4.2"
@@ -223,14 +223,14 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
-"@types/react-dom@16.9.3":
-  version "16.9.3"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.3.tgz#4006ff0e13958af91313869077c04cb20d9b9d04"
-  integrity sha512-FUuZKXPr9qlzUT9lhuzrZgLjH63TvNn28Ch3MvKG4B+F52zQtO8DtE0Opbncy3xaucNZM2WIPfuNTgkbKx5Brg==
+"@types/react-dom@16.9.4":
+  version "16.9.4"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.4.tgz#0b58df09a60961dcb77f62d4f1832427513420df"
+  integrity sha512-fya9xteU/n90tda0s+FtN5Ym4tbgxpq/hb/Af24dvs6uYnYn+fspaxw5USlw0R8apDNwxsqumdRoCoKitckQqw==
   dependencies:
     "@types/react" "*"
 
-"@types/react-router-dom@^5.1.1", "@types/react-router-dom@^5.1.3":
+"@types/react-router-dom@^5.1.3":
   version "5.1.3"
   resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.1.3.tgz#b5d28e7850bd274d944c0fbbe5d57e6b30d71196"
   integrity sha512-pCq7AkOvjE65jkGS5fQwQhvUp4+4PVD9g39gXLZViP2UqFiFzsEpB3PKf0O6mdbKsewSK8N14/eegisa/0CwnA==
@@ -247,18 +247,10 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*":
+"@types/react@*", "@types/react@16.9.15":
   version "16.9.15"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.15.tgz#aeabb7a50f96c9e31a16079ada20ede9ed602977"
   integrity sha512-WsmM1b6xQn1tG3X2Hx4F3bZwc2E82pJXt5OPs2YJgg71IzvUoKOSSSYOvLXYCg1ttipM+UuA4Lj3sfvqjVxyZw==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^2.2.0"
-
-"@types/react@16.9.11":
-  version "16.9.11"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.11.tgz#70e0b7ad79058a7842f25ccf2999807076ada120"
-  integrity sha512-UBT4GZ3PokTXSWmdgC/GeCGEJXE5ofWyibCcecRLUVN2ZBpXQGVgQGtG2foS7CrTKFKlQVVswLvf7Js6XA/CVQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -5597,17 +5589,17 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@16.11.0:
-  version "16.11.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.11.0.tgz#7e7c4a5a85a569d565c2462f5d345da2dd849af5"
-  integrity sha512-nrRyIUE1e7j8PaXSPtyRKtz+2y9ubW/ghNgqKFHHAHaeP0fpF5uXR+sq8IMRHC+ZUxw7W9NyCDTBtwWxvkb0iA==
+react-dom@16.12.0:
+  version "16.12.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
+  integrity sha512-LMxFfAGrcS3kETtQaCkTKjMiifahaMySFDn71fZUNpPHZQEzmk/GiAeIT8JSOrHB23fnuCOMruL2a8NYlw+8Gw==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.17.0"
+    scheduler "^0.18.0"
 
-react-hot-loader@^4.12.15:
+react-hot-loader@^4.12.18:
   version "4.12.18"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.12.18.tgz#a9029e34af2690d76208f9a35189d73c2dfea6a7"
   integrity sha512-qYD0Qi9lIbg9jLyfmodfqvAQqCBsoPKxAhca8Nxvy2/2pO5Q9r2kM28jN0bbbSnhwK8dJ7FjsfVtXKOxMW+bqw==
@@ -5643,7 +5635,7 @@ react-redux@^7.1.3:
     prop-types "^15.7.2"
     react-is "^16.9.0"
 
-react-router-dom@^5.1.0, react-router-dom@^5.1.2:
+react-router-dom@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.1.2.tgz#06701b834352f44d37fbb6311f870f84c76b9c18"
   integrity sha512-7BPHAaIwWpZS074UKaw1FjVdZBSVWEk8IuDXdB+OkLb8vd/WRQIpA4ag9WQk61aEfQs47wHyjWUoUGGZxpQXew==
@@ -5682,10 +5674,10 @@ react-test-renderer@^16.0.0-0:
     react-is "^16.8.6"
     scheduler "^0.18.0"
 
-react@16.11.0:
-  version "16.11.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.11.0.tgz#d294545fe62299ccee83363599bf904e4a07fdbb"
-  integrity sha512-M5Y8yITaLmU0ynd0r1Yvfq98Rmll6q8AxaEe88c8e7LxO8fZ2cNgmFt0aGAS9wzf1Ao32NKXtCl+/tVVtkxq6g==
+react@16.12.0:
+  version "16.12.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
+  integrity sha512-fglqy3k5E+81pA8s+7K0/T3DBCF0ZDOher1elBFzF7O6arXJgzyu/FW+COxFvAWXJoJN9KIZbT2LXlukwphYTA==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -6024,14 +6016,6 @@ sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
-
-scheduler@^0.17.0:
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.17.0.tgz#7c9c673e4ec781fac853927916d1c426b6f3ddfe"
-  integrity sha512-7rro8Io3tnCPuY4la/NuI5F2yfESpnfZyT6TtkXnSWVkcu0BCDJ+8gk5ozUaFaxpIyNuWAPXrH0yFcSi28fnDA==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
 
 scheduler@^0.18.0:
   version "0.18.0"

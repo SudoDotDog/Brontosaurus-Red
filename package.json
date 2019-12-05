@@ -22,12 +22,12 @@
     "@sudoo/fetch": "^1.14.1",
     "@sudoo/internationalization": "^1.2.1",
     "@sudoo/neon": "^2.10.3",
-    "@sudoo/react-force": "^1.6.1",
+    "@sudoo/react-force": "^1.6.2",
     "@sudoo/redux": "^1.4.1",
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
-    "@sudoo/react-force-dev": "^1.6.1",
+    "@sudoo/react-force-dev": "^1.6.2",
     "@sudoo/triforce": "^2.0.4",
     "@sudoo/webpack-react": "^2.3.1",
     "@types/react-router-dom": "^5.1.3"
