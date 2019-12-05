@@ -30,12 +30,12 @@
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-3.0.0.tgz#363293f1a7b7e1310f33325aeb6a32236cbbbdd7"
   integrity sha512-7S8DnlKgOE8pmZKBoD2pm7pkTZzmkaT6ML0WxxuvtuQhalbUKIq2C8U4YGxlY62UUF7TlElsptFvVwlKH0JStg==
 
-"@brontosaurus/react@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-3.2.0.tgz#1805a7637c297d82691d8fdbb63554dfd31a4ff3"
-  integrity sha512-JaTZvFd57ZdhmWTtKyUUQ0xezxen+czChX1rtOyRS7vrDCAM3Jje4as5HzdH3jyejBy0GpEMoiXEFeSWgdGdfw==
+"@brontosaurus/react@^3.2.3":
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-3.2.3.tgz#39c9388615696e17b94771ee1668d03d4e64c9fe"
+  integrity sha512-jiRBnf4A1CB3/8V1oNljZmuQ5N14Psr11DQfsudlxLQqfshUBpj1dUBlj5y/8HxwMiIYXyGyyoMacuPpmf6wJA==
   dependencies:
-    "@brontosaurus/web" "^3.0.4"
+    "@brontosaurus/web" "^3.0.5"
 
 "@brontosaurus/web@^3.0.4", "@brontosaurus/web@^3.0.5":
   version "3.0.5"
