@@ -121,10 +121,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/tslint-config/-/tslint-config-1.5.7.tgz#fdcdb0cb7e855c1b80f033f7e54c4f1b13140443"
   integrity sha512-Lind50i7vnZT3UgTUaIpL6+3eW8SDSq1YuRMelzke9jaU1AXPqhcXJCdr2MKHUBEeRwTfrsh/aU7r/5WF6k5bw==
 
-"@sudoo/webpack-react@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-2.4.0.tgz#f3b3f926bfbc8917512f0094393a3685ba47a63b"
-  integrity sha512-/dNuRAuZQ21uc2okbir4mrjVJx5NbGDbjekkiYjmMt6Krk4vZrL7eDMB3V4qF/Folx3hvrjsRmuNO5D/+tpRiA==
+"@sudoo/webpack-react@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-2.4.1.tgz#43f5fee807f52b2077f8015bc3ebd55e9e0ef779"
+  integrity sha512-zTRsz5owIYqbEDxP0sJ1YYG/W0+ztQ69XujzpJGpHxVOGNVeEwX2yqQaMz3sxpeZoPiDqBpl+wA6AuGkVnvcRw==
   dependencies:
     awesome-typescript-loader "5.2.1"
     copy-webpack-plugin "5.0.5"
@@ -133,6 +133,7 @@
     mini-css-extract-plugin "0.8.0"
     node-sass "4.13.0"
     optimize-css-assets-webpack-plugin "5.0.3"
+    react-hot-loader "4.12.18"
     sass-loader "7.3.1"
     source-map-loader "0.2.4"
     style-loader "1.0.1"
@@ -5599,7 +5600,7 @@ react-dom@16.12.0:
     prop-types "^15.6.2"
     scheduler "^0.18.0"
 
-react-hot-loader@^4.12.18:
+react-hot-loader@4.12.18, react-hot-loader@^4.12.18:
   version "4.12.18"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.12.18.tgz#a9029e34af2690d76208f9a35189d73c2dfea6a7"
   integrity sha512-qYD0Qi9lIbg9jLyfmodfqvAQqCBsoPKxAhca8Nxvy2/2pO5Q9r2kM28jN0bbbSnhwK8dJ7FjsfVtXKOxMW+bqw==
