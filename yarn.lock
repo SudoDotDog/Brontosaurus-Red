@@ -59,14 +59,14 @@
   resolved "https://registry.yarnpkg.com/@sudoo/internationalization/-/internationalization-1.2.1.tgz#7699959e564956a0865f2d6a2c69baef316edf05"
   integrity sha512-11lBmDKcgozQo+Ig8YPPyoB3aHAJOgLT/34Kybx6OHCjvoqryK4uUjif/AIaoa3q02S3W8kORBEuJ8KHKmfnxA==
 
-"@sudoo/neon@^2.10.3":
-  version "2.10.3"
-  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-2.10.3.tgz#976189de766cf78dd90a73224979a878a6a46a28"
-  integrity sha512-61NAXvaVeAwvPjQeuQPu3TZgvX4b1mCjfyCwZmdvFKkU9u6EifCEnk16Y5DJGXhWFT8mh1P7j8CD2fvx+bHEBg==
+"@sudoo/neon@^2.11.0":
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/neon/-/neon-2.11.0.tgz#241394371c92abc35db438339649854d095a6ef9"
+  integrity sha512-fZ1GK9S7ptf52qB1+FMCjkPVJ66zg3znovhmjM4luUVrmPJE4F/pzl7XG4tyQCdTj6PMmP0lTfUiFFyPuLTZGg==
   dependencies:
     "@sudoo/bark" "^2.7.1"
-    jss "^10.0.0-alpha.17"
-    jss-preset-default "^10.0.0-alpha.17"
+    jss "^10.0.0"
+    jss-preset-default "^10.0.0"
 
 "@sudoo/react-force-dev@^1.6.4":
   version "1.6.4"
@@ -3820,7 +3820,7 @@ jss-plugin-vendor-prefixer@10.0.0:
     css-vendor "^2.0.6"
     jss "10.0.0"
 
-jss-preset-default@^10.0.0-alpha.17:
+jss-preset-default@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/jss-preset-default/-/jss-preset-default-10.0.0.tgz#ea6941b453f70f300087889ff5d81d010bfbf7e3"
   integrity sha512-GgIeSf+0SrR84azME+1fsrmcxvFX8iHqPCqXM8F5Rmg4OwCmGTAVIVPRhdDi3hawqGG47pNd6UkvK0kYb76KpQ==
@@ -3840,7 +3840,7 @@ jss-preset-default@^10.0.0-alpha.17:
     jss-plugin-template "10.0.0"
     jss-plugin-vendor-prefixer "10.0.0"
 
-jss@10.0.0, jss@^10.0.0-alpha.17:
+jss@10.0.0, jss@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/jss/-/jss-10.0.0.tgz#998d5026c02accae15708de83bd6ba57bac977d2"
   integrity sha512-TPpDFsiBjuERiL+dFDq8QCdiF9oDasPcNqCKLGCo/qED3fNYOQ8PX2lZhknyTiAt3tZrfOFbb0lbQ9lTjPZxsQ==
