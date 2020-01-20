@@ -49,10 +49,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.7.1.tgz#84b9db0be3aa7b4d6896ced81d9fa9aac96578ef"
   integrity sha512-0zBFbIQAtu3XNJkFPszdljYXXIPXzR63qypfTwFRupmu3gxgfBMtdPShbQebGuGG0KQEmXasGMBQVi2O0jWbbQ==
 
-"@sudoo/fetch@^1.14.1":
-  version "1.14.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-1.14.1.tgz#a2ace7e12ef7d3060982a091303525378cedf1e3"
-  integrity sha512-tqfuRwpzd30RNq6UoaTESKRAfskRXbdAtbwIzrSqOy5JWMxNqLMnaPJIs9Di+iuG/aT+ZiuJfLVeceLJYUsRww==
+"@sudoo/fetch@^1.14.2":
+  version "1.14.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-1.14.2.tgz#b3576fab203e422b92fad5607a06b6a346006b5d"
+  integrity sha512-pvH1ar+QOYjKydW40nyjhnwRE+2Vh1Fd/5t8Zd8Qs+lq0uCinTefjD0yVbgl6yuxVuyOdJOijsnAIAg1VL+D/g==
 
 "@sudoo/internationalization@^1.2.1":
   version "1.2.1"
