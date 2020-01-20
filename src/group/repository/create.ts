@@ -5,8 +5,7 @@
  */
 
 import { Brontosaurus } from "@brontosaurus/web";
-import { Fetch } from "@sudoo/fetch";
-import { IFetch } from "@sudoo/fetch/dist/declare";
+import { Fetch, IFetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
 export const createGroup = async (name: string, description?: string): Promise<string> => {
