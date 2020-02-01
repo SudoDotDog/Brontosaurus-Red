@@ -1,15 +1,15 @@
 /**
  * @author WMXPY
- * @namespace Brontosaurus_Server
+ * @namespace Brontosaurus_Red
  * @description Placeholder
  * @package Unit Test
  */
 
 import { expect } from 'chai';
 
-describe('p', (): void => {
+describe('placeholder', (): void => {
 
-    it('p', (): void => {
+    it('placeholder', (): void => {
 
         expect(1).to.be.equal(1);
     });
