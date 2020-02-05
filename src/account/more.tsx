@@ -12,6 +12,7 @@ import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { activateAccount } from "./repository/activate";
 import { deactivateAccount } from "./repository/deactivate";
+import { generateTemporaryPasswordRepository, GenerateTemporaryPasswordResponse } from "./repository/generate-temp-password";
 import { limboAccount, LimboAccountResponse } from "./repository/limbo";
 import { resetAttemptAccount } from "./repository/reset-attempt";
 import { removeTwoFAAccount } from "./repository/twoFARemove";
@@ -96,6 +97,20 @@ const withdrawOrganizationUser = async (username: string, next: () => void) => {
     }
 };
 
+const generateTemporaryPassword = async (username: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to generate a temporary password for ${username}`);
+    if (isConfirm) {
+        try {
+            const result: GenerateTemporaryPasswordResponse = await generateTemporaryPasswordRepository(username);
+            alert(`Temporary Password for ${result.username} is ${result.password}`);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
+
 export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps) => {
 
     const params: any = props.match.params;
@@ -144,6 +159,11 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
                 description={`Withdraw ${username}'s organization`}
                 link="Withdraw"
                 onClick={() => withdrawOrganizationUser(username, () => props.history.push('/admin/user/e/' + username))}
+            />
+            <MenuItem
+                description={`Generate a Temporary Password for ${username}`}
+                link="Generate Temporary Password"
+                onClick={() => generateTemporaryPassword(username, () => props.history.push('/admin/user/e/' + username))}
             />
         </div>
     </div>);
