@@ -12,6 +12,7 @@ import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { activateAccount } from "./repository/activate";
 import { deactivateAccount } from "./repository/deactivate";
+import { generateApplicationPasswordRepository, GenerateApplicationPasswordResponse } from "./repository/generate-application-password";
 import { generateTemporaryPasswordRepository, GenerateTemporaryPasswordResponse } from "./repository/generate-temp-password";
 import { limboAccount, LimboAccountResponse } from "./repository/limbo";
 import { resetAttemptAccount } from "./repository/reset-attempt";
@@ -111,6 +112,20 @@ const generateTemporaryPassword = async (username: string, next: () => void) => 
     }
 };
 
+const generateApplicationPassword = async (username: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to generate a application password for ${username}`);
+    if (isConfirm) {
+        try {
+            const result: GenerateApplicationPasswordResponse = await generateApplicationPasswordRepository(username);
+            alert(`Application Password for ${result.username} is ${result.password}`);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
+
 export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps) => {
 
     const params: any = props.match.params;
@@ -164,6 +179,11 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
                 description={`Generate a Temporary Password for ${username}`}
                 link="Generate Temporary Password"
                 onClick={() => generateTemporaryPassword(username, () => props.history.push('/admin/user/e/' + username))}
+            />
+            <MenuItem
+                description={`Generate a Application Password for ${username}`}
+                link="Generate Application Password"
+                onClick={() => generateApplicationPassword(username, () => props.history.push('/admin/user/e/' + username))}
             />
         </div>
     </div>);

@@ -8,6 +8,13 @@ import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
+export type SpecialPasswordResponse = {
+
+    readonly id: string;
+    readonly by: string;
+    readonly expireAt: Date,
+};
+
 export type SingleFetchResponse = {
 
     readonly active: boolean;
@@ -26,6 +33,8 @@ export type SingleFetchResponse = {
     readonly decorators: string[];
     readonly tags: string[];
     readonly groups: string[];
+    readonly temporaryPasswords: SpecialPasswordResponse[];
+    readonly applicationPasswords: SpecialPasswordResponse[];
 };
 
 export const singleFetchRepository = async (username: string): Promise<SingleFetchResponse> => {
@@ -39,5 +48,15 @@ export const singleFetchRepository = async (username: string): Promise<SingleFet
         .add('username', username)
         .fetch();
 
-    return response.account;
+    return {
+        ...response.account,
+        temporaryPasswords: response.account.temporaryPasswords.map((each) => ({
+            ...each,
+            expireAt: new Date(each.expireAt),
+        })),
+        applicationPasswords: response.account.applicationPasswords.map((each) => ({
+            ...each,
+            expireAt: new Date(each.expireAt),
+        })),
+    };
 };

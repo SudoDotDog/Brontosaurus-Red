@@ -9,7 +9,7 @@ import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
-import { NeonSmartList } from "@sudoo/neon/table";
+import { NeonSmartList, NeonTable } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
@@ -21,7 +21,7 @@ import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { editAccountAdminRepository } from "./repository/admin-edit";
-import { singleFetchRepository, SingleFetchResponse } from "./repository/single-fetch";
+import { singleFetchRepository, SingleFetchResponse, SpecialPasswordResponse } from "./repository/single-fetch";
 
 type AccountEditProp = {
 } & RouteComponentProps;
@@ -107,6 +107,8 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     {this._renderDetail()}
                     {this._renderInformation()}
                     {this._renderBeacon()}
+                    {this._renderTemporaryPasswords()}
+                    {this._renderApplicationPasswords()}
                     {this._renderUserGroup()}
                     {this._renderUserDecorator()}
                     {this._renderUserTag()}
@@ -192,6 +194,48 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                         beacons: newBeacon,
                     },
                 })} />
+        </React.Fragment>);
+    }
+
+    private _renderTemporaryPasswords() {
+
+        const user = this.state.user as SingleFetchResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>Temporary Passwords</NeonTitle>
+            <NeonTable
+                headers={[
+                    'ID',
+                    'By',
+                    'Expire At',
+                ]}
+                style={{ marginTop: '1rem' }}>
+                {user.temporaryPasswords.map((each: SpecialPasswordResponse) => <tr key={each.id}>
+                    <td>{each.id}</td>
+                    <td>{each.by}</td>
+                    <td>{each.expireAt.toLocaleString()}</td>
+                </tr>)}
+            </NeonTable>
+        </React.Fragment>);
+    }
+
+    private _renderApplicationPasswords() {
+
+        const user = this.state.user as SingleFetchResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>Application Passwords</NeonTitle>
+            <NeonTable
+                headers={[
+                    'ID',
+                    'By',
+                    'Expire At',
+                ]}
+                style={{ marginTop: '1rem' }}>
+                {user.applicationPasswords.map((each: SpecialPasswordResponse) => <tr key={each.id}>
+                    <td>{each.id}</td>
+                    <td>{each.by}</td>
+                    <td>{each.expireAt.toLocaleString()}</td>
+                </tr>)}
+            </NeonTable>
         </React.Fragment>);
     }
 
