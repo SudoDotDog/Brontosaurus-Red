@@ -13,6 +13,8 @@ export type SpecialPasswordResponse = {
     readonly id: string;
     readonly by: string;
     readonly expireAt: Date,
+    readonly suspendedAt?: Date;
+    readonly suspendedBy?: string;
 };
 
 export type SingleFetchResponse = {
@@ -53,10 +55,12 @@ export const singleFetchRepository = async (username: string): Promise<SingleFet
         temporaryPasswords: response.account.temporaryPasswords.map((each) => ({
             ...each,
             expireAt: new Date(each.expireAt),
+            suspendedAt: each.suspendedAt ? new Date(each.suspendedAt) : undefined,
         })),
         applicationPasswords: response.account.applicationPasswords.map((each) => ({
             ...each,
             expireAt: new Date(each.expireAt),
+            suspendedAt: each.suspendedAt ? new Date(each.suspendedAt) : undefined,
         })),
     };
 };

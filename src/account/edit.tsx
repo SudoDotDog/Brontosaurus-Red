@@ -14,6 +14,7 @@ import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import * as MenuStyle from "../../style/components/menu.scss";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
@@ -22,6 +23,8 @@ import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse, SpecialPasswordResponse } from "./repository/single-fetch";
+import { suspendApplicationPasswordRepository } from "./repository/suspend-application-password";
+import { suspendTemporaryPasswordRepository } from "./repository/suspend-temp-password";
 
 type AccountEditProp = {
 } & RouteComponentProps;
@@ -207,12 +210,24 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     'ID',
                     'By',
                     'Expire At',
+                    'Suspended',
+                    'Action',
                 ]}
                 style={{ marginTop: '1rem' }}>
                 {user.temporaryPasswords.map((each: SpecialPasswordResponse) => <tr key={each.id}>
                     <td>{each.id}</td>
                     <td>{each.by}</td>
                     <td>{each.expireAt.toLocaleString()}</td>
+                    <td>{each.suspendedAt ? `${each.suspendedAt.toLocaleString()} (${each.suspendedBy})` : 'No'}</td>
+                    <td>
+                        {each.suspendedAt ? 'None' : <NeonButton
+                            className={MenuStyle.actionButton}
+                            onClick={() => this._suspendTemporaryPassword(each.id)}
+                            style={{ margin: '2px' }}
+                            size={SIZE.RELATIVE}>
+                            Suspend
+                        </NeonButton>}
+                    </td>
                 </tr>)}
             </NeonTable>
         </React.Fragment>);
@@ -228,12 +243,24 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     'ID',
                     'By',
                     'Expire At',
+                    'Suspended',
+                    'Action',
                 ]}
                 style={{ marginTop: '1rem' }}>
                 {user.applicationPasswords.map((each: SpecialPasswordResponse) => <tr key={each.id}>
                     <td>{each.id}</td>
                     <td>{each.by}</td>
                     <td>{each.expireAt.toLocaleString()}</td>
+                    <td>{each.suspendedAt ? `${each.suspendedAt.toLocaleString()} (${each.suspendedBy})` : 'No'}</td>
+                    <td>
+                        {each.suspendedAt ? 'None' : <NeonButton
+                            className={MenuStyle.actionButton}
+                            onClick={() => this._suspendApplicationPassword(each.id)}
+                            style={{ margin: '2px' }}
+                            size={SIZE.RELATIVE}>
+                            Suspend
+                        </NeonButton>}
+                    </td>
                 </tr>)}
             </NeonTable>
         </React.Fragment>);
@@ -314,6 +341,106 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
             return null;
         }
         return <NeonSticker {...this.state.cover} />;
+    }
+
+    private async _suspendTemporaryPassword(passwordId: string) {
+
+        if (!this.state.user) {
+            return;
+        }
+
+        this.setState({
+            loading: true,
+            cover: undefined,
+        });
+
+        try {
+
+            await suspendTemporaryPasswordRepository(this.state.user.username, passwordId);
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.SUCCEED,
+                    title: "Succeed",
+
+                    peek: {
+                        children: "<-",
+                        expend: "Complete",
+                        onClick: this.props.history.goBack,
+                    },
+                },
+            });
+        } catch (err) {
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.ERROR,
+                    title: "Failed",
+                    info: err.message,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Retry",
+                        onClick: () => this.setState({ cover: undefined }),
+                    },
+                },
+            });
+        } finally {
+
+            this.setState({
+                loading: false,
+            });
+        }
+    }
+
+    private async _suspendApplicationPassword(passwordId: string) {
+
+        if (!this.state.user) {
+            return;
+        }
+
+        this.setState({
+            loading: true,
+            cover: undefined,
+        });
+
+        try {
+
+            await suspendApplicationPasswordRepository(this.state.user.username, passwordId);
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.SUCCEED,
+                    title: "Succeed",
+
+                    peek: {
+                        children: "<-",
+                        expend: "Complete",
+                        onClick: this.props.history.goBack,
+                    },
+                },
+            });
+        } catch (err) {
+
+            this.setState({
+                cover: {
+                    type: SIGNAL.ERROR,
+                    title: "Failed",
+                    info: err.message,
+
+                    peek: {
+                        children: "<-",
+                        expend: "Retry",
+                        onClick: () => this.setState({ cover: undefined }),
+                    },
+                },
+            });
+        } finally {
+
+            this.setState({
+                loading: false,
+            });
+        }
     }
 
     private async _submit() {
