@@ -22,7 +22,7 @@
     "@sudoo/bark": "^2.7.1",
     "@sudoo/fetch": "^1.14.2",
     "@sudoo/internationalization": "^1.3.0",
-    "@sudoo/neon": "^2.12.0",
+    "@sudoo/neon": "^2.12.1",
     "@sudoo/react-force": "^1.6.2",
     "@sudoo/redux": "^1.5.0",
     "react-router-dom": "^5.1.2"
