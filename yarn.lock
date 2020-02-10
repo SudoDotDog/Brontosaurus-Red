@@ -40,10 +40,10 @@
   resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-3.4.2.tgz#4ed2cf70b922c90ba29e82fc6f4158a60362bd0e"
   integrity sha512-2Ok3QIFqkFqpOiqpKJW/xX5Al8VG+8M2ph951zr7o+f+5IggYmu8Kj4qj8Kj61Gfh8YbuuBJs+GHVibPWxd6HQ==
 
-"@sudoo/bark@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.7.1.tgz#84b9db0be3aa7b4d6896ced81d9fa9aac96578ef"
-  integrity sha512-0zBFbIQAtu3XNJkFPszdljYXXIPXzR63qypfTwFRupmu3gxgfBMtdPShbQebGuGG0KQEmXasGMBQVi2O0jWbbQ==
+"@sudoo/bark@^2.7.1", "@sudoo/bark@^2.7.2":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.7.2.tgz#961c4b482dbc00d7c762607c63f7a3eaa8f8811e"
+  integrity sha512-COaH8iYTyutU0bgqhklIQShops+NYHRlCb+XEXkMimlkQuiw2dUY6yATSyiq89vIy74W39FAs/FgHAG4+aJVKA==
 
 "@sudoo/fetch@^1.14.2":
   version "1.14.2"
