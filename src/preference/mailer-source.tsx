@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace Preference
- * @description Mailer Transport
+ * @description Mailer Source
  */
 
 import { SIGNAL } from "@sudoo/neon/declare";
@@ -10,35 +10,34 @@ import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
-import { mailerTransportPreferenceRepository } from "./repository/mailer-transport";
-import { readMailerTransportPreferenceRepository } from "./repository/read-mailer-transport";
+import { mailerSourcePreferenceRepository } from "./repository/mailer-source";
+import { readMailerSourcePreferenceRepository, ReadMailerSourceRepositoryResponse } from "./repository/read-mailer-source";
 
-export type MailerTransportPreferenceStates = {
+export type MailerSourcePreferenceStates = {
 
-    readonly current: {
-        readonly config: string;
-    };
+    readonly current: ReadMailerSourceRepositoryResponse;
     readonly loading: boolean;
     readonly cover: NeonStickerCut | undefined;
     readonly flag: NeonFlagCut | undefined;
 };
 
-export type MailerTransportPreferenceProp = {
+export type MailerSourcePreferenceProp = {
 } & RouteComponentProps;
 
-export class MailerTransportPreference extends React.Component<MailerTransportPreferenceProp, MailerTransportPreferenceStates> {
+export class MailerSourcePreference extends React.Component<MailerSourcePreferenceProp, MailerSourcePreferenceStates> {
 
-    public readonly state: MailerTransportPreferenceStates = {
+    public readonly state: MailerSourcePreferenceStates = {
 
         current: {
-            config: '',
+            resetPassword: '',
+            notification: '',
         },
         loading: false,
         cover: undefined,
         flag: undefined,
     };
 
-    public constructor(props: MailerTransportPreferenceProp) {
+    public constructor(props: MailerSourcePreferenceProp) {
 
         super(props);
 
@@ -47,11 +46,9 @@ export class MailerTransportPreference extends React.Component<MailerTransportPr
 
     public async componentDidMount() {
 
-        const response: string = await readMailerTransportPreferenceRepository();
+        const response: ReadMailerSourceRepositoryResponse = await readMailerSourcePreferenceRepository();
         this.setState({
-            current: {
-                config: response,
-            },
+            current: response,
         });
     }
 
@@ -84,15 +81,16 @@ export class MailerTransportPreference extends React.Component<MailerTransportPr
         const current = this.state.current;
 
         try {
-            const changed: boolean = await mailerTransportPreferenceRepository(
-                current.config,
+            const changes: number = await mailerSourcePreferenceRepository(
+                current.resetPassword,
+                current.notification,
             );
 
             this.setState({
                 cover: {
                     type: SIGNAL.SUCCEED,
                     title: "Succeed",
-                    info: changed ? `Preferences Updated` : `Preferences Not Updated`,
+                    info: `${changes} Preferences Updated`,
 
                     peek: {
                         children: "<-",
@@ -124,9 +122,13 @@ export class MailerTransportPreference extends React.Component<MailerTransportPr
     private _getForm(): NeonFromStructure {
 
         return {
-            config: {
+            resetPassword: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Config',
+                display: 'Reset Password Email',
+            },
+            notification: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Notification Email',
             },
         };
     }

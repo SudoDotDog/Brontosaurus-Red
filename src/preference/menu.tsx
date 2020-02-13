@@ -30,5 +30,10 @@ export const PreferenceMenu: React.FC<PreferenceMenuProps> = (props: PreferenceM
             link="Mailer Transport"
             onClick={() => props.history.push('/admin/preference/mailer-transport')}
         />
+        <MenuItem
+            description="View and manage mailer sources preference setting"
+            link="Mailer Source"
+            onClick={() => props.history.push('/admin/preference/mailer-source')}
+        />
     </div>);
 };
