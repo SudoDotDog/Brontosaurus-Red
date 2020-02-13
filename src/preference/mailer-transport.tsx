@@ -11,11 +11,10 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { mailerTransportPreferenceRepository } from "./repository/mailer-transport";
-import { readNamePreferenceRepository, ReadNamesRepositoryResponse } from "./repository/read-names";
+import { readMailerTransportPreferenceRepository } from "./repository/read-mailer-transport";
+import { ReadNamesRepositoryResponse } from "./repository/read-names";
 
 export type MailerTransportPreferenceStates = {
-
-    readonly initial: ReadNamesRepositoryResponse | undefined;
 
     readonly current: {
         readonly config: string;
@@ -31,8 +30,6 @@ export type MailerTransportPreferenceProp = {
 export class MailerTransportPreference extends React.Component<MailerTransportPreferenceProp, MailerTransportPreferenceStates> {
 
     public readonly state: MailerTransportPreferenceStates = {
-
-        initial: undefined,
 
         current: {
             config: '',
@@ -51,9 +48,11 @@ export class MailerTransportPreference extends React.Component<MailerTransportPr
 
     public async componentDidMount() {
 
-        const response: ReadNamesRepositoryResponse = await readNamePreferenceRepository();
+        const response: string = await readMailerTransportPreferenceRepository();
         this.setState({
-            initial: response,
+            current: {
+                config: response,
+            },
         });
     }
 
@@ -68,10 +67,7 @@ export class MailerTransportPreference extends React.Component<MailerTransportPr
                 submit="Submit"
                 cover={this.state.cover}
                 flag={this.state.flag}
-                value={{
-                    ...this.state.initial,
-                    ...this.state.current,
-                }}
+                value={this.state.current}
                 onChange={(result: any) => this.setState({ current: result })}
                 onSubmit={this._handleSubmit}
             />
