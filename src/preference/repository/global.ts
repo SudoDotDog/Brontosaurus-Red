@@ -14,6 +14,8 @@ export const globalPreferenceRepository = async (
     globalFavicon?: string,
     globalHelpLink?: string,
     globalPrivacyPolicy?: string,
+    indexPage?: string,
+    entryPage?: string,
 ): Promise<number> => {
 
     const response: {
@@ -22,11 +24,13 @@ export const globalPreferenceRepository = async (
         .post
         .json(joinRoute('/preference/global'))
         .bearer(Brontosaurus.hard().raw)
-        .add('globalAvatar', globalAvatar)
-        .add('globalBackgroundImages', globalBackgroundImages)
-        .add('globalFavicon', globalFavicon)
-        .add('globalHelpLink', globalHelpLink)
-        .add('globalPrivacyPolicy', globalPrivacyPolicy)
+        .addIfExist('globalAvatar', globalAvatar)
+        .addIfExist('globalBackgroundImages', globalBackgroundImages)
+        .addIfExist('globalFavicon', globalFavicon)
+        .addIfExist('globalHelpLink', globalHelpLink)
+        .addIfExist('globalPrivacyPolicy', globalPrivacyPolicy)
+        .addIfExist('indexPage', indexPage)
+        .addIfExist('entryPage', entryPage)
         .fetch();
 
     return response.changed;

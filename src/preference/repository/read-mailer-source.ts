@@ -19,7 +19,6 @@ export const readMailerSourcePreferenceRepository = async (): Promise<ReadMailer
     const response: ReadMailerSourceRepositoryResponse = await Fetch
         .get
         .json(joinRoute('/preference/read/mailer-source'))
-        .debugResponse()
         .bearer(Brontosaurus.hard().raw)
         .fetch();
 

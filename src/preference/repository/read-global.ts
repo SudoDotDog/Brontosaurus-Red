@@ -14,6 +14,9 @@ export type ReadGlobalRepositoryResponse = {
     readonly globalBackgroundImages?: string[];
     readonly globalHelpLink?: string;
     readonly globalPrivacyPolicy?: string;
+
+    readonly indexPage?: string;
+    readonly entryPage?: string;
 };
 
 export const readGlobalPreferenceRepository = async (): Promise<ReadGlobalRepositoryResponse> => {

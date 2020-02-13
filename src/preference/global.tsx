@@ -91,6 +91,8 @@ export class GlobalPreference extends React.Component<GlobalPreferenceProp, Glob
                 current.globalFavicon,
                 current.globalHelpLink,
                 current.globalPrivacyPolicy,
+                current.indexPage,
+                current.entryPage,
             );
 
             this.setState({
@@ -144,6 +146,14 @@ export class GlobalPreference extends React.Component<GlobalPreferenceProp, Glob
             globalPrivacyPolicy: {
                 type: INPUT_TYPE.TEXT,
                 display: 'Global Privacy Policy',
+            },
+            indexPage: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Index Page',
+            },
+            entryPage: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Entry Page',
             },
         };
     }
