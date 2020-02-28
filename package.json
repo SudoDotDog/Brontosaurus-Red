@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@sudoo/react-force-dev": "^1.6.4",
-    "@sudoo/triforce": "^2.1.0",
+    "@sudoo/triforce": "^2.2.1",
     "@sudoo/webpack-react": "^2.5.0",
     "@types/react-router-dom": "^5.1.3"
   },
