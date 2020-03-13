@@ -112,11 +112,12 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
         return (<React.Fragment>
             <NeonTitle size={SIZE.MEDIUM}>Members Information</NeonTitle>
             <NeonTable
-                headers={['Username', 'Display', 'Phone', 'Email']}
+                headers={['Namespace', 'Username', 'Display', 'Phone', 'Email']}
                 style={{ marginTop: '1rem' }}>
                 {group.members.map((member) => {
 
                     return (<tr key={member.username}>
+                        <td>{member.namespace}</td>
                         <td>
                             <ClickableSpan
                                 to={buildAdminAccountEdit(member.username, member.namespace)}

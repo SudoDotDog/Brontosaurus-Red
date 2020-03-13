@@ -124,6 +124,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
             <NeonTitle size={SIZE.MEDIUM}>Owner Information</NeonTitle>
             <NeonSmartList
                 list={{
+                    Namespace: organization.owner.namespace,
                     Username: (<ClickableSpan
                         to={buildAdminAccountEdit(organization.owner.username, organization.owner.namespace)}
                         red={!organization.owner.active}
@@ -166,12 +167,13 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
         return (<React.Fragment>
             <NeonTitle size={SIZE.MEDIUM}>Members Information</NeonTitle>
             <NeonTable
-                headers={['Username', 'Display', 'Phone', 'Email', 'Action']}
+                headers={['Namespace', 'Username', 'Display', 'Phone', 'Email', 'Action']}
                 style={{ marginTop: '1rem' }}>
                 {organization.members.map((member) => {
 
                     const isOwner: boolean = member.username === organization.owner.username;
                     return (<tr key={member.username}>
+                        <td>{member.namespace}</td>
                         <td>
                             <ClickableSpan
                                 to={buildAdminAccountEdit(member.username, member.namespace)}

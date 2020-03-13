@@ -71,6 +71,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                     ? void 0
                     : <NeonTable
                         headers={[
+                            this.props.language.get(PROFILE.NAMESPACE),
                             this.props.language.get(PROFILE.USERNAME),
                             this.props.language.get(PROFILE.DISPLAY_NAME),
                             this.props.language.get(PROFILE.GROUPS),
@@ -103,6 +104,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
             );
 
             return (<tr key={user.username}>
+                <td>{user.namespace}</td>
                 <td>
                     <ClickableSpan
                         to={buildAdminAccountEdit(user.username, user.namespace)}
