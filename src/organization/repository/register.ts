@@ -12,6 +12,7 @@ import { joinRoute } from "../../repository/route";
 export const registerSubOrganization = async (
     organizationName: string,
     username: string,
+    namespace: string,
     displayName: string | undefined,
     email: string | undefined,
     phone: string | undefined,
@@ -21,6 +22,7 @@ export const registerSubOrganization = async (
     const obj: Record<string, any> = {
         organization: organizationName,
         username,
+        namespace,
         infos,
     };
 

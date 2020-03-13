@@ -14,13 +14,14 @@ export type GenerateApplicationPasswordResponse = {
     readonly password: string;
 };
 
-export const generateApplicationPasswordRepository = async (username: string): Promise<GenerateApplicationPasswordResponse> => {
+export const generateApplicationPasswordRepository = async (username: string, namespace: string): Promise<GenerateApplicationPasswordResponse> => {
 
     const response: GenerateApplicationPasswordResponse = await Fetch
         .post
         .json(joinRoute('/account/generate-application-password'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
+        .add('namespace', namespace)
         .fetch();
 
     return response;

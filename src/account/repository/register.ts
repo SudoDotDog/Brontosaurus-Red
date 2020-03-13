@@ -16,6 +16,7 @@ export type RegisterRepositoryResponse = {
 
 export const registerRepository = async (
     username: string,
+    namespace: string,
     displayName: string | undefined,
     password: string,
     email: string,
@@ -27,6 +28,7 @@ export const registerRepository = async (
 
     const obj: Record<string, any> = {
         username,
+        namespace,
         password,
         email,
         phone,

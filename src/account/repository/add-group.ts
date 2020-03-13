@@ -8,7 +8,7 @@ import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
-export const addGroup = async (username: string, group: string): Promise<string> => {
+export const addGroup = async (username: string, namespace: string, group: string): Promise<string> => {
 
     const response: {
         account: string;
@@ -17,6 +17,7 @@ export const addGroup = async (username: string, group: string): Promise<string>
         .json(joinRoute('/account/add-group/'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
+        .add('namespace', namespace)
         .add('group', group)
         .fetch();
 

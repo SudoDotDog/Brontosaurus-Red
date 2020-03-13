@@ -14,13 +14,14 @@ export type SetOrganizationResponse = {
     readonly organization: string;
 };
 
-export const setOrganizationRepository = async (username: string, organization: string): Promise<SetOrganizationResponse> => {
+export const setOrganizationRepository = async (username: string, namespace: string, organization: string): Promise<SetOrganizationResponse> => {
 
     const response: SetOrganizationResponse = await Fetch
         .post
         .json(joinRoute('/account/set-organization'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
+        .add('namespace', namespace)
         .add('organization', organization)
         .fetch();
 

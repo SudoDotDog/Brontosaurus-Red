@@ -8,7 +8,7 @@ import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
-export const deactivateAccount = async (username: string): Promise<string> => {
+export const deactivateAccount = async (username: string, namespace: string): Promise<string> => {
 
     const response: {
         deactivated: string;
@@ -17,6 +17,7 @@ export const deactivateAccount = async (username: string): Promise<string> => {
         .json(joinRoute('/account/deactivate'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
+        .add('namespace', namespace)
         .fetch();
 
     return response.deactivated;

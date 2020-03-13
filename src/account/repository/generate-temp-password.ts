@@ -14,13 +14,14 @@ export type GenerateTemporaryPasswordResponse = {
     readonly password: string;
 };
 
-export const generateTemporaryPasswordRepository = async (username: string): Promise<GenerateTemporaryPasswordResponse> => {
+export const generateTemporaryPasswordRepository = async (username: string, namespace: string): Promise<GenerateTemporaryPasswordResponse> => {
 
     const response: GenerateTemporaryPasswordResponse = await Fetch
         .post
         .json(joinRoute('/account/generate-temporary-password'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
+        .add('namespace', namespace)
         .fetch();
 
     return response;

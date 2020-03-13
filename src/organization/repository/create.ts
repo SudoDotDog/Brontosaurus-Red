@@ -8,7 +8,7 @@ import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
-export const createOrganization = async (name: string, owner: string): Promise<string> => {
+export const createOrganization = async (name: string, owner: string, ownerNamespace: string): Promise<string> => {
 
     const response: {
         organization: string;
@@ -18,6 +18,7 @@ export const createOrganization = async (name: string, owner: string): Promise<s
         .bearer(Brontosaurus.hard().raw)
         .add('name', name)
         .add('owner', owner)
+        .add('ownerNamespace', ownerNamespace)
         .fetch();
 
     return response.organization;

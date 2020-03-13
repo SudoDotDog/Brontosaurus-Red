@@ -21,6 +21,7 @@ export type SingleFetchResponse = {
 
     readonly active: boolean;
     readonly username: string;
+    readonly namespace: string;
     readonly displayName?: string;
     readonly email?: string;
     readonly phone?: string;
@@ -39,7 +40,7 @@ export type SingleFetchResponse = {
     readonly applicationPasswords: SpecialPasswordResponse[];
 };
 
-export const singleFetchRepository = async (username: string): Promise<SingleFetchResponse> => {
+export const singleFetchRepository = async (username: string, namespace: string): Promise<SingleFetchResponse> => {
 
     const response: {
         account: SingleFetchResponse;
@@ -48,6 +49,7 @@ export const singleFetchRepository = async (username: string): Promise<SingleFet
         .json(joinRoute('/account/single'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
+        .add('namespace', namespace)
         .fetch();
 
     return {

@@ -13,13 +13,14 @@ export type WithdrawOrganizationAccountResponse = {
     readonly withdraw: string;
 };
 
-export const withdrawOrganizationAccountRepository = async (username: string): Promise<WithdrawOrganizationAccountResponse> => {
+export const withdrawOrganizationAccountRepository = async (username: string, namespace: string): Promise<WithdrawOrganizationAccountResponse> => {
 
     const response: WithdrawOrganizationAccountResponse = await Fetch
         .post
         .json(joinRoute('/account/withdraw-organization'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
+        .add('namespace', namespace)
         .fetch();
 
     return response;

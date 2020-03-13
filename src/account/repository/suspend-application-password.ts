@@ -13,13 +13,14 @@ export type SuspendApplicationPasswordResponse = {
     readonly username: string;
 };
 
-export const suspendApplicationPasswordRepository = async (username: string, passwordId: string): Promise<SuspendApplicationPasswordResponse> => {
+export const suspendApplicationPasswordRepository = async (username: string, namespace: string, passwordId: string): Promise<SuspendApplicationPasswordResponse> => {
 
     const response: SuspendApplicationPasswordResponse = await Fetch
         .post
         .json(joinRoute('/account/suspend-application-password'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
+        .add('namespace', namespace)
         .add('passwordId', passwordId)
         .fetch();
 

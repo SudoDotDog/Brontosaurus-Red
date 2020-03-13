@@ -13,13 +13,14 @@ export type LimboAccountResponse = {
     readonly removed: string;
 };
 
-export const removeTwoFAAccount = async (username: string): Promise<string> => {
+export const removeTwoFAAccount = async (username: string, namespace: string): Promise<string> => {
 
     const response: LimboAccountResponse = await Fetch
         .post
         .json(joinRoute('/account/remove-2fa'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
+        .add('namespace', namespace)
         .fetch();
 
     return response.removed;

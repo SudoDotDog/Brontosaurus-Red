@@ -14,13 +14,14 @@ export type LimboAccountResponse = {
     readonly tempPassword: string;
 };
 
-export const limboAccount = async (username: string): Promise<LimboAccountResponse> => {
+export const limboAccount = async (username: string, namespace: string): Promise<LimboAccountResponse> => {
 
     const response: LimboAccountResponse = await Fetch
         .post
         .json(joinRoute('/account/limbo'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
+        .add('namespace', namespace)
         .fetch();
 
     return response;

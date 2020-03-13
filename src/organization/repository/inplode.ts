@@ -12,6 +12,7 @@ import { joinRoute } from "../../repository/route";
 export const inplodeOrganization = async (
     name: string,
     username: string,
+    namespace: string,
     displayName: string | undefined,
     email: string | undefined,
     phone: string | undefined,
@@ -22,6 +23,7 @@ export const inplodeOrganization = async (
     const obj: Record<string, any> = {
         name,
         username,
+        namespace,
         infos,
         tags,
     };
