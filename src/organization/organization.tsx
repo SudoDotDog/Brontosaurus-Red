@@ -18,6 +18,7 @@ import { SearchDoubleNew } from "../components/search-di-new";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { buildAdminAccountEdit } from "../util/path";
 import { fetchOrganization, FetchOrganizationResponse, OrganizationResponse } from "./repository/organization-fetch";
 
 export type OrganizationStates = {
@@ -104,7 +105,7 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
                 </td>
                 <td>
                     <ClickableSpan
-                        to={'/admin/user/e/' + encodeURIComponent(organization.owner)}
+                        to={buildAdminAccountEdit(organization.owner, organization.ownerNamespace)}
                         red={!organization.ownerActive}
                     >
                         {organization.owner}

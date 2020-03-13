@@ -16,6 +16,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
 import { fetchOrganization, FetchOrganizationResponse, OrganizationResponse } from "../organization/repository/organization-fetch";
+import { buildAdminAccountEdit } from "../util/path";
 import { setOrganizationRepository } from "./repository/set-organization";
 
 export type AccountOrganizationAssignProps = {
@@ -111,6 +112,7 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
     private async _assign(organization: string) {
 
         const username: string = this._getUsername();
+        const namespace: string = this._getNamespace();
         const validation: boolean = window.confirm(`Assign "${username}" to "${organization}"?`);
 
         this.setState({
@@ -131,7 +133,7 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
                         peek: {
                             children: "<-",
                             expend: "Complete",
-                            onClick: () => this.props.history.push('/admin/user/e/' + username),
+                            onClick: () => this.props.history.push(buildAdminAccountEdit(username, namespace)),
                         },
                     },
                 });
@@ -174,5 +176,11 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
 
         const params: any = this.props.match.params;
         return params.username;
+    }
+
+    private _getNamespace(): string {
+
+        const params: any = this.props.match.params;
+        return params.namespace;
     }
 }

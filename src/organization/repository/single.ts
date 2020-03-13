@@ -22,6 +22,7 @@ export type SingleOrganizationResponse = {
     readonly members: Array<{
         readonly active: boolean;
         readonly username: string;
+        readonly namespace: string;
         readonly displayName: string;
         readonly phone: string;
         readonly email: string;

@@ -17,6 +17,7 @@ import { setOrganizationRepository } from "../account/repository/set-organizatio
 import { fetchStandaloneAccount, FetchStandaloneAccountResponse, StandaloneAccountResponse } from "../account/repository/standalone-account-fetch";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
+import { buildAdminAccountEdit } from "../util/path";
 
 export type UserProp = {
 } & RouteComponentProps;
@@ -104,7 +105,7 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
                 <td>{user.phone}</td>
                 <td>
                     <NeonButton
-                        onClick={() => this._addTo(user.username)}
+                        onClick={() => this._addTo(user.username, user.namespace)}
                         size={SIZE.RELATIVE}>
                         Add To
                     </NeonButton>
@@ -113,7 +114,7 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
         );
     }
 
-    private async _addTo(username: string) {
+    private async _addTo(username: string, namespace: string) {
 
         const organization: string = this._getOrganizationName();
         const validation: boolean = window.confirm(`Add "${username}" to "${organization}"?`);
@@ -136,7 +137,7 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
                         peek: {
                             children: "<-",
                             expend: "Complete",
-                            onClick: () => this.props.history.push('/admin/user/e/' + username),
+                            onClick: () => this.props.history.push(buildAdminAccountEdit(username, namespace)),
                         },
                     },
                 });

@@ -18,6 +18,7 @@ import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
+import { buildAdminAccountEdit } from "../util/path";
 import { singleGroup, SingleGroupResponse } from "./repository/single";
 import { updateGroupRepository } from "./repository/update";
 
@@ -118,7 +119,7 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
                     return (<tr key={member.username}>
                         <td>
                             <ClickableSpan
-                                to={'/admin/user/e/' + encodeURIComponent(member.username)}
+                                to={buildAdminAccountEdit(member.username, member.namespace)}
                                 red={!member.active}
                             >
                                 {member.username}

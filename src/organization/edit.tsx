@@ -21,6 +21,7 @@ import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
+import { buildAdminAccountEdit } from "../util/path";
 import { setOwnerRepository } from "./repository/set-owner";
 import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
 import { updateOrganizationRepository } from "./repository/update";
@@ -124,7 +125,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
             <NeonSmartList
                 list={{
                     Username: (<ClickableSpan
-                        to={'/admin/user/e/' + encodeURIComponent(organization.owner.username)}
+                        to={buildAdminAccountEdit(organization.owner.username, organization.owner.namespace)}
                         red={!organization.owner.active}
                     >
                         {organization.owner.username}
@@ -173,7 +174,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     return (<tr key={member.username}>
                         <td>
                             <ClickableSpan
-                                to={'/admin/user/e/' + encodeURIComponent(member.username)}
+                                to={buildAdminAccountEdit(member.username, member.namespace)}
                                 red={!member.active}
                             >
                                 {member.username}

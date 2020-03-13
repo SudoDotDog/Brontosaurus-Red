@@ -10,6 +10,7 @@ import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { buildAdminAccountAssign, buildAdminAccountEdit } from "../util/path";
 import { activateAccount } from "./repository/activate";
 import { deactivateAccount } from "./repository/deactivate";
 import { generateApplicationPasswordRepository, GenerateApplicationPasswordResponse } from "./repository/generate-application-password";
@@ -130,11 +131,12 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
 
     const params: any = props.match.params;
     const username: string = decodeURIComponent(params.username);
+    const namespace: string = decodeURIComponent(params.namespace);
 
     return (<div>
         <GoBack
             right="Edit"
-            onClickRight={() => props.history.push('/admin/user/e/' + encodeURIComponent(username))}
+            onClickRight={() => props.history.push(buildAdminAccountEdit(username, namespace))}
         />
         <NamedTitle about="More About Account">
             {username}
@@ -143,7 +145,7 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
             <MenuItem
                 description={`Assign ${username} to an (another) organization`}
                 link="Assign"
-                onClick={() => props.history.push('/admin/user/o/' + encodeURIComponent(username))}
+                onClick={() => props.history.push(buildAdminAccountAssign(username, namespace))}
             />
             <MenuItem
                 description={`Activate ${username}`}
@@ -173,17 +175,17 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
             <MenuItem
                 description={`Withdraw ${username}'s organization`}
                 link="Withdraw"
-                onClick={() => withdrawOrganizationUser(username, () => props.history.push('/admin/user/e/' + username))}
+                onClick={() => withdrawOrganizationUser(username, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
             />
             <MenuItem
                 description={`Generate a Temporary Password for ${username}`}
                 link="Generate Temporary Password"
-                onClick={() => generateTemporaryPassword(username, () => props.history.push('/admin/user/e/' + username))}
+                onClick={() => generateTemporaryPassword(username, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
             />
             <MenuItem
                 description={`Generate a Application Password for ${username}`}
                 link="Generate Application Password"
-                onClick={() => generateApplicationPassword(username, () => props.history.push('/admin/user/e/' + username))}
+                onClick={() => generateApplicationPassword(username, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
             />
         </div>
     </div>);

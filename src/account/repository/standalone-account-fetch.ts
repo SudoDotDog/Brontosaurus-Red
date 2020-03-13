@@ -9,11 +9,12 @@ import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
 export type StandaloneAccountResponse = {
-    username: string;
-    email?: string;
-    phone?: string;
-    twoFA: boolean;
-    groups: number;
+    readonly username: string;
+    readonly namespace: string;
+    readonly email?: string;
+    readonly phone?: string;
+    readonly twoFA: boolean;
+    readonly groups: number;
 };
 
 export type FetchStandaloneAccountResponse = {

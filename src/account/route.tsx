@@ -17,8 +17,8 @@ export const UserRoute: React.FC = () => {
     return (<React.Fragment>
         <Route path="/admin/user" exact component={User} />
         <Route path="/admin/user/new" exact component={Register} />
-        <Route path="/admin/user/e/:username" exact component={AccountEdit} />
+        <Route path="/admin/user/e/:namespace/:username" exact component={AccountEdit} />
         <Route path="/admin/user/more/:username" exact component={AccountMore} />
-        <Route path="/admin/user/o/:username" exact component={AccountOrganizationAssign} />
+        <Route path="/admin/user/o/:namespace/:username" exact component={AccountOrganizationAssign} />
     </React.Fragment>);
 };
