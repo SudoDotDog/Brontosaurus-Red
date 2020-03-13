@@ -4,6 +4,7 @@
  * @description Create
  */
 
+import { DEFAULT_BRONTOSAURUS_NAMESPACE } from "@brontosaurus/definition";
 import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
@@ -43,7 +44,7 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
                     form={this._getForm()}
                     value={this.state.current}
                     onChange={(value: any) => this.setState({ current: value })}
-                    onSubmit={() => this._submit(this.state.current.name, this.state.current.owner)}
+                    onSubmit={() => this._submit(this.state.current.name, this.state.current.owner, this.state.current.ownerNamespace)}
                 />
             </React.Fragment>
         );
@@ -60,10 +61,15 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
                 type: INPUT_TYPE.TEXT,
                 display: 'Owner Username',
             },
+            ownerNamespace: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Owner Namespace',
+                defaultValue: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
+            },
         };
     }
 
-    private async _submit(name: string, owner: string) {
+    private async _submit(name: string, owner: string, ownerNamespace: string) {
 
         this.setState({
             loading: true,
@@ -71,7 +77,7 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
 
         try {
 
-            const id: string = await createOrganization(name, owner);
+            const id: string = await createOrganization(name, owner, ownerNamespace);
 
             this.setState({
                 cover: {

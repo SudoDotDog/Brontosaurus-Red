@@ -4,6 +4,7 @@
  * @description Register
  */
 
+import { DEFAULT_BRONTOSAURUS_NAMESPACE } from "@brontosaurus/definition";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
@@ -127,6 +128,11 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
                 type: INPUT_TYPE.TEXT,
                 display: 'Username',
             },
+            namespace: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Namespace',
+                defaultValue: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
+            },
             displayName: {
                 type: INPUT_TYPE.TEXT,
                 display: 'Display Name',
@@ -197,11 +203,27 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             };
         }, {} as Record<string, string>);
 
+        if (!response.username) {
+            alert('username required');
+            return;
+        }
+
+        if (!response.namespace) {
+            alert('namespace required');
+            return;
+        }
+
+        if (!response.password) {
+            alert('password required');
+            return;
+        }
+
         try {
             const id: string = await registerRepository(
-                response.username || '',
+                response.username,
+                response.namespace,
                 response.displayName,
-                response.password || '',
+                response.password,
                 response.email,
                 response.phone,
                 parsed,

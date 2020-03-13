@@ -122,7 +122,7 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
 
         if (validation) {
             try {
-                const response = await setOrganizationRepository(username, organization);
+                const response = await setOrganizationRepository(username, namespace, organization);
 
                 this.setState({
                     cover: {

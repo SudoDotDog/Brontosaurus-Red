@@ -23,12 +23,12 @@ import { withdrawOrganizationAccountRepository } from "./repository/withdraw-org
 export type AccountMoreProps = {
 } & RouteComponentProps;
 
-const activateUser = async (username: string, goBack: () => void) => {
+const activateUser = async (username: string, namespace: string, goBack: () => void) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to activate ${username}?`);
     if (isConfirm) {
         try {
-            await activateAccount(username);
+            await activateAccount(username, namespace);
             goBack();
         } catch (err) {
             window.alert(err);
@@ -36,12 +36,12 @@ const activateUser = async (username: string, goBack: () => void) => {
     }
 };
 
-const deactivateUser = async (username: string, goBack: () => void) => {
+const deactivateUser = async (username: string, namespace: string, goBack: () => void) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to deactivate ${username}?`);
     if (isConfirm) {
         try {
-            await deactivateAccount(username);
+            await deactivateAccount(username, namespace);
             goBack();
         } catch (err) {
             window.alert(err);
@@ -49,12 +49,12 @@ const deactivateUser = async (username: string, goBack: () => void) => {
     }
 };
 
-const limboUser = async (username: string) => {
+const limboUser = async (username: string, namespace: string) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to reset ${username}'s password?`);
     if (isConfirm) {
         try {
-            const response: LimboAccountResponse = await limboAccount(username);
+            const response: LimboAccountResponse = await limboAccount(username, namespace);
             window.alert(`${username}'s temp new password is ${response.tempPassword}`);
         } catch (err) {
             window.alert(err);
@@ -62,36 +62,36 @@ const limboUser = async (username: string) => {
     }
 };
 
-const twoFARemoveUser = async (username: string) => {
+const twoFARemoveUser = async (username: string, namespace: string) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to remove ${username}'s Two-Factor authenticator?`);
     if (isConfirm) {
         try {
-            await removeTwoFAAccount(username);
+            await removeTwoFAAccount(username, namespace);
         } catch (err) {
             window.alert(err);
         }
     }
 };
 
-const resetAttemptUser = async (username: string) => {
+const resetAttemptUser = async (username: string, namespace: string) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to reset ${username}'s Sign-in attempt count?`);
     if (isConfirm) {
         try {
-            await resetAttemptAccount(username);
+            await resetAttemptAccount(username, namespace);
         } catch (err) {
             window.alert(err);
         }
     }
 };
 
-const withdrawOrganizationUser = async (username: string, next: () => void) => {
+const withdrawOrganizationUser = async (username: string, namespace: string, next: () => void) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to remove ${username}'s organization?`);
     if (isConfirm) {
         try {
-            await withdrawOrganizationAccountRepository(username);
+            await withdrawOrganizationAccountRepository(username, namespace);
             next();
         } catch (err) {
             window.alert(err);
@@ -99,12 +99,12 @@ const withdrawOrganizationUser = async (username: string, next: () => void) => {
     }
 };
 
-const generateTemporaryPassword = async (username: string, next: () => void) => {
+const generateTemporaryPassword = async (username: string, namespace: string, next: () => void) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to generate a temporary password for ${username}`);
     if (isConfirm) {
         try {
-            const result: GenerateTemporaryPasswordResponse = await generateTemporaryPasswordRepository(username);
+            const result: GenerateTemporaryPasswordResponse = await generateTemporaryPasswordRepository(username, namespace);
             alert(`Temporary Password for ${result.username} is ${result.password}`);
             next();
         } catch (err) {
@@ -113,12 +113,12 @@ const generateTemporaryPassword = async (username: string, next: () => void) => 
     }
 };
 
-const generateApplicationPassword = async (username: string, next: () => void) => {
+const generateApplicationPassword = async (username: string, namespace: string, next: () => void) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to generate a application password for ${username}`);
     if (isConfirm) {
         try {
-            const result: GenerateApplicationPasswordResponse = await generateApplicationPasswordRepository(username);
+            const result: GenerateApplicationPasswordResponse = await generateApplicationPasswordRepository(username, namespace);
             alert(`Application Password for ${result.username} is ${result.password}`);
             next();
         } catch (err) {
@@ -150,42 +150,42 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
             <MenuItem
                 description={`Activate ${username}`}
                 link="Activate"
-                onClick={() => activateUser(username, props.history.goBack)}
+                onClick={() => activateUser(username, namespace, props.history.goBack)}
             />
             <MenuItem
                 description={`Deactivate ${username}`}
                 link="Deactivate"
-                onClick={() => deactivateUser(username, props.history.goBack)}
+                onClick={() => deactivateUser(username, namespace, props.history.goBack)}
             />
             <MenuItem
                 description={`Reset ${username}'s password and assign a temporary password.`}
                 link="Limbo"
-                onClick={() => limboUser(username)}
+                onClick={() => limboUser(username, namespace)}
             />
             <MenuItem
                 description={`Remove ${username}'s two-factoring authorization`}
                 link="Remove 2FA"
-                onClick={() => twoFARemoveUser(username)}
+                onClick={() => twoFARemoveUser(username, namespace)}
             />
             <MenuItem
                 description={`Reset ${username}'s login attempt points`}
                 link="Reset Attempt"
-                onClick={() => resetAttemptUser(username)}
+                onClick={() => resetAttemptUser(username, namespace)}
             />
             <MenuItem
                 description={`Withdraw ${username}'s organization`}
                 link="Withdraw"
-                onClick={() => withdrawOrganizationUser(username, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
+                onClick={() => withdrawOrganizationUser(username, namespace, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
             />
             <MenuItem
                 description={`Generate a Temporary Password for ${username}`}
                 link="Generate Temporary Password"
-                onClick={() => generateTemporaryPassword(username, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
+                onClick={() => generateTemporaryPassword(username, namespace, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
             />
             <MenuItem
                 description={`Generate a Application Password for ${username}`}
                 link="Generate Application Password"
-                onClick={() => generateApplicationPassword(username, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
+                onClick={() => generateApplicationPassword(username, namespace, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
             />
         </div>
     </div>);

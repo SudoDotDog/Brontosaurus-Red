@@ -126,7 +126,7 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
 
         if (validation) {
             try {
-                const response = await setOrganizationRepository(username, organization);
+                const response = await setOrganizationRepository(username, namespace, organization);
 
                 this.setState({
                     cover: {

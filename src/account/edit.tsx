@@ -60,7 +60,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
 
     public async componentDidMount() {
 
-        const response: SingleFetchResponse = await singleFetchRepository(this._getUsername());
+        const response: SingleFetchResponse = await singleFetchRepository(this._getUsername(), this._getNamespace());
         const groups: AllGroupsResponse[] = await fetchAllGroups();
         const decorators: AllDecoratorsResponse[] = await fetchAllDecorators();
         const tags: AllTagsResponse[] = await fetchAllTags();
@@ -356,7 +356,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
 
         try {
 
-            await suspendTemporaryPasswordRepository(this.state.user.username, passwordId);
+            await suspendTemporaryPasswordRepository(this.state.user.username, this.state.user.namespace, passwordId);
 
             this.setState({
                 cover: {
@@ -406,7 +406,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
 
         try {
 
-            await suspendApplicationPasswordRepository(this.state.user.username, passwordId);
+            await suspendApplicationPasswordRepository(this.state.user.username, this.state.user.namespace, passwordId);
 
             this.setState({
                 cover: {
@@ -458,6 +458,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
 
             const account: string = await editAccountAdminRepository(
                 this.state.user.username,
+                this.state.user.namespace,
                 this.state.user.displayName,
                 this.state.user.email,
                 this.state.user.phone,
@@ -535,5 +536,11 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
 
         const params: any = this.props.match.params;
         return params.username;
+    }
+
+    private _getNamespace(): string {
+
+        const params: any = this.props.match.params;
+        return params.namespace;
     }
 }

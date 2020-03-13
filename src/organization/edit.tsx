@@ -189,7 +189,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                             : <NeonButton
                                 className={MenuStyle.actionButton}
                                 style={{ margin: '2px' }}
-                                onClick={() => this._promoteUser(member.username)}
+                                onClick={() => this._promoteUser(member.username, member.namespace)}
                                 size={SIZE.RELATIVE}>
                                 Promote
                             </NeonButton>}
@@ -310,7 +310,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
         }
     }
 
-    private async _promoteUser(username: string): Promise<void> {
+    private async _promoteUser(username: string, namespace: string): Promise<void> {
 
         const organization: string = this._getOrganizationName();
         const confirmed: boolean = window.confirm(`Are you sure to promote ${username} to the owner of ${organization}`);
@@ -326,7 +326,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
 
         try {
 
-            await setOwnerRepository(username, organization);
+            await setOwnerRepository(username, namespace, organization);
 
             this.setState({
                 cover: {

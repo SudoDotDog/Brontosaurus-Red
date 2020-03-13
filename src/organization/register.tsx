@@ -4,6 +4,7 @@
  * @description Sub Register
  */
 
+import { DEFAULT_BRONTOSAURUS_NAMESPACE } from "@brontosaurus/definition";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
@@ -92,6 +93,11 @@ export class OrganizationSubRegister extends React.Component<OrganizationSubRegi
                 type: INPUT_TYPE.TEXT,
                 display: 'Username',
             },
+            namespace: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Namespace',
+                defaultValue: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
+            },
             displayName: {
                 type: INPUT_TYPE.TEXT,
                 display: 'Display Name',
@@ -134,10 +140,21 @@ export class OrganizationSubRegister extends React.Component<OrganizationSubRegi
             };
         }, {} as Record<string, string>);
 
+        if (!response.username) {
+            alert('username required');
+            return;
+        }
+
+        if (!response.namespace) {
+            alert('namespace required');
+            return;
+        }
+
         try {
             const tempPassword: string = await registerSubOrganization(
                 this._getOrganizationName(),
                 response.username || '',
+                response.namespace,
                 response.displayName,
                 response.email,
                 response.phone,

@@ -4,6 +4,7 @@
  * @description Inplode
  */
 
+import { DEFAULT_BRONTOSAURUS_NAMESPACE } from "@brontosaurus/definition";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
@@ -110,6 +111,11 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
                 type: INPUT_TYPE.TEXT,
                 display: 'Owner Username',
             },
+            namespace: {
+                type: INPUT_TYPE.TEXT,
+                display: 'Owner Namespace',
+                defaultValue: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
+            },
             displayName: {
                 type: INPUT_TYPE.TEXT,
                 display: 'Owner Display Name',
@@ -160,10 +166,26 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
             };
         }, {} as Record<string, string>);
 
+        if (!response.name) {
+            alert('name required');
+            return;
+        }
+
+        if (!response.username) {
+            alert('username required');
+            return;
+        }
+
+        if (!response.namespace) {
+            alert('namespace required');
+            return;
+        }
+
         try {
             const tempPassword: string = await inplodeOrganization(
                 response.name || '',
                 response.username || '',
+                response.namespace,
                 response.displayName,
                 response.email,
                 response.phone,
