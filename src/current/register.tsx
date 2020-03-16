@@ -4,6 +4,7 @@
  * @description Register
  */
 
+import { DEFAULT_BRONTOSAURUS_NAMESPACE } from "@brontosaurus/definition";
 import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
@@ -27,6 +28,11 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
         username: {
             type: INPUT_TYPE.TEXT,
             display: 'Username',
+        },
+        namespace: {
+            type: INPUT_TYPE.TEXT,
+            display: 'Namespace',
+            defaultValue: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
         },
         displayName: {
             type: INPUT_TYPE.TEXT,
@@ -65,6 +71,7 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
 
                     try {
                         const tempPassword: string = await registerForOrganization(
+                            current.namespace,
                             current.username,
                             current.displayName,
                             current.email,

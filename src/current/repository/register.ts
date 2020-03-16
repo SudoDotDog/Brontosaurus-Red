@@ -10,6 +10,7 @@ import { joinRoute } from "../../repository/route";
 
 export const registerForOrganization = async (
     username: string,
+    namespace: string,
     displayName?: string,
     email?: string,
     phone?: string,
@@ -17,6 +18,7 @@ export const registerForOrganization = async (
 
     const obj: Record<string, any> = {
         username,
+        namespace,
     };
 
     if (displayName && displayName.length > 0) {
