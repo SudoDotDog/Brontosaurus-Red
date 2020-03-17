@@ -35,10 +35,10 @@
   resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-3.6.1.tgz#28cbd78c8bb575b2d3499d02432386c7e1a15171"
   integrity sha512-iy0hf6+a/DyaVsHtSqf9wtNPtqiCIgPozY5wdFszj1EX1DhpfzvIhEPsKlKlLi5hMETMKQUtlP5OWzGOL2xdrA==
 
-"@brontosaurus/web@^3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-3.6.0.tgz#b0477c4232e9157ccaaa4ffd280d4b9ec31647c6"
-  integrity sha512-j1QrwMDmy3oJ4+6/DcsN/PQztv4gRD+Dz2UzBo2jOvz1QhRcDAuYmdvX9BFRB8rr5jagAcHEsUXG0BN2pBBsTw==
+"@brontosaurus/web@^3.6.1":
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-3.6.1.tgz#a74a8db010ffa7b8360a722a466615fb9eba948b"
+  integrity sha512-0PtoYtq8gCh9+Kf9NqBXSe/G17/bh37y1J+PM8NnI8b4t/mR14qtwExRPXzXx6CVrxfCv/1Z6BvdjDvysB9o5Q==
 
 "@sudoo/bark@^2.7.2":
   version "2.7.2"
