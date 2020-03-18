@@ -15,7 +15,7 @@ export const enable2FA = async (): Promise<string> => {
         qrcode: string;
     } = await Fetch
         .post
-        .json(joinRoute('/account/self/enable-2fa'))
+        .json(joinRoute('/flat/account/enable-2fa'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', Brontosaurus.hard().username)
         .fetch();
