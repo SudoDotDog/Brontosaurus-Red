@@ -1,12 +1,12 @@
 /**
  * @author WMXPY
- * @namespace Repository
+ * @namespace Preference_Repository
  * @description Command Center
  */
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
-import { joinRoute } from "./route";
+import { joinRoute } from "../../repository/route";
 
 export type GetCommandCenterNameResponse = {
 

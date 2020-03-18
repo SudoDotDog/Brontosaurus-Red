@@ -22,8 +22,8 @@ import { AdminMenu } from "./navigation/admin-menu";
 import { IndexMenu } from "./navigation/index-menu";
 import { Nav } from "./navigation/navigation";
 import { OrganizationRoute } from "./organization/route";
+import { getCommandCenterName, GetCommandCenterNameResponse } from "./preference/repository/command-center";
 import { PreferenceRoute } from "./preference/route";
-import { getCommandCenterName, GetCommandCenterNameResponse } from "./repository/command-center";
 import { TagRoute } from "./tag/route";
 
 export type EntryStates = {
@@ -125,4 +125,5 @@ export class Entry extends React.Component<{}, EntryStates> {
     }
 }
 
+// tslint:disable-next-line: no-default-export
 export default Entry;
