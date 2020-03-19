@@ -106,6 +106,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     </NamedTitle>
                     <NeonSub>Two-Factor Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
                     <NeonSub>Account {this.state.user.active ? "Active" : "Deactivated"}</NeonSub>
+                    {this._renderNamespace()}
                     {this._renderOrganization()}
                     {this._renderDetail()}
                     {this._renderInformation()}
@@ -503,6 +504,30 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
             this.setState({
                 loading: false,
             });
+        }
+    }
+
+    private _renderNamespace() {
+
+        const user: SingleFetchResponse = this.state.user as SingleFetchResponse;
+        if (user.namespace) {
+            return (<React.Fragment>
+                <NeonTitle size={SIZE.MEDIUM}>Namespace</NeonTitle>
+                <NeonSmartList
+                    list={{
+                        Namespace: <ClickableSpan
+                            to={'/admin/namespace/e/' + encodeURIComponent(user.namespace)}
+                        >
+                            {user.namespace}
+                        </ClickableSpan> as any,
+                    }}
+                />
+            </React.Fragment>);
+        } else {
+            return (<React.Fragment>
+                <NeonTitle size={SIZE.MEDIUM}>Namespace</NeonTitle>
+                <NeonSub>No Namespace Found</NeonSub>
+            </React.Fragment>);
         }
     }
 
