@@ -68,9 +68,9 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
                     ? void 0
                     : <NeonTable
                         headers={[
-                            this.props.language.get(PROFILE.NAME),
                             this.props.language.get(PROFILE.NAMESPACE),
                             this.props.language.get(PROFILE.DOMAIN),
+                            this.props.language.get(PROFILE.NAME),
                             this.props.language.get(PROFILE.ACTION),
                         ]}
                         style={{ marginTop: '1rem' }}>
@@ -93,13 +93,13 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
             (<tr key={namespace.name}>
                 <td>
                     <ClickableSpan
-                        to={'/admin/namespace/e/' + encodeURIComponent(namespace.name)}
+                        to={'/admin/namespace/e/' + encodeURIComponent(namespace.namespace)}
                     >
-                        {namespace.name}
+                        {namespace.namespace}
                     </ClickableSpan>
                 </td>
-                <td>{namespace.namespace}</td>
                 <td>{namespace.domain}</td>
+                <td>{namespace.name}</td>
                 <td><NeonButton
                     onClick={() => this.props.history.push('/admin/namespace/e/' + encodeURIComponent(namespace.name))}
                     size={SIZE.RELATIVE}>

@@ -106,7 +106,7 @@ export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceE
                 onChange={(newInfo: Record<string, string>) => this.setState({
                     namespace: {
                         ...namespace,
-                        name: newInfo.name,
+                        name: newInfo.Name,
                     },
                 })}
             />
