@@ -21,6 +21,7 @@ import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
+import { buildAdminAccountMore } from "../util/path";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse, SpecialPasswordResponse } from "./repository/single-fetch";
 import { suspendApplicationPasswordRepository } from "./repository/suspend-application-password";
@@ -79,7 +80,11 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
             <div>
                 <GoBack
                     right="More"
-                    onClickRight={() => this.props.history.push('/admin/user/more/' + encodeURIComponent(this._getUsername()))}
+                    onClickRight={() => {
+                        const username: string = this._getUsername();
+                        const namespace: string = this._getNamespace();
+                        this.props.history.push(buildAdminAccountMore(username, namespace));
+                    }}
                 />
                 {this._renderEditableInfos()}
             </div>

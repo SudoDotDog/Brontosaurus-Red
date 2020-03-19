@@ -18,7 +18,7 @@ import { SearchNew } from "../components/search-new";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
-import { buildAdminAccountEdit } from "../util/path";
+import { buildAdminAccountEdit, buildAdminAccountMore } from "../util/path";
 import { fetchAccount, FetchAccountResponse, UserResponse } from "./repository/account-fetch";
 
 export type UserState = {
@@ -123,7 +123,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                 <td className={MenuStyle.actionRaw}>
                     <NeonButton
                         className={MenuStyle.actionButton}
-                        onClick={() => this.props.history.push('/admin/user/more/' + encodeURIComponent(user.username))}
+                        onClick={() => this.props.history.push(buildAdminAccountMore(user.username, user.namespace))}
                         size={SIZE.RELATIVE}>
                         {this.props.language.get(PROFILE.MORE)}
                     </NeonButton>
