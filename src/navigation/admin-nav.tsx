@@ -61,6 +61,12 @@ export const AdminNavBase: React.FC<AdminNavProps> = (props: AdminNavProps) => {
             {props.language.get(PROFILE.DECORATOR)}
         </SubButton>
         <SubButton
+            selected={props.location.pathname.indexOf('/admin/namespace') === 0}
+            onClick={() => props.history.push('/admin/namespace')}
+        >
+            {props.language.get(PROFILE.NAMESPACE)}
+        </SubButton>
+        <SubButton
             selected={props.location.pathname.indexOf('/admin/tag') === 0}
             onClick={() => props.history.push('/admin/tag')}
         >

@@ -1,47 +1,43 @@
 /**
  * @author WMXPY
- * @namespace Decorator
+ * @namespace Namespace
  * @description Edit
  */
 
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
-import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
-import { singleDecorator, SingleDecoratorResponse } from "./repository/single";
-import { updateDecoratorRepository } from "./repository/update";
+import { singleNamespace, SingleNamespaceResponse } from "./repository/single";
+import { updateNamespaceRepository } from "./repository/update";
 
-type DecoratorEditProp = {
+type NamespaceEditProp = {
 } & RouteComponentProps;
 
-type DecoratorEditState = {
+type NamespaceEditState = {
 
     readonly loading: boolean;
     readonly cover: any;
-    readonly decorator: SingleDecoratorResponse | null;
-    readonly groups: string[];
+    readonly namespace: SingleNamespaceResponse | null;
 };
 
-export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorEditState> {
+export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceEditState> {
 
-    public readonly state: DecoratorEditState = {
+    public readonly state: NamespaceEditState = {
 
         loading: false,
         cover: undefined,
-        decorator: null,
-        groups: [],
+        namespace: null,
     };
 
-    public constructor(props: DecoratorEditProp) {
+    public constructor(props: NamespaceEditProp) {
 
         super(props);
 
@@ -50,12 +46,10 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
 
     public async componentDidMount() {
 
-        const response: SingleDecoratorResponse = await singleDecorator(this._getDecoratorName());
-        const groups: AllGroupsResponse[] = await fetchAllGroups();
+        const response: SingleNamespaceResponse = await singleNamespace(this._getNamespaceNamespace());
 
         this.setState({
-            decorator: response,
-            groups: groups.map((res: AllGroupsResponse) => res.name),
+            namespace: response,
         });
     }
 
@@ -71,7 +65,7 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
 
     private _renderEditableInfos() {
 
-        if (!this.state.decorator) {
+        if (!this.state.namespace) {
             return null;
         }
 
@@ -84,8 +78,8 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NamedTitle about="Editing Decorator">
-                        {this.state.decorator.name}
+                    <NamedTitle about="Editing Namespace">
+                        {this.state.namespace.name}
                     </NamedTitle>
                     {this._renderDescription()}
                     <NeonButton
@@ -101,43 +95,27 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
 
     private _renderDescription() {
 
-        const decorator = this.state.decorator as SingleDecoratorResponse;
+        const namespace = this.state.namespace as SingleNamespaceResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Description</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>Name</NeonTitle>
             <NeonSmartList
                 list={{
-                    Description: decorator.description || '',
+                    Name: namespace.name || '',
                 }}
                 editableValue
                 onChange={(newInfo: Record<string, string>) => this.setState({
-                    decorator: {
-                        ...decorator,
-                        description: newInfo.Description,
+                    namespace: {
+                        ...namespace,
+                        name: newInfo.name,
                     },
                 })}
             />
-        </React.Fragment>);
-    }
-
-    private _renderAddableGroup() {
-
-        const decorator = this.state.decorator as SingleDecoratorResponse;
-        return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Addable Groups</NeonTitle>
-            <NeonPillGroup
-                style={{ flexWrap: 'wrap' }}
-                selected={decorator.addableGroups || []}
-                onChange={(next: string[]) => {
-                    this.setState({
-                        decorator: {
-                            ...decorator,
-                            addableGroups: next,
-                        },
-                    });
+            <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
+            <NeonSmartList
+                list={{
+                    Domain: namespace.domain,
+                    Namespace: namespace.namespace,
                 }}
-                addable
-                removable
-                options={this.state.groups}
             />
         </React.Fragment>);
     }
@@ -152,7 +130,7 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
 
     private async _submit() {
 
-        if (!this.state.decorator) {
+        if (!this.state.namespace) {
             return;
         }
 
@@ -163,11 +141,9 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
 
         try {
 
-            const name: string = await updateDecoratorRepository({
-                name: this.state.decorator.name,
-                description: this.state.decorator.description,
-                addableGroups: this.state.decorator.addableGroups,
-                removableGroups: this.state.decorator.removableGroups,
+            const name: string = await updateNamespaceRepository({
+                name: this.state.namespace.name,
+                namespace: this.state.namespace.namespace,
             });
 
             this.setState({
@@ -206,9 +182,9 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
         }
     }
 
-    private _getDecoratorName(): string {
+    private _getNamespaceNamespace(): string {
 
         const params: any = this.props.match.params;
-        return params.decorator;
+        return params.namespace;
     }
 }

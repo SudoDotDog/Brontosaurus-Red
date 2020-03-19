@@ -36,6 +36,11 @@ export const AdminMenu: React.FC<AdminMenuProps> = (props: AdminMenuProps) => {
             onClick={() => props.history.push('/admin/decorator')}
         />
         <MenuItem
+            description="View, Create, Modify Namespaces"
+            link="Namespace"
+            onClick={() => props.history.push('/admin/namespace')}
+        />
+        <MenuItem
             description="View, Create, Modify Tags"
             link="Tag"
             onClick={() => props.history.push('/admin/tag')}

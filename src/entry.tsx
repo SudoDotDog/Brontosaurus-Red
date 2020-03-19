@@ -18,6 +18,7 @@ import { CurrentRoute } from "./current/route";
 import { DecoratorRoute } from "./decorator/route";
 import { GroupRoute } from "./group/route";
 import { MeRoute } from "./me/route";
+import { NamespaceRoute } from "./namespace/route";
 import { AdminMenu } from "./navigation/admin-menu";
 import { IndexMenu } from "./navigation/index-menu";
 import { Nav } from "./navigation/navigation";
@@ -85,6 +86,7 @@ export class Entry extends React.Component<{}, EntryStates> {
                             <OrganizationRoute />
                             <GroupRoute />
                             <DecoratorRoute />
+                            <NamespaceRoute />
                             <TagRoute />
                             <ApplicationRoute />
                             <PreferenceRoute />
