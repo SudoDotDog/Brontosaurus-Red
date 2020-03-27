@@ -30,7 +30,7 @@ type OrganizationSubRegisterStates = {
     }>;
     readonly tags: string[];
     readonly selected: string[];
-    readonly current: any;
+    readonly current: Record<string, any>;
 };
 
 export class OrganizationSubRegister extends React.Component<OrganizationSubRegisterProp, OrganizationSubRegisterStates> {
@@ -39,7 +39,9 @@ export class OrganizationSubRegister extends React.Component<OrganizationSubRegi
 
         loading: false,
         cover: undefined,
-        current: {},
+        current: {
+            namespace: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
+        },
         tags: [],
         selected: [],
         infos: [],
@@ -96,7 +98,6 @@ export class OrganizationSubRegister extends React.Component<OrganizationSubRegi
             namespace: {
                 type: INPUT_TYPE.TEXT,
                 display: 'Namespace',
-                defaultValue: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
             },
             displayName: {
                 type: INPUT_TYPE.TEXT,

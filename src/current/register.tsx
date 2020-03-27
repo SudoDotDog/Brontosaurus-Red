@@ -18,7 +18,9 @@ type CurrentRegisterProp = {
 
 export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentRegisterProp) => {
 
-    const [current, setCurrent] = React.useState<any>({});
+    const [current, setCurrent] = React.useState<Record<string, any>>({
+        namespace: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
+    });
 
     const [loading, setLoading] = React.useState<boolean>(false);
     const [cover, setCover] = React.useState<NeonStickerCut | undefined>(undefined);
@@ -32,7 +34,6 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
         namespace: {
             type: INPUT_TYPE.TEXT,
             display: 'Namespace',
-            defaultValue: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
         },
         displayName: {
             type: INPUT_TYPE.TEXT,

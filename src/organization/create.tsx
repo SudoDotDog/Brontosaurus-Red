@@ -20,7 +20,7 @@ type CreateOrganizationStates = {
 
     readonly loading: boolean;
     readonly cover: NeonStickerCut | undefined;
-    readonly current: any;
+    readonly current: Record<string, any>;
 };
 
 export class CreateOrganization extends React.Component<CreateOrganizationProp, CreateOrganizationStates> {
@@ -29,7 +29,9 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
 
         loading: false,
         cover: undefined,
-        current: {},
+        current: {
+            ownerNamespace: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
+        },
     };
 
     public render() {
@@ -64,7 +66,6 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
             ownerNamespace: {
                 type: INPUT_TYPE.TEXT,
                 display: 'Owner Namespace',
-                defaultValue: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
             },
         };
     }

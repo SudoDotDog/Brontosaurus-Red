@@ -32,7 +32,7 @@ type InplodeOrganizationStates = {
     }>;
     readonly tags: string[];
     readonly selected: string[];
-    readonly current: any;
+    readonly current: Record<string, any>;
 };
 
 export class InplodeOrganization extends React.Component<InplodeOrganizationProp, InplodeOrganizationStates> {
@@ -41,7 +41,9 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
 
         loading: false,
         cover: undefined,
-        current: {},
+        current: {
+            namespace: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
+        },
         tags: [],
         selected: [],
         infos: [],
@@ -114,7 +116,6 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
             namespace: {
                 type: INPUT_TYPE.TEXT,
                 display: 'Owner Namespace',
-                defaultValue: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
             },
             displayName: {
                 type: INPUT_TYPE.TEXT,
