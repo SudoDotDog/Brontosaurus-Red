@@ -53,7 +53,9 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
         groups: [],
         selectedGroups: [],
 
-        current: {},
+        current: {
+            namespace: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
+        },
         infos: [],
     };
 
@@ -131,7 +133,6 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             namespace: {
                 type: INPUT_TYPE.TEXT,
                 display: 'Namespace',
-                defaultValue: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
             },
             displayName: {
                 type: INPUT_TYPE.TEXT,
@@ -205,16 +206,25 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
 
         if (!response.username) {
             alert('username required');
+            this.setState({
+                loading: false,
+            });
             return;
         }
 
         if (!response.namespace) {
             alert('namespace required');
+            this.setState({
+                loading: false,
+            });
             return;
         }
 
         if (!response.password) {
             alert('password required');
+            this.setState({
+                loading: false,
+            });
             return;
         }
 
