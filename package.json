@@ -31,7 +31,8 @@
     "@sudoo/react-force-dev": "^1.7.1",
     "@sudoo/triforce": "^2.2.1",
     "@sudoo/webpack-react": "^2.7.0",
-    "@types/react-router-dom": "^5.1.4"
+    "@types/react-router-dom": "^5.1.4",
+    "ts-loader": "^7.0.0"
   },
   "nyc": {
     "extension": [
