@@ -140,7 +140,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
             <NeonSmartList
                 list={{
                     ['Display Name']: user.displayName || '',
-                    Avatar: user.avatar,
+                    Avatar: user.avatar || '',
                     Email: user.email || '',
                     Phone: user.phone || '',
                 }}
