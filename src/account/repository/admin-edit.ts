@@ -12,6 +12,7 @@ export const editAccountAdminRepository = async (
     username: string,
     namespace: string,
     displayName: string | undefined,
+    avatar: string | undefined,
     email: string | undefined,
     phone: string | undefined,
     groups: string[],
@@ -32,6 +33,7 @@ export const editAccountAdminRepository = async (
         .add('tags', tags)
         .add('decorators', decorators)
         .add('displayName', displayName)
+        .add('avatar', avatar)
         .add('email', email)
         .add('phone', phone)
         .add('username', username)

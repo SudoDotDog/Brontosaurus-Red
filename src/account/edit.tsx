@@ -149,7 +149,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     user: {
                         ...user,
                         displayName: newInfo['Display Name'],
-                        avatar: newInfo.avatar,
+                        avatar: newInfo.Avatar,
                         email: newInfo.Email,
                         phone: newInfo.Phone,
                     },
@@ -468,6 +468,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                 this.state.user.username,
                 this.state.user.namespace,
                 this.state.user.displayName,
+                this.state.user.avatar,
                 this.state.user.email,
                 this.state.user.phone,
                 this.state.user.groups,
