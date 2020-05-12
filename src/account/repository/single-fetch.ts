@@ -22,6 +22,7 @@ export type SingleFetchResponse = {
     readonly active: boolean;
     readonly username: string;
     readonly namespace: string;
+    readonly avatar?: string;
     readonly displayName?: string;
     readonly email?: string;
     readonly phone?: string;
