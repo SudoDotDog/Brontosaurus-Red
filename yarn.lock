@@ -52,10 +52,22 @@
   resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.7.2.tgz#961c4b482dbc00d7c762607c63f7a3eaa8f8811e"
   integrity sha512-COaH8iYTyutU0bgqhklIQShops+NYHRlCb+XEXkMimlkQuiw2dUY6yATSyiq89vIy74W39FAs/FgHAG4+aJVKA==
 
+"@sudoo/duplicate@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/duplicate/-/duplicate-1.2.0.tgz#0cadc86ee291cf379fdc57c4f2ae9f61133400c0"
+  integrity sha512-HjHgxI0JpeJnwv6rruC2U7xUvzitRLv1MEoffo7uXN2gUfiikNBpkEcyjk0v7zBYi23ynS6bsKM0y8Er/M0yqg==
+
 "@sudoo/fetch@^1.17.0":
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-1.17.0.tgz#28e2481c66f18adfaae619aa26be99799cdba6ec"
   integrity sha512-tC02W1kj9es6CBbXm+KM21oyFkJT/JntzlO3KMidTiuEu/DdS6WMFsJyDHJ8V97FaVZE4MLnMJe3JR3z2gEKFQ==
+
+"@sudoo/immutable@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/immutable/-/immutable-1.2.0.tgz#d2821f497a279c87f490608cd9ce816c4d563991"
+  integrity sha512-t17Y6Wa/D6MjSIBXJ8uqKo4uaxOGkW3s3gpkl5VziJPIROAyIY8H6e+SZf7+8KE0wBRhWHsU+tp5OP0HKUS2oA==
+  dependencies:
+    "@sudoo/duplicate" "^1.2.0"
 
 "@sudoo/internationalization@^1.3.0":
   version "1.3.0"
@@ -122,6 +134,11 @@
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/@sudoo/tslint-config/-/tslint-config-1.6.1.tgz#4bca6141cc596f79c64f014832d58a65874b8ade"
   integrity sha512-qrKPhIscCPioJoi/EnFPATTpjXDU5l7kCcJCfbx/lf8BGvZdUY/XshEuTtsgzRWrMtEH39R4aXsfpsKKM6aZOw==
+
+"@sudoo/verify@^1.10.0":
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/verify/-/verify-1.10.0.tgz#cc580f7c58c79fbb94972545aecc81d62f4bbc25"
+  integrity sha512-zFRC9FINRDYEYSzI2E28H6XqVbfhS3V54yWy7125/w1wmLfpC8ha6jQ32glINOdwIhG+MMjzQzEtLW+PQ6nxXw==
 
 "@sudoo/webpack-react@^2.7.1":
   version "2.7.1"
