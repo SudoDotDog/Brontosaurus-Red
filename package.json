@@ -30,7 +30,7 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
-    "@sudoo/react-force-dev": "^1.7.1",
+    "@sudoo/react-force-dev": "^1.7.2",
     "@sudoo/triforce": "^2.4.1",
     "@sudoo/webpack-react": "^2.7.3",
     "@types/react-router-dom": "^5.1.5",
