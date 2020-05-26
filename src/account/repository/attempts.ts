@@ -25,7 +25,7 @@ export type AccountAttemptElement = {
 
 export type AccountAttemptResponse = {
 
-    readonly pages: string;
+    readonly pages: number;
     readonly attempts: AccountAttemptElement[];
 };
 

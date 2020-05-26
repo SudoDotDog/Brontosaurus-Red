@@ -7,6 +7,7 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
 import { AccountOrganizationAssign } from "./assign";
+import { AccountAttempts } from "./attempts";
 import { AccountEdit } from "./edit";
 import { AccountMore } from "./more";
 import { Register } from "./register";
@@ -19,6 +20,7 @@ export const UserRoute: React.FC = () => {
         <Route path="/admin/user/new" exact component={Register} />
         <Route path="/admin/user/e/:namespace/:username" exact component={AccountEdit} />
         <Route path="/admin/user/more/:namespace/:username" exact component={AccountMore} />
+        <Route path="/admin/user/attempts/:namespace/:username" exact component={AccountAttempts} />
         <Route path="/admin/user/o/:namespace/:username" exact component={AccountOrganizationAssign} />
     </React.Fragment>);
 };
