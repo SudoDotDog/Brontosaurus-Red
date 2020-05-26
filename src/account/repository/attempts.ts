@@ -38,6 +38,11 @@ export const fetchAccountAttempts = async (username: string, namespace: string, 
         .add('username', username)
         .add('namespace', namespace)
         .add('page', page)
+        .addProducePostProcessFunction((draft: AccountAttemptResponse) => {
+            for (const each of draft.attempts) {
+                (each as any).at = new Date(each.at);
+            }
+        })
         .fetch();
 
     return response;

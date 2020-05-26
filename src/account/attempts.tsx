@@ -54,12 +54,19 @@ export class AccountAttempts extends React.Component<AccountAttemptsProps, Accou
                 loading={this.state.loading}
             >
                 <GoBack />
-                <NeonTitle margin={MARGIN.SMALL}>Set {this._getUsername()}'s Organization</NeonTitle>
+                <NeonTitle margin={MARGIN.SMALL}>{this._getUsername()}'s Attempts</NeonTitle>
 
                 {this.state.attempts.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name', 'Owner']}
+                        headers={[
+                            'At',
+                            'Application',
+                            'Platform',
+                            'User Agent',
+                            'Source',
+                            'Target',
+                        ]}
                         style={{ marginTop: '1rem' }}>
                         {this._renderAttempts()}
                     </NeonTable>}
@@ -77,8 +84,14 @@ export class AccountAttempts extends React.Component<AccountAttemptsProps, Accou
 
         return this.state.attempts.map((attempt: AccountAttemptElement) =>
             (<tr key={attempt.identifier}>
-                <td>{attempt.account}</td>
+                <td>{attempt.at.toLocaleString()}</td>
                 <td>{attempt.application}</td>
+                <td>{attempt.platform}</td>
+                <td style={{
+                    maxWidth: '500px',
+                }}>{attempt.userAgent}</td>
+                <td>{attempt.source} [{attempt.proxySources.join(', ')}]</td>
+                <td>{attempt.target}</td>
             </tr>),
         );
     }
