@@ -43,6 +43,10 @@ export class AccountAttempts extends React.Component<AccountAttemptsProps, Accou
         this._fetchAttempts = this._fetchAttempts.bind(this);
     }
 
+    public componentDidMount() {
+        this._fetchAttempts();
+    }
+
     public render() {
 
         return (

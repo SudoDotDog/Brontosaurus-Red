@@ -18,3 +18,8 @@ export const buildAdminAccountAssign = (username: string, namespace: string) => 
 
     return `/admin/user/o/${namespace}/${username}`;
 };
+
+export const buildAdminAccountAttempts = (username: string, namespace: string) => {
+
+    return `/admin/user/attempts/${namespace}/${username}`;
+};

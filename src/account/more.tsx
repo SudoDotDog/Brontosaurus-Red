@@ -10,7 +10,7 @@ import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
-import { buildAdminAccountAssign, buildAdminAccountEdit } from "../util/path";
+import { buildAdminAccountAssign, buildAdminAccountAttempts, buildAdminAccountEdit } from "../util/path";
 import { activateAccount } from "./repository/activate";
 import { deactivateAccount } from "./repository/deactivate";
 import { generateApplicationPasswordRepository, GenerateApplicationPasswordResponse } from "./repository/generate-application-password";
@@ -146,6 +146,11 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
                 description={`Assign ${username} to an (another) organization`}
                 link="Assign"
                 onClick={() => props.history.push(buildAdminAccountAssign(username, namespace))}
+            />
+            <MenuItem
+                description={`Check ${username}'s attempt history`}
+                link="Attempts"
+                onClick={() => props.history.push(buildAdminAccountAttempts(username, namespace))}
             />
             <MenuItem
                 description={`Activate ${username}`}
