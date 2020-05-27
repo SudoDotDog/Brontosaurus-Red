@@ -30,17 +30,17 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@brontosaurus/definition@^3.3.0", "@brontosaurus/definition@^3.4.0":
+"@brontosaurus/definition@^3.4.0":
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-3.4.0.tgz#05f362da522fad8a15f053b2811ec125ad024bf8"
   integrity sha512-QmL5pCIEMQK8WtrpjxG3Zf0RuocVotXEC+jcUgfr01wOtlkEh4U7qsMra4ZuFzgQx9fTVcvmfuEZsjVz2baRtA==
 
-"@brontosaurus/react@^3.9.0":
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-3.9.0.tgz#a355bdb74a5f434b20d7e663bdc4b9c24f2c34b7"
-  integrity sha512-nCQ583q2rPqS50yF+VDN5Ga2CPGGTxudlQYwUFhjWAanl8IAYXo5E5yWrm2+PlcNmr9GkymP0ZBMNQvYc6Uc4w==
+"@brontosaurus/react@^3.10.0":
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-3.10.0.tgz#a48c60a3bacfbdc8d858763a9d5a0b2a495a0a29"
+  integrity sha512-5wgMwLGEeWcq1x/Muhmgt5C4FrX0MnQrEo1v/yE3C76ZU2EQcxzQv+u6tijOs6UDtG2zyOU6eP4JD9dztz84fw==
   dependencies:
-    "@brontosaurus/definition" "^3.3.0"
+    "@brontosaurus/definition" "^3.4.0"
 
 "@brontosaurus/web@^3.10.0":
   version "3.10.0"
