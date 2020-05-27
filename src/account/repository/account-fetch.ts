@@ -11,6 +11,7 @@ import { joinRoute } from "../../repository/route";
 export type UserResponse = {
 
     readonly active: boolean;
+    readonly attempts: number;
     readonly username: string;
     readonly namespace: string;
     readonly displayName?: string;

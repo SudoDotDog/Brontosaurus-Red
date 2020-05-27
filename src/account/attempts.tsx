@@ -87,9 +87,7 @@ export class AccountAttempts extends React.Component<AccountAttemptsProps, Accou
                 <td>{attempt.at.toLocaleString()}</td>
                 <td>{attempt.application}</td>
                 <td>{attempt.platform}</td>
-                <td style={{
-                    maxWidth: '500px',
-                }}>{attempt.userAgent}</td>
+                <td>{attempt.userAgent}</td>
                 <td>{attempt.source} [{attempt.proxySources.join(', ')}]</td>
                 <td>{attempt.target}</td>
             </tr>),

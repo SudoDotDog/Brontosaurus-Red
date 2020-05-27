@@ -80,6 +80,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                             this.props.language.get(PROFILE.TWO_FACTOR_AUTHORIZATION_LITE),
                             this.props.language.get(PROFILE.EMAIL),
                             this.props.language.get(PROFILE.PHONE),
+                            this.props.language.get(PROFILE.ATTEMPTS),
                             this.props.language.get(PROFILE.ACTION),
                         ]}
                         style={{ marginTop: '1rem' }}>
@@ -120,6 +121,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                 <td>{twoFA}</td>
                 <td>{user.email}</td>
                 <td>{user.phone}</td>
+                <td>{user.attempts}</td>
                 <td className={MenuStyle.actionRaw}>
                     <NeonButton
                         className={MenuStyle.actionButton}
