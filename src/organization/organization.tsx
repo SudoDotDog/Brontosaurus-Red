@@ -4,6 +4,7 @@
  * @description Organization
  */
 
+import { Dump } from "@sudoo/dump";
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
@@ -40,15 +41,20 @@ const connector = Connector.create<IStore, ConnectedStates>()
         language: intl.format(preference.language),
     }));
 
+const searchKeywordCache: Dump<string> = Dump.create('organization-search-keyword-cache', '');
+const searchPageCache: Dump<number> = Dump.create('organization-search-page-cache', 0);
+
 export class OrganizationBase extends React.Component<ConnectedProps, OrganizationStates> {
 
     public readonly state: OrganizationStates = {
 
         organizations: [],
-        keyword: '',
+        keyword: searchKeywordCache.value,
         pages: 0,
-        page: 0,
+        page: searchPageCache.value,
     };
+
+    private readonly _defaultValue: string = searchKeywordCache.value;
 
     public constructor(props: ConnectedProps) {
 
@@ -56,13 +62,22 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
         this._searchOrganization = this._searchOrganization.bind(this);
     }
 
+    public componentDidMount() {
+        this._searchOrganization();
+    }
+
     public render() {
 
         return (
             <div>
                 <SearchDoubleNew
+                    defaultValue={this._defaultValue}
                     label="Organization"
-                    onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchOrganization)}
+                    onSearch={(keyword: string) => {
+                        searchKeywordCache.replace(keyword);
+                        searchPageCache.replace(0);
+                        this.setState({ keyword, page: 0 }, this._searchOrganization);
+                    }}
                     onNew={() => this.props.history.push('/admin/organization/create')}
                     onInplode={() => this.props.history.push('/admin/organization/inplode')}
                 />
@@ -85,7 +100,10 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
                 <PageSelector
                     total={this.state.pages}
                     selected={this.state.page}
-                    onClick={(page: number) => this.setState({ page }, this._searchOrganization)}
+                    onClick={(page: number) => {
+                        searchPageCache.replace(page);
+                        this.setState({ page }, this._searchOrganization);
+                    }}
                 />
             </div>
         );

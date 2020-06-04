@@ -17,10 +17,11 @@ import { IStore } from "../state/declare";
 
 export type SearchDoubleNewProps = {
 
-    label: string;
-    onSearch: (keyword: string) => any;
-    onNew: () => any;
-    onInplode: () => any;
+    readonly label: string;
+    readonly onSearch: (keyword: string) => any;
+    readonly onNew: () => any;
+    readonly onInplode: () => any;
+    readonly defaultValue?: string;
 };
 
 type ConnectedStates = {
@@ -38,6 +39,7 @@ export const SearchDoubleNewBase: React.ComponentType<ConnectedProps> = (props: 
 
     return (<div className={__Search_New.searchBar}>
         <NeonApplicable
+            defaultValue={props.defaultValue}
             className={__Search_New.search}
             size={SIZE.MEDIUM}
             apply={props.language.get(PROFILE.APPLY)}

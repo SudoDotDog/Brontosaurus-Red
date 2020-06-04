@@ -4,6 +4,7 @@
  * @description Tags
  */
 
+import { Dump } from "@sudoo/dump";
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
@@ -38,15 +39,20 @@ const connector = Connector.create<IStore, ConnectedStates>()
         language: intl.format(preference.language),
     }));
 
+const searchKeywordCache: Dump<string> = Dump.create('tag-search-keyword-cache', '');
+const searchPageCache: Dump<number> = Dump.create('tag-search-page-cache', 0);
+
 export class TagsBase extends React.Component<ConnectedProps, TagsState> {
 
     public readonly state: TagsState = {
 
         tags: [],
-        keyword: '',
+        keyword: searchKeywordCache.value,
         pages: 0,
-        page: 0,
+        page: searchPageCache.value,
     };
+
+    private readonly _defaultValue: string = searchKeywordCache.value;
 
     public constructor(props: ConnectedProps) {
 
@@ -54,13 +60,22 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
         this._searchTags = this._searchTags.bind(this);
     }
 
+    public componentDidMount() {
+        this._searchTags();
+    }
+
     public render() {
 
         return (
             <div>
                 <SearchNew
+                    defaultValue={this._defaultValue}
                     label="Tags"
-                    onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchTags)}
+                    onSearch={(keyword: string) => {
+                        searchKeywordCache.replace(keyword);
+                        searchPageCache.replace(0);
+                        this.setState({ keyword, page: 0 }, this._searchTags);
+                    }}
                     onNew={() => this.props.history.push('/admin/tag/create')}
                 />
 
@@ -79,7 +94,10 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
                 <PageSelector
                     total={this.state.pages}
                     selected={this.state.page}
-                    onClick={(page: number) => this.setState({ page }, this._searchTags)}
+                    onClick={(page: number) => {
+                        searchPageCache.replace(page);
+                        this.setState({ page }, this._searchTags);
+                    }}
                 />
             </div>
 
