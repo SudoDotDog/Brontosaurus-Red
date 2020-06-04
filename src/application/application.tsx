@@ -4,6 +4,7 @@
  * @description Application
  */
 
+import { Dump } from "@sudoo/dump";
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
@@ -38,15 +39,20 @@ const connector = Connector.create<IStore, ConnectedStates>()
         language: intl.format(preference.language),
     }));
 
+const searchKeywordCache: Dump<string> = Dump.create('application-search-keyword-cache', '');
+const searchPageCache: Dump<number> = Dump.create('application-search-page-cache', 0);
+
 export class ApplicationBase extends React.Component<ConnectedProps, ApplicationState> {
 
     public readonly state: ApplicationState = {
 
         applications: [],
-        keyword: '',
+        keyword: searchKeywordCache.value,
         pages: 0,
-        page: 0,
+        page: searchPageCache.value,
     };
+
+    private readonly _defaultValue: string = searchKeywordCache.value;
 
     public constructor(props: ConnectedProps) {
 
@@ -54,12 +60,21 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
         this._searchApplication = this._searchApplication.bind(this);
     }
 
+    public componentDidMount() {
+        this._searchApplication();
+    }
+
     public render() {
 
         return (<div>
             <SearchNew
+                defaultValue={this._defaultValue}
                 label="Application"
-                onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchApplication)}
+                onSearch={(keyword: string) => {
+                    searchKeywordCache.replace(keyword);
+                    searchPageCache.replace(0);
+                    this.setState({ keyword, page: 0 }, this._searchApplication);
+                }}
                 onNew={() => this.props.history.push('/admin/application/create')}
             />
 
@@ -81,7 +96,10 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
             <PageSelector
                 total={this.state.pages}
                 selected={this.state.page}
-                onClick={(page: number) => this.setState({ page }, this._searchApplication)}
+                onClick={(page: number) => {
+                    searchPageCache.replace(page);
+                    this.setState({ page }, this._searchApplication);
+                }}
             />
         </div>);
     }

@@ -4,6 +4,7 @@
  * @description Group
  */
 
+import { Dump } from "@sudoo/dump";
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
@@ -38,15 +39,20 @@ const connector = Connector.create<IStore, ConnectedStates>()
         language: intl.format(preference.language),
     }));
 
+const searchKeywordCache: Dump<string> = Dump.create('group-search-keyword-cache', '');
+const searchPageCache: Dump<number> = Dump.create('group-search-page-cache', 0);
+
 export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
 
     public readonly state: GroupStates = {
 
         groups: [],
-        keyword: '',
+        keyword: searchKeywordCache.value,
         pages: 0,
-        page: 0,
+        page: searchPageCache.value,
     };
+
+    private readonly _defaultValue: string = searchKeywordCache.value;
 
     public constructor(props: ConnectedProps) {
 
@@ -54,13 +60,22 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
         this._searchGroup = this._searchGroup.bind(this);
     }
 
+    public componentDidMount() {
+        this._searchGroup();
+    }
+
     public render() {
 
         return (
             <div>
                 <SearchNew
+                    defaultValue={this._defaultValue}
                     label="Group"
-                    onSearch={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchGroup)}
+                    onSearch={(keyword: string) => {
+                        searchKeywordCache.replace(keyword);
+                        searchPageCache.replace(0);
+                        this.setState({ keyword, page: 0 }, this._searchGroup);
+                    }}
                     onNew={() => this.props.history.push('/admin/group/create')}
                 />
 
@@ -80,7 +95,10 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
                 <PageSelector
                     total={this.state.pages}
                     selected={this.state.page}
-                    onClick={(page: number) => this.setState({ page }, this._searchGroup)}
+                    onClick={(page: number) => {
+                        searchPageCache.replace(page);
+                        this.setState({ page }, this._searchGroup);
+                    }}
                 />
             </div>
 

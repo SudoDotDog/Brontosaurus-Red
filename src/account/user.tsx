@@ -59,7 +59,6 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
     public constructor(props: ConnectedProps) {
 
         super(props);
-
         this._searchUser = this._searchUser.bind(this);
     }
 
