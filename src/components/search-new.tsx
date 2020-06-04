@@ -17,9 +17,10 @@ import { IStore } from "../state/declare";
 
 export type SearchNewProps = {
 
-    label: string;
-    onSearch: (keyword: string) => any;
-    onNew: () => any;
+    readonly label: string;
+    readonly onSearch: (keyword: string) => any;
+    readonly onNew: () => any;
+    readonly defaultValue?: string;
 };
 
 type ConnectedStates = {
@@ -41,6 +42,7 @@ export const SearchNewBase: React.ComponentType<ConnectedProps> = (props: Connec
             size={SIZE.MEDIUM}
             apply={props.language.get(PROFILE.APPLY)}
             label={`${props.language.get(PROFILE.SEARCH)} ${props.label}`}
+            defaultValue={props.defaultValue}
             onApply={props.onSearch}
         />
 
