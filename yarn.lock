@@ -42,10 +42,10 @@
   dependencies:
     "@brontosaurus/definition" "^3.4.0"
 
-"@brontosaurus/web@^3.10.0":
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-3.10.0.tgz#f2912b1179f0302fc7136e5c5aac1669544f8441"
-  integrity sha512-olLa4HHrh5aQ+BHm6PquP6Kr3O8WRnoCC5/ZaPC+zU21flIFQplF6V9IfTE80rHyQfq1bVPRlkJ1Kqt+bmmdSw==
+"@brontosaurus/web@^3.11.0":
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/web/-/web-3.11.0.tgz#2f0b322197e9b4bab26dc1e31b9272febaec4360"
+  integrity sha512-0SBoDipbrQ/NR5lWgf1gPNP4F9jx/mUI1CCEVewTmC6Rnaz4Yw1iY9JDi1/PcdoaHeLIjuz+hKN5iWvpMN0Bbg==
 
 "@sudoo/bark@^2.7.2":
   version "2.7.2"
