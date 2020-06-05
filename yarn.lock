@@ -35,10 +35,10 @@
   resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-3.4.0.tgz#05f362da522fad8a15f053b2811ec125ad024bf8"
   integrity sha512-QmL5pCIEMQK8WtrpjxG3Zf0RuocVotXEC+jcUgfr01wOtlkEh4U7qsMra4ZuFzgQx9fTVcvmfuEZsjVz2baRtA==
 
-"@brontosaurus/react@^3.10.0":
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-3.10.0.tgz#a48c60a3bacfbdc8d858763a9d5a0b2a495a0a29"
-  integrity sha512-5wgMwLGEeWcq1x/Muhmgt5C4FrX0MnQrEo1v/yE3C76ZU2EQcxzQv+u6tijOs6UDtG2zyOU6eP4JD9dztz84fw==
+"@brontosaurus/react@^3.11.0":
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/react/-/react-3.11.0.tgz#e9f6b6bfa71bdf16f58a3e79fa372a39e8ad3244"
+  integrity sha512-xXSK5Dcm1ZlnwUOddfKU+09UBKhgStZyeQJ0h1sCEKwUUF/LCcMXRxWlHfoLe7W636oeq1+lrnyhLjhPg1sbmg==
   dependencies:
     "@brontosaurus/definition" "^3.4.0"
 
