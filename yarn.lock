@@ -175,14 +175,15 @@
   resolved "https://registry.yarnpkg.com/@sudoo/verify/-/verify-1.12.1.tgz#9cc7f53f6598164b831c81a20b691bd391e0bb23"
   integrity sha512-4av60uf7zFmmeu398keXrIw1GOlvXen39vM+xeQ75LZ0a3wgsTse8emx/jw9W3FutnteGhBpPvj3CWwk2zYUqg==
 
-"@sudoo/webpack-react@^2.8.4":
-  version "2.8.4"
-  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-2.8.4.tgz#ea5a5fcc2064629800e53caccc7023d344529625"
-  integrity sha512-/nG/NmcflPMD+3OTBhcw27NwWRrQjNxz9CdJ+0amEQYqENzVehL4OO034OBAaW1PBEkSrXkV9E1kvKG8gsuDtQ==
+"@sudoo/webpack-react@^2.9.1":
+  version "2.9.1"
+  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-2.9.1.tgz#35c339508ac2de85d50f0d4f838460252c4c0708"
+  integrity sha512-3gEKW1IA+rt9XEQjVeJPPp24+4aiePrLQ0j4jDW0o8MJpwZ/FrVaPGh1b4XR7UKoe8yojBwG4eGXDpiYVKOpZA==
   dependencies:
     copy-webpack-plugin "6.0.2"
     css-loader "1.0.1"
     html-webpack-plugin "4.3.0"
+    license-webpack-plugin "^2.2.0"
     mini-css-extract-plugin "0.9.0"
     node-sass "4.14.1"
     optimize-css-assets-webpack-plugin "5.0.3"
@@ -346,6 +347,15 @@
     "@types/node" "*"
     "@types/source-list-map" "*"
     source-map "^0.7.3"
+
+"@types/webpack-sources@^0.1.5":
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/@types/webpack-sources/-/webpack-sources-0.1.8.tgz#078d75410435993ec8a0a2855e88706f3f751f81"
+  integrity sha512-JHB2/xZlXOjzjBB6fMOpH1eQAfsrpqVVIbneE0Rok16WXwFaznaI5vfg75U5WgGJm7V9W1c4xeRQDjX/zwvghA==
+  dependencies:
+    "@types/node" "*"
+    "@types/source-list-map" "*"
+    source-map "^0.6.1"
 
 "@types/webpack@^4.41.8":
   version "4.41.17"
@@ -4093,6 +4103,14 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
+license-webpack-plugin@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/license-webpack-plugin/-/license-webpack-plugin-2.2.0.tgz#5c964380d7d0e0c27c349d86a6f856c82924590e"
+  integrity sha512-XPsdL/0brSHf+7dXIlRqotnCQ58RX2au6otkOg4U3dm8uH+Ka/fW4iukEs95uXm+qKe/SBs+s1Ll/aQddKG+tg==
+  dependencies:
+    "@types/webpack-sources" "^0.1.5"
+    webpack-sources "^1.2.0"
+
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"
@@ -7567,7 +7585,7 @@ webpack-log@^2.0.0:
     ansi-colors "^3.0.0"
     uuid "^3.3.2"
 
-webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1, webpack-sources@^1.4.3:
+webpack-sources@^1.1.0, webpack-sources@^1.2.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1, webpack-sources@^1.4.3:
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.4.3.tgz#eedd8ec0b928fbf1cbfe994e22d2d890f330a933"
   integrity sha512-lgTS3Xhv1lCOKo7SA5TjKXMjpSM4sBjNV5+q2bqesbSPs5FjGmU6jjtBSkX9b4qW87vDIsCIlUPOEhbZrMdjeQ==
