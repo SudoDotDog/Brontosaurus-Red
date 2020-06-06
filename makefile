@@ -19,7 +19,7 @@ run:
 	NODE_ENV=development \
 	$(webpack_dev_server) --config $(webpack_dev) --open
 
-build:
+build: clean-linux
 	@echo "[INFO] Starting build"
 	@NODE_ENV=production $(webpack) --config $(webpack_build)
 
