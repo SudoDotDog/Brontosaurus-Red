@@ -80,12 +80,12 @@
   resolved "https://registry.yarnpkg.com/@sudoo/bark/-/bark-2.7.2.tgz#961c4b482dbc00d7c762607c63f7a3eaa8f8811e"
   integrity sha512-COaH8iYTyutU0bgqhklIQShops+NYHRlCb+XEXkMimlkQuiw2dUY6yATSyiq89vIy74W39FAs/FgHAG4+aJVKA==
 
-"@sudoo/dump@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/dump/-/dump-1.5.0.tgz#271db7604f084f4cabc6eab731eb152e21c6c9c0"
-  integrity sha512-+8Z8tdGEWJ27HBX/D6f/99/DGlWXR3qVe+qdjtJ43rfYKI7+V46ltwWYroZO6KrPijSzxQujqAjkrCcNVgZZVg==
+"@sudoo/dump@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@sudoo/dump/-/dump-1.5.1.tgz#fff7ec9cf62ba619b3e7a1b20bda6a71bfc3540c"
+  integrity sha512-R26URIAkENXSaN1XLGc8JVhmiwaUEJkQbmrzeOnKJoDt3YYicG/weqYTSBbWi4bmvEFg1JTrvYvUrMQHiMuoHg==
   dependencies:
-    "@sudoo/immutable" "^1.2.0"
+    "@sudoo/immutable" "^1.3.0"
 
 "@sudoo/duplicate@^1.3.0":
   version "1.3.0"
@@ -97,7 +97,7 @@
   resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-1.17.0.tgz#28e2481c66f18adfaae619aa26be99799cdba6ec"
   integrity sha512-tC02W1kj9es6CBbXm+KM21oyFkJT/JntzlO3KMidTiuEu/DdS6WMFsJyDHJ8V97FaVZE4MLnMJe3JR3z2gEKFQ==
 
-"@sudoo/immutable@^1.2.0", "@sudoo/immutable@^1.3.0":
+"@sudoo/immutable@^1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@sudoo/immutable/-/immutable-1.3.0.tgz#71e8f245a414440c7d36d97e2840fdc21c0226b4"
   integrity sha512-mMdv9pMiPGU0Lyy/lXwXf1yAbPfQDbSkNyjWDiKRR3zpYRXFmbpZwK+FAb9I4hSmuwXRFxTQo0or2TgCM/ngLw==
