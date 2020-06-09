@@ -31,6 +31,7 @@ export const singleFetchApplicationRepository = async (key: string): Promise<Sin
     } = await Fetch
         .post
         .json(joinRoute('/application/single'))
+        .debugResponse()
         .bearer(Brontosaurus.hard().raw)
         .add('key', key)
         .fetch();
