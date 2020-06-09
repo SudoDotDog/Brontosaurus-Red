@@ -5,6 +5,6 @@
  */
 
 export declare type ApplicationRedirection = {
-    readonly name: string;
-    readonly regexp: string;
+    name: string;
+    regexp: string;
 };

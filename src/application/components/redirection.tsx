@@ -4,6 +4,7 @@
  * @description Redirection
  */
 
+import { produce } from "@sudoo/immutable";
 import { NeonCoin } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonInput } from "@sudoo/neon/input";
@@ -29,8 +30,8 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
 
         return (
             <div>
-                {this.props.redirections.map((each: ApplicationRedirection) => {
-                    return this._renderRedirect(each);
+                {this.props.redirections.map((each: ApplicationRedirection, index: number) => {
+                    return this._renderRedirect(each, index);
                 })}
                 <NeonCoin
                     size={SIZE.NORMAL}
@@ -48,15 +49,31 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
         );
     }
 
-    private _renderRedirect(redirection: ApplicationRedirection) {
+    private _renderRedirect(redirection: ApplicationRedirection, index: number) {
 
-        console.log(RedirectionStyle);
-
-        return (<div>
-            <NeonInput
-                label="Name"
-                value={redirection.name}
-            />
+        return (<div key={index}>
+            <div className={RedirectionStyle.nameContainer}>
+                <NeonInput
+                    style={{ flex: 1 }}
+                    label="Name"
+                    value={redirection.name}
+                    onChange={(newName: string) => {
+                        this.props.onChange(produce(this.props.redirections, (draft: ApplicationRedirection[]) => {
+                            draft[index].name = newName;
+                        }));
+                    }}
+                />
+                <NeonCoin
+                    size={SIZE.NORMAL}
+                    onClick={() => {
+                        this.props.onChange(this.props.redirections.filter(
+                            (_: ApplicationRedirection, currentIndex: number) => {
+                                return currentIndex !== index;
+                            }),
+                        );
+                    }}
+                >X</NeonCoin>
+            </div>
             <NeonInput
                 label="Name"
                 value={redirection.name}
