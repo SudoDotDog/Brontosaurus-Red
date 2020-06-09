@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace Application
- * @description Create
+ * @description Redirect
  */
 
 import { TimeBuilder } from "@sudoo/magic";
@@ -13,19 +13,19 @@ import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { createApplication } from "./repository/create";
 
-type CreateApplicationProp = {
+type ApplicationRedirectionProp = {
 } & RouteComponentProps;
 
-type CreateApplicationStates = {
+type ApplicationRedirectionStates = {
 
     readonly loading: boolean;
     readonly cover: NeonStickerCut | undefined;
     readonly current: any;
 };
 
-export class CreateApplication extends React.Component<CreateApplicationProp, CreateApplicationStates> {
+export class ApplicationRedirection extends React.Component<ApplicationRedirectionProp, ApplicationRedirectionStates> {
 
-    public readonly state: CreateApplicationStates = {
+    public readonly state: ApplicationRedirectionStates = {
 
         loading: false,
         cover: undefined,
