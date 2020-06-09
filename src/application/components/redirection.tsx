@@ -110,12 +110,17 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
 
     private _getTestResult(): string {
 
-        for (const redirect of this.props.redirections) {
-            const regexp: RegExp = new RegExp(redirect.regexp);
-            if (regexp.test(this.state.testValue)) {
-                return `Succeed by "${redirect.name}"`;
+        try {
+            for (const redirect of this.props.redirections) {
+                const regexp: RegExp = new RegExp(redirect.regexp);
+                if (regexp.test(this.state.testValue)) {
+                    return `Succeed by "${redirect.name}"`;
+                }
             }
+            return `Failed`;
+        } catch (err) {
+
+            return `Invalid Regular Expression`;
         }
-        return `Failed`;
     }
 }
