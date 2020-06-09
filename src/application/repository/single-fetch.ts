@@ -6,6 +6,7 @@
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
+import { ApplicationRedirection } from "../../common/declare";
 import { joinRoute } from "../../repository/route";
 
 export type SingleApplicationFetchResponse = {
@@ -15,6 +16,7 @@ export type SingleApplicationFetchResponse = {
     readonly key: string;
     readonly expire: number;
     readonly groups: string[];
+    readonly redirection: ApplicationRedirection[];
     readonly requires: string[];
     readonly green: string;
     readonly greenAccess: boolean;
