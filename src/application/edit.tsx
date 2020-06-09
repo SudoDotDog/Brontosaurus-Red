@@ -15,9 +15,11 @@ import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as ApplicationEditStyle from "../../style/application/edit.scss";
+import { ApplicationRedirection } from "../common/declare";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
+import { ApplicationRedirectionEditor } from "./components/redirection";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
 import { updateApplicationRepository } from "./repository/update";
 
@@ -137,7 +139,7 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                             })}
                         </div>
                     </div>
-                    <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
+                    <NeonTitle size={SIZE.MEDIUM}>User Groups</NeonTitle>
                     <NeonPillGroup
                         style={{ flexWrap: 'wrap' }}
                         selected={this.state.application.groups}
@@ -154,6 +156,13 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                         addable
                         removable
                         options={this.state.groups}
+                    />
+                    <NeonTitle size={SIZE.MEDIUM}>Redirections</NeonTitle>
+                    <ApplicationRedirectionEditor
+                        redirections={this.state.application.redirections}
+                        onChange={(newRedirections: ApplicationRedirection[]) => {
+                            this._updateApplication('redirections', newRedirections);
+                        }}
                     />
                     <NeonButton
                         size={SIZE.MEDIUM}

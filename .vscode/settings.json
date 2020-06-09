@@ -7,6 +7,7 @@
         "ifeq",
         "inplode",
         "qrcode",
+        "redirections",
         "setx",
         "triforce",
         "tshook"

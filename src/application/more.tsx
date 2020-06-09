@@ -104,11 +104,6 @@ export const ApplicationMore: React.FC<ApplicationMoreProps> = (props: Applicati
                 link="Toggle Portal Access"
                 onClick={() => togglePortalAccess(application, () => props.history.replace(`/admin/application/e/${params.application}`))}
             />
-            <MenuItem
-                description={`Set Redirection "${application}"`}
-                link="Go to Redirection"
-                onClick={() => props.history.push('/admin/application/redirection/' + encodeURIComponent(application))}
-            />
         </div>
     </div>);
 };

@@ -16,7 +16,7 @@ export type SingleApplicationFetchResponse = {
     readonly key: string;
     readonly expire: number;
     readonly groups: string[];
-    readonly redirection: ApplicationRedirection[];
+    readonly redirections: ApplicationRedirection[];
     readonly requires: string[];
     readonly green: string;
     readonly greenAccess: boolean;
