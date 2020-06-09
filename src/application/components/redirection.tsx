@@ -19,17 +19,22 @@ type ApplicationRedirectionProp = {
 };
 
 type ApplicationRedirectionStates = {
+
+    readonly testValue: string;
 };
 
 export class ApplicationRedirectionEditor extends React.Component<ApplicationRedirectionProp, ApplicationRedirectionStates> {
 
     public readonly state: ApplicationRedirectionStates = {
+
+        testValue: '',
     };
 
     public render() {
 
         return (
             <div>
+                {this._renderTestRedirect()}
                 {this.props.redirections.map((each: ApplicationRedirection, index: number) => {
                     return this._renderRedirect(each, index);
                 })}
@@ -39,7 +44,7 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
                         this.props.onChange([
                             ...this.props.redirections,
                             {
-                                name: '',
+                                name: 'NewRedirection',
                                 regexp: '^https://example.com/.+$',
                             },
                         ]);
@@ -49,12 +54,28 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
         );
     }
 
+    private _renderTestRedirect() {
+
+        return (<div>
+            <NeonInput
+                label="Test Redirect"
+                value={this.state.testValue}
+                onChange={(newValue: string) => this.setState({
+                    testValue: newValue,
+                })}
+            />
+            <div className={RedirectionStyle.testBox}>
+                {this._getTestResult()}
+            </div>
+        </div>);
+    }
+
     private _renderRedirect(redirection: ApplicationRedirection, index: number) {
 
-        return (<div key={index}>
+        return (<div key={`${redirection.name}+${index}`}>
             <div className={RedirectionStyle.nameContainer}>
                 <NeonInput
-                    style={{ flex: 1 }}
+                    className={RedirectionStyle.nameInput}
                     label="Name"
                     value={redirection.name}
                     onChange={(newName: string) => {
@@ -75,9 +96,26 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
                 >X</NeonCoin>
             </div>
             <NeonInput
-                label="Name"
-                value={redirection.name}
+                className={RedirectionStyle.regexpInput}
+                label="Regexp"
+                value={redirection.regexp}
+                onChange={(newRegexp: string) => {
+                    this.props.onChange(produce(this.props.redirections, (draft: ApplicationRedirection[]) => {
+                        draft[index].regexp = newRegexp;
+                    }));
+                }}
             />
         </div>);
+    }
+
+    private _getTestResult(): string {
+
+        for (const redirect of this.props.redirections) {
+            const regexp: RegExp = new RegExp(redirect.regexp);
+            if (regexp.test(this.state.testValue)) {
+                return `Succeed by "${redirect.name}"`;
+            }
+        }
+        return `Failed`;
     }
 }

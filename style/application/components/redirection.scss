@@ -9,3 +9,17 @@
 .name-container {
     display: flex;
 }
+
+.name-input {
+    flex: 1;
+    margin-right: 0;
+}
+
+.regexp-input {
+    margin-top: 0;
+}
+
+.test-box {
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+}

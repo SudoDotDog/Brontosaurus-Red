@@ -4,7 +4,8 @@
  * @description Declare
  */
 
-export declare type ApplicationRedirection = {
+export type ApplicationRedirection = {
+
     name: string;
     regexp: string;
 };
