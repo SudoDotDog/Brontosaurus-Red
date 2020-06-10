@@ -44,8 +44,8 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
                         this.props.onChange([
                             ...this.props.redirections,
                             {
-                                name: 'NewRedirection',
-                                regexp: '^https://example.com/.+$',
+                                name: 'New-Redirection',
+                                regexp: '^https://example\\.sudo\\.dog/.+$',
                             },
                         ]);
                     }}
