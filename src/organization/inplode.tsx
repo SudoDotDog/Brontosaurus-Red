@@ -202,7 +202,9 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

@@ -89,7 +89,9 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

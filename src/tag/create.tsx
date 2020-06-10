@@ -94,7 +94,9 @@ export class CreateTag extends React.Component<CreateTagProp, CreateTagStates> {
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

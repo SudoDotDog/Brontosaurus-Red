@@ -44,13 +44,6 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
         groups: [],
     };
 
-    public constructor(props: ApplicationEditProp) {
-
-        super(props);
-
-        this._submit = this._submit.bind(this);
-    }
-
     public async componentDidMount() {
 
         const response: SingleApplicationFetchResponse = await singleFetchApplicationRepository(this._getApplicationKey());
@@ -167,7 +160,7 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
-                        onClick={this._submit}
+                        onClick={this._submit.bind(this)}
                     >
                         Save Change
                     </NeonButton>
@@ -224,7 +217,9 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

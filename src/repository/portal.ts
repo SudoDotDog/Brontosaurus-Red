@@ -7,7 +7,7 @@
 export const getPortalPath = (): string => {
 
     if (process && process.env && process.env.PORTAL_PATH) {
-        return process.env.PORTAL_PATH as string;
+        return process.env.PORTAL_PATH;
     }
     if (window && (window as any).env && (window as any).env.PORTAL_PATH) {
         return (window as any).env.PORTAL_PATH as string;

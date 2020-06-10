@@ -43,13 +43,6 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
         decorators: [],
     };
 
-    public constructor(props: GroupEditProp) {
-
-        super(props);
-
-        this._submit = this._submit.bind(this);
-    }
-
     public async componentDidMount() {
 
         const response: SingleGroupResponse = await singleGroup(this._getGroupName());
@@ -98,7 +91,7 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
-                        onClick={this._submit}>
+                        onClick={this._submit.bind(this)}>
                         Save Change
                     </NeonButton>
                 </NeonIndicator>
@@ -214,7 +207,9 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

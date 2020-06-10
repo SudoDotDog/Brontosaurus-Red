@@ -68,7 +68,7 @@ export class MailerTransportPreference extends React.Component<MailerTransportPr
                 flag={this.state.flag}
                 value={this.state.current}
                 onChange={(result: any) => this.setState({ current: result })}
-                onSubmit={this._handleSubmit}
+                onSubmit={this._handleSubmit.bind(this)}
             />
         </div>);
     }
@@ -97,7 +97,9 @@ export class MailerTransportPreference extends React.Component<MailerTransportPr
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

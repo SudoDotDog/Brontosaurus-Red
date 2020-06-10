@@ -49,13 +49,6 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
         tags: [],
     };
 
-    public constructor(props: OrganizationEditProp) {
-
-        super(props);
-
-        this._submit = this._submit.bind(this);
-    }
-
     public async componentDidMount() {
 
         const response: SingleOrganizationResponse = await singleOrganization(this._getOrganizationName());
@@ -109,7 +102,7 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
-                        onClick={this._submit}>
+                        onClick={this._submit.bind(this)}>
                         Save Change
                     </NeonButton>
                 </NeonIndicator>
@@ -285,7 +278,9 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });
@@ -339,7 +334,9 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

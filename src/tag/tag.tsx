@@ -54,12 +54,6 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
 
     private readonly _defaultValue: string = searchKeywordCache.value;
 
-    public constructor(props: ConnectedProps) {
-
-        super(props);
-        this._searchTags = this._searchTags.bind(this);
-    }
-
     public componentDidMount() {
         this._searchTags();
     }
@@ -74,7 +68,9 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);
-                        this.setState({ keyword, page: 0 }, this._searchTags);
+                        this.setState({ keyword, page: 0 }, () => {
+                            this._searchTags();
+                        });
                     }}
                     onNew={() => this.props.history.push('/admin/tag/create')}
                 />
@@ -96,7 +92,9 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
                     selected={this.state.page}
                     onClick={(page: number) => {
                         searchPageCache.replace(page);
-                        this.setState({ page }, this._searchTags);
+                        this.setState({ page }, () => {
+                            this._searchTags();
+                        });
                     }}
                 />
             </div>
@@ -138,4 +136,4 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
     }
 }
 
-export const Tags: React.ComponentType<{}> = connector.connect(TagsBase);
+export const Tags: React.ComponentType<unknown> = connector.connect(TagsBase);

@@ -170,7 +170,9 @@ export class OrganizationSubRegister extends React.Component<OrganizationSubRegi
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

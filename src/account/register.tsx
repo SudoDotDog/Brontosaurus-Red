@@ -250,7 +250,9 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

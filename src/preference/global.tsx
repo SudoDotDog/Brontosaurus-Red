@@ -38,13 +38,6 @@ export class GlobalPreference extends React.Component<GlobalPreferenceProp, Glob
         flag: undefined,
     };
 
-    public constructor(props: GlobalPreferenceProp) {
-
-        super(props);
-
-        this._handleSubmit = this._handleSubmit.bind(this);
-    }
-
     public async componentDidMount() {
 
         const response: ReadGlobalRepositoryResponse = await readGlobalPreferenceRepository();
@@ -69,7 +62,7 @@ export class GlobalPreference extends React.Component<GlobalPreferenceProp, Glob
                     ...this.state.current,
                 }}
                 onChange={(result: any) => this.setState({ current: result })}
-                onSubmit={this._handleSubmit}
+                onSubmit={this._handleSubmit.bind(this)}
             />
         </div>);
     }
@@ -104,7 +97,9 @@ export class GlobalPreference extends React.Component<GlobalPreferenceProp, Glob
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

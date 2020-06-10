@@ -94,7 +94,9 @@ export class CreateGroup extends React.Component<CreateGroupProp, CreateGroupSta
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

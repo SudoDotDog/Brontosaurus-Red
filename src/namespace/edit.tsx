@@ -37,13 +37,6 @@ export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceE
         namespace: null,
     };
 
-    public constructor(props: NamespaceEditProp) {
-
-        super(props);
-
-        this._submit = this._submit.bind(this);
-    }
-
     public async componentDidMount() {
 
         const response: SingleNamespaceResponse = await singleNamespace(this._getNamespaceNamespace());
@@ -85,7 +78,7 @@ export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceE
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
-                        onClick={this._submit}>
+                        onClick={this._submit.bind(this)}>
                         Save Change
                     </NeonButton>
                 </NeonIndicator>
@@ -155,7 +148,9 @@ export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceE
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

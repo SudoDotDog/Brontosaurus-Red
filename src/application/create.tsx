@@ -92,7 +92,9 @@ export class CreateApplication extends React.Component<CreateApplicationProp, Cr
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

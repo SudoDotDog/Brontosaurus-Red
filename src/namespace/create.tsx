@@ -98,7 +98,9 @@ export class CreateNamespace extends React.Component<CreateNamespaceProp, Create
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

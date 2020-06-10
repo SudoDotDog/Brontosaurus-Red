@@ -52,13 +52,6 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
         decorators: [],
     };
 
-    public constructor(props: AccountEditProp) {
-
-        super(props);
-
-        this._submit = this._submit.bind(this);
-    }
-
     public async componentDidMount() {
 
         const response: SingleFetchResponse = await singleFetchRepository(this._getUsername(), this._getNamespace());
@@ -124,7 +117,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
-                        onClick={this._submit}>
+                        onClick={this._submit.bind(this)}>
                         Save Change
                     </NeonButton>
                 </NeonIndicator>
@@ -374,7 +367,9 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });
@@ -424,7 +419,9 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });
@@ -488,7 +485,9 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });

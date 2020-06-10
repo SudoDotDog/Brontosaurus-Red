@@ -37,13 +37,6 @@ export class TagEdit extends React.Component<TagEditProp, TagEditState> {
         tag: null,
     };
 
-    public constructor(props: TagEditProp) {
-
-        super(props);
-
-        this._submit = this._submit.bind(this);
-    }
-
     public async componentDidMount() {
 
         const response: SingleTagResponse = await singleTagRepository(this._getTagName());
@@ -85,7 +78,7 @@ export class TagEdit extends React.Component<TagEditProp, TagEditState> {
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
-                        onClick={this._submit}>
+                        onClick={this._submit.bind(this)}>
                         Save Change
                     </NeonButton>
                 </NeonIndicator>
@@ -150,7 +143,9 @@ export class TagEdit extends React.Component<TagEditProp, TagEditState> {
                     peek: {
                         children: "<-",
                         expend: "Complete",
-                        onClick: this.props.history.goBack,
+                        onClick: () => {
+                            this.props.history.goBack();
+                        },
                     },
                 },
             });
