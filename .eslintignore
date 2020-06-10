@@ -1,0 +1,12 @@
+# Dependencies
+node_modules
+
+# Build
+app
+coverage
+
+# Example
+example
+
+# Style
+Style

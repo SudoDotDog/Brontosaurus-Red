@@ -7,6 +7,7 @@ tsc := node_modules/.bin/tsc
 webpack := node_modules/.bin/webpack
 webpack_dev_server := node_modules/.bin/webpack-dev-server
 mocha := node_modules/.bin/mocha
+eslint := node_modules/.bin/eslint
 
 .IGNORE: clean-linux
 
@@ -31,6 +32,14 @@ cov:
 	@echo "[INFO] Testing with Nyc and Mocha"
 	@NODE_ENV=test \
 	nyc $(mocha)
+
+lint:
+	@echo "[INFO] Linting"
+	@$(eslint) . --ext .ts,.tsx --config ./typescript/.eslintrc.json
+
+lint-fix:
+	@echo "[INFO] Linting and Fixing"
+	@$(eslint) . --ext .ts,.tsx --config ./typescript/.eslintrc.json --fix
 
 install:
 	@echo "[INFO] Installing dev Dependencies"
