@@ -33,7 +33,7 @@ export type EntryStates = {
     readonly accountName: string;
 };
 
-export class Entry extends React.Component<{}, EntryStates> {
+export class Entry extends React.Component<undefined, EntryStates> {
 
     public readonly state: EntryStates = {
 
@@ -127,5 +127,4 @@ export class Entry extends React.Component<{}, EntryStates> {
     }
 }
 
-// tslint:disable-next-line: no-default-export
 export default Entry;

@@ -46,12 +46,6 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
         page: 0,
     };
 
-    public constructor(props: AccountOrganizationAssignProps) {
-
-        super(props);
-        this._searchOrganization = this._searchOrganization.bind(this);
-    }
-
     public render() {
 
         return (
@@ -61,12 +55,14 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
                 cover={this._renderSticker()}
             >
                 <GoBack />
-                <NeonTitle margin={MARGIN.SMALL}>Set {this._getUsername()}'s Organization</NeonTitle>
+                <NeonTitle margin={MARGIN.SMALL}>Set {this._getUsername()}&#39;s Organization</NeonTitle>
 
                 <NeonApplicable
                     size={SIZE.MEDIUM}
                     label={'Search Target Organization'}
-                    onApply={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchOrganization)}
+                    onApply={(keyword: string) => this.setState({ keyword, page: 0 }, () => {
+                        this._searchOrganization();
+                    })}
                 />
 
                 {this.state.organizations.length === 0
@@ -80,7 +76,9 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
                 <PageSelector
                     total={this.state.pages}
                     selected={this.state.page}
-                    onClick={(page: number) => this.setState({ page }, this._searchOrganization)}
+                    onClick={(page: number) => this.setState({ page }, () => {
+                        this._searchOrganization();
+                    })}
                 />
             </NeonIndicator>
         );

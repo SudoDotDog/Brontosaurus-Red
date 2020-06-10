@@ -46,12 +46,6 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
         page: 0,
     };
 
-    public constructor(props: UserProp) {
-
-        super(props);
-        this._searchUser = this._searchUser.bind(this);
-    }
-
     public render() {
 
         return (
@@ -66,7 +60,9 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
                 <NeonApplicable
                     size={SIZE.MEDIUM}
                     label={'Search Accounts'}
-                    onApply={(keyword: string) => this.setState({ keyword, page: 0 }, this._searchUser)}
+                    onApply={(keyword: string) => this.setState({ keyword, page: 0 }, () => {
+                        this._searchUser();
+                    })}
                 />
 
                 {this.state.users.length === 0
@@ -80,7 +76,9 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
                 <PageSelector
                     total={this.state.pages}
                     selected={this.state.page}
-                    onClick={(page: number) => this.setState({ page }, this._searchUser)}
+                    onClick={(page: number) => this.setState({ page }, () => {
+                        this._searchUser();
+                    })}
                 />
             </NeonIndicator>
         );

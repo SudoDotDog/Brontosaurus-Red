@@ -12,6 +12,7 @@ install:
   - npm install codecov nyc -g
 
 before_script:
+  - make lint
   - make build
 
 script:

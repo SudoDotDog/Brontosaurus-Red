@@ -37,74 +37,74 @@ export const MeChangePasswordBase: React.FC<MeChangePasswordProp> = (props: MeCh
     const [cover, setCover] = React.useState<NeonStickerCut | undefined>(undefined);
     const [flag, setFlag] = React.useState<NeonFlagCut | undefined>(undefined);
 
-    return (
-        <div>
-            <GoBack />
-            <NeonSmartForm
-                loading={loading}
-                form={{
-                    password: {
-                        type: INPUT_TYPE.PASSWORD,
-                        display: props.language.get(PROFILE.PASSWORD),
-                    },
-                    confirm: {
-                        type: INPUT_TYPE.PASSWORD,
-                        display: props.language.get(PROFILE.CONFIRM_PASSWORD),
-                    },
-                }}
-                title={props.language.get(PROFILE.CHANGE_PASSWORD)}
-                submit={props.language.get(PROFILE.UPDATE)}
-                cover={cover}
-                flag={flag}
-                value={current}
-                onChange={(result: any) => {
-                    setCurrent(result);
-                }}
-                onSubmit={async () => {
+    return (<div>
+        <GoBack />
+        <NeonSmartForm
+            loading={loading}
+            form={{
+                password: {
+                    type: INPUT_TYPE.PASSWORD,
+                    display: props.language.get(PROFILE.PASSWORD),
+                },
+                confirm: {
+                    type: INPUT_TYPE.PASSWORD,
+                    display: props.language.get(PROFILE.CONFIRM_PASSWORD),
+                },
+            }}
+            title={props.language.get(PROFILE.CHANGE_PASSWORD)}
+            submit={props.language.get(PROFILE.UPDATE)}
+            cover={cover}
+            flag={flag}
+            value={current}
+            onChange={(result: any) => {
+                setCurrent(result);
+            }}
+            onSubmit={async () => {
 
-                    setCover(undefined);
-                    setFlag(undefined);
+                setCover(undefined);
+                setFlag(undefined);
 
-                    setLoading(true);
-                    if (current.password === current.confirm) {
-                        try {
-                            await editPassword(current.password);
+                setLoading(true);
+                if (current.password === current.confirm) {
+                    try {
+                        await editPassword(current.password);
 
-                            setCover({
-                                type: SIGNAL.SUCCEED,
-                                title: props.language.get(PROFILE.SUCCEED),
+                        setCover({
+                            type: SIGNAL.SUCCEED,
+                            title: props.language.get(PROFILE.SUCCEED),
 
-                                peek: {
-                                    children: "<-",
-                                    expend: props.language.get(PROFILE.COMPLETE),
-                                    onClick: props.history.goBack,
+                            peek: {
+                                children: "<-",
+                                expend: props.language.get(PROFILE.COMPLETE),
+                                onClick: () => {
+                                    props.history.goBack();
                                 },
-                            });
-                        } catch (err) {
-                            setCover({
-                                type: SIGNAL.ERROR,
-                                title: props.language.get(PROFILE.FAILED),
-                                info: err.message,
-
-                                peek: {
-                                    children: "<-",
-                                    expend: props.language.get(PROFILE.RETRY),
-                                    onClick: () => setCover(undefined),
-                                },
-                            });
-                        }
-                    } else {
-                        setFlag({
+                            },
+                        });
+                    } catch (err) {
+                        setCover({
                             type: SIGNAL.ERROR,
-                            message: props.language.get(PROFILE.PASSWORD_NOT_MATCHED),
+                            title: props.language.get(PROFILE.FAILED),
+                            info: err.message,
+
+                            peek: {
+                                children: "<-",
+                                expend: props.language.get(PROFILE.RETRY),
+                                onClick: () => setCover(undefined),
+                            },
                         });
                     }
+                } else {
+                    setFlag({
+                        type: SIGNAL.ERROR,
+                        message: props.language.get(PROFILE.PASSWORD_NOT_MATCHED),
+                    });
+                }
 
-                    setLoading(false);
-                }}
-            />
-        </div>
-    );
+                setLoading(false);
+            }}
+        />
+    </div>);
 };
 
-export const MeChangePassword: React.ComponentType<{}> = connector.connect(MeChangePasswordBase);
+export const MeChangePassword: React.ComponentType<unknown> = connector.connect(MeChangePasswordBase);

@@ -54,12 +54,6 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
 
     private readonly _defaultValue: string = searchKeywordCache.value;
 
-    public constructor(props: ConnectedProps) {
-
-        super(props);
-        this._searchNamespace = this._searchNamespace.bind(this);
-    }
-
     public componentDidMount() {
         this._searchNamespace();
     }
@@ -74,7 +68,9 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);
-                        this.setState({ keyword, page: 0 }, this._searchNamespace);
+                        this.setState({ keyword, page: 0 }, () => {
+                            this._searchNamespace();
+                        });
                     }}
                     onNew={() => this.props.history.push('/admin/namespace/create')}
                 />
@@ -97,7 +93,9 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
                     selected={this.state.page}
                     onClick={(page: number) => {
                         searchPageCache.replace(page);
-                        this.setState({ page }, this._searchNamespace);
+                        this.setState({ page }, () => {
+                            this._searchNamespace();
+                        });
                     }}
                 />
             </div>
@@ -140,4 +138,4 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
     }
 }
 
-export const Namespace: React.ComponentType<{}> = connector.connect(NamespaceBase);
+export const Namespace: React.ComponentType<unknown> = connector.connect(NamespaceBase);

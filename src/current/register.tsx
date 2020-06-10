@@ -86,7 +86,9 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
                             peek: {
                                 children: "<-",
                                 expend: "Complete",
-                                onClick: props.history.goBack,
+                                onClick: () => {
+                                    props.history.goBack();
+                                },
                             },
                         });
 

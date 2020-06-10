@@ -56,12 +56,6 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
 
     private readonly _defaultValue: string = searchKeywordCache.value;
 
-    public constructor(props: ConnectedProps) {
-
-        super(props);
-        this._searchUser = this._searchUser.bind(this);
-    }
-
     public componentDidMount() {
         this._searchUser();
     }
@@ -76,7 +70,9 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);
-                        this.setState({ keyword, page: 0 }, this._searchUser);
+                        this.setState({ keyword, page: 0 }, () => {
+                            this._searchUser();
+                        });
                     }}
                     onNew={() => this.props.history.push('/admin/user/new')}
                 />
@@ -106,7 +102,9 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                     selected={this.state.page}
                     onClick={(page: number) => {
                         searchPageCache.replace(page);
-                        this.setState({ page }, this._searchUser);
+                        this.setState({ page }, () => {
+                            this._searchUser();
+                        });
                     }}
                 />
             </div>
@@ -164,4 +162,4 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
     }
 }
 
-export const User: React.ComponentType<{}> = connector.connect(UserBase);
+export const User: React.ComponentType<unknown> = connector.connect(UserBase);

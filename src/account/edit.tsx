@@ -559,7 +559,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
         } else {
             return (<React.Fragment>
                 <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
-                <NeonSub>This user doesn't belong to any organization</NeonSub>
+                <NeonSub>This user doesn&#39;t belong to any organization</NeonSub>
             </React.Fragment>);
         }
     }

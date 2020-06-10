@@ -38,13 +38,6 @@ export class MailerTransportPreference extends React.Component<MailerTransportPr
         flag: undefined,
     };
 
-    public constructor(props: MailerTransportPreferenceProp) {
-
-        super(props);
-
-        this._handleSubmit = this._handleSubmit.bind(this);
-    }
-
     public async componentDidMount() {
 
         const response: string = await readMailerTransportPreferenceRepository();

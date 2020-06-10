@@ -54,12 +54,6 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
 
     private readonly _defaultValue: string = searchKeywordCache.value;
 
-    public constructor(props: ConnectedProps) {
-
-        super(props);
-        this._searchGroup = this._searchGroup.bind(this);
-    }
-
     public componentDidMount() {
         this._searchGroup();
     }
@@ -74,7 +68,9 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);
-                        this.setState({ keyword, page: 0 }, this._searchGroup);
+                        this.setState({ keyword, page: 0 }, () => {
+                            this._searchGroup();
+                        });
                     }}
                     onNew={() => this.props.history.push('/admin/group/create')}
                 />
@@ -97,7 +93,9 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
                     selected={this.state.page}
                     onClick={(page: number) => {
                         searchPageCache.replace(page);
-                        this.setState({ page }, this._searchGroup);
+                        this.setState({ page }, () => {
+                            this._searchGroup();
+                        });
                     }}
                 />
             </div>
@@ -140,4 +138,4 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
     }
 }
 
-export const Group: React.ComponentType<{}> = connector.connect(GroupBase);
+export const Group: React.ComponentType<unknown> = connector.connect(GroupBase);

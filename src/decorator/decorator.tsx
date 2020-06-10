@@ -54,12 +54,6 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
 
     private readonly _defaultValue: string = searchKeywordCache.value;
 
-    public constructor(props: ConnectedProps) {
-
-        super(props);
-        this._searchDecorator = this._searchDecorator.bind(this);
-    }
-
     public componentDidMount() {
         this._searchDecorator();
     }
@@ -74,7 +68,9 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);
-                        this.setState({ keyword, page: 0 }, this._searchDecorator);
+                        this.setState({ keyword, page: 0 }, () => {
+                            this._searchDecorator();
+                        });
                     }}
                     onNew={() => this.props.history.push('/admin/decorator/create')}
                 />
@@ -96,7 +92,9 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
                     selected={this.state.page}
                     onClick={(page: number) => {
                         searchPageCache.replace(page);
-                        this.setState({ page }, this._searchDecorator);
+                        this.setState({ page }, () => {
+                            this._searchDecorator();
+                        });
                     }}
                 />
             </div>
@@ -138,4 +136,4 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
     }
 }
 
-export const Decorator: React.ComponentType<{}> = connector.connect(DecoratorBase);
+export const Decorator: React.ComponentType<unknown> = connector.connect(DecoratorBase);

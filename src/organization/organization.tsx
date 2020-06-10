@@ -56,12 +56,6 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
 
     private readonly _defaultValue: string = searchKeywordCache.value;
 
-    public constructor(props: ConnectedProps) {
-
-        super(props);
-        this._searchOrganization = this._searchOrganization.bind(this);
-    }
-
     public componentDidMount() {
         this._searchOrganization();
     }
@@ -76,7 +70,9 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);
-                        this.setState({ keyword, page: 0 }, this._searchOrganization);
+                        this.setState({ keyword, page: 0 }, () => {
+                            this._searchOrganization();
+                        });
                     }}
                     onNew={() => this.props.history.push('/admin/organization/create')}
                     onInplode={() => this.props.history.push('/admin/organization/inplode')}
@@ -102,7 +98,9 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
                     selected={this.state.page}
                     onClick={(page: number) => {
                         searchPageCache.replace(page);
-                        this.setState({ page }, this._searchOrganization);
+                        this.setState({ page }, () => {
+                            this._searchOrganization();
+                        });
                     }}
                 />
             </div>
@@ -157,4 +155,4 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
     }
 }
 
-export const Organization: React.ComponentType<{}> = connector.connect(OrganizationBase);
+export const Organization: React.ComponentType<unknown> = connector.connect(OrganizationBase);

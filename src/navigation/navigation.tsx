@@ -107,4 +107,4 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
     );
 };
 
-export const Nav: React.ComponentType<{}> = connector.connect(NavBase);
+export const Nav: React.ComponentType<unknown> = connector.connect(NavBase);

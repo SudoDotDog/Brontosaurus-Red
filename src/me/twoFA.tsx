@@ -57,4 +57,4 @@ export const MeEnable2FABase: React.FC<MeEnable2FAProp> = (props: MeEnable2FAPro
     );
 };
 
-export const MeEnable2FA: React.ComponentType<{}> = connector.connect(MeEnable2FABase);
+export const MeEnable2FA: React.ComponentType<unknown> = connector.connect(MeEnable2FABase);

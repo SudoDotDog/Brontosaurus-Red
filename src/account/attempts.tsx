@@ -37,12 +37,6 @@ export class AccountAttempts extends React.Component<AccountAttemptsProps, Accou
         page: 0,
     };
 
-    public constructor(props: AccountAttemptsProps) {
-
-        super(props);
-        this._fetchAttempts = this._fetchAttempts.bind(this);
-    }
-
     public componentDidMount() {
         this._fetchAttempts();
     }
@@ -54,7 +48,7 @@ export class AccountAttempts extends React.Component<AccountAttemptsProps, Accou
                 loading={this.state.loading}
             >
                 <GoBack />
-                <NeonTitle margin={MARGIN.SMALL}>{this._getUsername()}'s Attempts</NeonTitle>
+                <NeonTitle margin={MARGIN.SMALL}>{this._getUsername()}&#39;s Attempts</NeonTitle>
 
                 {this.state.attempts.length === 0
                     ? void 0
@@ -74,7 +68,9 @@ export class AccountAttempts extends React.Component<AccountAttemptsProps, Accou
                 <PageSelector
                     total={this.state.pages}
                     selected={this.state.page}
-                    onClick={(page: number) => this.setState({ page }, this._fetchAttempts)}
+                    onClick={(page: number) => this.setState({ page }, () => {
+                        this._fetchAttempts();
+                    })}
                 />
             </NeonIndicator>
         );

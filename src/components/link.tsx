@@ -20,6 +20,7 @@ export const Link: React.FC<LinkProps> = (props: LinkProps) => {
 
     return (<a
         target="_blank"
+        rel="noreferrer"
         href={props.href}
         className={combineClasses(
             props.className,

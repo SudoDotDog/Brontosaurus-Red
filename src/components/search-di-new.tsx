@@ -10,7 +10,7 @@ import { SIZE } from "@sudoo/neon/declare";
 import { NeonApplicable } from "@sudoo/neon/input";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
-import * as __Search_New from "../../style/components/search-new.scss";
+import * as SearchNewStyle from "../../style/components/search-new.scss";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
@@ -37,10 +37,10 @@ const connector = Connector.create<IStore, ConnectedStates>()
 
 export const SearchDoubleNewBase: React.ComponentType<ConnectedProps> = (props: ConnectedProps) => {
 
-    return (<div className={__Search_New.searchBar}>
+    return (<div className={SearchNewStyle.searchBar}>
         <NeonApplicable
             defaultValue={props.defaultValue}
-            className={__Search_New.search}
+            className={SearchNewStyle.search}
             size={SIZE.MEDIUM}
             apply={props.language.get(PROFILE.APPLY)}
             label={`${props.language.get(PROFILE.SEARCH)} ${props.label}`}
@@ -50,13 +50,13 @@ export const SearchDoubleNewBase: React.ComponentType<ConnectedProps> = (props: 
         <div style={{ width: '0.5rem' }}></div>
 
         <NeonButton
-            className={__Search_New.single}
+            className={SearchNewStyle.single}
             size={SIZE.RELATIVE}
             onClick={props.onNew}
         >{props.language.get(PROFILE.CREATE_NEW)}</NeonButton>
 
         <NeonButton
-            className={__Search_New.single}
+            className={SearchNewStyle.single}
             size={SIZE.RELATIVE}
             onClick={props.onInplode}
         >{props.language.get(PROFILE.INPLODE)}</NeonButton>

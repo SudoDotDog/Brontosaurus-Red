@@ -87,4 +87,4 @@ export const AdminNavBase: React.FC<AdminNavProps> = (props: AdminNavProps) => {
     </React.Fragment>);
 };
 
-export const AdminNav: React.ComponentType<{}> = connector.connect(AdminNavBase);
+export const AdminNav: React.ComponentType<unknown> = connector.connect(AdminNavBase);

@@ -51,4 +51,4 @@ export const MeMenuBase: React.FC<MeMenuProps> = (props: MeMenuProps) => {
     </React.Fragment>);
 };
 
-export const MeMenu: React.ComponentType<{}> = connector.connect(MeMenuBase);
+export const MeMenu: React.ComponentType<unknown> = connector.connect(MeMenuBase);

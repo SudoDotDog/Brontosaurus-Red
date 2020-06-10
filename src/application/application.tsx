@@ -54,12 +54,6 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
 
     private readonly _defaultValue: string = searchKeywordCache.value;
 
-    public constructor(props: ConnectedProps) {
-
-        super(props);
-        this._searchApplication = this._searchApplication.bind(this);
-    }
-
     public componentDidMount() {
         this._searchApplication();
     }
@@ -73,7 +67,9 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                 onSearch={(keyword: string) => {
                     searchKeywordCache.replace(keyword);
                     searchPageCache.replace(0);
-                    this.setState({ keyword, page: 0 }, this._searchApplication);
+                    this.setState({ keyword, page: 0 }, () => {
+                        this._searchApplication();
+                    });
                 }}
                 onNew={() => this.props.history.push('/admin/application/create')}
             />
@@ -98,7 +94,9 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                 selected={this.state.page}
                 onClick={(page: number) => {
                     searchPageCache.replace(page);
-                    this.setState({ page }, this._searchApplication);
+                    this.setState({ page }, () => {
+                        this._searchApplication();
+                    });
                 }}
             />
         </div>);
@@ -150,4 +148,4 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
     }
 }
 
-export const Application: React.ComponentType<{}> = connector.connect(ApplicationBase);
+export const Application: React.ComponentType<unknown> = connector.connect(ApplicationBase);
