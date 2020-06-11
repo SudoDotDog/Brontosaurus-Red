@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@sudoo/react-force-dev": "^1.7.2",
-    "@sudoo/triforce": "^2.6.3",
+    "@sudoo/triforce": "^2.7.1",
     "@sudoo/webpack-react": "^2.9.1",
     "@types/react-router-dom": "^5.1.5",
     "ts-loader": "^7.0.5"
@@ -53,9 +53,6 @@
       "text-summary"
     ],
     "report-dir": "coverage",
-    "require": [
-      "./test/tshook.js"
-    ],
     "sourceMap": true
   }
 }

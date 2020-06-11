@@ -16,7 +16,7 @@ before_script:
   - make build
 
 script:
-  - nyc mocha
+  - make cov
 
 after_success:
   - codecov -f ./coverage/coverage-final.json
