@@ -12,6 +12,7 @@ import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { NeonCheckbox } from "@sudoo/neon/radio"
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as ApplicationEditStyle from "../../style/application/edit.scss";
@@ -151,6 +152,24 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                         options={this.state.groups}
                     />
                     <NeonTitle size={SIZE.MEDIUM}>Redirections</NeonTitle>
+                    <div className={ApplicationEditStyle.protocolGrid}>
+                        <NeonCheckbox
+                            value={this.state.application.iFrameProtocol}
+                            onChange={(newValue: boolean) => this._updateApplication('iFrameProtocol', newValue)}
+                        >Allow IFrame</NeonCheckbox>
+                        <NeonCheckbox
+                            value={this.state.application.postProtocol}
+                            onChange={(newValue: boolean) => this._updateApplication('postProtocol', newValue)}
+                        >Allow Post</NeonCheckbox>
+                        <NeonCheckbox
+                            value={this.state.application.alertProtocol}
+                            onChange={(newValue: boolean) => this._updateApplication('alertProtocol', newValue)}
+                        >Allow Alert</NeonCheckbox>
+                        <NeonCheckbox
+                            value={this.state.application.noneProtocol}
+                            onChange={(newValue: boolean) => this._updateApplication('noneProtocol', newValue)}
+                        >Allow None</NeonCheckbox>
+                    </div>
                     <ApplicationRedirectionEditor
                         redirections={this.state.application.redirections}
                         onChange={(newRedirections: ApplicationRedirection[]) => {
