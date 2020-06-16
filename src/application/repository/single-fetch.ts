@@ -16,7 +16,13 @@ export type SingleApplicationFetchResponse = {
     readonly key: string;
     readonly expire: number;
     readonly groups: string[];
+
     readonly redirections: ApplicationRedirection[];
+    readonly iFrameProtocol: boolean;
+    readonly postProtocol: boolean;
+    readonly alertProtocol: boolean;
+    readonly noneProtocol: boolean;
+
     readonly requires: string[];
     readonly green: string;
     readonly greenAccess: boolean;

@@ -7,13 +7,20 @@
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
+import { ApplicationRedirection } from "../../common/declare";
 
 export type ApplicationResponse = {
-    expire: number;
-    key: string;
-    name: string;
-    greenAccess: boolean;
-    portalAccess: boolean;
+    readonly expire: number;
+    readonly key: string;
+    readonly name: string;
+    readonly greenAccess: boolean;
+    readonly portalAccess: boolean;
+
+    readonly redirections: ApplicationRedirection[];
+    readonly iFrameProtocol: boolean;
+    readonly postProtocol: boolean;
+    readonly alertProtocol: boolean;
+    readonly noneProtocol: boolean;
 };
 
 export type FetchApplicationResponse = {

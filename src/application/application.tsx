@@ -83,6 +83,7 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                         this.props.language.get(PROFILE.EXPIRE),
                         this.props.language.get(PROFILE.GREEN_ACCESS),
                         this.props.language.get(PROFILE.PORTAL_ACCESS),
+                        this.props.language.get(PROFILE.REDIRECTIONS),
                         this.props.language.get(PROFILE.ACTION),
                     ]}
                     style={{ marginTop: '1rem' }}>
@@ -126,6 +127,7 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                 <td>{application.expire}</td>
                 <td>{greenAccess}</td>
                 <td>{portalAccess}</td>
+                <td>{application.redirections.length}</td>
                 <td><NeonButton
                     onClick={() => this.props.history.push('/admin/application/more/' + encodeURIComponent(application.key))}
                     size={SIZE.RELATIVE}>
