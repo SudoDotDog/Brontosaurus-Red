@@ -84,6 +84,7 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                         this.props.language.get(PROFILE.GREEN_ACCESS),
                         this.props.language.get(PROFILE.PORTAL_ACCESS),
                         this.props.language.get(PROFILE.REDIRECTIONS),
+                        this.props.language.get(PROFILE.PROTOCOL),
                         this.props.language.get(PROFILE.ACTION),
                     ]}
                     style={{ marginTop: '1rem' }}>
@@ -128,6 +129,7 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                 <td>{greenAccess}</td>
                 <td>{portalAccess}</td>
                 <td>{application.redirections.length}</td>
+                <td>{this._renderProtocol(application)}</td>
                 <td><NeonButton
                     onClick={() => this.props.history.push('/admin/application/more/' + encodeURIComponent(application.key))}
                     size={SIZE.RELATIVE}>
@@ -135,6 +137,25 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                 </NeonButton></td>
             </tr>);
         });
+    }
+
+    private _renderProtocol(application: ApplicationResponse): string {
+
+        const buffer: string[] = [];
+
+        if (application.iFrameProtocol) {
+            buffer.push('I');
+        }
+        if (application.postProtocol) {
+            buffer.push('P');
+        }
+        if (application.alertProtocol) {
+            buffer.push('A');
+        }
+        if (application.noneProtocol) {
+            buffer.push('N');
+        }
+        return buffer.join('');
     }
 
     private async _searchApplication() {
