@@ -214,10 +214,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/verify/-/verify-1.13.0.tgz#26953041d7211dcc008a6b5030bf71a20288bc94"
   integrity sha512-5HgSXQSMNthyvkq9EjnnFkjPBazlH0f+yHxDCukWOPZHg2nLeyi0UX4PC1FfU0BEqDHQKV9A605gCfbZ1n2N0g==
 
-"@sudoo/webpack-react@^2.9.1":
-  version "2.9.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-2.9.1.tgz#35c339508ac2de85d50f0d4f838460252c4c0708"
-  integrity sha512-3gEKW1IA+rt9XEQjVeJPPp24+4aiePrLQ0j4jDW0o8MJpwZ/FrVaPGh1b4XR7UKoe8yojBwG4eGXDpiYVKOpZA==
+"@sudoo/webpack-react@^2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-2.10.0.tgz#fd4c922c172d1db9dd7e59ce839d48adf3f8c977"
+  integrity sha512-Jv4WCsb1gD6ViUDEpReOx/x68n8WAMadJagSY4LfBgJl0RzqENUBedo3qqJUW/9pNgQP5bDBpo+RPVUAi6lM9w==
   dependencies:
     copy-webpack-plugin "6.0.2"
     css-loader "1.0.1"
