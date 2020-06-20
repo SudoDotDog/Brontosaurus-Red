@@ -27,6 +27,7 @@ module.exports = SudooWebpack.create(
         mobile: false,
         insertion: '<!-- Insertion Point -->',
         defines: {
+            'process.env.RELEASE_VERSION': JSON.stringify(process.env.RELEASE_VERSION ?? 'LOCAL'),
             'process.env.PORTAL_PATH': JSON.stringify(process.env.PORTAL_PATH),
             'process.env.TEST_SERVER_PATH': JSON.stringify(process.env.TEST_SERVER_PATH),
         },
