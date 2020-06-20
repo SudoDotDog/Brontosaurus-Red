@@ -23,6 +23,9 @@ module.exports = SudooWebpack.create(
         APP_ENTRY_FILE_NAME: 'index.tsx',
     },
     {
+        defines: {
+            'process.env.RELEASE_VERSION': JSON.stringify(process.env.RELEASE_VERSION ?? 'LOCAL'),
+        },
         title: 'Red - Brontosaurus',
         silent: true,
         mobile: false,
