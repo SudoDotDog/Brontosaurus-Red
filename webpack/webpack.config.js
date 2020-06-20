@@ -24,7 +24,7 @@ module.exports = SudooWebpack.create(
     },
     {
         defines: {
-            'process.env.RELEASE_VERSION': JSON.stringify(process.env.RELEASE_VERSION ?? 'LOCAL'),
+            'process.env.RELEASE_VERSION': JSON.stringify(process.env.RELEASE_VERSION || 'LOCAL'),
         },
         title: 'Red - Brontosaurus',
         silent: true,
