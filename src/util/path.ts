@@ -1,8 +1,8 @@
 /**
-* @author WMXPY
-* @namespace Util
-* @description Path
-*/
+ * @author WMXPY
+ * @namespace Util
+ * @description Path
+ */
 
 export const buildAdminAccountEdit = (username: string, namespace: string): string => {
 

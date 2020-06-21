@@ -1,8 +1,8 @@
 /**
-* @author WMXPY
-* @namespace Util
-* @description Version
-*/
+ * @author WMXPY
+ * @namespace Util
+ * @description Version
+ */
 
 export const getVersion = (): string => {
 

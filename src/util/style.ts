@@ -1,8 +1,8 @@
 /**
-* @author WMXPY
-* @namespace Util
-* @description Style
-*/
+ * @author WMXPY
+ * @namespace Util
+ * @description Style
+ */
 
 export const combineClasses = (...classes: Array<string | null | undefined>): string => {
 
