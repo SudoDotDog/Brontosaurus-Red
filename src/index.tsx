@@ -14,14 +14,11 @@ import '../style/common/global.sass';
 import Entry from "./entry";
 import { getPortalPath } from "./repository/portal";
 import { redux } from "./state/store";
-import { getVersion } from "./util/version";
 
 declare const module: any;
 
 Brontosaurus.enableFallback();
 Brontosaurus.register(getPortalPath(), 'BRONTOSAURUS_RED').check().validate();
-
-(window as any).version = getVersion();
 
 const render: (App: any) => void = (App: any): void => {
 

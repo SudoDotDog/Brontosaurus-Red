@@ -9,3 +9,4 @@ export const namedTitle: string;
 export const namedTitleAbout: string;
 export const namedTitleName: string;
 export const goBack: string;
+export const menuExtra: string;
