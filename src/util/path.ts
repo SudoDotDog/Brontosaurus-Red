@@ -23,3 +23,8 @@ export const buildAdminAccountAttempts = (username: string, namespace: string): 
 
     return `/admin/user/attempts/${namespace}/${username}`;
 };
+
+export const buildAdminAccountResets = (username: string, namespace: string): string => {
+
+    return `/admin/user/resets/${namespace}/${username}`;
+};

@@ -20,6 +20,7 @@ export type AccountResetElement = {
     readonly source: string;
     readonly proxySources: string[];
     readonly application: string;
+    readonly identifier: string;
     readonly at: Date;
 };
 

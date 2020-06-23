@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace Account
- * @description Attempts
+ * @description Resets
  */
 
 import { MARGIN } from "@sudoo/neon/declare";
@@ -12,33 +12,33 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
-import { AccountAttemptElement, AccountAttemptResponse, fetchAccountAttempts } from "./repository/attempts";
+import { AccountResetElement, AccountResetResponse, fetchAccountResets } from "./repository/resets";
 
-export type AccountAttemptsProps = {
+export type AccountResetsProps = {
 } & RouteComponentProps;
 
-export type AccountAttemptsStates = {
+export type AccountResetsStates = {
 
     readonly loading: boolean;
 
-    readonly attempts: AccountAttemptElement[];
+    readonly resets: AccountResetElement[];
     readonly pages: number;
     readonly page: number;
 };
 
-export class AccountAttempts extends React.Component<AccountAttemptsProps, AccountAttemptsStates> {
+export class AccountResets extends React.Component<AccountResetsProps, AccountResetsStates> {
 
-    public readonly state: AccountAttemptsStates = {
+    public readonly state: AccountResetsStates = {
 
         loading: false,
 
-        attempts: [],
+        resets: [],
         pages: 0,
         page: 0,
     };
 
     public componentDidMount() {
-        this._fetchAttempts();
+        this._fetchResets();
     }
 
     public render() {
@@ -48,9 +48,9 @@ export class AccountAttempts extends React.Component<AccountAttemptsProps, Accou
                 loading={this.state.loading}
             >
                 <GoBack />
-                <NeonTitle margin={MARGIN.SMALL}>{this._getUsername()}&#39;s Attempts</NeonTitle>
+                <NeonTitle margin={MARGIN.SMALL}>{this._getUsername()}&#39;s Resets</NeonTitle>
 
-                {this.state.attempts.length === 0
+                {this.state.resets.length === 0
                     ? void 0
                     : <NeonTable
                         headers={[
@@ -59,51 +59,51 @@ export class AccountAttempts extends React.Component<AccountAttemptsProps, Accou
                             'Platform',
                             'User Agent',
                             'Succeed',
-                            'Source',
-                            'Target',
+                            'Email Used',
+                            'Email Expected',
                         ]}
                         style={{ marginTop: '1rem' }}>
-                        {this._renderAttempts()}
+                        {this._renderResets()}
                     </NeonTable>}
 
                 <PageSelector
                     total={this.state.pages}
                     selected={this.state.page}
                     onClick={(page: number) => this.setState({ page }, () => {
-                        this._fetchAttempts();
+                        this._fetchResets();
                     })}
                 />
             </NeonIndicator>
         );
     }
 
-    private _renderAttempts(): JSX.Element[] {
+    private _renderResets(): JSX.Element[] {
 
-        return this.state.attempts.map((attempt: AccountAttemptElement) =>
-            (<tr key={attempt.identifier}>
-                <td>{attempt.at.toLocaleString()}</td>
-                <td>{attempt.application}</td>
-                <td>{attempt.platform}</td>
-                <td>{attempt.userAgent}</td>
-                <td>{attempt.succeed ? 'YES' : 'NO'}</td>
-                <td>{attempt.source} [{attempt.proxySources.join(', ')}]</td>
-                <td>{attempt.target}</td>
+        return this.state.resets.map((reset: AccountResetElement) =>
+            (<tr key={reset.identifier}>
+                <td>{reset.at.toLocaleString()}</td>
+                <td>{reset.application}</td>
+                <td>{reset.platform}</td>
+                <td>{reset.userAgent}</td>
+                <td>{reset.succeed ? 'YES' : 'NO'}</td>
+                <td>{reset.emailUsed}</td>
+                <td>{reset.emailExpected}</td>
             </tr>),
         );
     }
 
-    private async _fetchAttempts() {
+    private async _fetchResets() {
 
         const username: string = this._getUsername();
         const namespace: string = this._getNamespace();
 
-        const response: AccountAttemptResponse = await fetchAccountAttempts(
+        const response: AccountResetResponse = await fetchAccountResets(
             username,
             namespace,
             this.state.page,
         );
         this.setState({
-            attempts: response.attempts,
+            resets: response.resets,
             pages: response.pages,
         });
     }
