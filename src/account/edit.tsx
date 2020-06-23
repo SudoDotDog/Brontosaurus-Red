@@ -26,6 +26,7 @@ import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse, SpecialPasswordResponse } from "./repository/single-fetch";
 import { suspendApplicationPasswordRepository } from "./repository/suspend-application-password";
 import { suspendTemporaryPasswordRepository } from "./repository/suspend-temp-password";
+import { AccountPreviousPasswords } from "./components/previous-passwords";
 
 type AccountEditProp = {
 } & RouteComponentProps;
@@ -109,6 +110,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     {this._renderDetail()}
                     {this._renderInformation()}
                     {this._renderBeacon()}
+                    {this._renderPreviousPasswords()}
                     {this._renderTemporaryPasswords()}
                     {this._renderApplicationPasswords()}
                     {this._renderUserGroup()}
@@ -264,6 +266,19 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     </td>
                 </tr>)}
             </NeonTable>
+        </React.Fragment>);
+    }
+
+    private _renderPreviousPasswords() {
+
+        const user = this.state.user as SingleFetchResponse;
+        return (<React.Fragment>
+            <NeonTitle size={SIZE.MEDIUM}>Previous Passwords</NeonTitle>
+            <AccountPreviousPasswords
+                username={user.username}
+                namespace={user.namespace}
+                previousPasswordsCount={user.previousPasswordsCount}
+            />
         </React.Fragment>);
     }
 
@@ -558,8 +573,14 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
             </React.Fragment>);
         } else {
             return (<React.Fragment>
-                <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
-                <NeonSub>This user doesn&#39;t belong to any organization</NeonSub>
+                <NeonTitle
+                    size={SIZE.MEDIUM}
+                >
+                    Organization
+                </NeonTitle>
+                <NeonSub>
+                    This user doesn&#39;t belong to any organization
+                </NeonSub>
             </React.Fragment>);
         }
     }

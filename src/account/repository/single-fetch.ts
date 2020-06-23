@@ -31,6 +31,7 @@ export type SingleFetchResponse = {
         readonly active: boolean;
         readonly owner: string;
     };
+    readonly previousPasswordsCount: number;
     readonly twoFA: boolean;
     readonly beacons: Record<string, any>;
     readonly infos: Record<string, any>;
