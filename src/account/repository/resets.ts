@@ -1,45 +1,45 @@
 /**
  * @author WMXPY
  * @namespace Account_Repository
- * @description Fetch Attempts
+ * @description Fetch Resets
  */
 
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
 
-export type AccountAttemptElement = {
+export type AccountResetElement = {
 
     readonly account: string;
     readonly succeed: boolean;
-    readonly failedReason?: string;
+    readonly emailUsed: string;
+    readonly emailExpected: string;
     readonly platform: string;
     readonly userAgent: string;
     readonly target: string;
     readonly source: string;
     readonly proxySources: string[];
     readonly application: string;
-    readonly identifier: string;
     readonly at: Date;
 };
 
-export type AccountAttemptResponse = {
+export type AccountResetResponse = {
 
     readonly pages: number;
-    readonly attempts: AccountAttemptElement[];
+    readonly resets: AccountResetElement[];
 };
 
-export const fetchAccountAttempts = async (username: string, namespace: string, page: number): Promise<AccountAttemptResponse> => {
+export const fetchAccountResets = async (username: string, namespace: string, page: number): Promise<AccountResetResponse> => {
 
-    const response: AccountAttemptResponse = await Fetch
+    const response: AccountResetResponse = await Fetch
         .post
-        .json(joinRoute('/account/attempts'))
+        .json(joinRoute('/account/resets'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
         .add('page', page)
-        .addProducePostProcessFunction((draft: AccountAttemptResponse) => {
-            for (const each of draft.attempts) {
+        .addProducePostProcessFunction((draft: AccountResetResponse) => {
+            for (const each of draft.resets) {
                 (each as any).at = new Date(each.at);
             }
         })
