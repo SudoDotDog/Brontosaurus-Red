@@ -52,10 +52,16 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
         page: searchPageCache.value,
     };
 
+    private _mounted: boolean = false;
     private readonly _defaultValue: string = searchKeywordCache.value;
 
     public componentDidMount() {
+        this._mounted = true;
         this._searchGroup();
+    }
+
+    public componentWillUnmount() {
+        this._mounted = false;
     }
 
     public render() {
@@ -131,10 +137,13 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
             this.state.keyword,
             this.state.page,
         );
-        this.setState({
-            groups: response.groups,
-            pages: response.pages,
-        });
+
+        if (this._mounted) {
+            this.setState({
+                groups: response.groups,
+                pages: response.pages,
+            });
+        }
     }
 }
 

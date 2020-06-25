@@ -43,7 +43,7 @@ export class AccountPreviousPasswords extends React.Component<AccountPreviousPas
                 </NeonSub>
                 <NeonApplicable
                     size={SIZE.MEDIUM}
-                    margin={MARGIN.NONE}
+                    margin={MARGIN.SMALL}
                     label="Test Previous Password"
                     onApply={(password: string) => {
                         this._verifyPreviousPassword(password);
