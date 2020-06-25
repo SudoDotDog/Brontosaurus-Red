@@ -8,6 +8,7 @@ import { produce } from "@sudoo/immutable";
 import { NeonCoin } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonInput } from "@sudoo/neon/input";
+import { randomUnique } from "@sudoo/random";
 import * as React from "react";
 import * as RedirectionStyle from "../../../style/application/components/redirection.scss";
 import { ApplicationRedirection } from "../../common/declare";
@@ -44,6 +45,7 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
                         this.props.onChange([
                             ...this.props.redirections,
                             {
+                                identifier: randomUnique(),
                                 name: 'New-Redirection',
                                 regexp: '^https://example\\.sudo\\.dog/.+$',
                             },
@@ -72,7 +74,7 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
 
     private _renderRedirect(redirection: ApplicationRedirection, index: number) {
 
-        return (<div key={`${redirection.name}+${index}`}>
+        return (<div key={redirection.identifier}>
             <div className={RedirectionStyle.nameContainer}>
                 <NeonInput
                     className={RedirectionStyle.nameInput}

@@ -6,6 +6,7 @@
 
 export type ApplicationRedirection = {
 
+    identifier?: string;
     name: string;
     regexp: string;
 };

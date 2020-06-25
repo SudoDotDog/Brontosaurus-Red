@@ -8,6 +8,7 @@ import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { ApplicationRedirection } from "../../common/declare";
 import { joinRoute } from "../../repository/route";
+import { randomUnique } from "@sudoo/random";
 
 export type SingleApplicationFetchResponse = {
 
@@ -40,6 +41,13 @@ export const singleFetchApplicationRepository = async (key: string): Promise<Sin
         .debugResponse()
         .bearer(Brontosaurus.hard().raw)
         .add('key', key)
+        .addProducePostProcessFunction((draft: {
+            application: SingleApplicationFetchResponse;
+        }) => {
+            for (const redirection of draft.application.redirections) {
+                redirection.identifier = randomUnique();
+            }
+        })
         .fetch();
 
     return response.application;
