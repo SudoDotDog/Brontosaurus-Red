@@ -151,10 +151,10 @@
     jss "^10.3.0"
     jss-preset-default "^10.3.0"
 
-"@sudoo/pattern@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/pattern/-/pattern-1.1.0.tgz#cb89371e6fca209a39c37d7eefcca2c88215f2f8"
-  integrity sha512-5jUV0BN8rFLbhx1ngwdcMOSJp4eanPIzDj+5MbWLTFglj/MvLXO5gYBYEF8w1aGnCb152T3aUFn2XXRYuPPhTA==
+"@sudoo/pattern@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/pattern/-/pattern-1.2.0.tgz#bd57d9d8066a968cba057ed93a7480494085998e"
+  integrity sha512-g5C3BJB6WJRBaQe+JMyKCq7+UK4g4IAksrtp0NMCZl8yQ6Jrg87aPjdv36RmUNJyAcRBxJ1ZHAxLpn6GL+vyaA==
 
 "@sudoo/react-force-dev@^1.7.2":
   version "1.7.2"
