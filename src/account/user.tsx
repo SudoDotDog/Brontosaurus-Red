@@ -5,7 +5,7 @@
  */
 
 import { Dump } from "@sudoo/dump";
-import { SudooFormat } from "@sudoo/internationalization/dist/format";
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE } from "@sudoo/neon/declare";
 import { NeonTable } from "@sudoo/neon/table";

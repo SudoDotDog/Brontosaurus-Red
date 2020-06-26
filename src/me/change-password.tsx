@@ -4,7 +4,7 @@
  * @description Me
  */
 
-import { SudooFormat } from "@sudoo/internationalization/dist/format";
+import { SudooFormat } from "@sudoo/internationalization";
 import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
