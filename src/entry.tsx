@@ -93,7 +93,7 @@ export class Entry extends React.Component<undefined, EntryStates> {
                         </EnableForGroup>
                     </NeonPaper>
                 </div>
-                <ConnectedLanguage className={EntryStyle.languageSetting} />
+                <ConnectedLanguage />
             </div>
         );
     }

@@ -7,8 +7,10 @@
 import { LOCALE } from "@sudoo/internationalization";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
+import * as EntryStyle from "../../style/route/entry.scss";
 import { IStore } from "../state/declare";
 import { setLanguage } from "../state/preference/preference";
+import { combineClasses } from "../util/style";
 import { getVersion } from "../util/version";
 
 type ConnectedLanguageStates = {
@@ -22,8 +24,6 @@ type ConnectedLanguageActions = {
 };
 
 type LanguageProps = {
-
-    readonly className?: string;
 };
 
 type ConnectedProps = LanguageProps & ConnectedLanguageStates & ConnectedLanguageActions;
@@ -39,12 +39,15 @@ const connector = Connector.create<IStore, ConnectedLanguageStates, ConnectedLan
 
 export const LanguageBase: React.FC<ConnectedProps> = (props: ConnectedProps) => {
 
-    return (<div className={props.className}>
+    return (<div className={combineClasses(
+        EntryStyle.languageBar,
+    )}>
         <div>
             {getVersion()}
         </div>
         <select
             value={props.language}
+            className={EntryStyle.languageSetting}
             onChange={(next: React.ChangeEvent<HTMLSelectElement>) => props.setLanguage(next.target.value as LOCALE)}
         >
             <option value={LOCALE.CHINESE_SIMPLIFIED}>简体中文</option>
