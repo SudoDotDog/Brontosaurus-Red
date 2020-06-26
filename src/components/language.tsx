@@ -42,7 +42,7 @@ export const LanguageBase: React.FC<ConnectedProps> = (props: ConnectedProps) =>
     return (<div className={combineClasses(
         EntryStyle.languageBar,
     )}>
-        <div>
+        <div style={{ flex: 1 }}>
             {getVersion()}
         </div>
         <select

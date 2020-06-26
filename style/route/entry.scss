@@ -8,6 +8,7 @@
 
 .container {
     margin: 4rem;
+    margin-bottom: 5rem;
     position: relative;
     display: grid;
     grid-gap: 0.5rem;
@@ -23,7 +24,7 @@
 
     font-family: $font;
     font-size: 0.9rem;
-    margin: 0.5rem;
+
     cursor: pointer;
     border: 0;
 
@@ -32,10 +33,6 @@
     -webkit-appearance: none;
     background-color: inherit;
 
-    position: fixed;
-    bottom: 0;
-    right: 0;
-
     &:focus {
         outline: 0;
     }
@@ -43,7 +40,19 @@
 
 .language-bar {
 
+    background-color: rgba($color: #FFFFFF, $alpha: 0.8);
+
+    padding-left: 4rem;
+    padding-right: 3rem;
+    width: calc(100% - 7rem);
+
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .title {
