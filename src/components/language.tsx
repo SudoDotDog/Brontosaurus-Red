@@ -9,6 +9,7 @@ import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { IStore } from "../state/declare";
 import { setLanguage } from "../state/preference/preference";
+import { getVersion } from "../util/version";
 
 type ConnectedLanguageStates = {
 
@@ -38,16 +39,18 @@ const connector = Connector.create<IStore, ConnectedLanguageStates, ConnectedLan
 
 export const LanguageBase: React.FC<ConnectedProps> = (props: ConnectedProps) => {
 
-    return (
+    return (<div className={props.className}>
+        <div>
+            {getVersion()}
+        </div>
         <select
             value={props.language}
             onChange={(next: React.ChangeEvent<HTMLSelectElement>) => props.setLanguage(next.target.value as LOCALE)}
-            className={props.className}
         >
             <option value={LOCALE.CHINESE_SIMPLIFIED}>简体中文</option>
             <option value={LOCALE.ENGLISH_UNITED_STATES}>English</option>
         </select>
-    );
+    </div>);
 };
 
 export const ConnectedLanguage: React.ComponentType<LanguageProps> = connector.connect(LanguageBase);

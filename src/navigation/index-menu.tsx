@@ -16,7 +16,6 @@ import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
-import { getVersion } from "../util/version";
 
 export type IndexMenuBaseProps = {
 
@@ -79,9 +78,6 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
                     onClick={() => props.history.push('/admin')}
                 />
             </EnableForGroup>
-        </div>
-        <div className={MenuStyle.menuExtra}>
-            {getVersion()}
         </div>
     </div>);
 };
