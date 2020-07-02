@@ -10,19 +10,17 @@ import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonPair } from "@sudoo/neon/input";
 import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
-import { NeonSmartList, NeonTable } from "@sudoo/neon/table";
+import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import * as MenuStyle from "../../style/components/menu.scss";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { buildAdminAccountEdit } from "../util/path";
-import { setOwnerRepository } from "./repository/set-owner";
 import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
 import { updateOrganizationRepository } from "./repository/update";
 
@@ -96,7 +94,6 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     <NeonSub>Organization {this.state.organization.active ? "Active" : "Deactivated"}</NeonSub>
                     {this._renderOwner()}
                     {this._renderLimit()}
-                    {this._renderMembers()}
                     {this._renderDecorators()}
                     {this._renderTags()}
                     <NeonButton
@@ -151,47 +148,6 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     },
                 })}
             />
-        </React.Fragment>);
-    }
-
-    private _renderMembers() {
-
-        const organization = this.state.organization as SingleOrganizationResponse;
-        return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Members Information</NeonTitle>
-            <NeonTable
-                headers={['Namespace', 'Username', 'Display', 'Phone', 'Email', 'Action']}
-                style={{ marginTop: '1rem' }}>
-                {organization.members.map((member) => {
-
-                    const isOwner: boolean = member.username === organization.owner.username;
-                    return (<tr key={member.username}>
-                        <td>{member.namespace}</td>
-                        <td>
-                            <ClickableSpan
-                                to={buildAdminAccountEdit(member.username, member.namespace)}
-                                red={!member.active}
-                            >
-                                {member.username}
-                            </ClickableSpan>
-                            {isOwner && <span style={{ color: 'red' }}>&nbsp;(Owner)</span>}
-                        </td>
-                        <td>{member.displayName}</td>
-                        <td>{member.phone}</td>
-                        <td>{member.email}</td>
-                        <td>{isOwner
-                            ? 'None'
-                            : <NeonButton
-                                className={MenuStyle.actionButton}
-                                style={{ margin: '2px' }}
-                                onClick={() => this._promoteUser(member.username, member.namespace)}
-                                size={SIZE.RELATIVE}>
-                                Promote
-                            </NeonButton>}
-                        </td>
-                    </tr>);
-                })}
-            </NeonTable>
         </React.Fragment>);
     }
 
@@ -268,62 +224,6 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                 decorators: this.state.organization.decorators,
                 tags: this.state.organization.tags,
             });
-
-            this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-                    info: name,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
-            });
-        } catch (err) {
-
-            this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
-            });
-        } finally {
-
-            this.setState({
-                loading: false,
-            });
-        }
-    }
-
-    private async _promoteUser(username: string, namespace: string): Promise<void> {
-
-        const organization: string = this._getOrganizationName();
-        const confirmed: boolean = window.confirm(`Are you sure to promote ${username} to the owner of ${organization}`);
-
-        if (!confirmed) {
-            return;
-        }
-
-        this.setState({
-            loading: true,
-            cover: undefined,
-        });
-
-        try {
-
-            await setOwnerRepository(username, namespace, organization);
 
             this.setState({
                 cover: {

@@ -18,9 +18,16 @@ export type OrganizationMemberElement = {
     readonly email: string;
 };
 
+export type OrganizationMemberOwner = {
+
+    readonly username: string;
+    readonly namespace: string;
+};
+
 export type OrganizationMemberResponse = {
 
     readonly pages: number;
+    readonly owner: OrganizationMemberOwner;
     readonly members: OrganizationMemberElement[];
 };
 
