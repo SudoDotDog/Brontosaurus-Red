@@ -9,6 +9,7 @@ import { Route } from "react-router-dom";
 import { CreateGroup } from "./create";
 import { GroupEdit } from "./edit";
 import { Group } from "./group";
+import { GroupMembers } from "./members";
 import { GroupMore } from "./more";
 
 export const GroupRoute: React.FC = () => {
@@ -18,5 +19,6 @@ export const GroupRoute: React.FC = () => {
         <Route path="/admin/group/create" exact component={CreateGroup} />
         <Route path="/admin/group/e/:group" exact component={GroupEdit} />
         <Route path="/admin/group/more/:group" exact component={GroupMore} />
+        <Route path="/admin/group/members/:group" exact component={GroupMembers} />
     </React.Fragment>);
 };

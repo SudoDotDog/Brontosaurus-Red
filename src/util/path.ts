@@ -28,3 +28,8 @@ export const buildAdminAccountResets = (username: string, namespace: string): st
 
     return `/admin/user/resets/${namespace}/${username}`;
 };
+
+export const buildAdminGroupMembers = (group: string): string => {
+
+    return `/admin/group/members/${group}`;
+};

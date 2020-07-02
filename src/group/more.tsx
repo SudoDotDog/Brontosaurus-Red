@@ -10,6 +10,7 @@ import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { buildAdminGroupMembers } from "../util/path";
 import { removeAllGroupRepository } from "./repository/remove-all";
 
 export type ApplicationMoreProps = {
@@ -46,6 +47,11 @@ export const GroupMore: React.FC<ApplicationMoreProps> = (props: ApplicationMore
                 description={`Remove Group "${group}" in All Accounts`}
                 link="Remove All"
                 onClick={() => removeAllGroup(group, () => props.history.replace(`/admin/group/e/${params.group}`))}
+            />
+            <MenuItem
+                description={`See Members of "${group}"`}
+                link="Members"
+                onClick={() => props.history.push(buildAdminGroupMembers(group))}
             />
         </div>
     </div>);
