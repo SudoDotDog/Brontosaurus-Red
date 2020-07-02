@@ -8,6 +8,7 @@ import * as React from "react";
 import { Route } from "react-router-dom";
 import { CreateTag } from "./create";
 import { TagEdit } from "./edit";
+import { TagMembers } from "./members";
 import { Tags } from "./tag";
 
 export const TagRoute: React.FC = () => {
@@ -16,5 +17,6 @@ export const TagRoute: React.FC = () => {
         <Route path="/admin/tag" exact component={Tags} />
         <Route path="/admin/tag/create" exact component={CreateTag} />
         <Route path="/admin/tag/e/:tag" exact component={TagEdit} />
+        <Route path="/admin/tag/members/:tag" exact component={TagMembers} />
     </React.Fragment>);
 };

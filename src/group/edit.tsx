@@ -9,16 +9,14 @@ import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
-import { NeonSmartList, NeonTable } from "@sudoo/neon/table";
+import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
-import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
-import { buildAdminAccountEdit } from "../util/path";
 import { singleGroup, SingleGroupResponse } from "./repository/single";
 import { updateGroupRepository } from "./repository/update";
 
@@ -87,7 +85,6 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
                     </NamedTitle>
                     {this._renderDescription()}
                     {this._renderDecorators()}
-                    {this._renderMembers()}
                     <NeonButton
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
@@ -97,35 +94,6 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
                 </NeonIndicator>
             </NeonThemeProvider>
         );
-    }
-
-    private _renderMembers() {
-
-        const group = this.state.group as SingleGroupResponse;
-        return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Members Information</NeonTitle>
-            <NeonTable
-                headers={['Namespace', 'Username', 'Display', 'Phone', 'Email']}
-                style={{ marginTop: '1rem' }}>
-                {group.members.map((member) => {
-
-                    return (<tr key={member.username}>
-                        <td>{member.namespace}</td>
-                        <td>
-                            <ClickableSpan
-                                to={buildAdminAccountEdit(member.username, member.namespace)}
-                                red={!member.active}
-                            >
-                                {member.username}
-                            </ClickableSpan>
-                        </td>
-                        <td>{member.displayName}</td>
-                        <td>{member.phone}</td>
-                        <td>{member.email}</td>
-                    </tr>);
-                })}
-            </NeonTable>
-        </React.Fragment>);
     }
 
     private _renderDescription() {
