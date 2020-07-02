@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Tag
+ * @namespace Namespace
  * @description Members
  */
 
@@ -14,23 +14,23 @@ import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
 import { buildAdminAccountEdit } from "../util/path";
-import { fetchTagMembers, TagMemberElement, TagMemberResponse } from "./repository/members";
+import { fetchNamespaceMembers, NamespaceMemberElement, NamespaceMemberResponse } from "./repository/members";
 
-export type TagMembersProps = {
+export type NamespaceMembersProps = {
 } & RouteComponentProps;
 
-export type TagMembersStates = {
+export type NamespaceMembersStates = {
 
     readonly loading: boolean;
 
-    readonly members: TagMemberElement[];
+    readonly members: NamespaceMemberElement[];
     readonly pages: number;
     readonly page: number;
 };
 
-export class TagMembers extends React.Component<TagMembersProps, TagMembersStates> {
+export class NamespaceMembers extends React.Component<NamespaceMembersProps, NamespaceMembersStates> {
 
-    public readonly state: TagMembersStates = {
+    public readonly state: NamespaceMembersStates = {
 
         loading: false,
 
@@ -50,7 +50,7 @@ export class TagMembers extends React.Component<TagMembersProps, TagMembersState
                 loading={this.state.loading}
             >
                 <GoBack />
-                <NeonTitle margin={MARGIN.SMALL}>{this._getTagName()}&#39;s Member</NeonTitle>
+                <NeonTitle margin={MARGIN.SMALL}>{this._getNamespaceName()}&#39;s Member</NeonTitle>
 
                 {this.state.members.length === 0
                     ? void 0
@@ -79,7 +79,7 @@ export class TagMembers extends React.Component<TagMembersProps, TagMembersState
 
     private _renderMembers(): JSX.Element[] {
 
-        return this.state.members.map((member: TagMemberElement) => {
+        return this.state.members.map((member: NamespaceMemberElement) => {
 
             return (<tr key={member.username}>
                 <td>{member.namespace}</td>
@@ -100,10 +100,10 @@ export class TagMembers extends React.Component<TagMembersProps, TagMembersState
 
     private async _fetchMembers() {
 
-        const tag: string = this._getTagName();
+        const namespace: string = this._getNamespaceName();
 
-        const response: TagMemberResponse = await fetchTagMembers(
-            tag,
+        const response: NamespaceMemberResponse = await fetchNamespaceMembers(
+            namespace,
             this.state.page,
         );
         this.setState({
@@ -111,9 +111,9 @@ export class TagMembers extends React.Component<TagMembersProps, TagMembersState
             pages: response.pages,
         });
     }
-    private _getTagName(): string {
+    private _getNamespaceName(): string {
 
         const params: any = this.props.match.params;
-        return params.tag;
+        return params.namespace;
     }
 }

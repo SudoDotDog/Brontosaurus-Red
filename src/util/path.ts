@@ -38,3 +38,8 @@ export const buildAdminTagMembers = (tag: string): string => {
 
     return `/admin/tag/members/${tag}`;
 };
+
+export const buildAdminNamespaceMembers = (namespace: string): string => {
+
+    return `/admin/namespace/members/${namespace}`;
+};

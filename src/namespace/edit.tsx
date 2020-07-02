@@ -50,7 +50,10 @@ export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceE
 
         return (
             <div>
-                <GoBack />
+                <GoBack
+                    right="More"
+                    onClickRight={() => this.props.history.push('/admin/namespace/more/' + encodeURIComponent(this._getNamespaceNamespace()))}
+                />
                 {this._renderEditableInfos()}
             </div>
         );

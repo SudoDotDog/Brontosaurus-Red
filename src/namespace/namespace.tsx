@@ -117,9 +117,9 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
                 <td>{namespace.domain}</td>
                 <td>{namespace.name}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/admin/namespace/e/' + encodeURIComponent(namespace.name))}
+                    onClick={() => this.props.history.push('/admin/namespace/more/' + encodeURIComponent(namespace.namespace))}
                     size={SIZE.RELATIVE}>
-                    {this.props.language.get(PROFILE.EDIT)}
+                    {this.props.language.get(PROFILE.MORE)}
                 </NeonButton></td>
             </tr>),
         );
