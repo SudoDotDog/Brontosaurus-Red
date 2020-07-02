@@ -43,3 +43,8 @@ export const buildAdminNamespaceMembers = (namespace: string): string => {
 
     return `/admin/namespace/members/${namespace}`;
 };
+
+export const buildAdminDecoratorMembers = (decorator: string): string => {
+
+    return `/admin/decorator/members/${decorator}`;
+};

@@ -115,9 +115,9 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
                 </td>
                 <td>{decorator.description}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/admin/decorator/e/' + encodeURIComponent(decorator.name))}
+                    onClick={() => this.props.history.push('/admin/decorator/more/' + encodeURIComponent(decorator.name))}
                     size={SIZE.RELATIVE}>
-                    {this.props.language.get(PROFILE.EDIT)}
+                    {this.props.language.get(PROFILE.MORE)}
                 </NeonButton></td>
             </tr>),
         );

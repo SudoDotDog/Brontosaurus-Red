@@ -56,7 +56,10 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
 
         return (
             <div>
-                <GoBack />
+                <GoBack
+                    right="More"
+                    onClickRight={() => this.props.history.push('/admin/decorator/more/' + encodeURIComponent(this._getDecoratorName()))}
+                />
                 {this._renderEditableInfos()}
             </div>
         );
