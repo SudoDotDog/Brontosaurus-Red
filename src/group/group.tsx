@@ -123,9 +123,9 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
                 <td>{group.description}</td>
                 <td>{group.decorators}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/admin/group/e/' + encodeURIComponent(group.name))}
+                    onClick={() => this.props.history.push('/admin/group/more/' + encodeURIComponent(group.name))}
                     size={SIZE.RELATIVE}>
-                    {this.props.language.get(PROFILE.EDIT)}
+                    {this.props.language.get(PROFILE.MORE)}
                 </NeonButton></td>
             </tr>),
         );

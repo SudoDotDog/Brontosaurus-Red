@@ -13,7 +13,7 @@ import { NamedTitle } from "../components/named-title";
 import { buildAdminGroupMembers } from "../util/path";
 import { removeAllGroupRepository } from "./repository/remove-all";
 
-export type ApplicationMoreProps = {
+export type GroupMoreProps = {
 } & RouteComponentProps;
 
 const removeAllGroup = async (group: string, next: () => void) => {
@@ -29,7 +29,7 @@ const removeAllGroup = async (group: string, next: () => void) => {
     }
 };
 
-export const GroupMore: React.FC<ApplicationMoreProps> = (props: ApplicationMoreProps) => {
+export const GroupMore: React.FC<GroupMoreProps> = (props: GroupMoreProps) => {
 
     const params: any = props.match.params;
     const group: string = decodeURIComponent(params.group);

@@ -50,7 +50,10 @@ export class TagEdit extends React.Component<TagEditProp, TagEditState> {
 
         return (
             <div>
-                <GoBack />
+                <GoBack
+                    right="More"
+                    onClickRight={() => this.props.history.push('/admin/tag/more/' + encodeURIComponent(this._getTagName()))}
+                />
                 {this._renderEditableInfos()}
             </div>
         );

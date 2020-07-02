@@ -115,9 +115,9 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
                 </td>
                 <td>{tag.description}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/admin/tag/e/' + encodeURIComponent(tag.name))}
+                    onClick={() => this.props.history.push('/admin/tag/more/' + encodeURIComponent(tag.name))}
                     size={SIZE.RELATIVE}>
-                    {this.props.language.get(PROFILE.EDIT)}
+                    {this.props.language.get(PROFILE.MORE)}
                 </NeonButton></td>
             </tr>),
         );
