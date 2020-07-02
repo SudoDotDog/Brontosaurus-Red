@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Decorator
+ * @namespace Organization
  * @description Members
  */
 
@@ -14,23 +14,23 @@ import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
 import { buildAdminAccountEdit } from "../util/path";
-import { DecoratorMemberElement, DecoratorMemberResponse, fetchDecoratorMembers } from "./repository/members";
+import { OrganizationMemberElement, OrganizationMemberResponse, fetchOrganizationMembers } from "./repository/member";
 
-export type DecoratorMembersProps = {
+export type OrganizationMembersProps = {
 } & RouteComponentProps;
 
-export type DecoratorMembersStates = {
+export type OrganizationMembersStates = {
 
     readonly loading: boolean;
 
-    readonly members: DecoratorMemberElement[];
+    readonly members: OrganizationMemberElement[];
     readonly pages: number;
     readonly page: number;
 };
 
-export class DecoratorMembers extends React.Component<DecoratorMembersProps, DecoratorMembersStates> {
+export class OrganizationMembers extends React.Component<OrganizationMembersProps, OrganizationMembersStates> {
 
-    public readonly state: DecoratorMembersStates = {
+    public readonly state: OrganizationMembersStates = {
 
         loading: false,
 
@@ -41,7 +41,7 @@ export class DecoratorMembers extends React.Component<DecoratorMembersProps, Dec
 
     public componentDidMount() {
 
-        this._fetchDecorator();
+        this._fetchOrganization();
     }
 
     public render() {
@@ -51,7 +51,7 @@ export class DecoratorMembers extends React.Component<DecoratorMembersProps, Dec
                 loading={this.state.loading}
             >
                 <GoBack />
-                <NeonTitle margin={MARGIN.SMALL}>{this._getDecorator()}&#39;s Member</NeonTitle>
+                <NeonTitle margin={MARGIN.SMALL}>{this._getOrganization()}&#39;s Member</NeonTitle>
 
                 {this.state.members.length === 0
                     ? void 0
@@ -70,7 +70,7 @@ export class DecoratorMembers extends React.Component<DecoratorMembersProps, Dec
                     total={this.state.pages}
                     selected={this.state.page}
                     onClick={(page: number) => this.setState({ page }, () => {
-                        this._fetchDecorator();
+                        this._fetchOrganization();
                     })}
                 />
             </NeonIndicator>
@@ -79,7 +79,7 @@ export class DecoratorMembers extends React.Component<DecoratorMembersProps, Dec
 
     private _renderMembers(): JSX.Element[] {
 
-        return this.state.members.map((member: DecoratorMemberElement) => {
+        return this.state.members.map((member: OrganizationMemberElement) => {
 
             return (<tr key={member.username}>
                 <td>{member.namespace}</td>
@@ -98,12 +98,12 @@ export class DecoratorMembers extends React.Component<DecoratorMembersProps, Dec
         });
     }
 
-    private async _fetchDecorator() {
+    private async _fetchOrganization() {
 
-        const decorator: string = this._getDecorator();
+        const organization: string = this._getOrganization();
 
-        const response: DecoratorMemberResponse = await fetchDecoratorMembers(
-            decorator,
+        const response: OrganizationMemberResponse = await fetchOrganizationMembers(
+            organization,
             this.state.page,
         );
         this.setState({
@@ -112,9 +112,9 @@ export class DecoratorMembers extends React.Component<DecoratorMembersProps, Dec
         });
     }
 
-    private _getDecorator(): string {
+    private _getOrganization(): string {
 
         const params: any = this.props.match.params;
-        return params.decorator;
+        return params.organization;
     }
 }

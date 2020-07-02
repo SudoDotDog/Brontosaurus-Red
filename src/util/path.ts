@@ -48,3 +48,8 @@ export const buildAdminDecoratorMembers = (decorator: string): string => {
 
     return `/admin/decorator/members/${decorator}`;
 };
+
+export const buildAdminOrganizationMembers = (organization: string): string => {
+
+    return `/admin/organization/members/${organization}`;
+};

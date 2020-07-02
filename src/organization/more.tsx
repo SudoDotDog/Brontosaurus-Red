@@ -12,6 +12,7 @@ import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { activateOrganizationRepository } from "./repository/activate";
 import { deactivateOrganizationRepository } from "./repository/deactivate";
+import { buildAdminOrganizationMembers } from "../util/path";
 
 export type OrganizationMoreProps = {
 } & RouteComponentProps;
@@ -65,6 +66,11 @@ export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: Organiz
                 description={`Register new account for organization "${organization}"`}
                 link="Register"
                 onClick={() => props.history.push('/admin/organization/register/' + encodeURIComponent(organization))}
+            />
+            <MenuItem
+                description={`See Members of "${organization}"`}
+                link="Members"
+                onClick={() => props.history.push(buildAdminOrganizationMembers(organization))}
             />
             <MenuItem
                 description={`Activate "${organization}"`}
