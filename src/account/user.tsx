@@ -91,6 +91,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                             this.props.language.get(PROFILE.EMAIL),
                             this.props.language.get(PROFILE.PHONE),
                             this.props.language.get(PROFILE.ATTEMPTS),
+                            this.props.language.get(PROFILE.RESETS),
                             this.props.language.get(PROFILE.ACTION),
                         ]}
                         style={{ marginTop: '1rem' }}>
@@ -137,6 +138,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                 <td>{user.email}</td>
                 <td>{user.phone}</td>
                 <td>{user.attempts}</td>
+                <td>{user.resets}</td>
                 <td className={MenuStyle["action-raw"]}>
                     <NeonButton
                         className={MenuStyle["action-button"]}
