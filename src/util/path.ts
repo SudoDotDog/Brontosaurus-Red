@@ -34,6 +34,11 @@ export const buildAdminGroupMembers = (group: string): string => {
     return `/admin/group/members/${group}`;
 };
 
+export const buildAdminGroupEdit = (group: string): string => {
+
+    return `/admin/group/e/${group}`;
+};
+
 export const buildAdminTagMembers = (tag: string): string => {
 
     return `/admin/tag/members/${tag}`;
@@ -47,6 +52,11 @@ export const buildAdminNamespaceMembers = (namespace: string): string => {
 export const buildAdminDecoratorMembers = (decorator: string): string => {
 
     return `/admin/decorator/members/${decorator}`;
+};
+
+export const buildAdminOrganizationEdit = (organization: string): string => {
+
+    return `/admin/organization/e/${organization}`;
 };
 
 export const buildAdminOrganizationMembers = (organization: string): string => {

@@ -10,9 +10,9 @@ import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { buildAdminOrganizationEdit, buildAdminOrganizationMembers } from "../util/path";
 import { activateOrganizationRepository } from "./repository/activate";
 import { deactivateOrganizationRepository } from "./repository/deactivate";
-import { buildAdminOrganizationMembers } from "../util/path";
 
 export type OrganizationMoreProps = {
 } & RouteComponentProps;
@@ -75,12 +75,12 @@ export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: Organiz
             <MenuItem
                 description={`Activate "${organization}"`}
                 link="Activate"
-                onClick={() => activateOrganization(organization, () => props.history.replace('/admin/organization'))}
+                onClick={() => activateOrganization(organization, () => props.history.replace(buildAdminOrganizationEdit(organization)))}
             />
             <MenuItem
                 description={`Deactivate "${organization}"`}
                 link="Deactivate"
-                onClick={() => deactivateOrganization(organization, () => props.history.replace('/admin/organization'))}
+                onClick={() => deactivateOrganization(organization, () => props.history.replace(buildAdminOrganizationEdit(organization)))}
             />
         </div>
     </div>);

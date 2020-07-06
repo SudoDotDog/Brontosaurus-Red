@@ -160,16 +160,12 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
             <MenuItem
                 description={`Activate ${username}`}
                 link="Activate"
-                onClick={() => activateUser(username, namespace, () => {
-                    props.history.goBack();
-                })}
+                onClick={() => activateUser(username, namespace, () => buildAdminAccountEdit(username, namespace))}
             />
             <MenuItem
                 description={`Deactivate ${username}`}
                 link="Deactivate"
-                onClick={() => deactivateUser(username, namespace, () => {
-                    props.history.goBack();
-                })}
+                onClick={() => deactivateUser(username, namespace, () => buildAdminAccountEdit(username, namespace))}
             />
             <MenuItem
                 description={`Reset ${username}'s password and assign a temporary password.`}

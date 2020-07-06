@@ -10,10 +10,10 @@ import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
-import { buildAdminGroupMembers } from "../util/path";
-import { removeAllGroupRepository } from "./repository/remove-all";
+import { buildAdminGroupEdit, buildAdminGroupMembers } from "../util/path";
 import { activateGroupRepository } from "./repository/activate";
 import { deactivateGroupRepository } from "./repository/deactivate";
+import { removeAllGroupRepository } from "./repository/remove-all";
 
 export type GroupMoreProps = {
 } & RouteComponentProps;
@@ -84,12 +84,12 @@ export const GroupMore: React.FC<GroupMoreProps> = (props: GroupMoreProps) => {
             <MenuItem
                 description={`Activate "${group}"`}
                 link="Activate"
-                onClick={() => activateGroup(group, () => props.history.replace('/admin/group'))}
+                onClick={() => activateGroup(group, () => props.history.replace(buildAdminGroupEdit(group)))}
             />
             <MenuItem
                 description={`Deactivate "${group}"`}
                 link="Deactivate"
-                onClick={() => deactivateGroup(group, () => props.history.replace('/admin/group'))}
+                onClick={() => deactivateGroup(group, () => props.history.replace(buildAdminGroupEdit(group)))}
             />
         </div>
     </div>);
