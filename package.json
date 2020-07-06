@@ -37,8 +37,13 @@
     "@sudoo/react-force-dev": "^1.7.3",
     "@sudoo/triforce": "^2.7.5",
     "@sudoo/webpack-react": "^2.11.0",
+    "@teamsupercell/typings-for-css-modules-loader": "^2.2.0",
     "@types/react-router-dom": "^5.1.5",
-    "ts-loader": "^7.0.5"
+    "css-loader": "^3.6.0",
+    "css-modules-typescript-loader": "^4.0.0",
+    "ts-loader": "^7.0.5",
+    "typings-for-css-modules-loader": "^1.7.0",
+    "webpack": "^4.43.0"
   },
   "nyc": {
     "extension": [
