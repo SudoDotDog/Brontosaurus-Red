@@ -4,6 +4,7 @@
  * @description Account Fetch
  */
 
+import { Basics } from "@brontosaurus/definition";
 import { Brontosaurus } from "@brontosaurus/web";
 import { Fetch } from "@sudoo/fetch";
 import { joinRoute } from "../../repository/route";
@@ -12,6 +13,7 @@ export type UserResponse = {
 
     readonly active: boolean;
     readonly attempts: number;
+    readonly resets: number;
     readonly username: string;
     readonly namespace: string;
     readonly displayName?: string;
@@ -21,6 +23,7 @@ export type UserResponse = {
     readonly groups: number;
     readonly decorators: number;
     readonly tags: number;
+    readonly infos: Record<string, Basics>;
 };
 
 export type FetchAccountResponse = {
