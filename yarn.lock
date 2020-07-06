@@ -211,16 +211,16 @@
   resolved "https://registry.yarnpkg.com/@sudoo/verify/-/verify-1.14.0.tgz#db3341ccb283019289634c11c2ed561d280aac5c"
   integrity sha512-83zurGVZk7WWqw58M580FX6NGg0U+OGE58KCKsu69Mp0Iga1MFknTT6p9Zs1L6L4cj/V5lk3cifyL0TJibydYg==
 
-"@sudoo/webpack-react@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-3.0.2.tgz#520efc873a4873f9061a267ff8a38010ab90f0a7"
-  integrity sha512-tJtzvT7/DpxfD/5A3yTkTfLBIjmfzWd2ZjLijpajysR4w+DRZLeXdyKqj+DAd5BOyRe8BeqlkzOd38f2OkW/dA==
+"@sudoo/webpack-react@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-3.1.0.tgz#859747471d57d2f2eddde535e3735c07cce272b1"
+  integrity sha512-IHHSVOEOUGo+fjK7ihE7d6bMYzYJn4omht+XEVhC3ruItprtcy1W/hZJPfMdY598/18q+NBdKoa97KTyXhwaYA==
   dependencies:
-    "@teamsupercell/typings-for-css-modules-loader" "^2.2.0"
+    "@teamsupercell/typings-for-css-modules-loader" "2.2.0"
     copy-webpack-plugin "6.0.3"
     css-loader "3.6.0"
     html-webpack-plugin "4.3.0"
-    license-webpack-plugin "^2.2.0"
+    license-webpack-plugin "2.2.0"
     mini-css-extract-plugin "0.9.0"
     node-sass "4.14.1"
     optimize-css-assets-webpack-plugin "5.0.3"
@@ -235,7 +235,7 @@
   optionalDependencies:
     typescript "*"
 
-"@teamsupercell/typings-for-css-modules-loader@^2.2.0":
+"@teamsupercell/typings-for-css-modules-loader@2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@teamsupercell/typings-for-css-modules-loader/-/typings-for-css-modules-loader-2.2.0.tgz#235b3ba7135cde3507c1d5daf06ae5a11088074f"
   integrity sha512-lDIHyUL//uqiSLgvN++wAGODFn1dEqi3lvBdpEUQXqOSgAr5NwEK2Ggi3n61KvjLgu5/Z82uTsuyBXbDpccLtg==
@@ -4461,7 +4461,7 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-license-webpack-plugin@^2.2.0:
+license-webpack-plugin@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/license-webpack-plugin/-/license-webpack-plugin-2.2.0.tgz#5c964380d7d0e0c27c349d86a6f856c82924590e"
   integrity sha512-XPsdL/0brSHf+7dXIlRqotnCQ58RX2au6otkOg4U3dm8uH+Ka/fW4iukEs95uXm+qKe/SBs+s1Ll/aQddKG+tg==
