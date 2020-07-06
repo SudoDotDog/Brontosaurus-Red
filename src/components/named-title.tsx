@@ -21,10 +21,10 @@ export const NamedTitle: React.FC<NamedTitleProps> = (props: NamedTitleProps) =>
     return (<div
         className={combineClasses(
             props.className,
-            MenuStyle.namedTitle,
+            MenuStyle["named-title"],
         )}
     >
-        <div className={MenuStyle.namedTitleAbout}>{props.about}</div>
-        <div className={MenuStyle.namedTitleName}>{props.children}</div>
+        <div className={MenuStyle["named-title-about"]}>{props.about}</div>
+        <div className={MenuStyle["named-title-name"]}>{props.children}</div>
     </div>);
 };

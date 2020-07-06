@@ -28,7 +28,7 @@ export const TagMore: React.FC<TagMoreProps> = (props: TagMoreProps) => {
         <NamedTitle about="More About Tag">
             {tag}
         </NamedTitle>
-        <div className={MenuStyle.menuGrid}>
+        <div className={MenuStyle["menu-grid"]}>
             <MenuItem
                 description={`See Members of "${tag}"`}
                 link="Members"

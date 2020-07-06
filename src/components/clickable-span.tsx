@@ -24,8 +24,8 @@ export const ClickableSpan: React.FC<ClickableSpanProps> = (props: ClickableSpan
         to={props.to}
         className={combineClasses(
             props.className,
-            MenuStyle.clickableSpan,
-            props.red ? MenuStyle.clickableSpanRed : null,
+            MenuStyle["clickable-span"],
+            props.red ? MenuStyle["clickable-span-red"] : null,
         )}
     >
         {props.children}

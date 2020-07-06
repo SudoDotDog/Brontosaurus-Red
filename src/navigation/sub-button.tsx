@@ -20,8 +20,8 @@ export const SubButton: React.FC<SubButtonProps> = (props: SubButtonProps) => {
 
     return (<button
         className={combineClasses(
-            NavStyle.commonButton,
-            NavStyle.subButton,
+            NavStyle["common-button"],
+            NavStyle["sub-button"],
             props.selected ? NavStyle.selected : null,
         )}
         onClick={props.onClick}

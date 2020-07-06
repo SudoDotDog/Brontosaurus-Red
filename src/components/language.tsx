@@ -40,14 +40,14 @@ const connector = Connector.create<IStore, ConnectedLanguageStates, ConnectedLan
 export const LanguageBase: React.FC<ConnectedProps> = (props: ConnectedProps) => {
 
     return (<div className={combineClasses(
-        EntryStyle.languageBar,
+        EntryStyle["language-bar"],
     )}>
         <div style={{ flex: 1 }}>
             {getVersion()}
         </div>
         <select
             value={props.language}
-            className={EntryStyle.languageSetting}
+            className={EntryStyle["language-setting"]}
             onChange={(next: React.ChangeEvent<HTMLSelectElement>) => props.setLanguage(next.target.value as LOCALE)}
         >
             <option value={LOCALE.CHINESE_SIMPLIFIED}>简体中文</option>

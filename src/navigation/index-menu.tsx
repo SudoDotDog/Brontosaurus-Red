@@ -49,7 +49,7 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
         <NamedTitle about={props.language.get(PROFILE.WELCOME)}>
             {welcomeMessage}
         </NamedTitle>
-        <div className={MenuStyle.menuGrid}>
+        <div className={MenuStyle["menu-grid"]}>
             <EnableForGroup
                 visit={false}
                 group={['BRONTOSAURUS_SELF_CONTROL']}>

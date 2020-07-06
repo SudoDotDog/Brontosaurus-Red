@@ -14,7 +14,7 @@ export type AdminMenuProps = {
 
 export const AdminMenu: React.FC<AdminMenuProps> = (props: AdminMenuProps) => {
 
-    return (<div className={MenuStyle.menuGrid}>
+    return (<div className={MenuStyle["menu-grid"]}>
         <MenuItem
             description="View, Create, Modify Accounts"
             link="Account"

@@ -224,7 +224,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     <td>{each.suspendedAt ? `${each.suspendedAt.toLocaleString()} (${each.suspendedBy})` : 'No'}</td>
                     <td>
                         {each.suspendedAt ? 'None' : <NeonButton
-                            className={MenuStyle.actionButton}
+                            className={MenuStyle["action-button"]}
                             onClick={() => this._suspendTemporaryPassword(each.id)}
                             style={{ margin: '2px' }}
                             size={SIZE.RELATIVE}>
@@ -257,7 +257,7 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     <td>{each.suspendedAt ? `${each.suspendedAt.toLocaleString()} (${each.suspendedBy})` : 'No'}</td>
                     <td>
                         {each.suspendedAt ? 'None' : <NeonButton
-                            className={MenuStyle.actionButton}
+                            className={MenuStyle["action-button"]}
                             onClick={() => this._suspendApplicationPassword(each.id)}
                             style={{ margin: '2px' }}
                             size={SIZE.RELATIVE}>

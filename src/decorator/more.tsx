@@ -28,7 +28,7 @@ export const DecoratorMore: React.FC<DecoratorMoreProps> = (props: DecoratorMore
         <NamedTitle about="More About Decorator">
             {decorator}
         </NamedTitle>
-        <div className={MenuStyle.menuGrid}>
+        <div className={MenuStyle["menu-grid"]}>
             <MenuItem
                 description={`See Members of "${decorator}"`}
                 link="Members"

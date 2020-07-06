@@ -141,7 +141,7 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
         <NamedTitle about="More About Account">
             {username}
         </NamedTitle>
-        <div className={MenuStyle.menuGrid}>
+        <div className={MenuStyle["menu-grid"]}>
             <MenuItem
                 description={`Assign ${username} to an (another) organization`}
                 link="Assign"

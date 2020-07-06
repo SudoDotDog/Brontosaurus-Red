@@ -38,7 +38,7 @@ const renderAuthButton = (token: Token, language: SudooFormat): React.ReactNode 
         return (<span>
             Hello, {token.username} &nbsp;
             <a
-                className={EntryStyle.signIn}
+                className={EntryStyle["sign-in"]}
                 onClick={() => Brontosaurus.logout()}
             >
                 {language.get(PROFILE.SIGN_OUT)}
@@ -57,8 +57,8 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
     const organization: string | undefined = token.organization;
 
     return (
-        <div className={NavStyle.navWrapper}>
-            <div className={NavStyle.mainArea}>
+        <div className={NavStyle["nav-wrapper"]}>
+            <div className={NavStyle["main-area"]}>
                 <NavButton
                     selected={props.location.pathname === '/'}
                     onClick={() => props.history.push('/')}
@@ -97,10 +97,10 @@ const NavBase: React.FC<NavProp> = (props: NavProp) => {
                     </NavButton>
                 </EnableForGroup>
             </div>
-            <div className={NavStyle.subArea}>
+            <div className={NavStyle["sub-area"]}>
                 <SubMenuRoute />
             </div>
-            <div className={NavStyle.outArea}>
+            <div className={NavStyle["out-area"]}>
                 {renderAuthButton(token, props.language)}
             </div>
         </div>

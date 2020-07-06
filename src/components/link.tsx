@@ -24,7 +24,7 @@ export const Link: React.FC<LinkProps> = (props: LinkProps) => {
         href={props.href}
         className={combineClasses(
             props.className,
-            MenuStyle.clickableSpan,
+            MenuStyle["clickable-span"],
         )}
     >
         {props.children}

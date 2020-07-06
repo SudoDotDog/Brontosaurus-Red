@@ -29,7 +29,7 @@ export const PageSelector: React.FC<PageSelectorProps> = (props: PageSelectorPro
             return (<NeonCoin
                 buttonClassName={combineClasses(
                     PageSelectorStyle.coin,
-                    props.selected === index ? PageSelectorStyle.coinSelected : null,
+                    props.selected === index ? PageSelectorStyle["coin-selected"] : null,
                 )}
                 key={index}
                 onClick={() => {

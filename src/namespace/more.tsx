@@ -28,7 +28,7 @@ export const NamespaceMore: React.FC<NamespaceMoreProps> = (props: NamespaceMore
         <NamedTitle about="More About Namespace">
             {namespace}
         </NamedTitle>
-        <div className={MenuStyle.menuGrid}>
+        <div className={MenuStyle["menu-grid"]}>
             <MenuItem
                 description={`See Members of "${namespace}"`}
                 link="Members"

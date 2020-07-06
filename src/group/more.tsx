@@ -42,7 +42,7 @@ export const GroupMore: React.FC<GroupMoreProps> = (props: GroupMoreProps) => {
         <NamedTitle about="More About Group">
             {group}
         </NamedTitle>
-        <div className={MenuStyle.menuGrid}>
+        <div className={MenuStyle["menu-grid"]}>
             <MenuItem
                 description={`Remove Group "${group}" in All Accounts`}
                 link="Remove All"

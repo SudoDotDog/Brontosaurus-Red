@@ -14,7 +14,7 @@ export type PreferenceMenuProps = {
 
 export const PreferenceMenu: React.FC<PreferenceMenuProps> = (props: PreferenceMenuProps) => {
 
-    return (<div className={StyleMenu.menuGrid}>
+    return (<div className={StyleMenu["menu-grid"]}>
         <MenuItem
             description="View and manage global preference setting"
             link="Global"

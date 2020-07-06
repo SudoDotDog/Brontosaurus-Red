@@ -20,8 +20,8 @@ export type MenuItemProps = {
 
 export const MenuItem: React.FC<MenuItemProps> = (props: MenuItemProps) => {
 
-    return (<div className={StyleMe.menuItem}>
-        <div className={StyleMe.menuDescription}>
+    return (<div className={StyleMe["menu-item"]}>
+        <div className={StyleMe["menu-description"]}>
             {props.description}
         </div>
         <NeonButton

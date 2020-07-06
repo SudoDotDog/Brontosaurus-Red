@@ -14,7 +14,7 @@ export type MeMenuProps = {
 
 export const MeMenu: React.FC<MeMenuProps> = (props: MeMenuProps) => {
 
-    return (<div className={StyleMe.menuGrid}>
+    return (<div className={StyleMe["menu-grid"]}>
         <MenuItem
             description="Change password"
             link="Change Password"

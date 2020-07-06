@@ -130,9 +130,9 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
                 <td>{organization.ownerDisplayName}</td>
                 <td>{organization.decorators}</td>
                 <td>{organization.tags}</td>
-                <td className={MenuStyle.actionRaw}>
+                <td className={MenuStyle["action-raw"]}>
                     <NeonButton
-                        className={MenuStyle.actionButton}
+                        className={MenuStyle["action-button"]}
                         onClick={() => this.props.history.push('/admin/organization/more/' + encodeURIComponent(organization.name))}
                         size={SIZE.RELATIVE}>
                         {this.props.language.get(PROFILE.MORE)}

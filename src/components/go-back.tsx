@@ -40,7 +40,7 @@ const GoBackBase: React.FC<GoBackProps> = (props: GoBackProps) => {
     return (<div
         className={combineClasses(
             props.className,
-            MenuStyle.goBack,
+            MenuStyle["go-back"],
         )}
     >
         <NeonSub

@@ -152,7 +152,7 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                         options={this.state.groups}
                     />
                     <NeonTitle size={SIZE.MEDIUM}>Redirections</NeonTitle>
-                    <div className={ApplicationEditStyle.protocolGrid}>
+                    <div className={ApplicationEditStyle["protocol-grid"]}>
                         <NeonCheckbox
                             value={this.state.application.iFrameProtocol}
                             onChange={(newValue: boolean) => this._updateApplication('iFrameProtocol', newValue)}

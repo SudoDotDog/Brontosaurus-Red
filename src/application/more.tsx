@@ -83,7 +83,7 @@ export const ApplicationMore: React.FC<ApplicationMoreProps> = (props: Applicati
         <NamedTitle about="More About Application">
             {application}
         </NamedTitle>
-        <div className={MenuStyle.menuGrid}>
+        <div className={MenuStyle["menu-grid"]}>
             <MenuItem
                 description={`Refresh "${application}"'s Green Token`}
                 link="Refresh"

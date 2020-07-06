@@ -105,7 +105,7 @@ export class OrganizationMembers extends React.Component<OrganizationMembersProp
                 <td>{isOwner
                     ? 'None'
                     : (<NeonButton
-                        className={MenuStyle.actionButton}
+                        className={MenuStyle["action-button"]}
                         style={{ margin: '2px' }}
                         onClick={() => this._promoteUser(member.username, member.namespace)}
                         size={SIZE.RELATIVE}>

@@ -37,7 +37,7 @@ const connector = Connector.create<IStore, ConnectedStates>()
 
 export const SearchDoubleNewBase: React.ComponentType<ConnectedProps> = (props: ConnectedProps) => {
 
-    return (<div className={SearchNewStyle.searchBar}>
+    return (<div className={SearchNewStyle["search-bar"]}>
         <NeonApplicable
             defaultValue={props.defaultValue}
             className={SearchNewStyle.search}

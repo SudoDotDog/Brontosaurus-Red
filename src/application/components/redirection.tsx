@@ -66,7 +66,7 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
                     testValue: newValue,
                 })}
             />
-            <div className={RedirectionStyle.testBox}>
+            <div className={RedirectionStyle["test-box"]}>
                 {this._getTestResult()}
             </div>
         </div>);
@@ -75,9 +75,9 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
     private _renderRedirect(redirection: ApplicationRedirection, index: number) {
 
         return (<div key={redirection.identifier}>
-            <div className={RedirectionStyle.nameContainer}>
+            <div className={RedirectionStyle["name-container"]}>
                 <NeonInput
-                    className={RedirectionStyle.nameInput}
+                    className={RedirectionStyle["name-input"]}
                     label="Name"
                     value={redirection.name}
                     onChange={(newName: string) => {
@@ -98,7 +98,7 @@ export class ApplicationRedirectionEditor extends React.Component<ApplicationRed
                 >X</NeonCoin>
             </div>
             <NeonInput
-                className={RedirectionStyle.regexpInput}
+                className={RedirectionStyle["regexp-input"]}
                 label="Regexp"
                 value={redirection.regexp}
                 onChange={(newRegexp: string) => {

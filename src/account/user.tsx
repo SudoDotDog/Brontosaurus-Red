@@ -137,9 +137,9 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                 <td>{user.email}</td>
                 <td>{user.phone}</td>
                 <td>{user.attempts}</td>
-                <td className={MenuStyle.actionRaw}>
+                <td className={MenuStyle["action-raw"]}>
                     <NeonButton
-                        className={MenuStyle.actionButton}
+                        className={MenuStyle["action-button"]}
                         onClick={() => this.props.history.push(buildAdminAccountMore(user.username, user.namespace))}
                         size={SIZE.RELATIVE}>
                         {this.props.language.get(PROFILE.MORE)}

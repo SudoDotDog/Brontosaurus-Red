@@ -56,7 +56,7 @@ export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: Organiz
         <NamedTitle about="More About Organization">
             {organization}
         </NamedTitle>
-        <div className={MenuStyle.menuGrid}>
+        <div className={MenuStyle["menu-grid"]}>
             <MenuItem
                 description={`Add exist account to "${organization}" organization.`}
                 link="Add"

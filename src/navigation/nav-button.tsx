@@ -20,8 +20,8 @@ export const NavButton: React.FC<NavButtonProps> = (props: NavButtonProps) => {
 
     return (<button
         className={combineClasses(
-            NavStyle.commonButton,
-            NavStyle.navButton,
+            NavStyle["common-button"],
+            NavStyle["nav-button"],
             props.selected ? NavStyle.selected : null,
         )}
         onClick={props.onClick}

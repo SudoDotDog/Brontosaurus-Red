@@ -14,7 +14,7 @@ export type CurrentMenuProps = {
 
 export const CurrentMenu: React.FC<CurrentMenuProps> = (props: CurrentMenuProps) => {
 
-    return (<div className={StyleMe.menuGrid}>
+    return (<div className={StyleMe["menu-grid"]}>
         <MenuItem
             description="Register sub account for your organization"
             link="Register"
