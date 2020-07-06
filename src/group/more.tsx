@@ -12,9 +12,37 @@ import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { buildAdminGroupMembers } from "../util/path";
 import { removeAllGroupRepository } from "./repository/remove-all";
+import { activateGroupRepository } from "./repository/activate";
+import { deactivateGroupRepository } from "./repository/deactivate";
 
 export type GroupMoreProps = {
 } & RouteComponentProps;
+
+const activateGroup = async (group: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to activate "${group}"?`);
+    if (isConfirm) {
+        try {
+            await activateGroupRepository(group);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
+
+const deactivateGroup = async (group: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to deactivate "${group}"?`);
+    if (isConfirm) {
+        try {
+            await deactivateGroupRepository(group);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
 
 const removeAllGroup = async (group: string, next: () => void) => {
 
@@ -52,6 +80,16 @@ export const GroupMore: React.FC<GroupMoreProps> = (props: GroupMoreProps) => {
                 description={`See Members of "${group}"`}
                 link="Members"
                 onClick={() => props.history.push(buildAdminGroupMembers(group))}
+            />
+            <MenuItem
+                description={`Activate "${group}"`}
+                link="Activate"
+                onClick={() => activateGroup(group, () => props.history.replace('/admin/group'))}
+            />
+            <MenuItem
+                description={`Deactivate "${group}"`}
+                link="Deactivate"
+                onClick={() => deactivateGroup(group, () => props.history.replace('/admin/group'))}
             />
         </div>
     </div>);
