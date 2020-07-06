@@ -1,3 +1,11 @@
-export const searchBar: string;
-export const search: string;
-export const single: string;
+declare namespace SearchNewScssNamespace {
+  export interface ISearchNewScss {
+    search: string;
+    "search-bar": string;
+    single: string;
+  }
+}
+
+declare const SearchNewScssModule: SearchNewScssNamespace.ISearchNewScss;
+
+export = SearchNewScssModule;

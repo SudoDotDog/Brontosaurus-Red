@@ -1,4 +1,12 @@
-export const nameContainer: string;
-export const nameInput: string;
-export const regexpInput: string;
-export const testBox: string;
+declare namespace RedirectionScssNamespace {
+  export interface IRedirectionScss {
+    "name-container": string;
+    "name-input": string;
+    "regexp-input": string;
+    "test-box": string;
+  }
+}
+
+declare const RedirectionScssModule: RedirectionScssNamespace.IRedirectionScss;
+
+export = RedirectionScssModule;

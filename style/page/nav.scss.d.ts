@@ -1,9 +1,17 @@
-export const navWrapper: string;
-export const mainArea: string;
-export const subArea: string;
-export const outArea: string;
-export const commonButton: string;
-export const subButton: string;
-export const selected: string;
-export const navButton: string;
-export const organizationButton: string;
+declare namespace NavScssNamespace {
+  export interface INavScss {
+    "common-button": string;
+    "main-area": string;
+    "nav-button": string;
+    "nav-wrapper": string;
+    "organization-button": string;
+    "out-area": string;
+    selected: string;
+    "sub-area": string;
+    "sub-button": string;
+  }
+}
+
+declare const NavScssModule: NavScssNamespace.INavScss;
+
+export = NavScssModule;

@@ -1,12 +1,20 @@
-export const menuGrid: string;
-export const menuItem: string;
-export const menuDescription: string;
-export const actionRaw: string;
-export const actionButton: string;
-export const clickableSpan: string;
-export const clickableSpanRed: string;
-export const namedTitle: string;
-export const namedTitleAbout: string;
-export const namedTitleName: string;
-export const goBack: string;
-export const menuExtra: string;
+declare namespace MenuScssNamespace {
+  export interface IMenuScss {
+    "action-button": string;
+    "action-raw": string;
+    "clickable-span": string;
+    "clickable-span-red": string;
+    "go-back": string;
+    "menu-description": string;
+    "menu-extra": string;
+    "menu-grid": string;
+    "menu-item": string;
+    "named-title": string;
+    "named-title-about": string;
+    "named-title-name": string;
+  }
+}
+
+declare const MenuScssModule: MenuScssNamespace.IMenuScss;
+
+export = MenuScssModule;

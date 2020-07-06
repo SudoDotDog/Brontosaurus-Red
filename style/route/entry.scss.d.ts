@@ -1,7 +1,15 @@
-export const container: string;
-export const languageSetting: string;
-export const languageBar: string;
-export const title: string;
-export const nav: string;
-export const signIn: string;
-export const content: string;
+declare namespace EntryScssNamespace {
+  export interface IEntryScss {
+    container: string;
+    content: string;
+    "language-bar": string;
+    "language-setting": string;
+    nav: string;
+    "sign-in": string;
+    title: string;
+  }
+}
+
+declare const EntryScssModule: EntryScssNamespace.IEntryScss;
+
+export = EntryScssModule;

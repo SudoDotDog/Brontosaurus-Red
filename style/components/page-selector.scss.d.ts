@@ -1,3 +1,11 @@
-export const container: string;
-export const coin: string;
-export const coinSelected: string;
+declare namespace PageSelectorScssNamespace {
+  export interface IPageSelectorScss {
+    coin: string;
+    "coin-selected": string;
+    container: string;
+  }
+}
+
+declare const PageSelectorScssModule: PageSelectorScssNamespace.IPageSelectorScss;
+
+export = PageSelectorScssModule;
