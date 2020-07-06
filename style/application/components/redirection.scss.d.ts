@@ -1,3 +1,4 @@
+// auto-generated - @sudoo/webpack-react
 declare namespace RedirectionScssNamespace {
   export interface IRedirectionScss {
     "name-container": string;

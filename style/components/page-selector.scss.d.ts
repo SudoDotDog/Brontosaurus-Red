@@ -1,3 +1,4 @@
+// auto-generated - @sudoo/webpack-react
 declare namespace PageSelectorScssNamespace {
   export interface IPageSelectorScss {
     coin: string;

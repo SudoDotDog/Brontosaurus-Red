@@ -1,3 +1,4 @@
+// auto-generated - @sudoo/webpack-react
 declare namespace SearchNewScssNamespace {
   export interface ISearchNewScss {
     search: string;

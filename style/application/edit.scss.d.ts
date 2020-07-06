@@ -1,3 +1,4 @@
+// auto-generated - @sudoo/webpack-react
 declare namespace EditScssNamespace {
   export interface IEditScss {
     container: string;

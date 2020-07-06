@@ -1,3 +1,4 @@
+// auto-generated - @sudoo/webpack-react
 declare namespace NavScssNamespace {
   export interface INavScss {
     "common-button": string;

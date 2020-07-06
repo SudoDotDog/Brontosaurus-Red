@@ -1,3 +1,4 @@
+// auto-generated - @sudoo/webpack-react
 declare namespace EntryScssNamespace {
   export interface IEntryScss {
     container: string;

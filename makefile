@@ -22,7 +22,13 @@ run:
 
 build: clean-linux
 	@echo "[INFO] Starting build"
-	@NODE_ENV=production $(webpack) --config $(webpack_build)
+	@NODE_ENV=production \
+	$(webpack) --config $(webpack_build)
+
+build-dev: clean-linux
+	@echo "[INFO] Starting build"
+	@NODE_ENV=development \
+	$(webpack) --config $(webpack_build)
 
 tests:
 	@echo "[INFO] Testing with Mocha"

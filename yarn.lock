@@ -211,10 +211,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/verify/-/verify-1.14.0.tgz#db3341ccb283019289634c11c2ed561d280aac5c"
   integrity sha512-83zurGVZk7WWqw58M580FX6NGg0U+OGE58KCKsu69Mp0Iga1MFknTT6p9Zs1L6L4cj/V5lk3cifyL0TJibydYg==
 
-"@sudoo/webpack-react@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-3.0.0.tgz#811a3a38eccbe2671dec8ad2688dc8367a21488b"
-  integrity sha512-X5xcsP0HjRtX7e5hgmoOjehV7Cd7xyv6j5d0PmJoxfArgrTv8/8vyVrsTiAXZEklgYOUbuFexi535CBWFesSrQ==
+"@sudoo/webpack-react@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-3.0.2.tgz#520efc873a4873f9061a267ff8a38010ab90f0a7"
+  integrity sha512-tJtzvT7/DpxfD/5A3yTkTfLBIjmfzWd2ZjLijpajysR4w+DRZLeXdyKqj+DAd5BOyRe8BeqlkzOd38f2OkW/dA==
   dependencies:
     "@teamsupercell/typings-for-css-modules-loader" "^2.2.0"
     copy-webpack-plugin "6.0.3"

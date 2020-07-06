@@ -1,3 +1,4 @@
+// auto-generated - @sudoo/webpack-react
 declare namespace MenuScssNamespace {
   export interface IMenuScss {
     "action-button": string;
