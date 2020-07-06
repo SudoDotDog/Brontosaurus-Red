@@ -30,14 +30,12 @@
     "@sudoo/random": "^2.1.1",
     "@sudoo/react-force": "^1.7.3",
     "@sudoo/redux": "^1.6.0",
-    "@sudoo/verify": "^1.14.0",
-    "react-router-dom": "^5.2.0"
+    "@sudoo/verify": "^1.14.0"
   },
   "devDependencies": {
     "@sudoo/react-force-dev": "^1.7.3",
     "@sudoo/triforce": "^2.7.5",
     "@sudoo/webpack-react": "^3.0.2",
-    "@types/react-router-dom": "^5.1.5",
     "ts-loader": "^7.0.5"
   },
   "nyc": {
