@@ -10,6 +10,7 @@ import { joinRoute } from "../../repository/route";
 
 export type SingleGroupResponse = {
 
+    readonly active: boolean;
     readonly name: string;
     readonly members: Array<{
         readonly active: boolean;

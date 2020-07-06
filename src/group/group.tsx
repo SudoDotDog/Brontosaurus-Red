@@ -116,6 +116,7 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
                 <td>
                     <ClickableSpan
                         to={'/admin/group/e/' + encodeURIComponent(group.name)}
+                        red={!group.active}
                     >
                         {group.name}
                     </ClickableSpan>

@@ -10,6 +10,7 @@ import { joinRoute } from "../../repository/route";
 
 export type GroupResponse = {
 
+    readonly active: boolean;
     readonly name: string;
     readonly decorators: number;
     readonly description?: string;

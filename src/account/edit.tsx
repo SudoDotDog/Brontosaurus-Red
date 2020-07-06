@@ -22,11 +22,11 @@ import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { buildAdminAccountMore } from "../util/path";
+import { AccountPreviousPasswords } from "./components/previous-passwords";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse, SpecialPasswordResponse } from "./repository/single-fetch";
 import { suspendApplicationPasswordRepository } from "./repository/suspend-application-password";
 import { suspendTemporaryPasswordRepository } from "./repository/suspend-temp-password";
-import { AccountPreviousPasswords } from "./components/previous-passwords";
 
 type AccountEditProp = {
 } & RouteComponentProps;
