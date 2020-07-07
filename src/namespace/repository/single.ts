@@ -10,6 +10,7 @@ import { joinRoute } from "../../repository/route";
 
 export type SingleNamespaceResponse = {
 
+    readonly active: boolean;
     readonly name: string;
     readonly namespace: string;
     readonly domain: string;

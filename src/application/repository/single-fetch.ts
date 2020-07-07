@@ -12,7 +12,9 @@ import { randomUnique } from "@sudoo/random";
 
 export type SingleApplicationFetchResponse = {
 
+    readonly active: boolean;
     readonly avatar?: string;
+    readonly favicon?: string;
     readonly name: string;
     readonly key: string;
     readonly expire: number;

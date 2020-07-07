@@ -12,8 +12,6 @@ export type UpdateTagRequest = {
 
     readonly name: string;
     readonly description?: string;
-    readonly addableGroups: string[];
-    readonly removableGroups: string[];
 };
 
 export const updateTagRepository = async (request: UpdateTagRequest): Promise<string> => {

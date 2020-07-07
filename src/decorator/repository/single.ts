@@ -10,6 +10,7 @@ import { joinRoute } from "../../repository/route";
 
 export type SingleDecoratorResponse = {
 
+    readonly active: boolean;
     readonly name: string;
     readonly description?: string;
     readonly addableGroups: string[];

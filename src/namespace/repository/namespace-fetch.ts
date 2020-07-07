@@ -11,9 +11,9 @@ import { joinRoute } from "../../repository/route";
 export type NamespaceResponse = {
 
     readonly active: boolean;
-    readonly name: string;
     readonly namespace: string;
     readonly domain: string;
+    readonly name?: string;
 };
 
 export type FetchNamespaceResponse = {

@@ -10,10 +10,9 @@ import { joinRoute } from "../../repository/route";
 
 export type SingleTagResponse = {
 
+    readonly active: boolean;
     readonly name: string;
     readonly description?: string;
-    readonly addableGroups: string[];
-    readonly removableGroups: string[];
 };
 
 export const singleTagRepository = async (name: string): Promise<SingleTagResponse> => {

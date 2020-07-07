@@ -133,8 +133,6 @@ export class TagEdit extends React.Component<TagEditProp, TagEditState> {
             const name: string = await updateTagRepository({
                 name: this.state.tag.name,
                 description: this.state.tag.description,
-                addableGroups: this.state.tag.addableGroups,
-                removableGroups: this.state.tag.removableGroups,
             });
 
             this.setState({
