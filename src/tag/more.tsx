@@ -10,7 +10,7 @@ import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
-import { buildAdminTagMembers } from "../util/path";
+import { buildAdminTagEdit, buildAdminTagMembers } from "../util/path";
 import { activateTagRepository } from "./repository/activate";
 import { deactivateTagRepository } from "./repository/deactivate";
 
@@ -61,6 +61,16 @@ export const TagMore: React.FC<TagMoreProps> = (props: TagMoreProps) => {
                 description={`See Members of "${tag}"`}
                 link="Members"
                 onClick={() => props.history.push(buildAdminTagMembers(tag))}
+            />
+            <MenuItem
+                description={`Activate "${tag}"`}
+                link="Activate"
+                onClick={() => activateTag(tag, () => props.history.replace(buildAdminTagEdit(tag)))}
+            />
+            <MenuItem
+                description={`Deactivate "${tag}"`}
+                link="Deactivate"
+                onClick={() => deactivateTag(tag, () => props.history.replace(buildAdminTagEdit(tag)))}
             />
         </div>
     </div>);

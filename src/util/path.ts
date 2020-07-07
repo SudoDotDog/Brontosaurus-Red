@@ -44,6 +44,11 @@ export const buildAdminGroupEdit = (group: string): string => {
     return `/admin/group/e/${group}`;
 };
 
+export const buildAdminTagEdit = (tag: string): string => {
+
+    return `/admin/tag/e/${tag}`;
+};
+
 export const buildAdminTagMembers = (tag: string): string => {
 
     return `/admin/tag/members/${tag}`;
