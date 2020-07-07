@@ -10,6 +10,8 @@ import { joinRoute } from "../../repository/route";
 import { ApplicationRedirection } from "../../common/declare";
 
 export type ApplicationResponse = {
+
+    readonly active: boolean;
     readonly expire: number;
     readonly key: string;
     readonly name: string;

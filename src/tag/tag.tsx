@@ -109,6 +109,7 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
                 <td>
                     <ClickableSpan
                         to={'/admin/tag/e/' + encodeURIComponent(tag.name)}
+                        red={!tag.active}
                     >
                         {tag.name}
                     </ClickableSpan>

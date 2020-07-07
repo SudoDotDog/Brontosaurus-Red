@@ -120,6 +120,7 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                 <td>
                     <ClickableSpan
                         to={'/admin/application/e/' + encodeURIComponent(application.key)}
+                        red={!application.active}
                     >
                         {application.name}
                     </ClickableSpan>

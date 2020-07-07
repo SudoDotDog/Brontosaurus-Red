@@ -110,6 +110,7 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
                 <td>
                     <ClickableSpan
                         to={'/admin/namespace/e/' + encodeURIComponent(namespace.namespace)}
+                        red={!namespace.active}
                     >
                         {namespace.namespace}
                     </ClickableSpan>

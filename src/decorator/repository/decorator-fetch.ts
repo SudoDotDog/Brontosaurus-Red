@@ -10,6 +10,7 @@ import { joinRoute } from "../../repository/route";
 
 export type DecoratorResponse = {
 
+    readonly active: boolean;
     readonly name: string;
     readonly description?: string;
 };

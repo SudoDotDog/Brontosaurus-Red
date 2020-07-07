@@ -109,6 +109,7 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
                 <td>
                     <ClickableSpan
                         to={'/admin/decorator/e/' + encodeURIComponent(decorator.name)}
+                        red={!decorator.active}
                     >
                         {decorator.name}
                     </ClickableSpan>
