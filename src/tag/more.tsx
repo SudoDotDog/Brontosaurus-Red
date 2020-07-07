@@ -11,9 +11,37 @@ import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { buildAdminTagMembers } from "../util/path";
+import { activateTagRepository } from "./repository/activate";
+import { deactivateTagRepository } from "./repository/deactivate";
 
 export type TagMoreProps = {
 } & RouteComponentProps;
+
+const activateTag = async (tag: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to activate "${tag}"?`);
+    if (isConfirm) {
+        try {
+            await activateTagRepository(tag);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
+
+const deactivateTag = async (tag: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to deactivate "${tag}"?`);
+    if (isConfirm) {
+        try {
+            await deactivateTagRepository(tag);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
 
 export const TagMore: React.FC<TagMoreProps> = (props: TagMoreProps) => {
 
