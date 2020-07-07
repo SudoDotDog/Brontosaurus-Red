@@ -10,6 +10,9 @@ import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { buildAdminApplicationEdit } from "../util/path";
+import { activateApplicationRepository } from "./repository/activate";
+import { deactivateApplicationRepository } from "./repository/deactivate";
 import { refreshGreenRepository } from "./repository/refresh-green";
 import { refreshKeyRepository } from "./repository/refresh-key";
 import { toggleGreenAccessRepository } from "./repository/toggle-green-access";
@@ -17,6 +20,32 @@ import { togglePortalAccessRepository } from "./repository/toggle-portal-access"
 
 export type ApplicationMoreProps = {
 } & RouteComponentProps;
+
+const activateApplication = async (application: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to activate "${application}"?`);
+    if (isConfirm) {
+        try {
+            await activateApplicationRepository(application);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
+
+const deactivateApplication = async (application: string, next: () => void) => {
+
+    const isConfirm: boolean = window.confirm(`Are you sure to deactivate "${application}"?`);
+    if (isConfirm) {
+        try {
+            await deactivateApplicationRepository(application);
+            next();
+        } catch (err) {
+            window.alert(err);
+        }
+    }
+};
 
 const refreshGreen = async (applicationKey: string, next: () => void) => {
 
@@ -84,6 +113,16 @@ export const ApplicationMore: React.FC<ApplicationMoreProps> = (props: Applicati
             {application}
         </NamedTitle>
         <div className={MenuStyle["menu-grid"]}>
+            <MenuItem
+                description={`Activate "${application}"`}
+                link="Activate"
+                onClick={() => activateApplication(application, () => props.history.replace(buildAdminApplicationEdit(application)))}
+            />
+            <MenuItem
+                description={`Deactivate "${application}"`}
+                link="Deactivate"
+                onClick={() => deactivateApplication(application, () => props.history.replace(buildAdminApplicationEdit(application)))}
+            />
             <MenuItem
                 description={`Refresh "${application}"'s Green Token`}
                 link="Refresh"

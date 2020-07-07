@@ -29,6 +29,11 @@ export const buildAdminAccountResets = (username: string, namespace: string): st
     return `/admin/user/resets/${namespace}/${username}`;
 };
 
+export const buildAdminApplicationEdit = (application: string): string => {
+
+    return `/admin/group/e/${application}`;
+};
+
 export const buildAdminGroupMembers = (group: string): string => {
 
     return `/admin/group/members/${group}`;
