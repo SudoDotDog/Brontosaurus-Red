@@ -10,7 +10,7 @@ import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonTitle } from "@sudoo/neon/typography";
+import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
@@ -77,6 +77,7 @@ export class TagEdit extends React.Component<TagEditProp, TagEditState> {
                     <NamedTitle about="Editing Tag">
                         {this.state.tag.name}
                     </NamedTitle>
+                    <NeonSub>Tag {this.state.tag.active ? "Active" : "Deactivated"}</NeonSub>
                     {this._renderDescription()}
                     <NeonButton
                         size={SIZE.MEDIUM}

@@ -11,7 +11,7 @@ import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonTitle } from "@sudoo/neon/typography";
+import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
@@ -83,6 +83,7 @@ export class DecoratorEdit extends React.Component<DecoratorEditProp, DecoratorE
                     <NamedTitle about="Editing Decorator">
                         {this.state.decorator.name}
                     </NamedTitle>
+                    <NeonSub>Decorator {this.state.decorator.active ? "Active" : "Deactivated"}</NeonSub>
                     {this._renderDescription()}
                     <NeonButton
                         size={SIZE.MEDIUM}

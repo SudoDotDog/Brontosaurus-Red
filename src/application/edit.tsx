@@ -9,10 +9,10 @@ import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { NeonPair } from "@sudoo/neon/input";
 import { NeonPillGroup } from "@sudoo/neon/pill";
+import { NeonCheckbox } from "@sudoo/neon/radio";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonTitle } from "@sudoo/neon/typography";
-import { NeonCheckbox } from "@sudoo/neon/radio"
+import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as ApplicationEditStyle from "../../style/application/edit.scss";
@@ -87,6 +87,7 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                     <NamedTitle about="Editing Application">
                         {this.state.application.key}
                     </NamedTitle>
+                    <NeonSub>Application {this.state.application.active ? "Active" : "Deactivated"}</NeonSub>
                     <NeonPair
                         label="Key"
                         value={this.state.application.key}
