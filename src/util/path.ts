@@ -31,7 +31,7 @@ export const buildAdminAccountResets = (username: string, namespace: string): st
 
 export const buildAdminApplicationEdit = (application: string): string => {
 
-    return `/admin/group/e/${application}`;
+    return `/admin/application/e/${application}`;
 };
 
 export const buildAdminGroupMembers = (group: string): string => {
@@ -52,6 +52,11 @@ export const buildAdminTagMembers = (tag: string): string => {
 export const buildAdminNamespaceMembers = (namespace: string): string => {
 
     return `/admin/namespace/members/${namespace}`;
+};
+
+export const buildAdminDecoratorEdit = (decorator: string): string => {
+
+    return `/admin/decorator/e/${decorator}`;
 };
 
 export const buildAdminDecoratorMembers = (decorator: string): string => {
