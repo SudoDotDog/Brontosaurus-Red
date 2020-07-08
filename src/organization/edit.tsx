@@ -20,7 +20,7 @@ import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
-import { buildAdminAccountEdit } from "../util/path";
+import { buildAdminAccountEdit, buildAdminOrganizationMore, buildAdminNamespaceEdit } from "../util/path";
 import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
 import { updateOrganizationRepository } from "./repository/update";
 
@@ -66,7 +66,9 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
             <div>
                 <GoBack
                     right="More"
-                    onClickRight={() => this.props.history.push('/admin/organization/more/' + encodeURIComponent(this._getOrganizationName()))}
+                    onClickRight={() => {
+                        this.props.history.push(buildAdminOrganizationMore(this._getOrganizationName()));
+                    }}
                 />
                 {this._renderEditableInfos()}
             </div>
@@ -91,7 +93,9 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     <NamedTitle about="Editing Organization">
                         {this.state.organization.name}
                     </NamedTitle>
-                    <NeonSub>Organization {this.state.organization.active ? "Active" : "Deactivated"}</NeonSub>
+                    <NeonSub>
+                        Organization {this.state.organization.active ? "Active" : "Deactivated"}
+                    </NeonSub>
                     {this._renderOwner()}
                     {this._renderLimit()}
                     {this._renderDecorators()}
@@ -114,7 +118,12 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
             <NeonTitle size={SIZE.MEDIUM}>Owner Information</NeonTitle>
             <NeonSmartList
                 list={{
-                    Namespace: organization.owner.namespace,
+                    Namespace: (<ClickableSpan
+                        to={buildAdminNamespaceEdit(organization.owner.namespace)}
+                        red={!organization.owner.namespaceActive}
+                    >
+                        {organization.owner.namespace}
+                    </ClickableSpan> as any),
                     Username: (<ClickableSpan
                         to={buildAdminAccountEdit(organization.owner.username, organization.owner.namespace)}
                         red={!organization.owner.active}

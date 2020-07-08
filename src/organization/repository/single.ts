@@ -15,6 +15,7 @@ export type SingleOrganizationResponse = {
     readonly owner: {
         readonly active: boolean;
         readonly username: string;
+        readonly namespaceActive: boolean;
         readonly namespace: string;
         readonly phone: string;
         readonly email: string;

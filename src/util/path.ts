@@ -76,10 +76,18 @@ export const buildAdminDecoratorMembers = (decorator: string): string => {
 
 export const buildAdminOrganizationEdit = (organization: string): string => {
 
-    return `/admin/organization/e/${organization}`;
+    const encoded: string = encodeURIComponent(organization);
+    return `/admin/organization/e/${encoded}`;
+};
+
+export const buildAdminOrganizationMore = (organization: string): string => {
+
+    const encoded: string = encodeURIComponent(organization);
+    return `/admin/organization/more/${encoded}`;
 };
 
 export const buildAdminOrganizationMembers = (organization: string): string => {
 
-    return `/admin/organization/members/${organization}`;
+    const encoded: string = encodeURIComponent(organization);
+    return `/admin/organization/members/${encoded}`;
 };
