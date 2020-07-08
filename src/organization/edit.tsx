@@ -20,7 +20,7 @@ import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
-import { buildAdminAccountEdit, buildAdminOrganizationMore, buildAdminNamespaceEdit } from "../util/path";
+import { buildAdminAccountEdit, buildAdminDecoratorEdit, buildAdminNamespaceEdit, buildAdminOrganizationMore, buildAdminTagEdit } from "../util/path";
 import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
 import { updateOrganizationRepository } from "./repository/update";
 
@@ -176,6 +176,13 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                         },
                     });
                 }}
+                render={(value: string) => {
+                    return (<ClickableSpan
+                        to={buildAdminDecoratorEdit(value)}
+                    >
+                        {value}
+                    </ClickableSpan>);
+                }}
                 addable
                 removable
                 options={this.state.decorators}
@@ -198,6 +205,13 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                             tags: next,
                         },
                     });
+                }}
+                render={(value: string) => {
+                    return (<ClickableSpan
+                        to={buildAdminTagEdit(value)}
+                    >
+                        {value}
+                    </ClickableSpan>);
                 }}
                 addable
                 removable

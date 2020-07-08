@@ -16,7 +16,9 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { registerInfo } from "../account/repository/register-infos";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
+import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
+import { buildAdminGroupEdit } from "../util/path";
 import { inplodeOrganization } from "./repository/inplode";
 
 type InplodeOrganizationProp = {
@@ -87,6 +89,13 @@ export class InplodeOrganization extends React.Component<InplodeOrganizationProp
                     style={{ flexWrap: 'wrap' }}
                     selected={this.state.selected}
                     onChange={(next: string[]) => this.setState({ selected: next })}
+                    render={(value: string) => {
+                        return (<ClickableSpan
+                            to={buildAdminGroupEdit(value)}
+                        >
+                            {value}
+                        </ClickableSpan>);
+                    }}
                     addable
                     removable
                     options={this.state.tags}

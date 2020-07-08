@@ -15,8 +15,10 @@ import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
+import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
+import { buildAdminDecoratorEdit } from "../util/path";
 import { singleGroup, SingleGroupResponse } from "./repository/single";
 import { updateGroupRepository } from "./repository/update";
 
@@ -132,6 +134,13 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
                             decorators: next,
                         },
                     });
+                }}
+                render={(value: string) => {
+                    return (<ClickableSpan
+                        to={buildAdminDecoratorEdit(value)}
+                    >
+                        {value}
+                    </ClickableSpan>);
                 }}
                 addable
                 removable
