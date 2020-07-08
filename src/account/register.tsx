@@ -16,7 +16,9 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
+import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
+import { buildAdminGroupEdit, buildAdminTagEdit } from "../util/path";
 import { registerRepository } from "./repository/register";
 import { registerInfo } from "./repository/register-infos";
 
@@ -98,6 +100,13 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
                     style={{ flexWrap: 'wrap' }}
                     selected={this.state.selectedTags}
                     onChange={(next: string[]) => this.setState({ selectedTags: next })}
+                    render={(value: string) => {
+                        return (<ClickableSpan
+                            to={buildAdminTagEdit(value)}
+                        >
+                            {value}
+                        </ClickableSpan>);
+                    }}
                     addable
                     removable
                     options={this.state.tags}
@@ -108,6 +117,13 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
                     style={{ flexWrap: 'wrap' }}
                     selected={this.state.selectedGroups}
                     onChange={(next: string[]) => this.setState({ selectedGroups: next })}
+                    render={(value: string) => {
+                        return (<ClickableSpan
+                            to={buildAdminGroupEdit(value)}
+                        >
+                            {value}
+                        </ClickableSpan>);
+                    }}
                     addable
                     removable
                     options={this.state.groups}

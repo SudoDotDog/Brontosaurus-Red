@@ -18,8 +18,10 @@ import { RouteComponentProps } from "react-router-dom";
 import * as ApplicationEditStyle from "../../style/application/edit.scss";
 import { ApplicationRedirection } from "../common/declare";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
+import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
+import { buildAdminGroupEdit } from "../util/path";
 import { ApplicationRedirectionEditor } from "./components/redirection";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
 import { updateApplicationRepository } from "./repository/update";
@@ -139,6 +141,13 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                         style={{ flexWrap: 'wrap' }}
                         selected={this.state.application.groups}
                         onChange={(next: string[]) => this._updateApplication('groups', next)}
+                        render={(value: string) => {
+                            return (<ClickableSpan
+                                to={buildAdminGroupEdit(value)}
+                            >
+                                {value}
+                            </ClickableSpan>);
+                        }}
                         addable
                         removable
                         options={this.state.groups}
@@ -148,6 +157,13 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                         style={{ flexWrap: 'wrap' }}
                         selected={this.state.application.requires}
                         onChange={(next: string[]) => this._updateApplication('requires', next)}
+                        render={(value: string) => {
+                            return (<ClickableSpan
+                                to={buildAdminGroupEdit(value)}
+                            >
+                                {value}
+                            </ClickableSpan>);
+                        }}
                         addable
                         removable
                         options={this.state.groups}
