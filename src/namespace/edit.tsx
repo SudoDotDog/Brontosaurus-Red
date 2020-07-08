@@ -10,9 +10,10 @@ import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { ActiveStatus } from "../components/active-status";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { singleNamespace, SingleNamespaceResponse } from "./repository/single";
@@ -74,7 +75,9 @@ export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceE
                 <NamedTitle about="Editing Namespace">
                     {this._renderName()}
                 </NamedTitle>
-                <NeonSub>Namespace {this.state.namespace.active ? "Active" : "Deactivated"}</NeonSub>
+                <ActiveStatus
+                    active={this.state.namespace.active}
+                />
                 {this._renderDescription()}
                 <NeonButton
                     size={SIZE.MEDIUM}

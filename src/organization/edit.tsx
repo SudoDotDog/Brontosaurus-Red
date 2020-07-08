@@ -12,11 +12,12 @@ import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
+import { ActiveStatus } from "../components/active-status";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
@@ -93,9 +94,9 @@ export class OrganizationEdit extends React.Component<OrganizationEditProp, Orga
                     <NamedTitle about="Editing Organization">
                         {this.state.organization.name}
                     </NamedTitle>
-                    <NeonSub>
-                        Organization {this.state.organization.active ? "Active" : "Deactivated"}
-                    </NeonSub>
+                    <ActiveStatus
+                        active={this.state.organization.active}
+                    />
                     {this._renderOwner()}
                     {this._renderLimit()}
                     {this._renderDecorators()}

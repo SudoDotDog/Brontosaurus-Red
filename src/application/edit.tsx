@@ -12,12 +12,13 @@ import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonCheckbox } from "@sudoo/neon/radio";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
-import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as ApplicationEditStyle from "../../style/application/edit.scss";
 import { ApplicationRedirection } from "../common/declare";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
+import { ActiveStatus } from "../components/active-status";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
@@ -89,7 +90,9 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
                     <NamedTitle about="Editing Application">
                         {this.state.application.key}
                     </NamedTitle>
-                    <NeonSub>Application {this.state.application.active ? "Active" : "Deactivated"}</NeonSub>
+                    <ActiveStatus
+                        active={this.state.application.active}
+                    />
                     <NeonPair
                         label="Key"
                         value={this.state.application.key}
