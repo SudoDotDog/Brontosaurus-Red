@@ -4,6 +4,7 @@ declare namespace ActiveStatusScssNamespace {
     activated: string;
     "active-status": string;
     inactivated: string;
+    "lite-status": string;
   }
 }
 

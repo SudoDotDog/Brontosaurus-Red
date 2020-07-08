@@ -18,8 +18,10 @@ import * as MenuStyle from "../../style/components/menu.scss";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
+import { ActiveStatus } from "../components/active-status";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
+import { LiteStatus } from "../components/lite-status";
 import { NamedTitle } from "../components/named-title";
 import { buildAdminAccountMore, buildAdminDecoratorEdit, buildAdminGroupEdit, buildAdminTagEdit } from "../util/path";
 import { AccountPreviousPasswords } from "./components/previous-passwords";
@@ -103,8 +105,15 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                     <NamedTitle about="Editing Account">
                         {this.state.user.username}
                     </NamedTitle>
-                    <NeonSub>Two-Factor Authorization {this.state.user.twoFA ? "Enabled" : "Disabled"}</NeonSub>
-                    <NeonSub>Account {this.state.user.active ? "Active" : "Deactivated"}</NeonSub>
+                    <ActiveStatus
+                        active={this.state.user.active}
+                    >
+                        <LiteStatus
+                            active={this.state.user.twoFA}
+                            activeText="2FA Enabled"
+                            inactiveText="2FA Disabled"
+                        />
+                    </ActiveStatus>
                     {this._renderNamespace()}
                     {this._renderOrganization()}
                     {this._renderDetail()}

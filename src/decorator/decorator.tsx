@@ -74,7 +74,6 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
                     }}
                     onNew={() => this.props.history.push('/admin/decorator/create')}
                 />
-
                 {this.state.decorators.length === 0
                     ? void 0
                     : <NeonTable
@@ -86,7 +85,6 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
                         style={{ marginTop: '1rem' }}>
                         {this._renderDecorator()}
                     </NeonTable>}
-
                 <PageSelector
                     total={this.state.pages}
                     selected={this.state.page}

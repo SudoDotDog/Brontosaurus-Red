@@ -26,5 +26,6 @@ export const ActiveStatus: React.FC<ActiveStatusProps> = (props: ActiveStatusPro
         )}>
             {text}
         </span>
+        {props.children}
     </NeonSub>);
 };
