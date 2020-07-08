@@ -21,7 +21,7 @@ import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
-import { buildAdminAccountMore } from "../util/path";
+import { buildAdminAccountMore, buildAdminGroupEdit, buildAdminDecoratorEdit, buildAdminTagEdit } from "../util/path";
 import { AccountPreviousPasswords } from "./components/previous-passwords";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse, SpecialPasswordResponse } from "./repository/single-fetch";
@@ -298,6 +298,13 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                         },
                     });
                 }}
+                render={(value: string) => {
+                    return (<ClickableSpan
+                        to={buildAdminGroupEdit(value)}
+                    >
+                        {value}
+                    </ClickableSpan>);
+                }}
                 addable
                 removable
                 options={this.state.groups}
@@ -321,6 +328,13 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                         },
                     });
                 }}
+                render={(value: string) => {
+                    return (<ClickableSpan
+                        to={buildAdminDecoratorEdit(value)}
+                    >
+                        {value}
+                    </ClickableSpan>);
+                }}
                 addable
                 removable
                 options={this.state.decorators}
@@ -343,6 +357,13 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                             tags: next,
                         },
                     });
+                }}
+                render={(value: string) => {
+                    return (<ClickableSpan
+                        to={buildAdminTagEdit(value)}
+                    >
+                        {value}
+                    </ClickableSpan>);
                 }}
                 addable
                 removable
@@ -537,11 +558,11 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                 <NeonTitle size={SIZE.MEDIUM}>Namespace</NeonTitle>
                 <NeonSmartList
                     list={{
-                        Namespace: <ClickableSpan
+                        Namespace: (<ClickableSpan
                             to={'/admin/namespace/e/' + encodeURIComponent(user.namespace)}
                         >
                             {user.namespace}
-                        </ClickableSpan> as any,
+                        </ClickableSpan> as any),
                     }}
                 />
             </React.Fragment>);
@@ -561,12 +582,12 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
                 <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
                 <NeonSmartList
                     list={{
-                        Name: <ClickableSpan
+                        Name: (<ClickableSpan
                             to={'/admin/organization/e/' + encodeURIComponent(user.organization.name)}
                             red={!user.organization.active}
                         >
                             {user.organization.name}
-                        </ClickableSpan> as any,
+                        </ClickableSpan> as any),
                         Owner: user.organization.owner,
                     }}
                 />
