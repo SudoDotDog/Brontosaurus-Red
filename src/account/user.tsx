@@ -19,7 +19,7 @@ import { SearchNew } from "../components/search-new";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
-import { buildAdminAccountEdit, buildAdminAccountMore } from "../util/path";
+import { buildAdminAccountEdit, buildAdminAccountMore, buildAdminNamespaceEdit } from "../util/path";
 import { fetchAccount, FetchAccountResponse, UserResponse } from "./repository/account-fetch";
 
 export type UserState = {
@@ -121,7 +121,14 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
             );
 
             return (<tr key={user.username}>
-                <td>{user.namespace}</td>
+                <td>
+                    <ClickableSpan
+                        to={buildAdminNamespaceEdit(user.namespace)}
+                        red={!user.namespaceActive}
+                    >
+                        {user.namespace}
+                    </ClickableSpan>
+                </td>
                 <td>
                     <ClickableSpan
                         to={buildAdminAccountEdit(user.username, user.namespace)}

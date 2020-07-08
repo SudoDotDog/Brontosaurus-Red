@@ -48,15 +48,13 @@ export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceE
 
     public render() {
 
-        return (
-            <div>
-                <GoBack
-                    right="More"
-                    onClickRight={() => this.props.history.push('/admin/namespace/more/' + encodeURIComponent(this._getNamespaceNamespace()))}
-                />
-                {this._renderEditableInfos()}
-            </div>
-        );
+        return (<div>
+            <GoBack
+                right="More"
+                onClickRight={() => this.props.history.push('/admin/namespace/more/' + encodeURIComponent(this._getNamespaceNamespace()))}
+            />
+            {this._renderEditableInfos()}
+        </div>);
     }
 
     private _renderEditableInfos() {
@@ -65,29 +63,28 @@ export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceE
             return null;
         }
 
-        return (
-            <NeonThemeProvider value={{
-                margin: MARGIN.SMALL,
-            }} >
-                <NeonIndicator
-                    loading={this.state.loading}
-                    covering={Boolean(this.state.cover)}
-                    cover={this._renderSticker()}
+        return (<NeonThemeProvider value={{
+            margin: MARGIN.SMALL,
+        }} >
+            <NeonIndicator
+                loading={this.state.loading}
+                covering={Boolean(this.state.cover)}
+                cover={this._renderSticker()}
+            >
+                <NamedTitle about="Editing Namespace">
+                    {this._renderName()}
+                </NamedTitle>
+                <NeonSub>Namespace {this.state.namespace.active ? "Active" : "Deactivated"}</NeonSub>
+                {this._renderDescription()}
+                <NeonButton
+                    size={SIZE.MEDIUM}
+                    width={WIDTH.FULL}
+                    onClick={this._submit.bind(this)}
                 >
-                    <NamedTitle about="Editing Namespace">
-                        {this._renderName()}
-                    </NamedTitle>
-                    <NeonSub>Namespace {this.state.namespace.active ? "Active" : "Deactivated"}</NeonSub>
-                    {this._renderDescription()}
-                    <NeonButton
-                        size={SIZE.MEDIUM}
-                        width={WIDTH.FULL}
-                        onClick={this._submit.bind(this)}>
-                        Save Change
-                    </NeonButton>
-                </NeonIndicator>
-            </NeonThemeProvider>
-        );
+                    Save Change
+                </NeonButton>
+            </NeonIndicator>
+        </NeonThemeProvider>);
     }
 
     private _renderName() {

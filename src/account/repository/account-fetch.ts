@@ -15,6 +15,7 @@ export type UserResponse = {
     readonly attempts: number;
     readonly resets: number;
     readonly username: string;
+    readonly namespaceActive: boolean;
     readonly namespace: string;
     readonly displayName?: string;
     readonly email?: string;
