@@ -74,7 +74,6 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
                     }}
                     onNew={() => this.props.history.push('/admin/namespace/create')}
                 />
-
                 {this.state.namespaces.length === 0
                     ? void 0
                     : <NeonTable
@@ -87,7 +86,6 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
                         style={{ marginTop: '1rem' }}>
                         {this._renderNamespace()}
                     </NeonTable>}
-
                 <PageSelector
                     total={this.state.pages}
                     selected={this.state.page}

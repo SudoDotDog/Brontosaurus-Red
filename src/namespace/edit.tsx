@@ -75,7 +75,7 @@ export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceE
                     cover={this._renderSticker()}
                 >
                     <NamedTitle about="Editing Namespace">
-                        {this.state.namespace.name}
+                        {this._renderName()}
                     </NamedTitle>
                     <NeonSub>Namespace {this.state.namespace.active ? "Active" : "Deactivated"}</NeonSub>
                     {this._renderDescription()}
@@ -88,6 +88,20 @@ export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceE
                 </NeonIndicator>
             </NeonThemeProvider>
         );
+    }
+
+    private _renderName() {
+
+        if (!this.state.namespace) {
+            return null;
+        }
+
+        if (typeof this.state.namespace.name === 'string'
+            && this.state.namespace.name.length > 0) {
+            return this.state.namespace.name;
+        }
+
+        return this.state.namespace.namespace;
     }
 
     private _renderDescription() {
