@@ -1,0 +1,32 @@
+/**
+ * @author WMXPY
+ * @namespace Components
+ * @description Menu
+ */
+
+@import "../common/color.sass";
+
+.active-status {
+
+    border-width: 1px;
+    border-left-width: 0.4rem;
+    border-style: solid;
+    border-color: $navy;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-weight: bold;
+}
+
+.activated {
+
+    background-color: $green;
+    color: $navy;
+}
+
+.inactivated {
+
+    background-color: $red;
+    color: $white;
+}
