@@ -19,6 +19,11 @@
 	height: 12rem;
 }
 
+.menu-dangerous {
+	background-color: $red !important;
+	border-color: $red;
+}
+
 .menu-description {
 	padding: 0.6rem;
 	flex: 1;

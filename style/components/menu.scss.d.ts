@@ -6,6 +6,7 @@ declare namespace MenuScssNamespace {
     "clickable-span": string;
     "clickable-span-red": string;
     "go-back": string;
+    "menu-dangerous": string;
     "menu-description": string;
     "menu-extra": string;
     "menu-grid": string;

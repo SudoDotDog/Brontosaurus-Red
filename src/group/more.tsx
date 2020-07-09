@@ -85,6 +85,7 @@ export const GroupMoreBase: React.FC<GroupMoreProps> = (props: GroupMoreProps) =
         <div className={MenuStyle["menu-grid"]}>
             <MenuItem
                 description={`Remove Group "${group}" in All Accounts`}
+                dangerous
                 link="Remove All"
                 onClick={() => removeAllGroup(group, () => props.history.replace(`/admin/group/e/${params.group}`))}
             />
@@ -100,6 +101,7 @@ export const GroupMoreBase: React.FC<GroupMoreProps> = (props: GroupMoreProps) =
             />
             <MenuItem
                 description={`Deactivate "${group}"`}
+                dangerous
                 link="Deactivate"
                 onClick={() => deactivateGroup(group, () => props.history.replace(buildAdminGroupEdit(group)))}
             />

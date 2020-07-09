@@ -7,7 +7,8 @@
 import { NeonButton } from "@sudoo/neon/button";
 import { SIZE, WIDTH } from "@sudoo/neon/declare";
 import * as React from "react";
-import * as StyleMe from "../../style/components/menu.scss";
+import * as StyleMenu from "../../style/components/menu.scss";
+import { combineClasses } from "../util/style";
 
 export type MenuItemProps = {
 
@@ -16,15 +17,19 @@ export type MenuItemProps = {
     readonly onClick: () => void;
 
     readonly disabled?: boolean;
+    readonly dangerous?: boolean;
 };
 
 export const MenuItem: React.FC<MenuItemProps> = (props: MenuItemProps) => {
 
-    return (<div className={StyleMe["menu-item"]}>
-        <div className={StyleMe["menu-description"]}>
+    return (<div className={StyleMenu["menu-item"]}>
+        <div className={StyleMenu["menu-description"]}>
             {props.description}
         </div>
         <NeonButton
+            buttonClassName={combineClasses(
+                props.dangerous ? StyleMenu["menu-dangerous"] : undefined,
+            )}
             disabled={props.disabled}
             size={SIZE.MEDIUM}
             width={WIDTH.FULL}
