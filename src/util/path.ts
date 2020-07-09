@@ -31,7 +31,14 @@ export const buildAdminAccountResets = (username: string, namespace: string): st
 
 export const buildAdminApplicationEdit = (application: string): string => {
 
-    return `/admin/application/e/${application}`;
+    const encoded: string = encodeURIComponent(application);
+    return `/admin/application/e/${encoded}`;
+};
+
+export const buildAdminApplicationMore = (application: string): string => {
+
+    const encoded: string = encodeURIComponent(application);
+    return `/admin/application/more/${encoded}`;
 };
 
 export const buildAdminGroupMembers = (group: string): string => {

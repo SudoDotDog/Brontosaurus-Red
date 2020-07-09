@@ -4,6 +4,7 @@
  * @description Edit
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
@@ -13,6 +14,7 @@ import { NeonCheckbox } from "@sudoo/neon/radio";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as ApplicationEditStyle from "../../style/application/edit.scss";
@@ -20,14 +22,17 @@ import { ApplicationRedirection } from "../common/declare";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { ActiveStatus } from "../components/active-status";
 import { ClickableSpan } from "../components/clickable-span";
-import { GoBack } from "../components/go-back";
+import { GoBack, GoBackBaseProps } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
-import { buildAdminGroupEdit } from "../util/path";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
+import { buildAdminApplicationMore, buildAdminGroupEdit } from "../util/path";
 import { ApplicationRedirectionEditor } from "./components/redirection";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
 import { updateApplicationRepository } from "./repository/update";
 
-type ApplicationEditProp = {
+type ApplicationEditBaseProps = {
 } & RouteComponentProps;
 
 type ApplicationEditState = {
@@ -38,7 +43,18 @@ type ApplicationEditState = {
     readonly groups: string[];
 };
 
-export class ApplicationEdit extends React.Component<ApplicationEditProp, ApplicationEditState> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type ApplicationEditProps = ApplicationEditBaseProps & ConnectedStates;
+
+export class ApplicationEditBase extends React.Component<ApplicationEditProps, ApplicationEditState> {
 
     public state: ApplicationEditState = {
 
@@ -64,8 +80,8 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
         return (
             <div>
                 <GoBack
-                    right="More"
-                    onClickRight={() => this.props.history.push('/admin/application/more/' + encodeURIComponent(this._getApplicationName()))}
+                    right={this.props.language.get(PROFILE.MORE)}
+                    onClickRight={() => this.props.history.push(buildAdminApplicationMore(this._getApplicationName()))}
                 />
                 {this._renderEditableInfos()}
             </div>
@@ -291,3 +307,5 @@ export class ApplicationEdit extends React.Component<ApplicationEditProp, Applic
         return params.application;
     }
 }
+
+export const ApplicationEdit: React.ComponentType<GoBackBaseProps> = connector.connect(ApplicationEditBase);
