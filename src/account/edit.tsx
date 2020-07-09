@@ -4,6 +4,7 @@
  * @description Edit
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton, NeonCoin } from "@sudoo/neon/button";
 import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
@@ -12,6 +13,7 @@ import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList, NeonTable } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
@@ -23,15 +25,14 @@ import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { LiteStatus } from "../components/lite-status";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminAccountMore, buildAdminDecoratorEdit, buildAdminGroupEdit, buildAdminTagEdit } from "../util/path";
 import { AccountPreviousPasswords } from "./components/previous-passwords";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse, SpecialPasswordResponse } from "./repository/single-fetch";
 import { suspendApplicationPasswordRepository } from "./repository/suspend-application-password";
 import { suspendTemporaryPasswordRepository } from "./repository/suspend-temp-password";
-
-type AccountEditProp = {
-} & RouteComponentProps;
 
 type AccountEditState = {
 
@@ -43,7 +44,18 @@ type AccountEditState = {
     readonly decorators: string[];
 };
 
-export class AccountEdit extends React.Component<AccountEditProp, AccountEditState> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type AccountEditProp = RouteComponentProps & ConnectedStates;
+
+export class AccountEditBase extends React.Component<AccountEditProp, AccountEditState> {
 
     public readonly state: AccountEditState = {
 
@@ -627,3 +639,5 @@ export class AccountEdit extends React.Component<AccountEditProp, AccountEditSta
         return params.namespace;
     }
 }
+
+export const AccountEdit: React.ComponentType = connector.connect(AccountEditBase);

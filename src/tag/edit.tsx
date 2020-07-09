@@ -4,6 +4,7 @@
  * @description Edit
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
@@ -11,16 +12,16 @@ import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { ActiveStatus } from "../components/active-status";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { singleTagRepository, SingleTagResponse } from "./repository/single";
 import { updateTagRepository } from "./repository/update";
-
-type TagEditProp = {
-} & RouteComponentProps;
 
 type TagEditState = {
 
@@ -29,7 +30,18 @@ type TagEditState = {
     readonly tag: SingleTagResponse | null;
 };
 
-export class TagEdit extends React.Component<TagEditProp, TagEditState> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type TagEditProp = RouteComponentProps & ConnectedStates;
+
+export class TagEditBase extends React.Component<TagEditProp, TagEditState> {
 
     public readonly state: TagEditState = {
 
@@ -183,3 +195,5 @@ export class TagEdit extends React.Component<TagEditProp, TagEditState> {
         return params.tag;
     }
 }
+
+export const TagEdit: React.ComponentType = connector.connect(TagEditBase);

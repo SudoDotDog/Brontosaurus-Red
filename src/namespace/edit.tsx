@@ -4,6 +4,7 @@
  * @description Edit
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
@@ -11,16 +12,16 @@ import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { ActiveStatus } from "../components/active-status";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { singleNamespace, SingleNamespaceResponse } from "./repository/single";
 import { updateNamespaceRepository } from "./repository/update";
-
-type NamespaceEditProp = {
-} & RouteComponentProps;
 
 type NamespaceEditState = {
 
@@ -29,7 +30,18 @@ type NamespaceEditState = {
     readonly namespace: SingleNamespaceResponse | null;
 };
 
-export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceEditState> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type NamespaceEditProp = RouteComponentProps & ConnectedStates;
+
+export class NamespaceEditBase extends React.Component<NamespaceEditProp, NamespaceEditState> {
 
     public readonly state: NamespaceEditState = {
 
@@ -201,3 +213,5 @@ export class NamespaceEdit extends React.Component<NamespaceEditProp, NamespaceE
         return params.namespace;
     }
 }
+
+export const NamespaceEdit: React.ComponentType = connector.connect(NamespaceEditBase);

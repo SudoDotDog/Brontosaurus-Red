@@ -4,6 +4,7 @@
  * @description Edit
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
@@ -12,6 +13,7 @@ import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
@@ -19,12 +21,11 @@ import { ActiveStatus } from "../components/active-status";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminDecoratorEdit } from "../util/path";
 import { singleGroup, SingleGroupResponse } from "./repository/single";
 import { updateGroupRepository } from "./repository/update";
-
-type GroupEditProp = {
-} & RouteComponentProps;
 
 type GroupEditState = {
 
@@ -34,7 +35,18 @@ type GroupEditState = {
     readonly decorators: string[];
 };
 
-export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type GroupEditProp = RouteComponentProps & ConnectedStates;
+
+export class GroupEditBase extends React.Component<GroupEditProp, GroupEditState> {
 
     public readonly state: GroupEditState = {
 
@@ -223,3 +235,5 @@ export class GroupEdit extends React.Component<GroupEditProp, GroupEditState> {
         return params.group;
     }
 }
+
+export const GroupEdit: React.ComponentType = connector.connect(GroupEditBase);
