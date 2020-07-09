@@ -21,6 +21,7 @@ import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { buildAdminNamespaceMore } from "../util/path";
 import { singleNamespace, SingleNamespaceResponse } from "./repository/single";
 import { updateNamespaceRepository } from "./repository/update";
 
@@ -65,7 +66,7 @@ export class NamespaceEditBase extends React.Component<NamespaceEditProp, Namesp
         return (<div>
             <GoBack
                 right={this.props.language.get(PROFILE.MORE)}
-                onClickRight={() => this.props.history.push('/admin/namespace/more/' + encodeURIComponent(this._getNamespaceNamespace()))}
+                onClickRight={() => buildAdminNamespaceMore(this._getNamespaceNamespace())}
             />
             {this._renderEditableInfos()}
         </div>);
@@ -85,7 +86,10 @@ export class NamespaceEditBase extends React.Component<NamespaceEditProp, Namesp
                 covering={Boolean(this.state.cover)}
                 cover={this._renderSticker()}
             >
-                <NamedTitle about="Editing Namespace">
+                <NamedTitle about={this.props.language.get(
+                    PROFILE.EDITING,
+                    this.props.language.get(PROFILE.NAMESPACE),
+                )}>
                     {this._renderName()}
                 </NamedTitle>
                 <ActiveStatus
@@ -97,7 +101,7 @@ export class NamespaceEditBase extends React.Component<NamespaceEditProp, Namesp
                     width={WIDTH.FULL}
                     onClick={this._submit.bind(this)}
                 >
-                    Save Change
+                    {this.props.language.get(PROFILE.SAVE_CHANGE)}
                 </NeonButton>
             </NeonIndicator>
         </NeonThemeProvider>);
@@ -121,8 +125,12 @@ export class NamespaceEditBase extends React.Component<NamespaceEditProp, Namesp
 
         const namespace = this.state.namespace as SingleNamespaceResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Name</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.NICKNAME)}
+            </NeonTitle>
             <NeonSmartList
+                name={this.props.language.get(PROFILE.KEY)}
+                value={this.props.language.get(PROFILE.VALUE)}
                 list={{
                     Name: namespace.name || '',
                 }}
@@ -134,8 +142,12 @@ export class NamespaceEditBase extends React.Component<NamespaceEditProp, Namesp
                     },
                 })}
             />
-            <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.INFORMATION)}
+            </NeonTitle>
             <NeonSmartList
+                name={this.props.language.get(PROFILE.KEY)}
+                value={this.props.language.get(PROFILE.VALUE)}
                 list={{
                     Domain: namespace.domain,
                     Namespace: namespace.namespace,

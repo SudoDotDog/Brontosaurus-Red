@@ -96,7 +96,10 @@ export class DecoratorEditBase extends React.Component<DecoratorEditProp, Decora
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NamedTitle about="Editing Decorator">
+                    <NamedTitle about={this.props.language.get(
+                        PROFILE.EDITING,
+                        this.props.language.get(PROFILE.DECORATOR)
+                    )}>
                         {this.state.decorator.name}
                     </NamedTitle>
                     <ActiveStatus
@@ -107,7 +110,7 @@ export class DecoratorEditBase extends React.Component<DecoratorEditProp, Decora
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
                         onClick={this._submit.bind(this)}>
-                        Save Change
+                        {this.props.language.get(PROFILE.SAVE_CHANGE)}
                     </NeonButton>
                 </NeonIndicator>
             </NeonThemeProvider>
@@ -118,8 +121,12 @@ export class DecoratorEditBase extends React.Component<DecoratorEditProp, Decora
 
         const decorator = this.state.decorator as SingleDecoratorResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Description</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.DESCRIPTION)}
+            </NeonTitle>
             <NeonSmartList
+                name={this.props.language.get(PROFILE.KEY)}
+                value={this.props.language.get(PROFILE.VALUE)}
                 list={{
                     Description: decorator.description || '',
                 }}

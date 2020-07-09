@@ -95,6 +95,7 @@ export class OrganizationEditBase extends React.Component<OrganizationEditProp, 
             return null;
         }
 
+        const language: SudooFormat = this.props.language;
         return (
             <NeonThemeProvider value={{
                 margin: MARGIN.SMALL,
@@ -104,7 +105,10 @@ export class OrganizationEditBase extends React.Component<OrganizationEditProp, 
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NamedTitle about="Editing Organization">
+                    <NamedTitle about={language.get(
+                        PROFILE.EDITING,
+                        language.get(PROFILE.ORGANIZATION),
+                    )}>
                         {this.state.organization.name}
                     </NamedTitle>
                     <ActiveStatus
@@ -118,7 +122,7 @@ export class OrganizationEditBase extends React.Component<OrganizationEditProp, 
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
                         onClick={this._submit.bind(this)}>
-                        Save Change
+                        {language.get(PROFILE.SAVE_CHANGE)}
                     </NeonButton>
                 </NeonIndicator>
             </NeonThemeProvider>
@@ -129,8 +133,12 @@ export class OrganizationEditBase extends React.Component<OrganizationEditProp, 
 
         const organization = this.state.organization as SingleOrganizationResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Owner Information</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.OWNER_INFORMATION)}
+            </NeonTitle>
             <NeonSmartList
+                name={this.props.language.get(PROFILE.KEY)}
+                value={this.props.language.get(PROFILE.VALUE)}
                 list={{
                     Namespace: (<ClickableSpan
                         to={buildAdminNamespaceEdit(organization.owner.namespace)}
@@ -155,13 +163,15 @@ export class OrganizationEditBase extends React.Component<OrganizationEditProp, 
 
         const organization = this.state.organization as SingleOrganizationResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Account Limit</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.ACCOUNT_LIMIT)}
+            </NeonTitle>
             <NeonPair
-                label="Used"
+                label={this.props.language.get(PROFILE.USED)}
                 value={organization.members.length.toString()}
             />
             <NeonPair
-                label="Limit"
+                label={this.props.language.get(PROFILE.LIMIT)}
                 editable
                 value={organization.limit.toString()}
                 onChange={(value: string) => this.setState({
@@ -178,8 +188,11 @@ export class OrganizationEditBase extends React.Component<OrganizationEditProp, 
 
         const organization = this.state.organization as SingleOrganizationResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Decorators</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.DECORATORS)}
+            </NeonTitle>
             <NeonPillGroup
+                addText={this.props.language.get(PROFILE.ADD_INDICATOR)}
                 style={{ flexWrap: 'wrap' }}
                 selected={organization.decorators || []}
                 onChange={(next: string[]) => {
@@ -208,8 +221,11 @@ export class OrganizationEditBase extends React.Component<OrganizationEditProp, 
 
         const organization = this.state.organization as SingleOrganizationResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Tags</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.TAGS)}
+            </NeonTitle>
             <NeonPillGroup
+                addText={this.props.language.get(PROFILE.ADD_INDICATOR)}
                 style={{ flexWrap: 'wrap' }}
                 selected={organization.tags || []}
                 onChange={(next: string[]) => {

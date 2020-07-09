@@ -91,6 +91,7 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
             return null;
         }
 
+        const language: SudooFormat = this.props.language;
         return (
             <NeonThemeProvider value={{
                 margin: MARGIN.SMALL,
@@ -100,49 +101,52 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NamedTitle about="Editing Application">
+                    <NamedTitle about={language.get(
+                        PROFILE.EDITING,
+                        language.get(PROFILE.APPLICATION)
+                    )}>
                         {this.state.application.key}
                     </NamedTitle>
                     <ActiveStatus
                         active={this.state.application.active}
                     />
                     <NeonPair
-                        label="Key"
+                        label={language.get(PROFILE.KEY)}
                         value={this.state.application.key}
                     />
                     <NeonPair
-                        label="Avatar"
+                        label={language.get(PROFILE.AVATAR)}
                         editable
                         value={this.state.application.avatar || ''}
                         onChange={(value: string) => this._updateApplication('avatar', value)}
                     />
                     <NeonPair
-                        label="Name"
+                        label={language.get(PROFILE.NICKNAME)}
                         editable
                         value={this.state.application.name}
                         onChange={(value: string) => this._updateApplication('name', value)}
                     />
                     <NeonPair
-                        label="Expire"
+                        label={language.get(PROFILE.EXPIRE)}
                         editable
                         value={this.state.application.expire.toString()}
                         onChange={(value: string) => this._updateApplication('expire', Number(value))}
                     />
                     <NeonPair
-                        label="Green"
+                        label={language.get(PROFILE.GREEN_TOKEN)}
                         value={this.state.application.green.toString()}
                     />
                     <NeonPair
-                        label="Green Access"
+                        label={language.get(PROFILE.GREEN_ACCESS)}
                         value={this.state.application.greenAccess ? 'Yes' : 'No'}
                     />
                     <NeonPair
-                        label="Portal Access"
+                        label={language.get(PROFILE.PORTAL_ACCESS)}
                         value={this.state.application.portalAccess ? 'Yes' : 'No'}
                     />
                     <div className={ApplicationEditStyle.container}>
                         <div className={ApplicationEditStyle.label}>
-                            Public Key
+                            {language.get(PROFILE.PUBLIC_KEY)}
                         </div>
                         <div className={ApplicationEditStyle.display}>
                             {this.state.application.publicKey.split('\n').map((part: string, index: number) => {
@@ -152,8 +156,11 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
                             })}
                         </div>
                     </div>
-                    <NeonTitle size={SIZE.MEDIUM}>User Groups</NeonTitle>
+                    <NeonTitle size={SIZE.MEDIUM}>
+                        {language.get(PROFILE.GROUPS)}
+                    </NeonTitle>
                     <NeonPillGroup
+                        addText={language.get(PROFILE.ADD_INDICATOR)}
                         style={{ flexWrap: 'wrap' }}
                         selected={this.state.application.groups}
                         onChange={(next: string[]) => this._updateApplication('groups', next)}
@@ -168,8 +175,11 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
                         removable
                         options={this.state.groups}
                     />
-                    <NeonTitle size={SIZE.MEDIUM}>Requires</NeonTitle>
+                    <NeonTitle size={SIZE.MEDIUM}>
+                        {language.get(PROFILE.REQUIRES)}
+                    </NeonTitle>
                     <NeonPillGroup
+                        addText={language.get(PROFILE.ADD_INDICATOR)}
                         style={{ flexWrap: 'wrap' }}
                         selected={this.state.application.requires}
                         onChange={(next: string[]) => this._updateApplication('requires', next)}
@@ -184,7 +194,9 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
                         removable
                         options={this.state.groups}
                     />
-                    <NeonTitle size={SIZE.MEDIUM}>Redirections</NeonTitle>
+                    <NeonTitle size={SIZE.MEDIUM}>
+                        {language.get(PROFILE.REDIRECTIONS)}
+                    </NeonTitle>
                     <div className={ApplicationEditStyle["protocol-grid"]}>
                         <NeonCheckbox
                             value={this.state.application.iFrameProtocol}
@@ -214,7 +226,7 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
                         width={WIDTH.FULL}
                         onClick={this._submit.bind(this)}
                     >
-                        Save Change
+                        {language.get(PROFILE.SAVE_CHANGE)}
                     </NeonButton>
                 </NeonIndicator>
             </NeonThemeProvider>

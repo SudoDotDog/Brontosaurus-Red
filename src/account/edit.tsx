@@ -331,7 +331,7 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
             <NeonTitle size={SIZE.MEDIUM}>
-                {this.props.language.get(PROFILE.GROUP)}
+                {this.props.language.get(PROFILE.GROUPS)}
             </NeonTitle>
             <NeonPillGroup
                 addText={this.props.language.get(PROFILE.ADD_INDICATOR)}
@@ -364,7 +364,7 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
             <NeonTitle size={SIZE.MEDIUM}>
-                {this.props.language.get(PROFILE.DECORATOR)}
+                {this.props.language.get(PROFILE.DECORATORS)}
             </NeonTitle>
             <NeonPillGroup
                 addText={this.props.language.get(PROFILE.ADD_INDICATOR)}
@@ -397,7 +397,7 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
             <NeonTitle size={SIZE.MEDIUM}>
-                {this.props.language.get(PROFILE.TAG)}
+                {this.props.language.get(PROFILE.TAGS)}
             </NeonTitle>
             <NeonPillGroup
                 addText={this.props.language.get(PROFILE.ADD_INDICATOR)}

@@ -81,6 +81,12 @@ export const buildAdminNamespaceEdit = (namespace: string): string => {
     return `/admin/namespace/e/${encoded}`;
 };
 
+export const buildAdminNamespaceMore = (namespace: string): string => {
+
+    const encoded: string = encodeURIComponent(namespace);
+    return `/admin/namespace/more/${encoded}`;
+};
+
 export const buildAdminNamespaceMembers = (namespace: string): string => {
 
     const encoded: string = encodeURIComponent(namespace);

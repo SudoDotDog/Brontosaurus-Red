@@ -96,7 +96,10 @@ export class GroupEditBase extends React.Component<GroupEditProp, GroupEditState
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NamedTitle about="Editing Group">
+                    <NamedTitle about={this.props.language.get(
+                        PROFILE.EDITING,
+                        this.props.language.get(PROFILE.GROUP),
+                    )}>
                         {this.state.group.name}
                     </NamedTitle>
                     <ActiveStatus
@@ -108,7 +111,7 @@ export class GroupEditBase extends React.Component<GroupEditProp, GroupEditState
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
                         onClick={this._submit.bind(this)}>
-                        Save Change
+                        {this.props.language.get(PROFILE.SAVE_CHANGE)}
                     </NeonButton>
                 </NeonIndicator>
             </NeonThemeProvider>
@@ -119,8 +122,12 @@ export class GroupEditBase extends React.Component<GroupEditProp, GroupEditState
 
         const group = this.state.group as SingleGroupResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Description</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.DESCRIPTION)}
+            </NeonTitle>
             <NeonSmartList
+                name={this.props.language.get(PROFILE.KEY)}
+                value={this.props.language.get(PROFILE.VALUE)}
                 list={{
                     Description: group.description || '',
                 }}
@@ -139,8 +146,11 @@ export class GroupEditBase extends React.Component<GroupEditProp, GroupEditState
 
         const group = this.state.group as SingleGroupResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Decorators</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.DECORATORS)}
+            </NeonTitle>
             <NeonPillGroup
+                addText={this.props.language.get(PROFILE.ADD_INDICATOR)}
                 style={{ flexWrap: 'wrap' }}
                 selected={group.decorators || []}
                 onChange={(next: string[]) => {

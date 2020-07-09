@@ -88,7 +88,10 @@ export class TagEditBase extends React.Component<TagEditProp, TagEditState> {
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NamedTitle about="Editing Tag">
+                    <NamedTitle about={this.props.language.get(
+                        PROFILE.EDITING,
+                        this.props.language.get(PROFILE.TAG)
+                    )}>
                         {this.state.tag.name}
                     </NamedTitle>
                     <ActiveStatus
@@ -99,7 +102,7 @@ export class TagEditBase extends React.Component<TagEditProp, TagEditState> {
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
                         onClick={this._submit.bind(this)}>
-                        Save Change
+                        {this.props.language.get(PROFILE.SAVE_CHANGE)}
                     </NeonButton>
                 </NeonIndicator>
             </NeonThemeProvider>
@@ -110,8 +113,12 @@ export class TagEditBase extends React.Component<TagEditProp, TagEditState> {
 
         const tag = this.state.tag as SingleTagResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Description</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.DESCRIPTION)}
+            </NeonTitle>
             <NeonSmartList
+                name={this.props.language.get(PROFILE.KEY)}
+                value={this.props.language.get(PROFILE.VALUE)}
                 list={{
                     Description: tag.description || '',
                 }}
