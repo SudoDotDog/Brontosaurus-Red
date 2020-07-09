@@ -105,7 +105,7 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.SEARCH]: '搜索',
     [PROFILE.SIGN_OUT]: '登出',
     [PROFILE.SUCCEED]: '成功',
-    [PROFILE.SUSPENDED]: '过期于',
+    [PROFILE.SUSPENDED]: '终止于',
     [PROFILE.TAG]: '标记',
     [PROFILE.TAGS]: '标记',
     [PROFILE.TEMPORARY_PASSWORD]: '临时密码',

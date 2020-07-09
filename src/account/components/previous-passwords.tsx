@@ -4,14 +4,18 @@
  * @description Previous Passwords
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { MARGIN, SIZE } from "@sudoo/neon/declare";
 import { NeonApplicable } from "@sudoo/neon/input";
 import { NeonSub } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { PreviousPassword } from "../../common/declare";
+import { intl } from "../../i18n/intl";
+import { IStore } from "../../state/declare";
 import { verifyPreviousPasswordRepository } from "../repository/verify-previous-password";
 
-type AccountPreviousPasswordsProp = {
+type AccountPreviousPasswordsBaseProp = {
 
     readonly username: string;
     readonly namespace: string;
@@ -25,7 +29,18 @@ type AccountPreviousPasswordsStates = {
     readonly verifyResult: PreviousPassword | null;
 };
 
-export class AccountPreviousPasswords extends React.Component<AccountPreviousPasswordsProp, AccountPreviousPasswordsStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type AccountPreviousPasswordsProp = AccountPreviousPasswordsBaseProp & ConnectedStates;
+
+export class AccountPreviousPasswordsBase extends React.Component<AccountPreviousPasswordsProp, AccountPreviousPasswordsStates> {
 
     public readonly state: AccountPreviousPasswordsStates = {
 
@@ -81,3 +96,5 @@ export class AccountPreviousPasswords extends React.Component<AccountPreviousPas
         })
     }
 }
+
+export const AccountPreviousPasswords: React.ComponentType<AccountPreviousPasswordsBaseProp> = connector.connect(AccountPreviousPasswordsBase);
