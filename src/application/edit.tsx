@@ -22,7 +22,7 @@ import { ApplicationRedirection } from "../common/declare";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { ActiveStatus } from "../components/active-status";
 import { ClickableSpan } from "../components/clickable-span";
-import { GoBack, GoBackBaseProps } from "../components/go-back";
+import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
@@ -31,9 +31,6 @@ import { buildAdminApplicationMore, buildAdminGroupEdit } from "../util/path";
 import { ApplicationRedirectionEditor } from "./components/redirection";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
 import { updateApplicationRepository } from "./repository/update";
-
-type ApplicationEditBaseProps = {
-} & RouteComponentProps;
 
 type ApplicationEditState = {
 
@@ -52,7 +49,7 @@ const connector = Connector.create<IStore, ConnectedStates>()
         language: intl.format(preference.language),
     }));
 
-type ApplicationEditProps = ApplicationEditBaseProps & ConnectedStates;
+type ApplicationEditProps = RouteComponentProps & ConnectedStates;
 
 export class ApplicationEditBase extends React.Component<ApplicationEditProps, ApplicationEditState> {
 
@@ -308,4 +305,4 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
     }
 }
 
-export const ApplicationEdit: React.ComponentType<GoBackBaseProps> = connector.connect(ApplicationEditBase);
+export const ApplicationEdit: React.ComponentType = connector.connect(ApplicationEditBase);
