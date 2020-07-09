@@ -35,6 +35,7 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.INPLODE]: '内爆',
     [PROFILE.KEY]: '关键字',
     [PROFILE.MORE]: '更多',
+    [PROFILE.MORE_ABOUT]: '更多关于{}',
     [PROFILE.MY_ACCOUNT]: '我的账户',
     [PROFILE.MY_ORGANIZATION]: '我的组织',
     [PROFILE.NAME]: '名字',

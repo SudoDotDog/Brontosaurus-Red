@@ -33,6 +33,7 @@ export enum PROFILE {
     INPLODE = "INPLODE",
     KEY = "KEY",
     MORE = "MORE",
+    MORE_ABOUT = "MORE_ABOUT",
     MY_ACCOUNT = "MY_ACCOUNT",
     MY_ORGANIZATION = "MY_ORGANIZATION",
     NAME = "NAME",

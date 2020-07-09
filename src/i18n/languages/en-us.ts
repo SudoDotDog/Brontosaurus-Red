@@ -35,6 +35,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.INPLODE]: 'Inplode',
     [PROFILE.KEY]: 'Key',
     [PROFILE.MORE]: 'More',
+    [PROFILE.MORE_ABOUT]: 'More About {}',
     [PROFILE.MY_ACCOUNT]: 'My Account',
     [PROFILE.MY_ORGANIZATION]: 'My Organization',
     [PROFILE.NAME]: 'Name',

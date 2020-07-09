@@ -18,6 +18,7 @@ import { buildAdminGroupEdit, buildAdminGroupMembers } from "../util/path";
 import { activateGroupRepository } from "./repository/activate";
 import { deactivateGroupRepository } from "./repository/deactivate";
 import { removeAllGroupRepository } from "./repository/remove-all";
+import { PROFILE } from "../i18n/profile";
 
 const activateGroup = async (group: string, next: () => void) => {
 
@@ -76,10 +77,13 @@ export const GroupMoreBase: React.FC<GroupMoreProps> = (props: GroupMoreProps) =
 
     return (<div>
         <GoBack
-            right="Edit"
+            right={props.language.get(PROFILE.EDIT)}
             onClickRight={() => props.history.push('/admin/group/e/' + encodeURIComponent(group))}
         />
-        <NamedTitle about="More About Group">
+        <NamedTitle about={props.language.get(
+            PROFILE.MORE_ABOUT,
+            props.language.get(PROFILE.GROUP),
+        )}>
             {group}
         </NamedTitle>
         <div className={MenuStyle["menu-grid"]}>
