@@ -13,6 +13,7 @@ import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminOrganizationEdit, buildAdminOrganizationMembers } from "../util/path";
 import { activateOrganizationRepository } from "./repository/activate";
@@ -62,36 +63,58 @@ export const OrganizationMoreBase: React.FC<OrganizationMoreProps> = (props: Org
 
     return (<div>
         <GoBack
-            right="Edit"
+            right={props.language.get(PROFILE.EDIT)}
             onClickRight={() => props.history.push('/admin/organization/e/' + encodeURIComponent(organization))}
         />
-        <NamedTitle about="More About Organization">
+        <NamedTitle about={props.language.get(
+            PROFILE.MORE_ABOUT,
+            props.language.get(PROFILE.ORGANIZATION),
+        )}>
             {organization}
         </NamedTitle>
         <div className={MenuStyle["menu-grid"]}>
             <MenuItem
-                description={`Add exist account to "${organization}" organization.`}
-                link="Add"
+                description={props.language.get(
+                    PROFILE.ADD_EXIST_ACCOUNT_TO_ORGANIZATION,
+                    organization,
+                )}
+                link={props.language.get(PROFILE.ADD)}
                 onClick={() => props.history.push('/admin/organization/a/' + encodeURIComponent(organization))}
             />
             <MenuItem
-                description={`Register new account for organization "${organization}"`}
-                link="Register"
+                description={props.language.get(
+                    PROFILE.REGISTER_ACCOUNT_FOR_ORGANIZATION,
+                    organization,
+                )}
+                link={props.language.get(PROFILE.REGISTER)}
                 onClick={() => props.history.push('/admin/organization/register/' + encodeURIComponent(organization))}
             />
             <MenuItem
-                description={`See Members of "${organization}"`}
-                link="Members"
+                description={props.language.get(
+                    PROFILE.VIEW_MEMBERS_OF_INSTANCE,
+                    organization,
+                    props.language.get(PROFILE.ORGANIZATION),
+                )}
+                link={props.language.get(PROFILE.MEMBERS)}
                 onClick={() => props.history.push(buildAdminOrganizationMembers(organization))}
             />
             <MenuItem
-                description={`Activate "${organization}"`}
-                link="Activate"
+                description={props.language.get(
+                    PROFILE.ACTIVATE_INSTANCE,
+                    organization,
+                    props.language.get(PROFILE.ORGANIZATION),
+                )}
+                link={props.language.get(PROFILE.ACTIVATE)}
                 onClick={() => activateOrganization(organization, () => props.history.replace(buildAdminOrganizationEdit(organization)))}
             />
             <MenuItem
-                description={`Deactivate "${organization}"`}
-                link="Deactivate"
+                description={props.language.get(
+                    PROFILE.DEACTIVATE_INSTANCE,
+                    organization,
+                    props.language.get(PROFILE.ORGANIZATION),
+                )}
+                link={props.language.get(PROFILE.DEACTIVATE)}
+                dangerous
                 onClick={() => deactivateOrganization(organization, () => props.history.replace(buildAdminOrganizationEdit(organization)))}
             />
         </div>
