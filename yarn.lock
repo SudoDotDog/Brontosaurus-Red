@@ -92,10 +92,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/duplicate/-/duplicate-1.3.0.tgz#fb96184263c51608ab2b3890435b337600ea1b89"
   integrity sha512-rn+gyCez/VgfYsUUitvUwQFvzGcPVzWX8/IIRgr50qwohr/yQjca4w4+eKnGU0L5OWZep6wOfQETYUNxzxA3Fg==
 
-"@sudoo/eslint-config-react@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/eslint-config-react/-/eslint-config-react-1.2.0.tgz#a27866129ffa6dcc8b3d0af4c19cead9d3d981b1"
-  integrity sha512-vANqODO+N0X4IvjP5s17X+PxuZyNahzgcwPtp9kWZJ7gWlyXftuKKfSc6oaaxgClCmfYH9in3flwk2CML0K6Nw==
+"@sudoo/eslint-config-react@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/eslint-config-react/-/eslint-config-react-1.3.0.tgz#b9cc76ff50234bf5df8d3c1fb5764122860e65b6"
+  integrity sha512-f06QX+GZsLQrZE04R37CGTa6eUjJPAVEOt5RTFTn4Pq/0eogyHqk3IhzFNtbvCF9qdv9M/J1JHoyGn15kr6Jwg==
 
 "@sudoo/eslint-config@1.2.0":
   version "1.2.0"
@@ -183,19 +183,19 @@
     react-redux "7.2.0"
     redux "4.0.5"
 
-"@sudoo/triforce@^2.7.6":
-  version "2.7.6"
-  resolved "https://registry.yarnpkg.com/@sudoo/triforce/-/triforce-2.7.6.tgz#1ad45f30e3c476ea80cf28288d2ec4ea6cc842fb"
-  integrity sha512-S0QaEb5VG9u09etyMpn/BVWRkT6kxhuH0TU2YzdQjqEP9YdcmHH6LUp+kqXiLkmNOPjtaokCQvXRY+GFIcRRAw==
+"@sudoo/triforce@^2.7.7":
+  version "2.7.7"
+  resolved "https://registry.yarnpkg.com/@sudoo/triforce/-/triforce-2.7.7.tgz#be16ff976ec06500a86ccf230697458fe779eedb"
+  integrity sha512-ln9O9CAYqvwGA36U0Q3ahzkpBWgfyQIB9Gm56+iyEcwB56nSqFsUCNF4UQ+eq6IbbBCLLAUKabNpV2nL9AI7JA==
   dependencies:
     "@sudoo/eslint-config" "1.2.0"
-    "@sudoo/eslint-config-react" "1.2.0"
+    "@sudoo/eslint-config-react" "1.3.0"
     "@sudoo/mocha-config" "1.0.0"
     "@sudoo/mocha-config-react" "1.1.0"
     "@types/chai" "4.2.11"
     "@types/chance" "1.1.0"
     "@types/mocha" "7.0.2"
-    "@types/node" "14.0.19"
+    "@types/node" "14.0.20"
     "@typescript-eslint/eslint-plugin" "3.6.0"
     "@typescript-eslint/parser" "3.6.0"
     chai "4.2.0"
@@ -211,10 +211,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/verify/-/verify-1.14.0.tgz#db3341ccb283019289634c11c2ed561d280aac5c"
   integrity sha512-83zurGVZk7WWqw58M580FX6NGg0U+OGE58KCKsu69Mp0Iga1MFknTT6p9Zs1L6L4cj/V5lk3cifyL0TJibydYg==
 
-"@sudoo/webpack-react@^3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-3.1.1.tgz#8281b8258b399f3dd66b28843f146a04973df018"
-  integrity sha512-nnqEmDqm/RZGYrpD9V0SM5hp92ExQcnjd0fpbuwFrDBm5mn8lSN1Ty7PMTIEJpbY14ruiEFAGN8kl3NRSqrsJQ==
+"@sudoo/webpack-react@^3.1.2":
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-3.1.2.tgz#d1becd08c3ff08f00f7bfec47d83636d5368206d"
+  integrity sha512-qrwH4WQV8McKOcJcD4IMDfShBFSj8ywt/C/z3yTdR1kWnmYPAa/8kRNl5a1BEykqaGtIyrv4KjtK/Pu9MjL1iw==
   dependencies:
     "@teamsupercell/typings-for-css-modules-loader" "2.2.0"
     copy-webpack-plugin "6.0.3"
@@ -326,10 +326,15 @@
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-7.0.2.tgz#b17f16cf933597e10d6d78eae3251e692ce8b0ce"
   integrity sha512-ZvO2tAcjmMi8V/5Z3JsyofMe3hasRcaw88cto5etSVMwVQfeivGAlEYmaQgceUSVYFofVjT+ioHsATjdWcFt1w==
 
-"@types/node@*", "@types/node@14.0.19":
+"@types/node@*":
   version "14.0.19"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.19.tgz#994d99708822bca643a2364f8aeed04a16e0f5a1"
   integrity sha512-yf3BP/NIXF37BjrK5klu//asUWitOEoUP5xE1mhSUjazotwJ/eJDgEmMQNlOeWOVv72j24QQ+3bqXHE++CFGag==
+
+"@types/node@14.0.20":
+  version "14.0.20"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.20.tgz#0da05cddbc761e1fa98af88a17244c8c1ff37231"
+  integrity sha512-MRn/NP3dee8yL5QhbSA6riuwkS+UOcsPUMOIOG3KMUQpuor/2TopdRBu8QaaB4fGU+gz/bzyDWt0FtUbeJ8H1A==
 
 "@types/prop-types@*":
   version "15.7.3"
