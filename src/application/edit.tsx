@@ -201,19 +201,27 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
                         <NeonCheckbox
                             value={this.state.application.iFrameProtocol}
                             onChange={(newValue: boolean) => this._updateApplication('iFrameProtocol', newValue)}
-                        >Allow IFrame</NeonCheckbox>
+                        >
+                            {this.props.language.get(PROFILE.ALLOW_IFRAME)}
+                        </NeonCheckbox>
                         <NeonCheckbox
                             value={this.state.application.postProtocol}
                             onChange={(newValue: boolean) => this._updateApplication('postProtocol', newValue)}
-                        >Allow Post</NeonCheckbox>
+                        >
+                            {this.props.language.get(PROFILE.ALLOW_POST)}
+                        </NeonCheckbox>
                         <NeonCheckbox
                             value={this.state.application.alertProtocol}
                             onChange={(newValue: boolean) => this._updateApplication('alertProtocol', newValue)}
-                        >Allow Alert</NeonCheckbox>
+                        >
+                            {this.props.language.get(PROFILE.ALLOW_ALERT)}
+                        </NeonCheckbox>
                         <NeonCheckbox
                             value={this.state.application.noneProtocol}
                             onChange={(newValue: boolean) => this._updateApplication('noneProtocol', newValue)}
-                        >Allow None</NeonCheckbox>
+                        >
+                            {this.props.language.get(PROFILE.ALLOW_NONE)}
+                        </NeonCheckbox>
                     </div>
                     <ApplicationRedirectionEditor
                         redirections={this.state.application.redirections}
