@@ -13,6 +13,7 @@ import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminAccountAssign, buildAdminAccountAttempts, buildAdminAccountEdit, buildAdminAccountResets } from "../util/path";
 import { activateAccount } from "./repository/activate";
@@ -23,7 +24,6 @@ import { limboAccount, LimboAccountResponse } from "./repository/limbo";
 import { resetAttemptAccount } from "./repository/reset-attempt";
 import { removeTwoFAAccount } from "./repository/twoFARemove";
 import { withdrawOrganizationAccountRepository } from "./repository/withdraw-organization";
-import { PROFILE } from "../i18n/profile";
 
 const activateUser = async (username: string, namespace: string, goBack: () => void) => {
 
@@ -159,33 +159,57 @@ export const AccountMoreBase: React.FC<AccountMoreProps> = (props: AccountMorePr
         </NamedTitle>
         <div className={MenuStyle["menu-grid"]}>
             <MenuItem
-                description={`Assign ${username} to an (another) organization`}
-                link="Assign"
+                description={props.language.get(
+                    PROFILE.ASSIGN_TO_ORGANIZATION,
+                    username,
+                )}
+                link={props.language.get(PROFILE.ASSIGN)}
                 onClick={() => props.history.push(buildAdminAccountAssign(username, namespace))}
             />
             <MenuItem
-                description={`Check ${username}'s attempt history`}
-                link="Attempts"
+                description={props.language.get(
+                    PROFILE.VIEW_ATTEMPTS_OF_INSTANCE,
+                    username,
+                    props.language.get(PROFILE.ACCOUNT),
+                )}
+                link={props.language.get(PROFILE.ATTEMPTS)}
                 onClick={() => props.history.push(buildAdminAccountAttempts(username, namespace))}
             />
             <MenuItem
-                description={`Check ${username}'s reset history`}
-                link="Resets"
+                description={props.language.get(
+                    PROFILE.VIEW_RESETS_OF_INSTANCE,
+                    username,
+                    props.language.get(PROFILE.ACCOUNT),
+                )}
+                link={props.language.get(PROFILE.RESETS)}
                 onClick={() => props.history.push(buildAdminAccountResets(username, namespace))}
             />
             <MenuItem
-                description={`Activate ${username}`}
-                link="Activate"
+                description={props.language.get(
+                    PROFILE.ACTIVATE_INSTANCE,
+                    username,
+                    props.language.get(PROFILE.ACCOUNT),
+                )}
+                link={props.language.get(PROFILE.ACTIVATE)}
                 onClick={() => activateUser(username, namespace, () => buildAdminAccountEdit(username, namespace))}
             />
             <MenuItem
-                description={`Deactivate ${username}`}
-                link="Deactivate"
+                description={props.language.get(
+                    PROFILE.DEACTIVATE_INSTANCE,
+                    username,
+                    props.language.get(PROFILE.ACCOUNT),
+                )}
+                link={props.language.get(PROFILE.DEACTIVATE)}
+                dangerous
                 onClick={() => deactivateUser(username, namespace, () => buildAdminAccountEdit(username, namespace))}
             />
             <MenuItem
-                description={`Reset ${username}'s password and assign a temporary password.`}
-                link="Limbo"
+                description={props.language.get(
+                    PROFILE.LIMBO_DESCRIPTION_OF_INSTANCE,
+                    username,
+                )}
+                link={props.language.get(PROFILE.LIMBOLIZE)}
+                dangerous
                 onClick={() => limboUser(username, namespace)}
             />
             <MenuItem
