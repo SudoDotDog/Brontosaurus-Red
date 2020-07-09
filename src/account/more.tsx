@@ -23,6 +23,7 @@ import { limboAccount, LimboAccountResponse } from "./repository/limbo";
 import { resetAttemptAccount } from "./repository/reset-attempt";
 import { removeTwoFAAccount } from "./repository/twoFARemove";
 import { withdrawOrganizationAccountRepository } from "./repository/withdraw-organization";
+import { PROFILE } from "../i18n/profile";
 
 const activateUser = async (username: string, namespace: string, goBack: () => void) => {
 
@@ -147,10 +148,13 @@ export const AccountMoreBase: React.FC<AccountMoreProps> = (props: AccountMorePr
 
     return (<div>
         <GoBack
-            right="Edit"
+            right={props.language.get(PROFILE.EDIT)}
             onClickRight={() => props.history.push(buildAdminAccountEdit(username, namespace))}
         />
-        <NamedTitle about="More About Account">
+        <NamedTitle about={props.language.get(
+            PROFILE.MORE_ABOUT,
+            props.language.get(PROFILE.ACCOUNT),
+        )}>
             {username}
         </NamedTitle>
         <div className={MenuStyle["menu-grid"]}>

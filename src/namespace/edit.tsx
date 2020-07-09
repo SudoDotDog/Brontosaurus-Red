@@ -19,6 +19,7 @@ import { ActiveStatus } from "../components/active-status";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { singleNamespace, SingleNamespaceResponse } from "./repository/single";
 import { updateNamespaceRepository } from "./repository/update";
@@ -63,7 +64,7 @@ export class NamespaceEditBase extends React.Component<NamespaceEditProp, Namesp
 
         return (<div>
             <GoBack
-                right="More"
+                right={this.props.language.get(PROFILE.MORE)}
                 onClickRight={() => this.props.history.push('/admin/namespace/more/' + encodeURIComponent(this._getNamespaceNamespace()))}
             />
             {this._renderEditableInfos()}

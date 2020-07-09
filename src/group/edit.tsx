@@ -22,6 +22,7 @@ import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminDecoratorEdit } from "../util/path";
 import { singleGroup, SingleGroupResponse } from "./repository/single";
@@ -72,7 +73,7 @@ export class GroupEditBase extends React.Component<GroupEditProp, GroupEditState
         return (
             <div>
                 <GoBack
-                    right="More"
+                    right={this.props.language.get(PROFILE.MORE)}
                     onClickRight={() => this.props.history.push('/admin/group/more/' + encodeURIComponent(this._getGroupName()))}
                 />
                 {this._renderEditableInfos()}

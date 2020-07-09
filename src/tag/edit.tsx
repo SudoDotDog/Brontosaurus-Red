@@ -19,6 +19,7 @@ import { ActiveStatus } from "../components/active-status";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { singleTagRepository, SingleTagResponse } from "./repository/single";
 import { updateTagRepository } from "./repository/update";
@@ -64,7 +65,7 @@ export class TagEditBase extends React.Component<TagEditProp, TagEditState> {
         return (
             <div>
                 <GoBack
-                    right="More"
+                    right={this.props.language.get(PROFILE.MORE)}
                     onClickRight={() => this.props.history.push('/admin/tag/more/' + encodeURIComponent(this._getTagName()))}
                 />
                 {this._renderEditableInfos()}

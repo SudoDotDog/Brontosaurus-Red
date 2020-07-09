@@ -26,6 +26,7 @@ import { GoBack } from "../components/go-back";
 import { LiteStatus } from "../components/lite-status";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminAccountMore, buildAdminDecoratorEdit, buildAdminGroupEdit, buildAdminTagEdit } from "../util/path";
 import { AccountPreviousPasswords } from "./components/previous-passwords";
@@ -87,7 +88,7 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
         return (
             <div>
                 <GoBack
-                    right="More"
+                    right={this.props.language.get(PROFILE.MORE)}
                     onClickRight={() => {
                         const username: string = this._getUsername();
                         const namespace: string = this._getNamespace();
@@ -228,7 +229,9 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Temporary Passwords</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                Temporary Passwords
+            </NeonTitle>
             <NeonTable
                 headers={[
                     'ID',
@@ -261,7 +264,9 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Application Passwords</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                Application Passwords
+            </NeonTitle>
             <NeonTable
                 headers={[
                     'ID',

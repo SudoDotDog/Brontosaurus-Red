@@ -24,6 +24,7 @@ import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminAccountEdit, buildAdminDecoratorEdit, buildAdminNamespaceEdit, buildAdminOrganizationMore, buildAdminTagEdit } from "../util/path";
 import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
@@ -78,7 +79,7 @@ export class OrganizationEditBase extends React.Component<OrganizationEditProp, 
         return (
             <div>
                 <GoBack
-                    right="More"
+                    right={this.props.language.get(PROFILE.MORE)}
                     onClickRight={() => {
                         this.props.history.push(buildAdminOrganizationMore(this._getOrganizationName()));
                     }}
