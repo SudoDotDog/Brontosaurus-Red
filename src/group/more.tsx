@@ -13,12 +13,12 @@ import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminGroupEdit, buildAdminGroupMembers } from "../util/path";
 import { activateGroupRepository } from "./repository/activate";
 import { deactivateGroupRepository } from "./repository/deactivate";
 import { removeAllGroupRepository } from "./repository/remove-all";
-import { PROFILE } from "../i18n/profile";
 
 const activateGroup = async (group: string, next: () => void) => {
 

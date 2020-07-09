@@ -13,6 +13,7 @@ import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminDecoratorEdit, buildAdminDecoratorMembers } from "../util/path";
 import { activateDecoratorRepository } from "./repository/activate";
@@ -62,26 +63,42 @@ export const DecoratorMoreBase: React.FC<DecoratorMoreProps> = (props: Decorator
 
     return (<div>
         <GoBack
-            right="Edit"
+            right={props.language.get(PROFILE.EDIT)}
             onClickRight={() => props.history.push('/admin/decorator/e/' + encodeURIComponent(decorator))}
         />
-        <NamedTitle about="More About Decorator">
+        <NamedTitle about={props.language.get(
+            PROFILE.MORE_ABOUT,
+            props.language.get(PROFILE.DECORATOR),
+        )}>
             {decorator}
         </NamedTitle>
         <div className={MenuStyle["menu-grid"]}>
             <MenuItem
-                description={`See Members of "${decorator}"`}
-                link="Members"
+                description={props.language.get(
+                    PROFILE.VIEW_MEMBERS_OF_INSTANCE,
+                    decorator,
+                    props.language.get(PROFILE.DECORATOR),
+                )}
+                link={props.language.get(PROFILE.MEMBERS)}
                 onClick={() => props.history.push(buildAdminDecoratorMembers(decorator))}
             />
             <MenuItem
-                description={`Activate "${decorator}"`}
-                link="Activate"
+                description={props.language.get(
+                    PROFILE.ACTIVATE_INSTANCE,
+                    decorator,
+                    props.language.get(PROFILE.DECORATOR),
+                )}
+                link={props.language.get(PROFILE.ACTIVATE)}
                 onClick={() => activateDecorator(decorator, () => props.history.replace(buildAdminDecoratorEdit(decorator)))}
             />
             <MenuItem
-                description={`Deactivate "${decorator}"`}
-                link="Deactivate"
+                description={props.language.get(
+                    PROFILE.DEACTIVATE_INSTANCE,
+                    decorator,
+                    props.language.get(PROFILE.DECORATOR),
+                )}
+                link={props.language.get(PROFILE.DEACTIVATE)}
+                dangerous
                 onClick={() => deactivateDecorator(decorator, () => props.history.replace(buildAdminDecoratorEdit(decorator)))}
             />
         </div>

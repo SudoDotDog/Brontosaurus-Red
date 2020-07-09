@@ -40,7 +40,7 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.KEY]: '关键字',
     [PROFILE.MEMBERS]: '成员',
     [PROFILE.MORE]: '更多',
-    [PROFILE.MORE_ABOUT]: '更多关于{}',
+    [PROFILE.MORE_ABOUT]: '更多有关于{}',
     [PROFILE.MY_ACCOUNT]: '我的账户',
     [PROFILE.MY_ORGANIZATION]: '我的组织',
     [PROFILE.NAME]: '名字',
