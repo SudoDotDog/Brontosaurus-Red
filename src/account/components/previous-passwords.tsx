@@ -14,6 +14,7 @@ import { PreviousPassword } from "../../common/declare";
 import { intl } from "../../i18n/intl";
 import { IStore } from "../../state/declare";
 import { verifyPreviousPasswordRepository } from "../repository/verify-previous-password";
+import { PROFILE } from "../../i18n/profile";
 
 type AccountPreviousPasswordsBaseProp = {
 
@@ -54,12 +55,15 @@ export class AccountPreviousPasswordsBase extends React.Component<AccountPreviou
         return (
             <div>
                 <NeonSub>
-                    Previous Passwords: {this.props.previousPasswordsCount}
+                    {this.props.language.get(
+                        PROFILE.PREVIOUS_PASSWORDS_COUNT,
+                        this.props.previousPasswordsCount.toString(),
+                    )}
                 </NeonSub>
                 <NeonApplicable
                     size={SIZE.MEDIUM}
                     margin={MARGIN.SMALL}
-                    label="Test Previous Password"
+                    label={this.props.language.get(PROFILE.TEST_PREVIOUS_PASSWORD)}
                     onApply={(password: string) => {
                         this._verifyPreviousPassword(password);
                     }}
@@ -77,12 +81,16 @@ export class AccountPreviousPasswordsBase extends React.Component<AccountPreviou
 
         if (!this.state.verifyResult) {
             return (<NeonSub>
-                Password has no matched record.
+                {this.props.language.get(PROFILE.PREVIOUS_PASSWORD_HAS_NO_MATCHED_RECORD)}
             </NeonSub>);
         }
 
         return (<NeonSub>
-            Matched. Changed at: {this.state.verifyResult.changedAt.toLocaleString()}. Reason: {this.state.verifyResult.reason}.
+            {this.props.language.get(
+                PROFILE.PREVIOUS_PASSWORD_MATCHED_WITH_INSTANCE,
+                this.state.verifyResult.changedAt.toLocaleString(),
+                this.state.verifyResult.reason,
+            )}
         </NeonSub>);
     }
 
