@@ -13,6 +13,7 @@ import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminApplicationEdit } from "../util/path";
 import { activateApplicationRepository } from "./repository/activate";
@@ -118,41 +119,82 @@ export const ApplicationMoreBase: React.FC<ApplicationMoreProps> = (props: Appli
 
     return (<div>
         <GoBack
-            right="Edit"
+            right={props.language.get(PROFILE.EDIT)}
             onClickRight={() => props.history.push('/admin/application/e/' + encodeURIComponent(application))}
         />
-        <NamedTitle about="More About Application">
+        <NamedTitle about={props.language.get(
+            PROFILE.MORE_ABOUT,
+            props.language.get(PROFILE.APPLICATION)
+        )}>
             {application}
         </NamedTitle>
         <div className={MenuStyle["menu-grid"]}>
             <MenuItem
-                description={`Activate "${application}"`}
-                link="Activate"
+                description={props.language.get(
+                    PROFILE.ACTIVATE_INSTANCE,
+                    application,
+                    props.language.get(PROFILE.APPLICATION),
+                )}
+                link={props.language.get(PROFILE.ACTIVATE)}
                 onClick={() => activateApplication(application, () => props.history.replace(buildAdminApplicationEdit(application)))}
             />
             <MenuItem
-                description={`Deactivate "${application}"`}
-                link="Deactivate"
+                description={props.language.get(
+                    PROFILE.DEACTIVATE_INSTANCE,
+                    application,
+                    props.language.get(PROFILE.APPLICATION),
+                )}
+                link={props.language.get(PROFILE.DEACTIVATE)}
+                dangerous
                 onClick={() => deactivateApplication(application, () => props.history.replace(buildAdminApplicationEdit(application)))}
             />
             <MenuItem
-                description={`Refresh "${application}"'s Green Token`}
-                link="Refresh"
-                onClick={() => refreshGreen(application, () => props.history.replace(`/admin/application/e/${params.application}`))}
+                description={props.language.get(
+                    PROFILE.REFRESH_SOMETHING_OF_INSTANCE,
+                    props.language.get(PROFILE.GREEN_TOKEN),
+                    props.language.get(PROFILE.APPLICATION),
+                    application,
+                )}
+                link={props.language.get(PROFILE.REFRESH)}
+                dangerous
+                onClick={() => refreshGreen(application, () => props.history.replace(buildAdminApplicationEdit(application)))}
             />
             <MenuItem
-                description={`Reset "${application}"'s RSA-SHA256 Key`}
-                link="Reset"
+                description={props.language.get(
+                    PROFILE.RESET_RSA_SHA_KEY_OF_INSTANCE,
+                    props.language.get(PROFILE.APPLICATION),
+                    application,
+                )}
+                link={props.language.get(PROFILE.RESET)}
+                dangerous
                 onClick={() => refreshKey(application, () => props.history.replace(`/admin/application/e/${params.application}`))}
             />
             <MenuItem
-                description={`Toggle Green Access for "${application}"`}
-                link="Toggle Green Access"
+                description={props.language.get(
+                    PROFILE.TOGGLE_SOMETHING_AUTHORIZATION_OF_INSTANCE,
+                    props.language.get(PROFILE.GREEN_ACCESS_WITH_SPACE),
+                    props.language.get(PROFILE.APPLICATION),
+                    application,
+                )}
+                link={props.language.get(
+                    PROFILE.TOGGLE_SOMETHING_AUTHORIZATION,
+                    props.language.get(PROFILE.GREEN_ACCESS_WITH_SPACE),
+                )}
+                dangerous
                 onClick={() => toggleGreenAccess(application, () => props.history.replace(`/admin/application/e/${params.application}`))}
             />
             <MenuItem
-                description={`Toggle Portal Access for "${application}"`}
-                link="Toggle Portal Access"
+                description={props.language.get(
+                    PROFILE.TOGGLE_SOMETHING_AUTHORIZATION_OF_INSTANCE,
+                    props.language.get(PROFILE.PORTAL_ACCESS),
+                    props.language.get(PROFILE.APPLICATION),
+                    application,
+                )}
+                link={props.language.get(
+                    PROFILE.TOGGLE_SOMETHING_AUTHORIZATION,
+                    props.language.get(PROFILE.PORTAL_ACCESS),
+                )}
+                dangerous
                 onClick={() => togglePortalAccess(application, () => props.history.replace(`/admin/application/e/${params.application}`))}
             />
         </div>

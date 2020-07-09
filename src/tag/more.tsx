@@ -13,6 +13,7 @@ import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminTagEdit, buildAdminTagMembers } from "../util/path";
 import { activateTagRepository } from "./repository/activate";
@@ -62,26 +63,42 @@ export const TagMoreBase: React.FC<TagMoreProps> = (props: TagMoreProps) => {
 
     return (<div>
         <GoBack
-            right="Edit"
+            right={props.language.get(PROFILE.EDIT)}
             onClickRight={() => props.history.push('/admin/tag/e/' + encodeURIComponent(tag))}
         />
-        <NamedTitle about="More About Tag">
+        <NamedTitle about={props.language.get(
+            PROFILE.MORE_ABOUT,
+            props.language.get(PROFILE.TAGS)
+        )}>
             {tag}
         </NamedTitle>
         <div className={MenuStyle["menu-grid"]}>
             <MenuItem
-                description={`See Members of "${tag}"`}
-                link="Members"
+                description={props.language.get(
+                    PROFILE.VIEW_MEMBERS_OF_INSTANCE,
+                    tag,
+                    props.language.get(PROFILE.TAGS),
+                )}
+                link={props.language.get(PROFILE.MEMBERS)}
                 onClick={() => props.history.push(buildAdminTagMembers(tag))}
             />
             <MenuItem
-                description={`Activate "${tag}"`}
-                link="Activate"
+                description={props.language.get(
+                    PROFILE.ACTIVATE_INSTANCE,
+                    tag,
+                    props.language.get(PROFILE.TAGS),
+                )}
+                link={props.language.get(PROFILE.ACTIVATE)}
                 onClick={() => activateTag(tag, () => props.history.replace(buildAdminTagEdit(tag)))}
             />
             <MenuItem
-                description={`Deactivate "${tag}"`}
-                link="Deactivate"
+                description={props.language.get(
+                    PROFILE.DEACTIVATE_INSTANCE,
+                    tag,
+                    props.language.get(PROFILE.TAGS),
+                )}
+                link={props.language.get(PROFILE.DEACTIVATE)}
+                dangerous
                 onClick={() => deactivateTag(tag, () => props.history.replace(buildAdminTagEdit(tag)))}
             />
         </div>
