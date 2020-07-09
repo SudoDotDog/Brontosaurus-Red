@@ -106,6 +106,7 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
             return null;
         }
 
+        const language: SudooFormat = this.props.language;
         return (
             <NeonThemeProvider value={{
                 margin: MARGIN.SMALL,
@@ -115,7 +116,10 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
                     covering={Boolean(this.state.cover)}
                     cover={this._renderSticker()}
                 >
-                    <NamedTitle about="Editing Account">
+                    <NamedTitle about={language.get(
+                        PROFILE.EDITING,
+                        language.get(PROFILE.ACCOUNT),
+                    )}>
                         {this.state.user.username}
                     </NamedTitle>
                     <ActiveStatus
@@ -123,8 +127,8 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
                     >
                         <LiteStatus
                             active={this.state.user.twoFA}
-                            activeText="2FA Enabled"
-                            inactiveText="2FA Disabled"
+                            activeText={language.get(PROFILE.TWO_FACTOR_ENABLED_BADGE)}
+                            inactiveText={language.get(PROFILE.TWO_FACTOR_DISABLED_BADGE)}
                         />
                     </ActiveStatus>
                     {this._renderNamespace()}
@@ -142,7 +146,7 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
                         size={SIZE.MEDIUM}
                         width={WIDTH.FULL}
                         onClick={this._submit.bind(this)}>
-                        Save Change
+                        {language.get(PROFILE.SAVE_CHANGE)}
                     </NeonButton>
                 </NeonIndicator>
             </NeonThemeProvider>
@@ -153,8 +157,12 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Detail</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.DETAIL)}
+            </NeonTitle>
             <NeonSmartList
+                name={this.props.language.get(PROFILE.KEY)}
+                value={this.props.language.get(PROFILE.VALUE)}
                 list={{
                     ['Display Name']: user.displayName || '',
                     Avatar: user.avatar || '',
@@ -179,8 +187,12 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Information</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.INFORMATION)}
+            </NeonTitle>
             <NeonSmartList
+                name={this.props.language.get(PROFILE.KEY)}
+                value={this.props.language.get(PROFILE.VALUE)}
                 list={user.infos}
                 editableName
                 editableValue
@@ -212,8 +224,12 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Beacon</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.BEACON)}
+            </NeonTitle>
             <NeonSmartList
+                name={this.props.language.get(PROFILE.KEY)}
+                value={this.props.language.get(PROFILE.VALUE)}
                 list={user.beacons}
                 editableValue
                 onChange={(newBeacon) => this.setState({
@@ -230,15 +246,15 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
             <NeonTitle size={SIZE.MEDIUM}>
-                Temporary Passwords
+                {this.props.language.get(PROFILE.TEMPORARY_PASSWORD)}
             </NeonTitle>
             <NeonTable
                 headers={[
-                    'ID',
-                    'By',
-                    'Expire At',
-                    'Suspended',
-                    'Action',
+                    this.props.language.get(PROFILE.ID),
+                    this.props.language.get(PROFILE.BY),
+                    this.props.language.get(PROFILE.EXPIRE_AT),
+                    this.props.language.get(PROFILE.SUSPENDED),
+                    this.props.language.get(PROFILE.ACTION),
                 ]}
                 style={{ marginTop: '1rem' }}>
                 {user.temporaryPasswords.map((each: SpecialPasswordResponse) => <tr key={each.id}>
@@ -265,15 +281,15 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
             <NeonTitle size={SIZE.MEDIUM}>
-                Application Passwords
+                {this.props.language.get(PROFILE.APPLICATION_PASSWORD)}
             </NeonTitle>
             <NeonTable
                 headers={[
-                    'ID',
-                    'By',
-                    'Expire At',
-                    'Suspended',
-                    'Action',
+                    this.props.language.get(PROFILE.ID),
+                    this.props.language.get(PROFILE.BY),
+                    this.props.language.get(PROFILE.EXPIRE_AT),
+                    this.props.language.get(PROFILE.SUSPENDED),
+                    this.props.language.get(PROFILE.ACTION),
                 ]}
                 style={{ marginTop: '1rem' }}>
                 {user.applicationPasswords.map((each: SpecialPasswordResponse) => <tr key={each.id}>
@@ -299,7 +315,9 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>Previous Passwords</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.PREVIOUS_PASSWORD)}
+            </NeonTitle>
             <AccountPreviousPasswords
                 username={user.username}
                 namespace={user.namespace}
@@ -312,8 +330,11 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>User Group</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.GROUP)}
+            </NeonTitle>
             <NeonPillGroup
+                addText={this.props.language.get(PROFILE.ADD_INDICATOR)}
                 style={{ flexWrap: 'wrap' }}
                 selected={user.groups || []}
                 onChange={(next: string[]) => {
@@ -342,8 +363,11 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>User Decorator</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.DECORATOR)}
+            </NeonTitle>
             <NeonPillGroup
+                addText={this.props.language.get(PROFILE.ADD_INDICATOR)}
                 style={{ flexWrap: 'wrap' }}
                 selected={user.decorators || []}
                 onChange={(next: string[]) => {
@@ -372,8 +396,11 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
         const user = this.state.user as SingleFetchResponse;
         return (<React.Fragment>
-            <NeonTitle size={SIZE.MEDIUM}>User Tag</NeonTitle>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.TAG)}
+            </NeonTitle>
             <NeonPillGroup
+                addText={this.props.language.get(PROFILE.ADD_INDICATOR)}
                 style={{ flexWrap: 'wrap' }}
                 selected={user.tags || []}
                 onChange={(next: string[]) => {
@@ -581,8 +608,12 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
         const user: SingleFetchResponse = this.state.user as SingleFetchResponse;
         if (user.namespace) {
             return (<React.Fragment>
-                <NeonTitle size={SIZE.MEDIUM}>Namespace</NeonTitle>
+                <NeonTitle size={SIZE.MEDIUM}>
+                    {this.props.language.get(PROFILE.NAMESPACE)}
+                </NeonTitle>
                 <NeonSmartList
+                    name={this.props.language.get(PROFILE.KEY)}
+                    value={this.props.language.get(PROFILE.VALUE)}
                     list={{
                         Namespace: (<ClickableSpan
                             to={'/admin/namespace/e/' + encodeURIComponent(user.namespace)}
@@ -594,7 +625,9 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
             </React.Fragment>);
         } else {
             return (<React.Fragment>
-                <NeonTitle size={SIZE.MEDIUM}>Namespace</NeonTitle>
+                <NeonTitle size={SIZE.MEDIUM}>
+                    {this.props.language.get(PROFILE.NAMESPACE)}
+                </NeonTitle>
                 <NeonSub>No Namespace Found</NeonSub>
             </React.Fragment>);
         }
@@ -605,8 +638,12 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
         const user: SingleFetchResponse = this.state.user as SingleFetchResponse;
         if (user.organization) {
             return (<React.Fragment>
-                <NeonTitle size={SIZE.MEDIUM}>Organization</NeonTitle>
+                <NeonTitle size={SIZE.MEDIUM}>
+                    {this.props.language.get(PROFILE.ORGANIZATION)}
+                </NeonTitle>
                 <NeonSmartList
+                    name={this.props.language.get(PROFILE.KEY)}
+                    value={this.props.language.get(PROFILE.VALUE)}
                     list={{
                         Name: (<ClickableSpan
                             to={'/admin/organization/e/' + encodeURIComponent(user.organization.name)}
@@ -623,10 +660,10 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
                 <NeonTitle
                     size={SIZE.MEDIUM}
                 >
-                    Organization
+                    {this.props.language.get(PROFILE.ORGANIZATION)}
                 </NeonTitle>
                 <NeonSub>
-                    This user doesn&#39;t belong to any organization
+                    {this.props.language.get(PROFILE.NO_ORGANIZATION_DESCRIPTION)}
                 </NeonSub>
             </React.Fragment>);
         }
