@@ -213,28 +213,62 @@ export const AccountMoreBase: React.FC<AccountMoreProps> = (props: AccountMorePr
                 onClick={() => limboUser(username, namespace)}
             />
             <MenuItem
-                description={`Remove ${username}'s two-factoring authorization`}
-                link="Remove 2FA"
+                description={props.language.get(
+                    PROFILE.REMOVE_TWO_FA_OF_INSTANCE,
+                    props.language.get(PROFILE.ACCOUNT),
+                    username,
+                )}
+                link={props.language.get(PROFILE.REMOVE_TWO_FA)}
+                dangerous
                 onClick={() => twoFARemoveUser(username, namespace)}
             />
             <MenuItem
-                description={`Reset ${username}'s login attempt points`}
-                link="Reset Attempt"
+                description={props.language.get(
+                    PROFILE.RESET_ATTEMPT_POINTS_OF_INSTANCE,
+                    props.language.get(PROFILE.ACCOUNT),
+                    username,
+                )}
+                link={props.language.get(PROFILE.RESET_ATTEMPT_POINTS)}
+                dangerous
                 onClick={() => resetAttemptUser(username, namespace)}
             />
             <MenuItem
-                description={`Withdraw ${username}'s organization`}
-                link="Withdraw"
+                description={props.language.get(
+                    PROFILE.WITHDRAW_FROM_OF_INSTANCE,
+                    props.language.get(PROFILE.ORGANIZATION),
+                    props.language.get(PROFILE.ACCOUNT),
+                    username,
+                )}
+                link={props.language.get(PROFILE.WITHDRAW)}
+                dangerous
                 onClick={() => withdrawOrganizationUser(username, namespace, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
             />
             <MenuItem
-                description={`Generate a Temporary Password for ${username}`}
-                link="Generate Temporary Password"
+                description={props.language.get(
+                    PROFILE.GENERATE_SOMETHING_FOR_INSTANCE,
+                    props.language.get(PROFILE.TEMPORARY_PASSWORD),
+                    props.language.get(PROFILE.ACCOUNT),
+                    username,
+                )}
+                link={props.language.get(
+                    PROFILE.GENERATE_SOMETHING,
+                    props.language.get(PROFILE.TEMPORARY_PASSWORD),
+                )}
+                dangerous
                 onClick={() => generateTemporaryPassword(username, namespace, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
             />
             <MenuItem
-                description={`Generate a Application Password for ${username}`}
-                link="Generate Application Password"
+                description={props.language.get(
+                    PROFILE.GENERATE_SOMETHING_FOR_INSTANCE,
+                    props.language.get(PROFILE.APPLICATION_PASSWORD),
+                    props.language.get(PROFILE.ACCOUNT),
+                    username,
+                )}
+                link={props.language.get(
+                    PROFILE.GENERATE_SOMETHING,
+                    props.language.get(PROFILE.APPLICATION_PASSWORD),
+                )}
+                dangerous
                 onClick={() => generateApplicationPassword(username, namespace, () => props.history.push(buildAdminAccountEdit(username, namespace)))}
             />
         </div>
