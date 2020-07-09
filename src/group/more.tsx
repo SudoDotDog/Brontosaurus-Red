@@ -89,24 +89,36 @@ export const GroupMoreBase: React.FC<GroupMoreProps> = (props: GroupMoreProps) =
         <div className={MenuStyle["menu-grid"]}>
             <MenuItem
                 description={`Remove Group "${group}" in All Accounts`}
+                link={props.language.get(PROFILE.REMOVE_ALL)}
                 dangerous
-                link="Remove All"
                 onClick={() => removeAllGroup(group, () => props.history.replace(`/admin/group/e/${params.group}`))}
             />
             <MenuItem
-                description={`See Members of "${group}"`}
-                link="Members"
+                description={props.language.get(
+                    PROFILE.VIEW_MEMBERS_OF_INSTANCE,
+                    group,
+                    props.language.get(PROFILE.GROUP),
+                )}
+                link={props.language.get(PROFILE.MEMBERS)}
                 onClick={() => props.history.push(buildAdminGroupMembers(group))}
             />
             <MenuItem
-                description={`Activate "${group}"`}
-                link="Activate"
+                description={props.language.get(
+                    PROFILE.ACTIVATE_INSTANCE,
+                    group,
+                    props.language.get(PROFILE.GROUP),
+                )}
+                link={props.language.get(PROFILE.ACTIVATE)}
                 onClick={() => activateGroup(group, () => props.history.replace(buildAdminGroupEdit(group)))}
             />
             <MenuItem
-                description={`Deactivate "${group}"`}
+                description={props.language.get(
+                    PROFILE.DEACTIVATE_INSTANCE,
+                    group,
+                    props.language.get(PROFILE.GROUP),
+                )}
+                link={props.language.get(PROFILE.DEACTIVATE)}
                 dangerous
-                link="Deactivate"
                 onClick={() => deactivateGroup(group, () => props.history.replace(buildAdminGroupEdit(group)))}
             />
         </div>
