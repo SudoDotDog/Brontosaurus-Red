@@ -13,6 +13,7 @@ import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminNamespaceEdit, buildAdminNamespaceMembers } from "../util/path";
 import { activateNamespaceRepository } from "./repository/activate";
@@ -62,26 +63,42 @@ export const NamespaceMoreBase: React.FC<NamespaceMoreProps> = (props: Namespace
 
     return (<div>
         <GoBack
-            right="Edit"
-            onClickRight={() => props.history.push('/admin/namespace/e/' + encodeURIComponent(namespace))}
+            right={props.language.get(PROFILE.EDIT)}
+            onClickRight={() => buildAdminNamespaceEdit(namespace)}
         />
-        <NamedTitle about="More About Namespace">
+        <NamedTitle about={props.language.get(
+            PROFILE.MORE_ABOUT,
+            props.language.get(PROFILE.NAMESPACE)
+        )}>
             {namespace}
         </NamedTitle>
         <div className={MenuStyle["menu-grid"]}>
             <MenuItem
-                description={`See Members of "${namespace}"`}
-                link="Members"
+                description={props.language.get(
+                    PROFILE.VIEW_MEMBERS_OF_INSTANCE,
+                    namespace,
+                    props.language.get(PROFILE.NAMESPACE),
+                )}
+                link={props.language.get(PROFILE.MEMBERS)}
                 onClick={() => props.history.push(buildAdminNamespaceMembers(namespace))}
             />
             <MenuItem
-                description={`Activate "${namespace}"`}
-                link="Activate"
+                description={props.language.get(
+                    PROFILE.ACTIVATE_INSTANCE,
+                    namespace,
+                    props.language.get(PROFILE.NAMESPACE),
+                )}
+                link={props.language.get(PROFILE.ACTIVATE)}
                 onClick={() => activateNamespace(namespace, () => props.history.replace(buildAdminNamespaceEdit(namespace)))}
             />
             <MenuItem
-                description={`Deactivate "${namespace}"`}
-                link="Deactivate"
+                description={props.language.get(
+                    PROFILE.DEACTIVATE_INSTANCE,
+                    namespace,
+                    props.language.get(PROFILE.NAMESPACE),
+                )}
+                link={props.language.get(PROFILE.DEACTIVATE)}
+                dangerous
                 onClick={() => deactivateNamespace(namespace, () => props.history.replace(buildAdminNamespaceEdit(namespace)))}
             />
         </div>

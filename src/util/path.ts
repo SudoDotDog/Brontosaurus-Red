@@ -6,27 +6,37 @@
 
 export const buildAdminAccountEdit = (username: string, namespace: string): string => {
 
-    return `/admin/user/e/${namespace}/${username}`;
+    const encodedUsername: string = encodeURIComponent(username);
+    const encodedNamespace: string = encodeURIComponent(namespace);
+    return `/admin/user/e/${encodedNamespace}/${encodedUsername}`;
 };
 
 export const buildAdminAccountMore = (username: string, namespace: string): string => {
 
-    return `/admin/user/more/${namespace}/${username}`;
+    const encodedUsername: string = encodeURIComponent(username);
+    const encodedNamespace: string = encodeURIComponent(namespace);
+    return `/admin/user/more/${encodedNamespace}/${encodedUsername}`;
 };
 
 export const buildAdminAccountAssign = (username: string, namespace: string): string => {
 
-    return `/admin/user/o/${namespace}/${username}`;
+    const encodedUsername: string = encodeURIComponent(username);
+    const encodedNamespace: string = encodeURIComponent(namespace);
+    return `/admin/user/o/${encodedNamespace}/${encodedUsername}`;
 };
 
 export const buildAdminAccountAttempts = (username: string, namespace: string): string => {
 
-    return `/admin/user/attempts/${namespace}/${username}`;
+    const encodedUsername: string = encodeURIComponent(username);
+    const encodedNamespace: string = encodeURIComponent(namespace);
+    return `/admin/user/attempts/${encodedNamespace}/${encodedUsername}`;
 };
 
 export const buildAdminAccountResets = (username: string, namespace: string): string => {
 
-    return `/admin/user/resets/${namespace}/${username}`;
+    const encodedUsername: string = encodeURIComponent(username);
+    const encodedNamespace: string = encodeURIComponent(namespace);
+    return `/admin/user/resets/${encodedNamespace}/${encodedUsername}`;
 };
 
 export const buildAdminApplicationEdit = (application: string): string => {
@@ -43,42 +53,50 @@ export const buildAdminApplicationMore = (application: string): string => {
 
 export const buildAdminGroupMembers = (group: string): string => {
 
-    return `/admin/group/members/${group}`;
+    const encoded: string = encodeURIComponent(group);
+    return `/admin/group/members/${encoded}`;
 };
 
 export const buildAdminGroupEdit = (group: string): string => {
 
-    return `/admin/group/e/${group}`;
+    const encoded: string = encodeURIComponent(group);
+    return `/admin/group/e/${encoded}`;
 };
 
 export const buildAdminTagEdit = (tag: string): string => {
 
-    return `/admin/tag/e/${tag}`;
+    const encoded: string = encodeURIComponent(tag);
+    return `/admin/tag/e/${encoded}`;
 };
 
 export const buildAdminTagMembers = (tag: string): string => {
 
-    return `/admin/tag/members/${tag}`;
+    const encoded: string = encodeURIComponent(tag);
+    return `/admin/tag/members/${encoded}`;
 };
 
 export const buildAdminNamespaceEdit = (namespace: string): string => {
 
-    return `/admin/namespace/e/${namespace}`;
+    const encoded: string = encodeURIComponent(namespace);
+    return `/admin/namespace/e/${encoded}`;
 };
 
 export const buildAdminNamespaceMembers = (namespace: string): string => {
 
-    return `/admin/namespace/members/${namespace}`;
+    const encoded: string = encodeURIComponent(namespace);
+    return `/admin/namespace/members/${encoded}`;
 };
 
 export const buildAdminDecoratorEdit = (decorator: string): string => {
 
-    return `/admin/decorator/e/${decorator}`;
+    const encoded: string = encodeURIComponent(decorator);
+    return `/admin/decorator/e/${encoded}`;
 };
 
 export const buildAdminDecoratorMembers = (decorator: string): string => {
 
-    return `/admin/decorator/members/${decorator}`;
+    const encoded: string = encodeURIComponent(decorator);
+    return `/admin/decorator/members/${encoded}`;
 };
 
 export const buildAdminOrganizationEdit = (organization: string): string => {
