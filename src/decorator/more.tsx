@@ -4,18 +4,19 @@
  * @description More
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminDecoratorEdit, buildAdminDecoratorMembers } from "../util/path";
 import { activateDecoratorRepository } from "./repository/activate";
 import { deactivateDecoratorRepository } from "./repository/deactivate";
-
-export type DecoratorMoreProps = {
-} & RouteComponentProps;
 
 const activateDecorator = async (decorator: string, next: () => void) => {
 
@@ -43,7 +44,18 @@ const deactivateDecorator = async (decorator: string, next: () => void) => {
     }
 };
 
-export const DecoratorMore: React.FC<DecoratorMoreProps> = (props: DecoratorMoreProps) => {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type DecoratorMoreProps = RouteComponentProps & ConnectedStates;
+
+export const DecoratorMoreBase: React.FC<DecoratorMoreProps> = (props: DecoratorMoreProps) => {
 
     const params: any = props.match.params;
     const decorator: string = decodeURIComponent(params.decorator);
@@ -75,3 +87,5 @@ export const DecoratorMore: React.FC<DecoratorMoreProps> = (props: DecoratorMore
         </div>
     </div>);
 };
+
+export const DecoratorMore: React.ComponentType = connector.connect(DecoratorMoreBase);

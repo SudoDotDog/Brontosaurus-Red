@@ -4,18 +4,19 @@
  * @description More
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminNamespaceEdit, buildAdminNamespaceMembers } from "../util/path";
 import { activateNamespaceRepository } from "./repository/activate";
 import { deactivateNamespaceRepository } from "./repository/deactivate";
-
-export type NamespaceMoreProps = {
-} & RouteComponentProps;
 
 const activateNamespace = async (namespace: string, next: () => void) => {
 
@@ -43,7 +44,18 @@ const deactivateNamespace = async (namespace: string, next: () => void) => {
     }
 };
 
-export const NamespaceMore: React.FC<NamespaceMoreProps> = (props: NamespaceMoreProps) => {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type NamespaceMoreProps = RouteComponentProps & ConnectedStates;
+
+export const NamespaceMoreBase: React.FC<NamespaceMoreProps> = (props: NamespaceMoreProps) => {
 
     const params: any = props.match.params;
     const namespace: string = decodeURIComponent(params.namespace);
@@ -75,3 +87,5 @@ export const NamespaceMore: React.FC<NamespaceMoreProps> = (props: NamespaceMore
         </div>
     </div>);
 };
+
+export const NamespaceMore: React.ComponentType = connector.connect(NamespaceMoreBase);

@@ -4,19 +4,20 @@
  * @description More
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminGroupEdit, buildAdminGroupMembers } from "../util/path";
 import { activateGroupRepository } from "./repository/activate";
 import { deactivateGroupRepository } from "./repository/deactivate";
 import { removeAllGroupRepository } from "./repository/remove-all";
-
-export type GroupMoreProps = {
-} & RouteComponentProps;
 
 const activateGroup = async (group: string, next: () => void) => {
 
@@ -57,7 +58,18 @@ const removeAllGroup = async (group: string, next: () => void) => {
     }
 };
 
-export const GroupMore: React.FC<GroupMoreProps> = (props: GroupMoreProps) => {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type GroupMoreProps = RouteComponentProps & ConnectedStates;
+
+export const GroupMoreBase: React.FC<GroupMoreProps> = (props: GroupMoreProps) => {
 
     const params: any = props.match.params;
     const group: string = decodeURIComponent(params.group);
@@ -94,3 +106,5 @@ export const GroupMore: React.FC<GroupMoreProps> = (props: GroupMoreProps) => {
         </div>
     </div>);
 };
+
+export const GroupMore: React.ComponentType = connector.connect(GroupMoreBase);

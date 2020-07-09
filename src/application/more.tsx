@@ -4,12 +4,16 @@
  * @description More
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminApplicationEdit } from "../util/path";
 import { activateApplicationRepository } from "./repository/activate";
 import { deactivateApplicationRepository } from "./repository/deactivate";
@@ -17,9 +21,6 @@ import { refreshGreenRepository } from "./repository/refresh-green";
 import { refreshKeyRepository } from "./repository/refresh-key";
 import { toggleGreenAccessRepository } from "./repository/toggle-green-access";
 import { togglePortalAccessRepository } from "./repository/toggle-portal-access";
-
-export type ApplicationMoreProps = {
-} & RouteComponentProps;
 
 const activateApplication = async (application: string, next: () => void) => {
 
@@ -99,7 +100,18 @@ const togglePortalAccess = async (applicationKey: string, next: () => void) => {
     }
 };
 
-export const ApplicationMore: React.FC<ApplicationMoreProps> = (props: ApplicationMoreProps) => {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type ApplicationMoreProps = RouteComponentProps & ConnectedStates;
+
+export const ApplicationMoreBase: React.FC<ApplicationMoreProps> = (props: ApplicationMoreProps) => {
 
     const params: any = props.match.params;
     const application: string = decodeURIComponent(params.application);
@@ -146,3 +158,5 @@ export const ApplicationMore: React.FC<ApplicationMoreProps> = (props: Applicati
         </div>
     </div>);
 };
+
+export const ApplicationMore: React.ComponentType = connector.connect(ApplicationMoreBase);

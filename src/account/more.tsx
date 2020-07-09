@@ -4,12 +4,16 @@
  * @description More
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminAccountAssign, buildAdminAccountAttempts, buildAdminAccountEdit, buildAdminAccountResets } from "../util/path";
 import { activateAccount } from "./repository/activate";
 import { deactivateAccount } from "./repository/deactivate";
@@ -19,9 +23,6 @@ import { limboAccount, LimboAccountResponse } from "./repository/limbo";
 import { resetAttemptAccount } from "./repository/reset-attempt";
 import { removeTwoFAAccount } from "./repository/twoFARemove";
 import { withdrawOrganizationAccountRepository } from "./repository/withdraw-organization";
-
-export type AccountMoreProps = {
-} & RouteComponentProps;
 
 const activateUser = async (username: string, namespace: string, goBack: () => void) => {
 
@@ -127,7 +128,18 @@ const generateApplicationPassword = async (username: string, namespace: string, 
     }
 };
 
-export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps) => {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type AccountMoreProps = RouteComponentProps & ConnectedStates;
+
+export const AccountMoreBase: React.FC<AccountMoreProps> = (props: AccountMoreProps) => {
 
     const params: any = props.match.params;
     const username: string = decodeURIComponent(params.username);
@@ -200,3 +212,5 @@ export const AccountMore: React.FC<AccountMoreProps> = (props: AccountMoreProps)
         </div>
     </div>);
 };
+
+export const AccountMore: React.ComponentType = connector.connect(AccountMoreBase);

@@ -4,18 +4,19 @@
  * @description More
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminTagEdit, buildAdminTagMembers } from "../util/path";
 import { activateTagRepository } from "./repository/activate";
 import { deactivateTagRepository } from "./repository/deactivate";
-
-export type TagMoreProps = {
-} & RouteComponentProps;
 
 const activateTag = async (tag: string, next: () => void) => {
 
@@ -43,7 +44,18 @@ const deactivateTag = async (tag: string, next: () => void) => {
     }
 };
 
-export const TagMore: React.FC<TagMoreProps> = (props: TagMoreProps) => {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type TagMoreProps = RouteComponentProps & ConnectedStates;
+
+export const TagMoreBase: React.FC<TagMoreProps> = (props: TagMoreProps) => {
 
     const params: any = props.match.params;
     const tag: string = decodeURIComponent(params.tag);
@@ -75,3 +87,5 @@ export const TagMore: React.FC<TagMoreProps> = (props: TagMoreProps) => {
         </div>
     </div>);
 };
+
+export const TagMore: React.ComponentType = connector.connect(TagMoreBase);

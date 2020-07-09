@@ -4,18 +4,19 @@
  * @description More
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { GoBack } from "../components/go-back";
 import { MenuItem } from "../components/menu-item";
 import { NamedTitle } from "../components/named-title";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminOrganizationEdit, buildAdminOrganizationMembers } from "../util/path";
 import { activateOrganizationRepository } from "./repository/activate";
 import { deactivateOrganizationRepository } from "./repository/deactivate";
-
-export type OrganizationMoreProps = {
-} & RouteComponentProps;
 
 const activateOrganization = async (organization: string, next: () => void) => {
 
@@ -43,7 +44,18 @@ const deactivateOrganization = async (organization: string, next: () => void) =>
     }
 };
 
-export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: OrganizationMoreProps) => {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type OrganizationMoreProps = RouteComponentProps & ConnectedStates;
+
+export const OrganizationMoreBase: React.FC<OrganizationMoreProps> = (props: OrganizationMoreProps) => {
 
     const params: any = props.match.params;
     const organization: string = decodeURIComponent(params.organization);
@@ -85,3 +97,5 @@ export const OrganizationMore: React.FC<OrganizationMoreProps> = (props: Organiz
         </div>
     </div>);
 };
+
+export const OrganizationMore: React.ComponentType = connector.connect(OrganizationMoreBase);
