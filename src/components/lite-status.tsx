@@ -19,6 +19,7 @@ export type LiteStatusProps = {
 export const LiteStatus: React.FC<LiteStatusProps> = (props: LiteStatusProps) => {
 
     const text: string = props.active ? props.activeText : props.inactiveText;
+
     return (<span className={combineClasses(
         ActiveStatusStyle["lite-status"],
         props.active ? ActiveStatusStyle.activated : ActiveStatusStyle.inactivated,
