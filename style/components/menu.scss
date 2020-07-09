@@ -21,7 +21,11 @@
 
 .menu-dangerous {
 	background-color: $red !important;
-	border-color: $red;
+	border-color: $red !important;
+
+	&:active {
+		border-color: $blue !important;
+	}
 }
 
 .menu-description {
