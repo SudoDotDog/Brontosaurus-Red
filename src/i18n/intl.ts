@@ -6,7 +6,8 @@
 
 import { LOCALE, SudooInternationalization } from "@sudoo/internationalization";
 import { defaultLanguage } from "../state/preference/type";
-import { CHINESE_SIMPLIFIED, ENGLISH_UNITED_STATES } from "./all";
+import { ENGLISH_UNITED_STATES } from "./languages/en-us";
+import { CHINESE_SIMPLIFIED } from "./languages/zh-cn";
 
 export const intl: SudooInternationalization = SudooInternationalization.create(defaultLanguage);
 
