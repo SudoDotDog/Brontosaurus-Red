@@ -17,12 +17,12 @@ import { User } from "./user";
 export const UserRoute: React.FC = () => {
 
     return (<React.Fragment>
-        <Route path="/admin/user" exact component={User} />
-        <Route path="/admin/user/new" exact component={Register} />
-        <Route path="/admin/user/e/:namespace/:username" exact component={AccountEdit} />
-        <Route path="/admin/user/more/:namespace/:username" exact component={AccountMore} />
-        <Route path="/admin/user/attempts/:namespace/:username" exact component={AccountAttempts} />
-        <Route path="/admin/user/resets/:namespace/:username" exact component={AccountResets} />
-        <Route path="/admin/user/o/:namespace/:username" exact component={AccountOrganizationAssign} />
+        <Route path="/admin/account" exact component={User} />
+        <Route path="/admin/account/new" exact component={Register} />
+        <Route path="/admin/account/e/:namespace/:username" exact component={AccountEdit} />
+        <Route path="/admin/account/more/:namespace/:username" exact component={AccountMore} />
+        <Route path="/admin/account/attempts/:namespace/:username" exact component={AccountAttempts} />
+        <Route path="/admin/account/resets/:namespace/:username" exact component={AccountResets} />
+        <Route path="/admin/account/o/:namespace/:username" exact component={AccountOrganizationAssign} />
     </React.Fragment>);
 };

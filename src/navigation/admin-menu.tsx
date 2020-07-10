@@ -37,7 +37,7 @@ export const AdminMenuBase: React.FC<AdminMenuProps> = (props: AdminMenuProps) =
                 props.language.get(PROFILE.ACCOUNTS),
             )}
             link={props.language.get(PROFILE.ACCOUNT)}
-            onClick={() => props.history.push('/admin/user')}
+            onClick={() => props.history.push('/admin/account')}
         />
         <MenuItem
             description={props.language.get(

@@ -37,8 +37,8 @@ export const AdminNavBase: React.FC<AdminNavProps> = (props: AdminNavProps) => {
             {props.language.get(PROFILE.ADMIN_PANEL)}
         </SubButton>
         <SubButton
-            selected={props.location.pathname.indexOf('/admin/user') === 0}
-            onClick={() => props.history.push('/admin/user')}
+            selected={props.location.pathname.indexOf('/admin/account') === 0}
+            onClick={() => props.history.push('/admin/account')}
         >
             {props.language.get(PROFILE.ACCOUNT)}
         </SubButton>

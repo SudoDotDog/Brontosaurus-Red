@@ -74,7 +74,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                             this._searchUser();
                         });
                     }}
-                    onNew={() => this.props.history.push('/admin/user/new')}
+                    onNew={() => this.props.history.push('/admin/account/new')}
                 />
 
                 {this.state.users.length === 0

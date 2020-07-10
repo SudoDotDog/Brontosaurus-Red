@@ -8,35 +8,35 @@ export const buildAdminAccountEdit = (username: string, namespace: string): stri
 
     const encodedUsername: string = encodeURIComponent(username);
     const encodedNamespace: string = encodeURIComponent(namespace);
-    return `/admin/user/e/${encodedNamespace}/${encodedUsername}`;
+    return `/admin/account/e/${encodedNamespace}/${encodedUsername}`;
 };
 
 export const buildAdminAccountMore = (username: string, namespace: string): string => {
 
     const encodedUsername: string = encodeURIComponent(username);
     const encodedNamespace: string = encodeURIComponent(namespace);
-    return `/admin/user/more/${encodedNamespace}/${encodedUsername}`;
+    return `/admin/account/more/${encodedNamespace}/${encodedUsername}`;
 };
 
 export const buildAdminAccountAssign = (username: string, namespace: string): string => {
 
     const encodedUsername: string = encodeURIComponent(username);
     const encodedNamespace: string = encodeURIComponent(namespace);
-    return `/admin/user/o/${encodedNamespace}/${encodedUsername}`;
+    return `/admin/account/o/${encodedNamespace}/${encodedUsername}`;
 };
 
 export const buildAdminAccountAttempts = (username: string, namespace: string): string => {
 
     const encodedUsername: string = encodeURIComponent(username);
     const encodedNamespace: string = encodeURIComponent(namespace);
-    return `/admin/user/attempts/${encodedNamespace}/${encodedUsername}`;
+    return `/admin/account/attempts/${encodedNamespace}/${encodedUsername}`;
 };
 
 export const buildAdminAccountResets = (username: string, namespace: string): string => {
 
     const encodedUsername: string = encodeURIComponent(username);
     const encodedNamespace: string = encodeURIComponent(namespace);
-    return `/admin/user/resets/${encodedNamespace}/${encodedUsername}`;
+    return `/admin/account/resets/${encodedNamespace}/${encodedUsername}`;
 };
 
 export const buildAdminApplicationEdit = (application: string): string => {

@@ -13,8 +13,8 @@ export const AccountNavigation: React.FC<RouteComponentProps> = (props: RouteCom
     return (<React.Fragment>
 
         <SubButton
-            selected={props.location.pathname.includes('/admin/user')}
-            onClick={() => props.history.push('/admin/user/list')}
+            selected={props.location.pathname.includes('/admin/account')}
+            onClick={() => props.history.push('/admin/account/list')}
         >
             Account
         </SubButton>
