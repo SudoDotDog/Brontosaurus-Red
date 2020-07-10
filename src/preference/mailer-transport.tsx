@@ -4,12 +4,16 @@
  * @description Mailer Transport
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { mailerTransportPreferenceRepository } from "./repository/mailer-transport";
 import { readMailerTransportPreferenceRepository } from "./repository/read-mailer-transport";
 
@@ -23,10 +27,18 @@ export type MailerTransportPreferenceStates = {
     readonly flag: NeonFlagCut | undefined;
 };
 
-export type MailerTransportPreferenceProp = {
-} & RouteComponentProps;
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
 
-export class MailerTransportPreference extends React.Component<MailerTransportPreferenceProp, MailerTransportPreferenceStates> {
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type MailerTransportPreferenceProp = RouteComponentProps & ConnectedStates;
+
+export class MailerTransportPreferenceBase extends React.Component<MailerTransportPreferenceProp, MailerTransportPreferenceStates> {
 
     public readonly state: MailerTransportPreferenceStates = {
 
@@ -126,3 +138,5 @@ export class MailerTransportPreference extends React.Component<MailerTransportPr
         };
     }
 }
+
+export const MailerTransportPreference: React.ComponentType = connector.connect(MailerTransportPreferenceBase);

@@ -4,12 +4,16 @@
  * @description Mailer Source
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { mailerSourcePreferenceRepository } from "./repository/mailer-source";
 import { readMailerSourcePreferenceRepository, ReadMailerSourceRepositoryResponse } from "./repository/read-mailer-source";
 
@@ -21,10 +25,18 @@ export type MailerSourcePreferenceStates = {
     readonly flag: NeonFlagCut | undefined;
 };
 
-export type MailerSourcePreferenceProp = {
-} & RouteComponentProps;
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
 
-export class MailerSourcePreference extends React.Component<MailerSourcePreferenceProp, MailerSourcePreferenceStates> {
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type MailerSourcePreferenceProp = RouteComponentProps & ConnectedStates;
+
+export class MailerSourcePreferenceBase extends React.Component<MailerSourcePreferenceProp, MailerSourcePreferenceStates> {
 
     public readonly state: MailerSourcePreferenceStates = {
 
@@ -128,3 +140,5 @@ export class MailerSourcePreference extends React.Component<MailerSourcePreferen
         };
     }
 }
+
+export const MailerSourcePreference: React.ComponentType = connector.connect(MailerSourcePreferenceBase);

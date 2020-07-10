@@ -4,12 +4,16 @@
  * @description Global
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { globalPreferenceRepository } from "./repository/global";
 import { readGlobalPreferenceRepository, ReadGlobalRepositoryResponse } from "./repository/read-global";
 
@@ -23,10 +27,18 @@ export type GlobalPreferenceStates = {
     readonly flag: NeonFlagCut | undefined;
 };
 
-export type GlobalPreferenceProp = {
-} & RouteComponentProps;
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
 
-export class GlobalPreference extends React.Component<GlobalPreferenceProp, GlobalPreferenceStates> {
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type GlobalPreferenceProps = RouteComponentProps & ConnectedStates;
+
+export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps, GlobalPreferenceStates> {
 
     public readonly state: GlobalPreferenceStates = {
 
@@ -153,3 +165,5 @@ export class GlobalPreference extends React.Component<GlobalPreferenceProp, Glob
         };
     }
 }
+
+export const GlobalPreference: React.ComponentType = connector.connect(GlobalPreferenceBase);

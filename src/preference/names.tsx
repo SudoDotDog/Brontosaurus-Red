@@ -4,12 +4,16 @@
  * @description Global
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { namePreferenceRepository } from "./repository/names";
 import { readNamePreferenceRepository, ReadNamesRepositoryResponse } from "./repository/read-names";
 
@@ -23,10 +27,18 @@ export type NamesPreferenceStates = {
     readonly flag: NeonFlagCut | undefined;
 };
 
-export type NamesPreferenceProp = {
-} & RouteComponentProps;
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
 
-export class NamesPreference extends React.Component<NamesPreferenceProp, NamesPreferenceStates> {
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type NamesPreferenceProp = RouteComponentProps & ConnectedStates;
+
+export class NamesPreferenceBase extends React.Component<NamesPreferenceProp, NamesPreferenceStates> {
 
     public readonly state: NamesPreferenceStates = {
 
@@ -137,3 +149,5 @@ export class NamesPreference extends React.Component<NamesPreferenceProp, NamesP
         };
     }
 }
+
+export const NamesPreference: React.ComponentType = connector.connect(NamesPreferenceBase);
