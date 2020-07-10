@@ -13,6 +13,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { globalPreferenceRepository } from "./repository/global";
 import { readGlobalPreferenceRepository, ReadGlobalRepositoryResponse } from "./repository/read-global";
@@ -65,8 +66,8 @@ export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps,
             <NeonSmartForm
                 loading={this.state.loading}
                 form={this._getForm()}
-                title="Change Global Preference"
-                submit="Submit"
+                title={this.props.language.get(PROFILE.GLOBAL_PREFERENCES)}
+                submit={this.props.language.get(PROFILE.SAVE_CHANGE)}
                 cover={this.state.cover}
                 flag={this.state.flag}
                 value={{
@@ -140,27 +141,27 @@ export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps,
         return {
             globalAvatar: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Global Avatar',
+                display: this.props.language.get(PROFILE.GLOBAL_AVATAR),
             },
             globalFavicon: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Global Favicon',
+                display: this.props.language.get(PROFILE.GLOBAL_FAVICON),
             },
             globalHelpLink: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Global Help Link',
+                display: this.props.language.get(PROFILE.GLOBAL_HELP_LINK),
             },
             globalPrivacyPolicy: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Global Privacy Policy',
+                display: this.props.language.get(PROFILE.GLOBAL_PRIVACY_POLICY),
             },
             indexPage: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Index Page',
+                display: this.props.language.get(PROFILE.INDEX_PAGE),
             },
             entryPage: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Entry Page',
+                display: this.props.language.get(PROFILE.ENTRY_PAGE),
             },
         };
     }
