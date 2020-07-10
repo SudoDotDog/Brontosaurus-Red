@@ -13,6 +13,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { mailerSourcePreferenceRepository } from "./repository/mailer-source";
 import { readMailerSourcePreferenceRepository, ReadMailerSourceRepositoryResponse } from "./repository/read-mailer-source";
@@ -64,8 +65,8 @@ export class MailerSourcePreferenceBase extends React.Component<MailerSourcePref
             <NeonSmartForm
                 loading={this.state.loading}
                 form={this._getForm()}
-                title="Change Mailer Transport Preference"
-                submit="Submit"
+                title={this.props.language.get(PROFILE.MAILER_SOURCE)}
+                submit={this.props.language.get(PROFILE.SAVE_CHANGE)}
                 cover={this.state.cover}
                 flag={this.state.flag}
                 value={this.state.current}
@@ -131,11 +132,11 @@ export class MailerSourcePreferenceBase extends React.Component<MailerSourcePref
         return {
             resetPassword: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Reset Password Email',
+                display: this.props.language.get(PROFILE.RESET_PASSWORD_EMAIL),
             },
             notification: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Notification Email',
+                display: this.props.language.get(PROFILE.NOTIFICATION_EMAIL),
             },
         };
     }

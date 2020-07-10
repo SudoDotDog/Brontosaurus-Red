@@ -13,6 +13,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { namePreferenceRepository } from "./repository/names";
 import { readNamePreferenceRepository, ReadNamesRepositoryResponse } from "./repository/read-names";
@@ -65,8 +66,8 @@ export class NamesPreferenceBase extends React.Component<NamesPreferenceProp, Na
             <NeonSmartForm
                 loading={this.state.loading}
                 form={this._getForm()}
-                title="Change Names Preference"
-                submit="Submit"
+                title={this.props.language.get(PROFILE.NAME_PREFERENCES)}
+                submit={this.props.language.get(PROFILE.SAVE_CHANGE)}
                 cover={this.state.cover}
                 flag={this.state.flag}
                 value={{
@@ -136,15 +137,15 @@ export class NamesPreferenceBase extends React.Component<NamesPreferenceProp, Na
         return {
             systemName: {
                 type: INPUT_TYPE.TEXT,
-                display: 'System Name',
+                display: this.props.language.get(PROFILE.SYSTEM_NAME),
             },
             accountName: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Account Name',
+                display: this.props.language.get(PROFILE.ACCOUNT_NAME),
             },
             commandCenterName: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Command Center Name',
+                display: this.props.language.get(PROFILE.COMMAND_CENTER_NAME),
             },
         };
     }

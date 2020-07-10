@@ -13,6 +13,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { mailerTransportPreferenceRepository } from "./repository/mailer-transport";
 import { readMailerTransportPreferenceRepository } from "./repository/read-mailer-transport";
@@ -67,8 +68,8 @@ export class MailerTransportPreferenceBase extends React.Component<MailerTranspo
             <NeonSmartForm
                 loading={this.state.loading}
                 form={this._getForm()}
-                title="Change Mailer Transport Preference"
-                submit="Submit"
+                title={this.props.language.get(PROFILE.MAILER_TRANSPORT)}
+                submit={this.props.language.get(PROFILE.SAVE_CHANGE)}
                 cover={this.state.cover}
                 flag={this.state.flag}
                 value={this.state.current}
@@ -133,7 +134,7 @@ export class MailerTransportPreferenceBase extends React.Component<MailerTranspo
         return {
             config: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Config',
+                display: this.props.language.get(PROFILE.CONFIG),
             },
         };
     }
