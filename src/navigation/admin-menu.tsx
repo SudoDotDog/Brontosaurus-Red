@@ -4,56 +4,98 @@
  * @description Admin Menu
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { MenuItem } from "../components/menu-item";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
 
-export type AdminMenuProps = {
+export type AdminMenuBaseProps = {
 } & RouteComponentProps;
 
-export const AdminMenu: React.FC<AdminMenuProps> = (props: AdminMenuProps) => {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type AdminMenuProps = AdminMenuBaseProps & ConnectedStates;
+
+export const AdminMenuBase: React.FC<AdminMenuProps> = (props: AdminMenuProps) => {
 
     return (<div className={MenuStyle["menu-grid"]}>
         <MenuItem
-            description="View, Create, Modify Accounts"
-            link="Account"
+            description={props.language.get(
+                PROFILE.VIEW_CREATE_MODIFY_INSTANCE,
+                props.language.get(PROFILE.ACCOUNTS),
+            )}
+            link={props.language.get(PROFILE.ACCOUNT)}
             onClick={() => props.history.push('/admin/user')}
         />
         <MenuItem
-            description="View, Create, Modify Organizations"
-            link="Organization"
+            description={props.language.get(
+                PROFILE.VIEW_CREATE_MODIFY_INSTANCE,
+                props.language.get(PROFILE.ORGANIZATIONS),
+            )}
+            link={props.language.get(PROFILE.ORGANIZATION)}
             onClick={() => props.history.push('/admin/organization')}
         />
         <MenuItem
-            description="View, Create, Modify Groups"
-            link="Group"
+            description={props.language.get(
+                PROFILE.VIEW_CREATE_MODIFY_INSTANCE,
+                props.language.get(PROFILE.GROUPS),
+            )}
+            link={props.language.get(PROFILE.GROUP)}
             onClick={() => props.history.push('/admin/group')}
         />
         <MenuItem
-            description="View, Create, Modify Decorators"
-            link="Decorator"
+            description={props.language.get(
+                PROFILE.VIEW_CREATE_MODIFY_INSTANCE,
+                props.language.get(PROFILE.DECORATORS),
+            )}
+            link={props.language.get(PROFILE.DECORATOR)}
             onClick={() => props.history.push('/admin/decorator')}
         />
         <MenuItem
-            description="View, Create, Modify Namespaces"
-            link="Namespace"
+            description={props.language.get(
+                PROFILE.VIEW_CREATE_MODIFY_INSTANCE,
+                props.language.get(PROFILE.NAMESPACES),
+            )}
+            link={props.language.get(PROFILE.NAMESPACE)}
             onClick={() => props.history.push('/admin/namespace')}
         />
         <MenuItem
-            description="View, Create, Modify Tags"
-            link="Tag"
+            description={props.language.get(
+                PROFILE.VIEW_CREATE_MODIFY_INSTANCE,
+                props.language.get(PROFILE.TAGS),
+            )}
+            link={props.language.get(PROFILE.TAG)}
             onClick={() => props.history.push('/admin/tag')}
         />
         <MenuItem
-            description="View, Create, Modify Applications"
-            link="Application"
+            description={props.language.get(
+                PROFILE.VIEW_CREATE_MODIFY_INSTANCE,
+                props.language.get(PROFILE.APPLICATIONS),
+            )}
+            link={props.language.get(PROFILE.APPLICATION)}
             onClick={() => props.history.push('/admin/application')}
         />
         <MenuItem
-            description="Modify Preferences"
-            link="Preference"
+            description={props.language.get(
+                PROFILE.MODIFY_INSTANCE,
+                props.language.get(PROFILE.PREFERENCES),
+            )}
+            link={props.language.get(PROFILE.PREFERENCE)}
             onClick={() => props.history.push('/admin/preference')}
         />
     </div>);
 };
+
+export const AdminMenu: React.ComponentType<AdminMenuProps> = connector.connect(AdminMenuBase);
