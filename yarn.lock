@@ -143,10 +143,10 @@
     jss "^10.3.0"
     jss-preset-default "^10.3.0"
 
-"@sudoo/pattern@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/pattern/-/pattern-1.2.0.tgz#bd57d9d8066a968cba057ed93a7480494085998e"
-  integrity sha512-g5C3BJB6WJRBaQe+JMyKCq7+UK4g4IAksrtp0NMCZl8yQ6Jrg87aPjdv36RmUNJyAcRBxJ1ZHAxLpn6GL+vyaA==
+"@sudoo/pattern@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/pattern/-/pattern-1.3.0.tgz#55acc0dbc78c5b5c74c6cfef2fa9ce6c34eb3bcd"
+  integrity sha512-br/HK6Dcw3ZVy40WOe98/wFRA7eCFY6uyDT0Y4GYNWRCF/rMkgPCPaVQEjDOEnR4cmlUemslyc3ItE4x8llJeA==
 
 "@sudoo/random@^2.1.1":
   version "2.1.1"
@@ -206,10 +206,10 @@
     ts-node "8.10.2"
     typescript "3.9.6"
 
-"@sudoo/verify@^1.14.0":
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/verify/-/verify-1.14.0.tgz#db3341ccb283019289634c11c2ed561d280aac5c"
-  integrity sha512-83zurGVZk7WWqw58M580FX6NGg0U+OGE58KCKsu69Mp0Iga1MFknTT6p9Zs1L6L4cj/V5lk3cifyL0TJibydYg==
+"@sudoo/verify@^1.15.0":
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/verify/-/verify-1.15.0.tgz#80111d4a2a2d91dce362a39c507c6f3e2e357c98"
+  integrity sha512-7u5k2ZUQxf6SjyLH+zsAUSNmepECEMmcrRkOrNfG41cXHk7L100UVt+dg3kJbjqQkuHb/AC9VdRcNqfvHthqmw==
 
 "@sudoo/webpack-react@^3.1.2":
   version "3.1.2"
