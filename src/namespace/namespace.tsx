@@ -64,7 +64,7 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
             <div>
                 <SearchNew
                     defaultValue={this._defaultValue}
-                    label="Namespace"
+                    label={this.props.language.get(PROFILE.NAMESPACE)}
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);

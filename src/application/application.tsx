@@ -63,7 +63,7 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
         return (<div>
             <SearchNew
                 defaultValue={this._defaultValue}
-                label="Application"
+                label={this.props.language.get(PROFILE.APPLICATION)}
                 onSearch={(keyword: string) => {
                     searchKeywordCache.replace(keyword);
                     searchPageCache.replace(0);

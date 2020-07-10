@@ -66,7 +66,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
             <div>
                 <SearchNew
                     defaultValue={this._defaultValue}
-                    label="Account"
+                    label={this.props.language.get(PROFILE.ACCOUNT)}
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);

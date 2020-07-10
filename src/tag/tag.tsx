@@ -64,7 +64,7 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
             <div>
                 <SearchNew
                     defaultValue={this._defaultValue}
-                    label="Tags"
+                    label={this.props.language.get(PROFILE.TAG)}
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);

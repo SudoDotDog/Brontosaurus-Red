@@ -64,7 +64,7 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
             <div>
                 <SearchNew
                     defaultValue={this._defaultValue}
-                    label="Decorator"
+                    label={this.props.language.get(PROFILE.DECORATOR)}
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);

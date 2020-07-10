@@ -66,7 +66,7 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
             <div>
                 <SearchDoubleNew
                     defaultValue={this._defaultValue}
-                    label="Organization"
+                    label={this.props.language.get(PROFILE.ORGANIZATION)}
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);

@@ -70,7 +70,7 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
             <div>
                 <SearchNew
                     defaultValue={this._defaultValue}
-                    label="Group"
+                    label={this.props.language.get(PROFILE.GROUP)}
                     onSearch={(keyword: string) => {
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);
