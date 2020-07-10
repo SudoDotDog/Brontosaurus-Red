@@ -36,7 +36,11 @@ const renderAuthButton = (token: Token, language: SudooFormat): React.ReactNode 
 
     if (token) {
         return (<span>
-            Hello, {token.username} &nbsp;
+            {language.get(
+                PROFILE.WELCOME_HELLO,
+                token.username,
+            )}
+            &nbsp;
             <a
                 className={EntryStyle["sign-in"]}
                 onClick={() => Brontosaurus.logout()}
