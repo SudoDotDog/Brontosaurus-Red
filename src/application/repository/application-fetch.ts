@@ -35,11 +35,11 @@ export const fetchApplication = async (keyword: string, page: number): Promise<F
 
     const response: FetchApplicationResponse = await Fetch
         .post
-        .json(joinRoute('/application/fetch'))
+        .withJson(joinRoute('/application/fetch'))
         .bearer(Brontosaurus.hard().raw)
         .add('page', page)
         .add('keyword', keyword)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

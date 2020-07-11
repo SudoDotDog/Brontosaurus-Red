@@ -14,10 +14,10 @@ export const mailerTransportPreferenceRepository = async (config: string): Promi
         changed: boolean;
     } = await Fetch
         .post
-        .json(joinRoute('/preference/mailer-transport'))
+        .withJson(joinRoute('/preference/mailer-transport'))
         .bearer(Brontosaurus.hard().raw)
         .add('config', config)
-        .fetch();
+        .fetchJson();
 
     return response.changed;
 };

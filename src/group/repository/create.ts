@@ -12,7 +12,7 @@ export const createGroup = async (name: string, description?: string): Promise<s
 
     const fetch: IFetch = Fetch
         .post
-        .json(joinRoute('/group/create'))
+        .withJson(joinRoute('/group/create'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name);
 
@@ -22,7 +22,7 @@ export const createGroup = async (name: string, description?: string): Promise<s
 
     const response: {
         group: string;
-    } = await fetch.fetch();
+    } = await fetch.fetchJson();
 
     return response.group;
 };

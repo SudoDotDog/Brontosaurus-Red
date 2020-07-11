@@ -18,11 +18,11 @@ export const generateTemporaryPasswordRepository = async (username: string, name
 
     const response: GenerateTemporaryPasswordResponse = await Fetch
         .post
-        .json(joinRoute('/account/generate-temporary-password'))
+        .withJson(joinRoute('/account/generate-temporary-password'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

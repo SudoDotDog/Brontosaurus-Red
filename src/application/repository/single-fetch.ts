@@ -39,7 +39,7 @@ export const singleFetchApplicationRepository = async (key: string): Promise<Sin
         application: SingleApplicationFetchResponse;
     } = await Fetch
         .post
-        .json(joinRoute('/application/single'))
+        .withJson(joinRoute('/application/single'))
         .debugResponse()
         .bearer(Brontosaurus.hard().raw)
         .add('key', key)
@@ -50,7 +50,7 @@ export const singleFetchApplicationRepository = async (key: string): Promise<Sin
                 redirection.identifier = randomUnique();
             }
         })
-        .fetch();
+        .fetchJson();
 
     return response.application;
 };

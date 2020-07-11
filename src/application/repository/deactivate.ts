@@ -16,10 +16,10 @@ export const deactivateApplicationRepository = async (
         deactivated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/application/deactivate'))
+        .withJson(joinRoute('/application/deactivate'))
         .bearer(Brontosaurus.hard().raw)
         .add('application', application)
-        .fetch();
+        .fetchJson();
 
     return response.deactivated;
 };

@@ -22,10 +22,10 @@ export const updateOrganizationRepository = async (request: UpdateOrganizationRe
         readonly organization: string;
     } = await Fetch
         .post
-        .json(joinRoute('/organization/update'))
+        .withJson(joinRoute('/organization/update'))
         .bearer(Brontosaurus.hard().raw)
         .migrate(request)
-        .fetch();
+        .fetchJson();
 
     return response.organization;
 };

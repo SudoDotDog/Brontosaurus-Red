@@ -17,12 +17,12 @@ export const setOwnerRepository = async (username: string, namespace: string, or
 
     const response: SetOwnerResponse = await Fetch
         .post
-        .json(joinRoute('/organization/set-owner'))
+        .withJson(joinRoute('/organization/set-owner'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
         .add('organization', organization)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

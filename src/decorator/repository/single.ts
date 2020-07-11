@@ -21,10 +21,10 @@ export const singleDecorator = async (name: string): Promise<SingleDecoratorResp
 
     const response: SingleDecoratorResponse = await Fetch
         .post
-        .json(joinRoute('/decorator/single'))
+        .withJson(joinRoute('/decorator/single'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

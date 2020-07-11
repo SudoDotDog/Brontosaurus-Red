@@ -29,11 +29,11 @@ export const fetchStandaloneAccount = async (keyword: string, page: number): Pro
         pages: number;
     } = await Fetch
         .post
-        .json(joinRoute('/account/standalone'))
+        .withJson(joinRoute('/account/standalone'))
         .bearer(Brontosaurus.hard().raw)
         .add('page', page)
         .add('keyword', keyword)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

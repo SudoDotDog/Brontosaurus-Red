@@ -16,10 +16,10 @@ export const deactivateDecoratorRepository = async (
         deactivated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/decorator/deactivate'))
+        .withJson(joinRoute('/decorator/deactivate'))
         .bearer(Brontosaurus.hard().raw)
         .add('decorator', decorator)
-        .fetch();
+        .fetchJson();
 
     return response.deactivated;
 };

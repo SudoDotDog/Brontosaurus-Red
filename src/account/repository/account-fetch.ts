@@ -39,11 +39,11 @@ export const fetchAccount = async (keyword: string, page: number): Promise<Fetch
         pages: number;
     } = await Fetch
         .post
-        .json(joinRoute('/account/fetch'))
+        .withJson(joinRoute('/account/fetch'))
         .bearer(Brontosaurus.hard().raw)
         .add('page', page)
         .add('keyword', keyword)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

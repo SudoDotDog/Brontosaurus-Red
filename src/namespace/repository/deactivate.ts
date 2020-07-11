@@ -16,10 +16,10 @@ export const deactivateNamespaceRepository = async (
         deactivated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/namespace/deactivate'))
+        .withJson(joinRoute('/namespace/deactivate'))
         .bearer(Brontosaurus.hard().raw)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return response.deactivated;
 };

@@ -20,9 +20,9 @@ export const fetchAllDecorators = async (): Promise<AllDecoratorsResponse[]> => 
         decorators: AllDecoratorsResponse[];
     } = await Fetch
         .get
-        .json(joinRoute('/decorator/all'))
+        .withJson(joinRoute('/decorator/all'))
         .bearer(Brontosaurus.hard().raw)
-        .fetch();
+        .fetchJson();
 
     return response.decorators;
 };

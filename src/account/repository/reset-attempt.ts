@@ -17,11 +17,11 @@ export const resetAttemptAccount = async (username: string, namespace: string): 
 
     const response: ResetAttemptResponse = await Fetch
         .post
-        .json(joinRoute('/account/reset-attempt'))
+        .withJson(joinRoute('/account/reset-attempt'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return response.attempt;
 };

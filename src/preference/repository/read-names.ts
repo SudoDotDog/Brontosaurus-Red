@@ -18,9 +18,9 @@ export const readNamePreferenceRepository = async (): Promise<ReadNamesRepositor
 
     const response: ReadNamesRepositoryResponse = await Fetch
         .get
-        .json(joinRoute('/preference/read/names'))
+        .withJson(joinRoute('/preference/read/names'))
         .bearer(Brontosaurus.hard().raw)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

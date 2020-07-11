@@ -16,10 +16,10 @@ export const activateNamespaceRepository = async (
         activated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/namespace/activate'))
+        .withJson(joinRoute('/namespace/activate'))
         .bearer(Brontosaurus.hard().raw)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return response.activated;
 };

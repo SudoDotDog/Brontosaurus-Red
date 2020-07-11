@@ -16,10 +16,10 @@ export const activateApplicationRepository = async (
         activated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/application/activate'))
+        .withJson(joinRoute('/application/activate'))
         .bearer(Brontosaurus.hard().raw)
         .add('application', application)
-        .fetch();
+        .fetchJson();
 
     return response.activated;
 };

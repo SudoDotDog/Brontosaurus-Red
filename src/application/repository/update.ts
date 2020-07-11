@@ -22,11 +22,11 @@ export const updateApplicationRepository = async (application: SingleApplication
         application: string;
     } = await Fetch
         .post
-        .json(joinRoute('/application/update'))
+        .withJson(joinRoute('/application/update'))
         .bearer(Brontosaurus.hard().raw)
         .add('key', application.key)
         .add('application', parsedApplication)
-        .fetch();
+        .fetchJson();
 
     return response.application;
 };

@@ -20,9 +20,9 @@ export const getCommandCenterName = async (): Promise<GetCommandCenterNameRespon
 
     const response: GetCommandCenterNameResponse = await Fetch
         .get
-        .json(joinRoute('/preference/command-center'))
+        .withJson(joinRoute('/preference/command-center'))
         .bearer(Brontosaurus.hard().raw)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

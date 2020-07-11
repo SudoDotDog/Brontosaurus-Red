@@ -20,10 +20,10 @@ export const updateTagRepository = async (request: UpdateTagRequest): Promise<st
         readonly Tag: string;
     } = await Fetch
         .post
-        .json(joinRoute('/tag/update'))
+        .withJson(joinRoute('/tag/update'))
         .bearer(Brontosaurus.hard().raw)
         .migrate(request)
-        .fetch();
+        .fetchJson();
 
     return response.Tag;
 };

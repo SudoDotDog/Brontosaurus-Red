@@ -30,11 +30,11 @@ export const fetchOrganization = async (keyword: string, page: number): Promise<
 
     const response: FetchOrganizationResponse = await Fetch
         .post
-        .json(joinRoute('/organization/fetch'))
+        .withJson(joinRoute('/organization/fetch'))
         .bearer(Brontosaurus.hard().raw)
         .add('page', page)
         .add('keyword', keyword)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

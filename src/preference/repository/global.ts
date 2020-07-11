@@ -22,7 +22,7 @@ export const globalPreferenceRepository = async (
         changed: number;
     } = await Fetch
         .post
-        .json(joinRoute('/preference/global'))
+        .withJson(joinRoute('/preference/global'))
         .bearer(Brontosaurus.hard().raw)
         .addIfExist('globalAvatar', globalAvatar)
         .addIfExist('globalBackgroundImages', globalBackgroundImages)
@@ -31,7 +31,7 @@ export const globalPreferenceRepository = async (
         .addIfExist('globalPrivacyPolicy', globalPrivacyPolicy)
         .addIfExist('indexPage', indexPage)
         .addIfExist('entryPage', entryPage)
-        .fetch();
+        .fetchJson();
 
     return response.changed;
 };

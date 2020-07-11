@@ -18,11 +18,11 @@ export const generateApplicationPasswordRepository = async (username: string, na
 
     const response: GenerateApplicationPasswordResponse = await Fetch
         .post
-        .json(joinRoute('/account/generate-application-password'))
+        .withJson(joinRoute('/account/generate-application-password'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

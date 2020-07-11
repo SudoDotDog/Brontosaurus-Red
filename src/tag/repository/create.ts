@@ -12,7 +12,7 @@ export const createTagRepository = async (name: string, description?: string): P
 
     const fetch: IFetch = Fetch
         .post
-        .json(joinRoute('/tag/create'))
+        .withJson(joinRoute('/tag/create'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name);
 
@@ -22,7 +22,7 @@ export const createTagRepository = async (name: string, description?: string): P
 
     const response: {
         tag: string;
-    } = await fetch.fetch();
+    } = await fetch.fetchJson();
 
     return response.tag;
 };

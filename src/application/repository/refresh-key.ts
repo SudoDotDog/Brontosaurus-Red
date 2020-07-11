@@ -14,10 +14,10 @@ export const refreshKeyRepository = async (key: string): Promise<string> => {
         application: string;
     } = await Fetch
         .post
-        .json(joinRoute('/application/refresh-key'))
+        .withJson(joinRoute('/application/refresh-key'))
         .bearer(Brontosaurus.hard().raw)
         .add('key', key)
-        .fetch();
+        .fetchJson();
 
     return response.application;
 };

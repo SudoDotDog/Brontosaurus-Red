@@ -48,11 +48,11 @@ export const singleFetchRepository = async (username: string, namespace: string)
         account: SingleFetchResponse;
     } = await Fetch
         .post
-        .json(joinRoute('/account/single'))
+        .withJson(joinRoute('/account/single'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return {
         ...response.account,

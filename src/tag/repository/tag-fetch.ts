@@ -25,11 +25,11 @@ export const fetchTagRepository = async (keyword: string, page: number): Promise
 
     const response: FetchTagResponse = await Fetch
         .post
-        .json(joinRoute('/tag/fetch'))
+        .withJson(joinRoute('/tag/fetch'))
         .bearer(Brontosaurus.hard().raw)
         .add('page', page)
         .add('keyword', keyword)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

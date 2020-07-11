@@ -34,7 +34,7 @@ export const fetchAccountResets = async (username: string, namespace: string, pa
 
     const response: AccountResetResponse = await Fetch
         .post
-        .json(joinRoute('/account/resets'))
+        .withJson(joinRoute('/account/resets'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
@@ -44,7 +44,7 @@ export const fetchAccountResets = async (username: string, namespace: string, pa
                 (each as any).at = new Date(each.at);
             }
         })
-        .fetch();
+        .fetchJson();
 
     return response;
 };

@@ -25,11 +25,11 @@ export const fetchDecorator = async (keyword: string, page: number): Promise<Fet
 
     const response: FetchDecoratorResponse = await Fetch
         .post
-        .json(joinRoute('/decorator/fetch'))
+        .withJson(joinRoute('/decorator/fetch'))
         .bearer(Brontosaurus.hard().raw)
         .add('page', page)
         .add('keyword', keyword)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

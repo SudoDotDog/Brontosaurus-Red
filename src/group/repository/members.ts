@@ -28,11 +28,11 @@ export const fetchGroupMembers = async (group: string, page: number): Promise<Gr
 
     const response: GroupMemberResponse = await Fetch
         .post
-        .json(joinRoute('/group/members'))
+        .withJson(joinRoute('/group/members'))
         .bearer(Brontosaurus.hard().raw)
         .add('group', group)
         .add('page', page)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

@@ -14,11 +14,11 @@ export const activateAccount = async (username: string, namespace: string): Prom
         activated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/account/activate'))
+        .withJson(joinRoute('/account/activate'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return response.activated;
 };

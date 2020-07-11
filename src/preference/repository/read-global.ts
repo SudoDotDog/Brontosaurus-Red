@@ -23,9 +23,9 @@ export const readGlobalPreferenceRepository = async (): Promise<ReadGlobalReposi
 
     const response: ReadGlobalRepositoryResponse = await Fetch
         .get
-        .json(joinRoute('/preference/read/global'))
+        .withJson(joinRoute('/preference/read/global'))
         .bearer(Brontosaurus.hard().raw)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

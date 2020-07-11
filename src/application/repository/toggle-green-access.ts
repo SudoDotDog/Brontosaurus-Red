@@ -14,10 +14,10 @@ export const toggleGreenAccessRepository = async (key: string): Promise<string> 
         application: string;
     } = await Fetch
         .post
-        .json(joinRoute('/application/toggle-green-access'))
+        .withJson(joinRoute('/application/toggle-green-access'))
         .bearer(Brontosaurus.hard().raw)
         .add('key', key)
-        .fetch();
+        .fetchJson();
 
     return response.application;
 };

@@ -22,10 +22,10 @@ export const updateDecoratorRepository = async (request: UpdateDecoratorRequest)
         readonly decorator: string;
     } = await Fetch
         .post
-        .json(joinRoute('/decorator/update'))
+        .withJson(joinRoute('/decorator/update'))
         .bearer(Brontosaurus.hard().raw)
         .migrate(request)
-        .fetch();
+        .fetchJson();
 
     return response.decorator;
 };

@@ -27,7 +27,7 @@ export const editAccountAdminRepository = async (
         readonly account: string;
     } = await Fetch
         .post
-        .json(joinRoute('/account/edit/admin'))
+        .withJson(joinRoute('/account/edit/admin'))
         .bearer(Brontosaurus.hard().raw)
         .add('groups', groups)
         .add('tags', tags)
@@ -39,7 +39,7 @@ export const editAccountAdminRepository = async (
         .add('username', username)
         .add('namespace', namespace)
         .add('account', account)
-        .fetch();
+        .fetchJson();
 
     return response.account;
 };

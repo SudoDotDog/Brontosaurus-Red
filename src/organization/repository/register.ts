@@ -41,10 +41,10 @@ export const registerSubOrganization = async (
         tempPassword: string;
     } = await Fetch
         .post
-        .json(joinRoute('/organization/sub-register'))
+        .withJson(joinRoute('/organization/sub-register'))
         .bearer(Brontosaurus.hard().raw)
         .migrate(obj)
-        .fetch();
+        .fetchJson();
 
     return response.tempPassword;
 };

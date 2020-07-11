@@ -28,11 +28,11 @@ export const fetchNamespaceMembers = async (namespace: string, page: number): Pr
 
     const response: NamespaceMemberResponse = await Fetch
         .post
-        .json(joinRoute('/namespace/members'))
+        .withJson(joinRoute('/namespace/members'))
         .bearer(Brontosaurus.hard().raw)
         .add('namespace', namespace)
         .add('page', page)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

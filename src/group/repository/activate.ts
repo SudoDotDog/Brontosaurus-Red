@@ -16,10 +16,10 @@ export const activateGroupRepository = async (
         activated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/group/activate'))
+        .withJson(joinRoute('/group/activate'))
         .bearer(Brontosaurus.hard().raw)
         .add('group', group)
-        .fetch();
+        .fetchJson();
 
     return response.activated;
 };

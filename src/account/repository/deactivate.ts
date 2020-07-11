@@ -14,11 +14,11 @@ export const deactivateAccount = async (username: string, namespace: string): Pr
         deactivated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/account/deactivate'))
+        .withJson(joinRoute('/account/deactivate'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return response.deactivated;
 };

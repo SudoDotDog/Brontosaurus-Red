@@ -18,14 +18,14 @@ export const createApplication = async (
         application: string;
     } = await Fetch
         .post
-        .json(joinRoute('/application/create'))
+        .withJson(joinRoute('/application/create'))
         .bearer(Brontosaurus.hard().raw)
         .migrate({
             name,
             key,
             expire,
         })
-        .fetch();
+        .fetchJson();
 
     return response.application;
 };

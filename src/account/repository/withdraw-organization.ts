@@ -17,11 +17,11 @@ export const withdrawOrganizationAccountRepository = async (username: string, na
 
     const response: WithdrawOrganizationAccountResponse = await Fetch
         .post
-        .json(joinRoute('/account/withdraw-organization'))
+        .withJson(joinRoute('/account/withdraw-organization'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

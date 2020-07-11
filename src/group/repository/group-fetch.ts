@@ -26,11 +26,11 @@ export const fetchGroup = async (keyword: string, page: number): Promise<FetchGr
 
     const response: FetchGroupResponse = await Fetch
         .post
-        .json(joinRoute('/group/fetch'))
+        .withJson(joinRoute('/group/fetch'))
         .bearer(Brontosaurus.hard().raw)
         .add('page', page)
         .add('keyword', keyword)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

@@ -12,7 +12,7 @@ export const createDecorator = async (name: string, description?: string): Promi
 
     const fetch: IFetch = Fetch
         .post
-        .json(joinRoute('/decorator/create'))
+        .withJson(joinRoute('/decorator/create'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name);
 
@@ -22,7 +22,7 @@ export const createDecorator = async (name: string, description?: string): Promi
 
     const response: {
         decorator: string;
-    } = await fetch.fetch();
+    } = await fetch.fetchJson();
 
     return response.decorator;
 };

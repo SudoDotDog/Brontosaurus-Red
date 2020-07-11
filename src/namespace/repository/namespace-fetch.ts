@@ -26,11 +26,11 @@ export const fetchNamespace = async (keyword: string, page: number): Promise<Fet
 
     const response: FetchNamespaceResponse = await Fetch
         .post
-        .json(joinRoute('/namespace/fetch'))
+        .withJson(joinRoute('/namespace/fetch'))
         .bearer(Brontosaurus.hard().raw)
         .add('page', page)
         .add('keyword', keyword)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

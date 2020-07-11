@@ -20,9 +20,9 @@ export const fetchAllTags = async (): Promise<AllTagsResponse[]> => {
         tags: AllTagsResponse[];
     } = await Fetch
         .get
-        .json(joinRoute('/tag/all'))
+        .withJson(joinRoute('/tag/all'))
         .bearer(Brontosaurus.hard().raw)
-        .fetch();
+        .fetchJson();
 
     return response.tags;
 };

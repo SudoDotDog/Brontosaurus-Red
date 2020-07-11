@@ -12,14 +12,14 @@ export const createNamespace = async (name: string, namespace: string): Promise<
 
     const fetch: IFetch = Fetch
         .post
-        .json(joinRoute('/namespace/create'))
+        .withJson(joinRoute('/namespace/create'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name)
         .add('namespace', namespace);
 
     const response: {
         namespace: string;
-    } = await fetch.fetch();
+    } = await fetch.fetchJson();
 
     return response.namespace;
 };

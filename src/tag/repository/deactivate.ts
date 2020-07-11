@@ -16,10 +16,10 @@ export const deactivateTagRepository = async (
         deactivated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/tag/deactivate'))
+        .withJson(joinRoute('/tag/deactivate'))
         .bearer(Brontosaurus.hard().raw)
         .add('tag', tag)
-        .fetch();
+        .fetchJson();
 
     return response.deactivated;
 };

@@ -18,12 +18,12 @@ export const setOrganizationRepository = async (username: string, namespace: str
 
     const response: SetOrganizationResponse = await Fetch
         .post
-        .json(joinRoute('/account/set-organization'))
+        .withJson(joinRoute('/account/set-organization'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
         .add('organization', organization)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

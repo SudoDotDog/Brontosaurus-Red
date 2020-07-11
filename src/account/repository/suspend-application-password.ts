@@ -17,12 +17,12 @@ export const suspendApplicationPasswordRepository = async (username: string, nam
 
     const response: SuspendApplicationPasswordResponse = await Fetch
         .post
-        .json(joinRoute('/account/suspend-application-password'))
+        .withJson(joinRoute('/account/suspend-application-password'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
         .add('passwordId', passwordId)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

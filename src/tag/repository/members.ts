@@ -28,11 +28,11 @@ export const fetchTagMembers = async (tag: string, page: number): Promise<TagMem
 
     const response: TagMemberResponse = await Fetch
         .post
-        .json(joinRoute('/tag/members'))
+        .withJson(joinRoute('/tag/members'))
         .bearer(Brontosaurus.hard().raw)
         .add('tag', tag)
         .add('page', page)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

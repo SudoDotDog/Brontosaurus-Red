@@ -14,12 +14,12 @@ export const addGroup = async (username: string, namespace: string, group: strin
         account: string;
     } = await Fetch
         .post
-        .json(joinRoute('/account/add-group/'))
+        .withJson(joinRoute('/account/add-group/'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
         .add('group', group)
-        .fetch();
+        .fetchJson();
 
     return response.account;
 };

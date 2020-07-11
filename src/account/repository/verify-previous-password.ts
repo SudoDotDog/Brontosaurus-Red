@@ -23,7 +23,7 @@ export const verifyPreviousPasswordRepository = async (
 
     const response: VerifyPreviousPasswordResponse = await Fetch
         .post
-        .json(joinRoute('/account/verify-previous-password'))
+        .withJson(joinRoute('/account/verify-previous-password'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
@@ -34,7 +34,7 @@ export const verifyPreviousPasswordRepository = async (
                 (draft.previousPassword as any).changedAt = new Date(draft.previousPassword.changedAt);
             }
         })
-        .fetch();
+        .fetchJson();
 
     return response.previousPassword;
 };

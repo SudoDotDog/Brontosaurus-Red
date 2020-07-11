@@ -18,12 +18,12 @@ export const namePreferenceRepository = async (
         readonly changed: number;
     } = await Fetch
         .post
-        .json(joinRoute('/preference/names'))
+        .withJson(joinRoute('/preference/names'))
         .bearer(Brontosaurus.hard().raw)
         .add('systemName', systemName)
         .add('accountName', accountName)
         .add('commandCenterName', commandCenterName)
-        .fetch();
+        .fetchJson();
 
     return response.changed;
 };

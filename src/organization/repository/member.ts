@@ -35,11 +35,11 @@ export const fetchOrganizationMembers = async (organization: string, page: numbe
 
     const response: OrganizationMemberResponse = await Fetch
         .post
-        .json(joinRoute('/organization/members'))
+        .withJson(joinRoute('/organization/members'))
         .bearer(Brontosaurus.hard().raw)
         .add('organization', organization)
         .add('page', page)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

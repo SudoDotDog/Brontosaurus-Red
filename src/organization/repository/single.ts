@@ -37,10 +37,10 @@ export const singleOrganization = async (name: string): Promise<SingleOrganizati
 
     const response: SingleOrganizationResponse = await Fetch
         .post
-        .json(joinRoute('/organization/single'))
+        .withJson(joinRoute('/organization/single'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

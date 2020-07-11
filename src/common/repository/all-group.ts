@@ -20,9 +20,9 @@ export const fetchAllGroups = async (): Promise<AllGroupsResponse[]> => {
         groups: AllGroupsResponse[];
     } = await Fetch
         .get
-        .json(joinRoute('/group/all'))
+        .withJson(joinRoute('/group/all'))
         .bearer(Brontosaurus.hard().raw)
-        .fetch();
+        .fetchJson();
 
     return response.groups;
 };

@@ -12,9 +12,9 @@ export const registerInfo = async (): Promise<any> => {
 
     const response: any = await Fetch
         .get
-        .json(joinRoute('/preference/infos'))
+        .withJson(joinRoute('/preference/infos'))
         .bearer(Brontosaurus.hard().raw)
-        .fetch();
+        .fetchJson();
 
     return response.registerInfos;
 };

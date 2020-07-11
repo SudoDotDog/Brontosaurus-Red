@@ -20,10 +20,10 @@ export const updateNamespaceRepository = async (request: UpdateNamespaceRequest)
         readonly namespace: string;
     } = await Fetch
         .post
-        .json(joinRoute('/namespace/update'))
+        .withJson(joinRoute('/namespace/update'))
         .bearer(Brontosaurus.hard().raw)
         .migrate(request)
-        .fetch();
+        .fetchJson();
 
     return response.namespace;
 };

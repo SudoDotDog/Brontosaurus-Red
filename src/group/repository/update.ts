@@ -21,10 +21,10 @@ export const updateGroupRepository = async (request: UpdateGroupRequest): Promis
         readonly group: string;
     } = await Fetch
         .post
-        .json(joinRoute('/group/update'))
+        .withJson(joinRoute('/group/update'))
         .bearer(Brontosaurus.hard().raw)
         .migrate(request)
-        .fetch();
+        .fetchJson();
 
     return response.group;
 };

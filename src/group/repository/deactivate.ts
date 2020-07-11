@@ -16,10 +16,10 @@ export const deactivateGroupRepository = async (
         deactivated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/group/deactivate'))
+        .withJson(joinRoute('/group/deactivate'))
         .bearer(Brontosaurus.hard().raw)
         .add('group', group)
-        .fetch();
+        .fetchJson();
 
     return response.deactivated;
 };

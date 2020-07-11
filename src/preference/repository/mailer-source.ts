@@ -14,11 +14,11 @@ export const mailerSourcePreferenceRepository = async (resetPassword: string, no
         changed: number;
     } = await Fetch
         .post
-        .json(joinRoute('/preference/mailer-source'))
+        .withJson(joinRoute('/preference/mailer-source'))
         .bearer(Brontosaurus.hard().raw)
         .add('resetPassword', resetPassword)
         .add('notification', notification)
-        .fetch();
+        .fetchJson();
 
     return response.changed;
 };

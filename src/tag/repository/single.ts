@@ -19,10 +19,10 @@ export const singleTagRepository = async (name: string): Promise<SingleTagRespon
 
     const response: SingleTagResponse = await Fetch
         .post
-        .json(joinRoute('/tag/single'))
+        .withJson(joinRoute('/tag/single'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

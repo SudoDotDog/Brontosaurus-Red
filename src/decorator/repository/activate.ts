@@ -16,10 +16,10 @@ export const activateDecoratorRepository = async (
         activated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/decorator/activate'))
+        .withJson(joinRoute('/decorator/activate'))
         .bearer(Brontosaurus.hard().raw)
         .add('decorator', decorator)
-        .fetch();
+        .fetchJson();
 
     return response.activated;
 };

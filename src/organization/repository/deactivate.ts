@@ -16,10 +16,10 @@ export const deactivateOrganizationRepository = async (
         deactivated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/organization/deactivate'))
+        .withJson(joinRoute('/organization/deactivate'))
         .bearer(Brontosaurus.hard().raw)
         .add('organization', organization)
-        .fetch();
+        .fetchJson();
 
     return response.deactivated;
 };

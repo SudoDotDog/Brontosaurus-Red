@@ -14,11 +14,11 @@ export const editPassword = async (password: string): Promise<string> => {
         account: string;
     } = await Fetch
         .post
-        .json(joinRoute('/flat/account/edit/password'))
+        .withJson(joinRoute('/flat/account/edit/password'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', Brontosaurus.hard().username)
         .add('password', password)
-        .fetch();
+        .fetchJson();
 
     return response.account;
 };

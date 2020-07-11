@@ -14,12 +14,12 @@ export const createOrganization = async (name: string, owner: string, ownerNames
         organization: string;
     } = await Fetch
         .post
-        .json(joinRoute('/organization/create'))
+        .withJson(joinRoute('/organization/create'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name)
         .add('owner', owner)
         .add('ownerNamespace', ownerNamespace)
-        .fetch();
+        .fetchJson();
 
     return response.organization;
 };

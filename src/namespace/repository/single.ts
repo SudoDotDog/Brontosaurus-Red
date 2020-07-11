@@ -20,10 +20,10 @@ export const singleNamespace = async (namespace: string): Promise<SingleNamespac
 
     const response: SingleNamespaceResponse = await Fetch
         .post
-        .json(joinRoute('/namespace/single'))
+        .withJson(joinRoute('/namespace/single'))
         .bearer(Brontosaurus.hard().raw)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

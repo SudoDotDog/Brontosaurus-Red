@@ -28,10 +28,10 @@ export const singleGroup = async (name: string): Promise<SingleGroupResponse> =>
 
     const response: SingleGroupResponse = await Fetch
         .post
-        .json(joinRoute('/group/single'))
+        .withJson(joinRoute('/group/single'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

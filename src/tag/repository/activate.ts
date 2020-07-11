@@ -16,10 +16,10 @@ export const activateTagRepository = async (
         activated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/tag/activate'))
+        .withJson(joinRoute('/tag/activate'))
         .bearer(Brontosaurus.hard().raw)
         .add('tag', tag)
-        .fetch();
+        .fetchJson();
 
     return response.activated;
 };

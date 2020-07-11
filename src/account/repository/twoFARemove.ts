@@ -17,11 +17,11 @@ export const removeTwoFAAccount = async (username: string, namespace: string): P
 
     const response: LimboAccountResponse = await Fetch
         .post
-        .json(joinRoute('/account/remove-2fa'))
+        .withJson(joinRoute('/account/remove-2fa'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return response.removed;
 };

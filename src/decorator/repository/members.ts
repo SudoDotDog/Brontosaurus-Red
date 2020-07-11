@@ -28,11 +28,11 @@ export const fetchDecoratorMembers = async (decorator: string, page: number): Pr
 
     const response: DecoratorMemberResponse = await Fetch
         .post
-        .json(joinRoute('/decorator/members'))
+        .withJson(joinRoute('/decorator/members'))
         .bearer(Brontosaurus.hard().raw)
         .add('decorator', decorator)
         .add('page', page)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

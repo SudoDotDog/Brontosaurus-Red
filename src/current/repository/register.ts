@@ -36,11 +36,11 @@ export const registerForOrganization = async (
         tempPassword: string;
     } = await Fetch
         .post
-        .json(joinRoute('/organization/flat/register'))
+        .withJson(joinRoute('/organization/flat/register'))
         .bearer(Brontosaurus.hard().raw)
         .migrate(obj)
         .add('infos', {})
-        .fetch();
+        .fetchJson();
 
     return response.tempPassword;
 };

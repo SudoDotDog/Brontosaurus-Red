@@ -14,10 +14,10 @@ export const removeAllGroupRepository = async (name: string): Promise<string> =>
         readonly group: string;
     } = await Fetch
         .post
-        .json(joinRoute('/group/remove-all'))
+        .withJson(joinRoute('/group/remove-all'))
         .bearer(Brontosaurus.hard().raw)
         .add('name', name)
-        .fetch();
+        .fetchJson();
 
     return response.group;
 };

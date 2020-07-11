@@ -17,12 +17,12 @@ export const suspendTemporaryPasswordRepository = async (username: string, names
 
     const response: SuspendTemporaryPasswordResponse = await Fetch
         .post
-        .json(joinRoute('/account/suspend-temporary-password'))
+        .withJson(joinRoute('/account/suspend-temporary-password'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
         .add('passwordId', passwordId)
-        .fetch();
+        .fetchJson();
 
     return response;
 };

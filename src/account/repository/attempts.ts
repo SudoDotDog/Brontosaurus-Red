@@ -33,7 +33,7 @@ export const fetchAccountAttempts = async (username: string, namespace: string, 
 
     const response: AccountAttemptResponse = await Fetch
         .post
-        .json(joinRoute('/account/attempts'))
+        .withJson(joinRoute('/account/attempts'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
@@ -43,7 +43,7 @@ export const fetchAccountAttempts = async (username: string, namespace: string, 
                 (each as any).at = new Date(each.at);
             }
         })
-        .fetch();
+        .fetchJson();
 
     return response;
 };

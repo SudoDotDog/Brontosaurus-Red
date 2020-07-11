@@ -14,10 +14,10 @@ export const togglePortalAccessRepository = async (key: string): Promise<string>
         application: string;
     } = await Fetch
         .post
-        .json(joinRoute('/application/toggle-portal-access'))
+        .withJson(joinRoute('/application/toggle-portal-access'))
         .bearer(Brontosaurus.hard().raw)
         .add('key', key)
-        .fetch();
+        .fetchJson();
 
     return response.application;
 };

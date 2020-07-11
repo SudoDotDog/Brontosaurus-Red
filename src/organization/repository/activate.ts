@@ -16,10 +16,10 @@ export const activateOrganizationRepository = async (
         activated: string;
     } = await Fetch
         .post
-        .json(joinRoute('/organization/activate'))
+        .withJson(joinRoute('/organization/activate'))
         .bearer(Brontosaurus.hard().raw)
         .add('organization', organization)
-        .fetch();
+        .fetchJson();
 
     return response.activated;
 };

@@ -44,10 +44,10 @@ export const inplodeOrganization = async (
         tempPassword: string;
     } = await Fetch
         .post
-        .json(joinRoute('/organization/inplode'))
+        .withJson(joinRoute('/organization/inplode'))
         .bearer(Brontosaurus.hard().raw)
         .migrate(obj)
-        .fetch();
+        .fetchJson();
 
     return response.tempPassword;
 };

@@ -43,10 +43,10 @@ export const registerRepository = async (
 
     const response: RegisterRepositoryResponse = await Fetch
         .post
-        .json(joinRoute('/account/register'))
+        .withJson(joinRoute('/account/register'))
         .bearer(Brontosaurus.hard().raw)
         .migrate(obj)
-        .fetch();
+        .fetchJson();
 
     return response.account;
 };

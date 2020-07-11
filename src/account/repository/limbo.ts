@@ -18,11 +18,11 @@ export const limboAccount = async (username: string, namespace: string): Promise
 
     const response: LimboAccountResponse = await Fetch
         .post
-        .json(joinRoute('/account/limbo'))
+        .withJson(joinRoute('/account/limbo'))
         .bearer(Brontosaurus.hard().raw)
         .add('username', username)
         .add('namespace', namespace)
-        .fetch();
+        .fetchJson();
 
     return response;
 };
