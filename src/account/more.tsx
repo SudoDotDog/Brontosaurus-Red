@@ -25,26 +25,26 @@ import { resetAttemptAccount } from "./repository/reset-attempt";
 import { removeTwoFAAccount } from "./repository/twoFARemove";
 import { withdrawOrganizationAccountRepository } from "./repository/withdraw-organization";
 
-const activateUser = async (username: string, namespace: string, goBack: () => void) => {
+const activateUser = async (username: string, namespace: string, next: () => void) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to activate ${username}?`);
     if (isConfirm) {
         try {
             await activateAccount(username, namespace);
-            goBack();
+            next();
         } catch (err) {
             window.alert(err);
         }
     }
 };
 
-const deactivateUser = async (username: string, namespace: string, goBack: () => void) => {
+const deactivateUser = async (username: string, namespace: string, next: () => void) => {
 
     const isConfirm: boolean = window.confirm(`Are you sure to deactivate ${username}?`);
     if (isConfirm) {
         try {
             await deactivateAccount(username, namespace);
-            goBack();
+            next();
         } catch (err) {
             window.alert(err);
         }
@@ -191,7 +191,9 @@ export const AccountMoreBase: React.FC<AccountMoreProps> = (props: AccountMorePr
                     props.language.get(PROFILE.ACCOUNT),
                 )}
                 link={props.language.get(PROFILE.ACTIVATE)}
-                onClick={() => activateUser(username, namespace, () => buildAdminAccountEdit(username, namespace))}
+                onClick={() => activateUser(username, namespace, () => {
+                    props.history.push(buildAdminAccountEdit(username, namespace));
+                })}
             />
             <MenuItem
                 description={props.language.get(
@@ -201,7 +203,9 @@ export const AccountMoreBase: React.FC<AccountMoreProps> = (props: AccountMorePr
                 )}
                 link={props.language.get(PROFILE.DEACTIVATE)}
                 dangerous
-                onClick={() => deactivateUser(username, namespace, () => buildAdminAccountEdit(username, namespace))}
+                onClick={() => deactivateUser(username, namespace, () => {
+                    props.history.push(buildAdminAccountEdit(username, namespace));
+                })}
             />
             <MenuItem
                 description={props.language.get(

@@ -157,36 +157,38 @@ export class AccountOrganizationAssignBase extends React.Component<AccountOrgani
         const namespace: string = this._getNamespace();
         const validation: boolean = window.confirm(`Assign "${username}" to "${organization}"?`);
 
+        if (!validation) {
+            return;
+        }
+
         this.setState({
             loading: true,
             cover: undefined,
         });
 
-        if (validation) {
-            try {
-                const response = await setOrganizationRepository(username, namespace, organization);
+        try {
+            const response = await setOrganizationRepository(username, namespace, organization);
 
-                this.setState({
-                    cover: createSucceedCover(
-                        this.props.language,
-                        response.account + ' > ' + response.organization,
-                        () => this.props.history.push(buildAdminAccountEdit(username, namespace)),
-                    ),
-                });
-            } catch (err) {
-                this.setState({
-                    cover: createFailedCover(
-                        this.props.language,
-                        err.message,
-                        () => this.setState({ cover: undefined }),
-                    ),
-                });
-            } finally {
+            this.setState({
+                cover: createSucceedCover(
+                    this.props.language,
+                    response.account + ' > ' + response.organization,
+                    () => this.props.history.push(buildAdminAccountEdit(username, namespace)),
+                ),
+            });
+        } catch (err) {
+            this.setState({
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
+            });
+        } finally {
 
-                this.setState({
-                    loading: false,
-                });
-            }
+            this.setState({
+                loading: false,
+            });
         }
     }
 
