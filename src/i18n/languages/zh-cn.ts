@@ -123,6 +123,8 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.REDIRECTIONS]: '重定向',
     [PROFILE.REGISTER]: '注册',
     [PROFILE.REGISTER_ACCOUNT_FOR_ORGANIZATION]: '为 "{}" 组织注册新的账户',
+    [PROFILE.REGISTER_DESCRIPTION]: '为你的组织注册子账户',
+    [PROFILE.REGISTER_SUB_ACCOUNT]: '注册子账户',
     [PROFILE.REGEXP]: '正则表达式',
     [PROFILE.REMOVE_ALL]: '清除全部',
     [PROFILE.REMOVE_TWO_FA]: '清除两步验证',
