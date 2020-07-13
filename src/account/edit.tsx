@@ -34,6 +34,7 @@ import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse, SpecialPasswordResponse } from "./repository/single-fetch";
 import { suspendApplicationPasswordRepository } from "./repository/suspend-application-password";
 import { suspendTemporaryPasswordRepository } from "./repository/suspend-temp-password";
+import { createSucceedCover, createFailedCover } from "../util/cover";
 
 type AccountEditState = {
 
@@ -566,34 +567,20 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
                 });
 
             this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-                    info: account,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+                cover: createSucceedCover(
+                    this.props.language,
+                    account,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         } finally {
 
