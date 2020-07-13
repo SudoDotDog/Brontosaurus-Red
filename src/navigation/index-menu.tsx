@@ -54,7 +54,11 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
                 visit={false}
                 group={['BRONTOSAURUS_SELF_CONTROL']}>
                 <MenuItem
-                    description={`As a ${props.accountName} User, change ${username}'s password or modify account settings`}
+                    description={props.language.get(
+                        PROFILE.SELF_CONTROL_DESCRIPTION,
+                        props.accountName,
+                        username,
+                    )}
                     link={props.language.get(PROFILE.MY_ACCOUNT)}
                     onClick={() => props.history.push('/me')}
                 />
@@ -64,7 +68,11 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
                 validation={() => Boolean(token.organization)}
                 group={['BRONTOSAURUS_ORGANIZATION_CONTROL']}>
                 <MenuItem
-                    description={`As a organization manager, create account for ${organization} or change ${organization}'s setting`}
+                    description={props.language.get(
+                        PROFILE.ORGANIZATION_CONTROL_DESCRIPTION,
+                        organization,
+                        organization,
+                    )}
                     link={props.language.get(PROFILE.MY_ORGANIZATION)}
                     onClick={() => props.history.push('/current')}
                 />
@@ -73,7 +81,10 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
                 visit={false}
                 group={['BRONTOSAURUS_SUPER_ADMIN']}>
                 <MenuItem
-                    description={`As a ${props.commandCenterName} super administrator, access Admin Panel`}
+                    description={props.language.get(
+                        PROFILE.ADMIN_PANEL_DESCRIPTION,
+                        props.commandCenterName,
+                    )}
                     link={props.language.get(PROFILE.ADMIN_PANEL)}
                     onClick={() => props.history.push('/admin')}
                 />
