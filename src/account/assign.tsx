@@ -4,23 +4,27 @@
  * @description Assign
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
-import { MARGIN, SIGNAL, SIZE } from "@sudoo/neon/declare";
+import { MARGIN, SIZE } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonApplicable } from "@sudoo/neon/input";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { fetchOrganization, FetchOrganizationResponse, OrganizationResponse } from "../organization/repository/organization-fetch";
-import { buildAdminAccountEdit } from "../util/path";
+import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
+import { buildAdminAccountEdit, buildAdminOrganizationEdit } from "../util/path";
 import { setOrganizationRepository } from "./repository/set-organization";
-
-export type AccountOrganizationAssignProps = {
-} & RouteComponentProps;
 
 export type AccountOrganizationAssignStates = {
 
@@ -33,7 +37,18 @@ export type AccountOrganizationAssignStates = {
     readonly page: number;
 };
 
-export class AccountOrganizationAssign extends React.Component<AccountOrganizationAssignProps, AccountOrganizationAssignStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type AccountOrganizationAssignProps = RouteComponentProps & ConnectedStates;
+
+export class AccountOrganizationAssignBase extends React.Component<AccountOrganizationAssignProps, AccountOrganizationAssignStates> {
 
     public readonly state: AccountOrganizationAssignStates = {
 
@@ -46,6 +61,11 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
         page: 0,
     };
 
+    public componentDidMount() {
+
+        this._searchOrganization();
+    }
+
     public render() {
 
         return (
@@ -55,11 +75,17 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
                 cover={this._renderSticker()}
             >
                 <GoBack />
-                <NeonTitle margin={MARGIN.SMALL}>Set {this._getUsername()}&#39;s Organization</NeonTitle>
+                <NeonTitle margin={MARGIN.SMALL}>
+                    {this.props.language.get(
+                        PROFILE.SET_INSTANCE_ORGANIZATION,
+                        this._getUsername(),
+                    )}
+                </NeonTitle>
 
                 <NeonApplicable
                     size={SIZE.MEDIUM}
-                    label={'Search Target Organization'}
+                    label={this.props.language.get(PROFILE.SEARCH_TARGET_ORGANIZATION)}
+                    apply={this.props.language.get(PROFILE.APPLY)}
                     onApply={(keyword: string) => this.setState({ keyword, page: 0 }, () => {
                         this._searchOrganization();
                     })}
@@ -68,7 +94,11 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
                 {this.state.organizations.length === 0
                     ? void 0
                     : <NeonTable
-                        headers={['Name', 'Owner', 'Action']}
+                        headers={[
+                            this.props.language.get(PROFILE.NAME),
+                            this.props.language.get(PROFILE.OWNER),
+                            this.props.language.get(PROFILE.ACTION),
+                        ]}
                         style={{ marginTop: '1rem' }}>
                         {this._renderOrganizations()}
                     </NeonTable>}
@@ -96,12 +126,26 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
 
         return this.state.organizations.map((organization: OrganizationResponse) =>
             (<tr key={organization.name}>
-                <td>{organization.name}</td>
-                <td>{organization.owner}</td>
+                <td>
+                    <ClickableSpan
+                        to={buildAdminOrganizationEdit(organization.name)}
+                        red={!organization.active}
+                    >
+                        {organization.name}
+                    </ClickableSpan>
+                </td>
+                <td>
+                    <ClickableSpan
+                        to={buildAdminAccountEdit(organization.owner, organization.ownerNamespace)}
+                        red={!organization.ownerActive}
+                    >
+                        {organization.owner}
+                    </ClickableSpan>
+                </td>
                 <td><NeonButton
                     onClick={() => this._assign(organization.name)}
                     size={SIZE.RELATIVE}>
-                    Assign To
+                    {this.props.language.get(PROFILE.ASSIGN_TO)}
                 </NeonButton></td>
             </tr>),
         );
@@ -123,31 +167,19 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
                 const response = await setOrganizationRepository(username, namespace, organization);
 
                 this.setState({
-                    cover: {
-                        type: SIGNAL.SUCCEED,
-                        title: "Succeed",
-                        info: response.account + ' > ' + response.organization,
-
-                        peek: {
-                            children: "<-",
-                            expend: "Complete",
-                            onClick: () => this.props.history.push(buildAdminAccountEdit(username, namespace)),
-                        },
-                    },
+                    cover: createSucceedCover(
+                        this.props.language,
+                        response.account + ' > ' + response.organization,
+                        () => this.props.history.push(buildAdminAccountEdit(username, namespace)),
+                    ),
                 });
             } catch (err) {
                 this.setState({
-                    cover: {
-                        type: SIGNAL.ERROR,
-                        title: "Failed",
-                        info: err.message,
-
-                        peek: {
-                            children: "<-",
-                            expend: "Retry",
-                            onClick: () => this.setState({ cover: undefined }),
-                        },
-                    },
+                    cover: createFailedCover(
+                        this.props.language,
+                        err.message,
+                        () => this.setState({ cover: undefined }),
+                    ),
                 });
             } finally {
 
@@ -182,3 +214,5 @@ export class AccountOrganizationAssign extends React.Component<AccountOrganizati
         return params.namespace;
     }
 }
+
+export const AccountOrganizationAssign: React.ComponentType = connector.connect(AccountOrganizationAssignBase);

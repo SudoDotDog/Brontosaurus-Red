@@ -35,7 +35,7 @@ export const createFailedCover = (
 
     return {
         type: SIGNAL.ERROR,
-        title: language.get(PROFILE.SUCCEED),
+        title: language.get(PROFILE.FAILED),
         info,
 
         peek: {
