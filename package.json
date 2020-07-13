@@ -30,6 +30,7 @@
     "@sudoo/random": "^2.1.1",
     "@sudoo/react-force": "^1.7.3",
     "@sudoo/redux": "^1.6.0",
+    "@sudoo/title": "^1.0.2",
     "@sudoo/verify": "^1.15.0"
   },
   "devDependencies": {

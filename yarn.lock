@@ -183,6 +183,11 @@
     react-redux "7.2.0"
     redux "4.0.5"
 
+"@sudoo/title@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@sudoo/title/-/title-1.0.2.tgz#e8c19bd0babb964ef5a18b7597a03ce8884d9aa8"
+  integrity sha512-tM1obdN6eCe4338ZDH6u/np28z89ASoO3ArzDrPizOM/9FgmRcGNPItL2lYZcnko0BZjj5tVW721i0ruStVMWA==
+
 "@sudoo/triforce@^2.7.7":
   version "2.7.7"
   resolved "https://registry.yarnpkg.com/@sudoo/triforce/-/triforce-2.7.7.tgz#be16ff976ec06500a86ccf230697458fe779eedb"
