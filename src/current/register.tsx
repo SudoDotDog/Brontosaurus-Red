@@ -5,18 +5,31 @@
  */
 
 import { DEFAULT_BRONTOSAURUS_NAMESPACE } from "@brontosaurus/definition";
+import { SudooFormat } from "@sudoo/internationalization";
 import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
 import { registerForOrganization } from "./repository/register";
 
-type CurrentRegisterProp = {
-} & RouteComponentProps;
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
 
-export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentRegisterProp) => {
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type CurrentRegisterProp = RouteComponentProps & ConnectedStates;
+
+export const CurrentRegisterBase: React.FC<CurrentRegisterProp> = (props: CurrentRegisterProp) => {
 
     const [current, setCurrent] = React.useState<Record<string, any>>({
         namespace: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
@@ -29,23 +42,23 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
     const form: NeonFromStructure = {
         username: {
             type: INPUT_TYPE.TEXT,
-            display: 'Username',
+            display: props.language.get(PROFILE.USERNAME),
         },
         namespace: {
             type: INPUT_TYPE.TEXT,
-            display: 'Namespace',
+            display: props.language.get(PROFILE.NAMESPACE),
         },
         displayName: {
             type: INPUT_TYPE.TEXT,
-            display: 'Display Name',
+            display: props.language.get(PROFILE.DISPLAY_NAME),
         },
         email: {
             type: INPUT_TYPE.EMAIL,
-            display: 'Email Address',
+            display: props.language.get(PROFILE.EMAIL),
         },
         phone: {
             type: INPUT_TYPE.NUMBER,
-            display: 'Phone Number',
+            display: props.language.get(PROFILE.PHONE),
         },
     };
 
@@ -55,8 +68,8 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
             <NeonSmartForm
                 loading={loading}
                 form={form}
-                title="Register Sub Account"
-                submit="Register"
+                title={props.language.get(PROFILE.REGISTER_SUB_ACCOUNT)}
+                submit={props.language.get(PROFILE.REGISTER)}
                 cover={cover}
                 flag={flag}
                 value={current}
@@ -112,3 +125,5 @@ export const CurrentRegister: React.FC<CurrentRegisterProp> = (props: CurrentReg
         </React.Fragment>
     );
 };
+
+export const CurrentRegister: React.ComponentType = connector.connect(CurrentRegisterBase);
