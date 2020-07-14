@@ -113,6 +113,7 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.PHONE]: '手机',
     [PROFILE.PORTAL_ACCESS]: '访问玄关',
     [PROFILE.PREFERENCE]: '偏好',
+    [PROFILE.PREFERENCE_NOT_UPDATED]: '偏好没有更新',
     [PROFILE.PREFERENCE_UPDATED]: '偏好已更新',
     [PROFILE.PREFERENCES]: '偏好',
     [PROFILE.PREFERENCES_UPDATED]: '{} 个偏好已更新',

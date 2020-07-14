@@ -100,7 +100,10 @@ export class NamesPreferenceBase extends React.Component<NamesPreferenceProp, Na
             this.setState({
                 cover: createSucceedCover(
                     this.props.language,
-                    `${changed} Preferences Updated`,
+                    this.props.language.get(
+                        PROFILE.PREFERENCES_UPDATED,
+                        changed.toString(),
+                    ),
                     () => this.props.history.goBack(),
                 ),
             });

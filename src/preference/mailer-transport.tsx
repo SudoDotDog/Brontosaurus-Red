@@ -97,7 +97,10 @@ export class MailerTransportPreferenceBase extends React.Component<MailerTranspo
             this.setState({
                 cover: createSucceedCover(
                     this.props.language,
-                    changed ? `Preferences Updated` : `Preferences Not Updated`,
+                    this.props.language.get(
+                        changed ? PROFILE.PREFERENCE_UPDATED
+                            : PROFILE.PREFERENCE_NOT_UPDATED,
+                    ),
                     () => this.props.history.goBack(),
                 ),
             });

@@ -113,6 +113,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.PHONE]: 'Phone',
     [PROFILE.PORTAL_ACCESS]: 'Portal Access',
     [PROFILE.PREFERENCE]: 'Preference',
+    [PROFILE.PREFERENCE_NOT_UPDATED]: 'Preference Not Updated',
     [PROFILE.PREFERENCE_UPDATED]: 'Preference Updated',
     [PROFILE.PREFERENCES]: 'Preferences',
     [PROFILE.PREFERENCES_UPDATED]: '{} Preferences Updated',
