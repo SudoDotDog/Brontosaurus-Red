@@ -12,6 +12,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { createNamespace } from "./repository/create";
@@ -55,14 +56,36 @@ export class CreateNamespaceBase extends React.Component<CreateNamespaceProps, C
                 <GoBack />
                 <NeonSmartForm
                     loading={this.state.loading}
-                    submit="Create"
+                    submit={this.props.language.get(PROFILE.SUBMIT)}
                     cover={this.state.cover}
                     flag={this.state.flag}
-                    title="Create Namespace"
+                    title={this.props.language.get(
+                        PROFILE.CREATE_INSTANCE,
+                        this.props.language.get(PROFILE.NAMESPACE),
+                    )}
                     form={this._getForm()}
                     value={this.state.current}
                     onChange={(value: any) => this.setState({ current: value })}
-                    onSubmit={() => this._submit(this.state.current.name as string, this.state.current.namespace as string)}
+                    onSubmit={() => {
+
+                        if (!this.state.current.name) {
+                            window.alert(this.props.language.get(
+                                PROFILE.INSTANCE_CAN_NOT_BE_EMPTY,
+                                this.props.language.get(PROFILE.NAME),
+                            ));
+                            return;
+                        }
+
+                        if (!this.state.current.namespace) {
+                            window.alert(this.props.language.get(
+                                PROFILE.INSTANCE_CAN_NOT_BE_EMPTY,
+                                this.props.language.get(PROFILE.NAMESPACE),
+                            ));
+                            return;
+                        }
+
+                        this._submit(this.state.current.name, this.state.current.namespace);
+                    }}
                 />
             </React.Fragment>
         );
@@ -73,24 +96,16 @@ export class CreateNamespaceBase extends React.Component<CreateNamespaceProps, C
         return {
             name: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Name',
+                display: this.props.language.get(PROFILE.NAME),
             },
             namespace: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Namespace',
+                display: this.props.language.get(PROFILE.NAMESPACE),
             },
         };
     }
 
     private async _submit(name: string, namespace: string) {
-
-        if (!name) {
-            window.alert('Name cannot be empty');
-        }
-
-        if (!namespace) {
-            window.alert('Namespace cannot be empty');
-        }
 
         this.setState({
             loading: true,
