@@ -167,27 +167,27 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
         return {
             username: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Username',
+                display: this.props.language.get(PROFILE.USERNAME),
             },
             namespace: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Namespace',
+                display: this.props.language.get(PROFILE.NAMESPACE),
             },
             displayName: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Display Name',
+                display: this.props.language.get(PROFILE.DISPLAY_NAME),
             },
             password: {
                 type: INPUT_TYPE.PASSWORD,
-                display: 'Password',
+                display: this.props.language.get(PROFILE.PASSWORD),
             },
             email: {
                 type: INPUT_TYPE.EMAIL,
-                display: 'Email Address',
+                display: this.props.language.get(PROFILE.EMAIL),
             },
             phone: {
                 type: INPUT_TYPE.NUMBER,
-                display: 'Phone Number',
+                display: this.props.language.get(PROFILE.PHONE),
             },
             ...this.state.infos.reduce((previous: Record<string, INPUT_TYPE>, current: {
                 name: string;
