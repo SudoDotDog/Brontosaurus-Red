@@ -21,6 +21,7 @@ import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminGroupEdit, buildAdminTagEdit } from "../util/path";
@@ -99,15 +100,22 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
                 covering={Boolean(this.state.cover)}
                 cover={this._renderSticker()}
             >
-                <NeonTitle>Register Account</NeonTitle>
-                <NeonSub margin={MARGIN.SMALL}>Information</NeonSub>
+                <NeonTitle>
+                    {this.props.language.get(PROFILE.REGISTER_ACCOUNT)}
+                </NeonTitle>
+                <NeonSub margin={MARGIN.SMALL}>
+                    {this.props.language.get(PROFILE.INFORMATION)}
+                </NeonSub>
                 <NeonSmartForm
                     form={this._getForm()}
                     value={this.state.current}
                     onChange={(value: any) => this.setState({ current: value })}
                 />
-                <NeonSub margin={MARGIN.SMALL}>Tags</NeonSub>
+                <NeonSub margin={MARGIN.SMALL}>
+                    {this.props.language.get(PROFILE.TAGS)}
+                </NeonSub>
                 <NeonPillGroup
+                    addText={this.props.language.get(PROFILE.ADD_INDICATOR)}
                     margin={MARGIN.SMALL}
                     style={{ flexWrap: 'wrap' }}
                     selected={this.state.selectedTags}
@@ -123,8 +131,11 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
                     removable
                     options={this.state.tags}
                 />
-                <NeonSub margin={MARGIN.SMALL}>Groups</NeonSub>
+                <NeonSub margin={MARGIN.SMALL}>
+                    {this.props.language.get(PROFILE.GROUPS)}
+                </NeonSub>
                 <NeonPillGroup
+                    addText={this.props.language.get(PROFILE.ADD_INDICATOR)}
                     margin={MARGIN.SMALL}
                     style={{ flexWrap: 'wrap' }}
                     selected={this.state.selectedGroups}
@@ -145,8 +156,8 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
                     width={WIDTH.FULL}
                     size={SIZE.MEDIUM}
                     margin={MARGIN.SMALL}>
-                    Submit
-                    </NeonButton>
+                    {this.props.language.get(PROFILE.SUBMIT)}
+                </NeonButton>
             </NeonIndicator>
         </React.Fragment>);
     }
