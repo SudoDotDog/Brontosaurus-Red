@@ -4,16 +4,17 @@
  * @description Create
  */
 
-import { SIGNAL } from "@sudoo/neon/declare";
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { createNamespace } from "./repository/create";
-
-type CreateNamespaceProp = {
-} & RouteComponentProps;
 
 type CreateNamespaceStates = {
 
@@ -26,7 +27,18 @@ type CreateNamespaceStates = {
     };
 };
 
-export class CreateNamespace extends React.Component<CreateNamespaceProp, CreateNamespaceStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type CreateNamespaceProps = RouteComponentProps & ConnectedStates;
+
+export class CreateNamespaceBase extends React.Component<CreateNamespaceProps, CreateNamespaceStates> {
 
     public readonly state: CreateNamespaceStates = {
 
@@ -89,35 +101,22 @@ export class CreateNamespace extends React.Component<CreateNamespaceProp, Create
         try {
 
             const createdName: string = await createNamespace(name, namespace);
-            this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-                    info: createdName,
 
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+            this.setState({
+                cover: createSucceedCover(
+                    this.props.language,
+                    createdName,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         } finally {
 
@@ -127,3 +126,5 @@ export class CreateNamespace extends React.Component<CreateNamespaceProp, Create
         }
     }
 }
+
+export const CreateNamespace: React.ComponentType = connector.connect(CreateNamespaceBase);

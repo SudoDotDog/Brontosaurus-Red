@@ -4,16 +4,17 @@
  * @description Create
  */
 
-import { SIGNAL } from "@sudoo/neon/declare";
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { createGroup } from "./repository/create";
-
-type CreateGroupProp = {
-} & RouteComponentProps;
 
 type CreateGroupStates = {
 
@@ -26,7 +27,18 @@ type CreateGroupStates = {
     };
 };
 
-export class CreateGroup extends React.Component<CreateGroupProp, CreateGroupStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type CreateGroupProps = RouteComponentProps & ConnectedStates;
+
+export class CreateGroupBase extends React.Component<CreateGroupProps, CreateGroupStates> {
 
     public readonly state: CreateGroupStates = {
 
@@ -85,35 +97,22 @@ export class CreateGroup extends React.Component<CreateGroupProp, CreateGroupSta
         try {
 
             const id: string = await createGroup(name, description);
-            this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-                    info: id,
 
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+            this.setState({
+                cover: createSucceedCover(
+                    this.props.language,
+                    id,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         } finally {
 
@@ -123,3 +122,5 @@ export class CreateGroup extends React.Component<CreateGroupProp, CreateGroupSta
         }
     }
 }
+
+export const CreateGroup: React.ComponentType = connector.connect(CreateGroupBase);
