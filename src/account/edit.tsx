@@ -6,7 +6,7 @@
 
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton, NeonCoin } from "@sudoo/neon/button";
-import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
@@ -28,13 +28,13 @@ import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminAccountMore, buildAdminDecoratorEdit, buildAdminGroupEdit, buildAdminTagEdit } from "../util/path";
 import { AccountPreviousPasswords } from "./components/previous-passwords";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse, SpecialPasswordResponse } from "./repository/single-fetch";
-import { suspendApplicationPasswordRepository } from "./repository/suspend-application-password";
-import { suspendTemporaryPasswordRepository } from "./repository/suspend-temp-password";
-import { createSucceedCover, createFailedCover } from "../util/cover";
+import { suspendApplicationPasswordRepository, SuspendApplicationPasswordResponse } from "./repository/suspend-application-password";
+import { suspendTemporaryPasswordRepository, SuspendTemporaryPasswordResponse } from "./repository/suspend-temp-password";
 
 type AccountEditState = {
 
@@ -447,36 +447,23 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
         try {
 
-            await suspendTemporaryPasswordRepository(this.state.user.username, this.state.user.namespace, passwordId);
+            const response: SuspendTemporaryPasswordResponse = await suspendTemporaryPasswordRepository(this.state.user.username, this.state.user.namespace, passwordId);
 
             this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+                cover: createSucceedCover(
+                    this.props.language,
+                    response.username,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         } finally {
 
@@ -499,36 +486,23 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
         try {
 
-            await suspendApplicationPasswordRepository(this.state.user.username, this.state.user.namespace, passwordId);
+            const application: SuspendApplicationPasswordResponse = await suspendApplicationPasswordRepository(this.state.user.username, this.state.user.namespace, passwordId);
 
             this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+                cover: createSucceedCover(
+                    this.props.language,
+                    application.username,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         } finally {
 

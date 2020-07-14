@@ -5,19 +5,24 @@
  */
 
 import { DEFAULT_BRONTOSAURUS_NAMESPACE } from "@brontosaurus/definition";
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
-import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminGroupEdit, buildAdminTagEdit } from "../util/path";
 import { registerRepository } from "./repository/register";
 import { registerInfo } from "./repository/register-infos";
@@ -39,11 +44,18 @@ export type RegisterState = {
     readonly selectedGroups: string[];
 };
 
-export type RegisterProp = {
-} & RouteComponentProps;
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
 
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
 
-export class Register extends React.Component<RegisterProp, RegisterState> {
+type RegisterProps = RouteComponentProps & ConnectedStates;
+
+export class RegisterBase extends React.Component<RegisterProps, RegisterState> {
 
     public readonly state: RegisterState = {
 
@@ -245,6 +257,7 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
         }
 
         try {
+
             const id: string = await registerRepository(
                 response.username,
                 response.namespace,
@@ -258,34 +271,20 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
             );
 
             this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-                    info: id,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+                cover: createSucceedCover(
+                    this.props.language,
+                    id,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         }
 
@@ -294,3 +293,5 @@ export class Register extends React.Component<RegisterProp, RegisterState> {
         });
     }
 }
+
+export const Register: React.ComponentType = connector.connect(RegisterBase);
