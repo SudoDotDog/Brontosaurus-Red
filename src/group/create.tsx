@@ -12,6 +12,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { createGroup } from "./repository/create";
@@ -55,14 +56,22 @@ export class CreateGroupBase extends React.Component<CreateGroupProps, CreateGro
                 <GoBack />
                 <NeonSmartForm
                     loading={this.state.loading}
-                    submit="Create"
+                    title={this.props.language.get(
+                        PROFILE.CREATE_INSTANCE,
+                        this.props.language.get(PROFILE.GROUP),
+                    )}
+                    submit={this.props.language.get(PROFILE.SUBMIT)}
                     cover={this.state.cover}
                     flag={this.state.flag}
-                    title="Create Group"
                     form={this._getForm()}
                     value={this.state.current}
                     onChange={(value: any) => this.setState({ current: value })}
-                    onSubmit={() => this._submit(this.state.current.name as string, this.state.current.description)}
+                    onSubmit={() => {
+                        if (!this.state.current.name) {
+                            return;
+                        }
+                        this._submit(this.state.current.name, this.state.current.description);
+                    }}
                 />
             </React.Fragment>
         );
@@ -73,11 +82,11 @@ export class CreateGroupBase extends React.Component<CreateGroupProps, CreateGro
         return {
             name: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Name',
+                display: this.props.language.get(PROFILE.NAME),
             },
             description: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Description',
+                display: this.props.language.get(PROFILE.DESCRIPTION),
             },
         };
     }

@@ -81,6 +81,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.INFORMATION]: 'Information',
     [PROFILE.INPLODE]: 'Inplode',
     [PROFILE.INPLODE_INSTANCE]: 'Inplode {}',
+    [PROFILE.INSTANCE_CAN_NOT_BE_EMPTY]: '{} can not be empty',
     [PROFILE.INVALID_REGULAR_EXPRESSION]: 'Invalid Regular Expression',
     [PROFILE.KEY]: 'Key',
     [PROFILE.LIMBO]: 'Limbo',

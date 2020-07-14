@@ -81,6 +81,7 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.INFORMATION]: '信息',
     [PROFILE.INPLODE]: '内爆',
     [PROFILE.INPLODE_INSTANCE]: '内爆{}',
+    [PROFILE.INSTANCE_CAN_NOT_BE_EMPTY]: '{}不能为空',
     [PROFILE.INVALID_REGULAR_EXPRESSION]: '不合法的正则表达式',
     [PROFILE.KEY]: '关键字',
     [PROFILE.LIMBO]: '虚无',
