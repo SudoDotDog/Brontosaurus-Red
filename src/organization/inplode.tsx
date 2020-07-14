@@ -21,6 +21,7 @@ import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminGroupEdit } from "../util/path";
@@ -89,15 +90,25 @@ export class InplodeOrganizationBase extends React.Component<InplodeOrganization
                 covering={Boolean(this.state.cover)}
                 cover={this._renderSticker()}
             >
-                <NeonTitle>Inplode Organization</NeonTitle>
-                <NeonSub margin={MARGIN.SMALL}>Organization and User</NeonSub>
+                <NeonTitle>
+                    {this.props.language.get(
+                        PROFILE.INPLODE_INSTANCE,
+                        this.props.language.get(PROFILE.ORGANIZATION),
+                    )}
+                </NeonTitle>
+                <NeonSub margin={MARGIN.SMALL}>
+                    {this.props.language.get(PROFILE.ORGANIZATION_AND_USER)}
+                </NeonSub>
                 <NeonSmartForm
                     form={this._getForm()}
                     value={this.state.current}
                     onChange={(value: any) => this.setState({ current: value })}
                 />
-                <NeonSub margin={MARGIN.SMALL}>Tags</NeonSub>
+                <NeonSub margin={MARGIN.SMALL}>
+                    {this.props.language.get(PROFILE.TAGS)}
+                </NeonSub>
                 <NeonPillGroup
+                    addText={this.props.language.get(PROFILE.ADD_INDICATOR)}
                     margin={MARGIN.SMALL}
                     style={{ flexWrap: 'wrap' }}
                     selected={this.state.selected}
@@ -118,8 +129,8 @@ export class InplodeOrganizationBase extends React.Component<InplodeOrganization
                     width={WIDTH.FULL}
                     size={SIZE.MEDIUM}
                     margin={MARGIN.SMALL}>
-                    Submit
-                    </NeonButton>
+                    {this.props.language.get(PROFILE.SUBMIT)}
+                </NeonButton>
             </NeonIndicator>
         </React.Fragment>);
     }
@@ -129,27 +140,27 @@ export class InplodeOrganizationBase extends React.Component<InplodeOrganization
         return {
             name: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Organization Name',
+                display: this.props.language.get(PROFILE.ORGANIZATION_NAME),
             },
             username: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Owner Username',
+                display: this.props.language.get(PROFILE.OWNER_USERNAME),
             },
             namespace: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Owner Namespace',
+                display: this.props.language.get(PROFILE.OWNER_NAMESPACE),
             },
             displayName: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Owner Display Name',
+                display: this.props.language.get(PROFILE.OWNER_DISPLAY_NAME),
             },
             email: {
                 type: INPUT_TYPE.EMAIL,
-                display: 'Owner Email Address',
+                display: this.props.language.get(PROFILE.OWNER_EMAIL),
             },
             phone: {
                 type: INPUT_TYPE.NUMBER,
-                display: 'Owner Phone Number',
+                display: this.props.language.get(PROFILE.OWNER_PHONE),
             },
             ...this.state.infos.reduce((previous: Record<string, INPUT_TYPE>, current: {
                 name: string;
