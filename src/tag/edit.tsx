@@ -6,7 +6,7 @@
 
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
-import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
@@ -21,6 +21,7 @@ import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { singleTagRepository, SingleTagResponse } from "./repository/single";
 import { updateTagRepository } from "./repository/update";
 
@@ -160,34 +161,20 @@ export class TagEditBase extends React.Component<TagEditProp, TagEditState> {
             });
 
             this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-                    info: name,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+                cover: createSucceedCover(
+                    this.props.language,
+                    name,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         } finally {
 

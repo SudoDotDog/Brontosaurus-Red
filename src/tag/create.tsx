@@ -4,16 +4,17 @@
  * @description Create
  */
 
-import { SIGNAL } from "@sudoo/neon/declare";
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { createTagRepository } from "./repository/create";
-
-type CreateTagProp = {
-} & RouteComponentProps;
 
 type CreateTagStates = {
 
@@ -26,7 +27,18 @@ type CreateTagStates = {
     };
 };
 
-export class CreateTag extends React.Component<CreateTagProp, CreateTagStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type CreateTagProps = RouteComponentProps & ConnectedStates;
+
+export class CreateTagBase extends React.Component<CreateTagProps, CreateTagStates> {
 
     public readonly state: CreateTagStates = {
 
@@ -85,35 +97,22 @@ export class CreateTag extends React.Component<CreateTagProp, CreateTagStates> {
         try {
 
             const id: string = await createTagRepository(name, description);
-            this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-                    info: id,
 
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+            this.setState({
+                cover: createSucceedCover(
+                    this.props.language,
+                    id,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         } finally {
 
@@ -123,3 +122,5 @@ export class CreateTag extends React.Component<CreateTagProp, CreateTagStates> {
         }
     }
 }
+
+export const CreateTag: React.ComponentType = connector.connect(CreateTagBase);
