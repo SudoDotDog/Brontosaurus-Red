@@ -12,6 +12,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { createDecorator } from "./repository/create";
@@ -55,14 +56,26 @@ export class CreateDecoratorBase extends React.Component<CreateDecoratorProps, C
                 <GoBack />
                 <NeonSmartForm
                     loading={this.state.loading}
-                    submit="Create"
+                    submit={this.props.language.get(PROFILE.SUBMIT)}
                     cover={this.state.cover}
                     flag={this.state.flag}
-                    title="Create Decorator"
+                    title={this.props.language.get(
+                        PROFILE.CREATE_INSTANCE,
+                        this.props.language.get(PROFILE.DECORATOR),
+                    )}
                     form={this._getForm()}
                     value={this.state.current}
                     onChange={(value: any) => this.setState({ current: value })}
-                    onSubmit={() => this._submit(this.state.current.name as string, this.state.current.description)}
+                    onSubmit={() => {
+                        if (!this.state.current.name) {
+                            window.alert(this.props.language.get(
+                                PROFILE.INSTANCE_CAN_NOT_BE_EMPTY,
+                                this.props.language.get(PROFILE.NAME),
+                            ));
+                            return;
+                        }
+                        this._submit(this.state.current.name, this.state.current.description);
+                    }}
                 />
             </React.Fragment>
         );
@@ -73,20 +86,16 @@ export class CreateDecoratorBase extends React.Component<CreateDecoratorProps, C
         return {
             name: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Name',
+                display: this.props.language.get(PROFILE.NAME),
             },
             description: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Description',
+                display: this.props.language.get(PROFILE.DESCRIPTION),
             },
         };
     }
 
     private async _submit(name: string, description?: string) {
-
-        if (!name) {
-            window.alert('Name cannot be empty');
-        }
 
         this.setState({
             loading: true,

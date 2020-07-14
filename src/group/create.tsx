@@ -68,6 +68,10 @@ export class CreateGroupBase extends React.Component<CreateGroupProps, CreateGro
                     onChange={(value: any) => this.setState({ current: value })}
                     onSubmit={() => {
                         if (!this.state.current.name) {
+                            window.alert(this.props.language.get(
+                                PROFILE.INSTANCE_CAN_NOT_BE_EMPTY,
+                                this.props.language.get(PROFILE.NAME),
+                            ));
                             return;
                         }
                         this._submit(this.state.current.name, this.state.current.description);
@@ -92,10 +96,6 @@ export class CreateGroupBase extends React.Component<CreateGroupProps, CreateGro
     }
 
     private async _submit(name: string, description?: string) {
-
-        if (!name) {
-            window.alert('Name cannot be empty');
-        }
 
         this.setState({
             loading: true,
