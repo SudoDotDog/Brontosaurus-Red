@@ -85,31 +85,27 @@ export const CurrentRegisterBase: React.FC<CurrentRegisterProp> = (props: Curren
 
                     try {
                         const tempPassword: string = await registerForOrganization(
-                            current.namespace,
                             current.username,
+                            current.namespace,
                             current.displayName,
                             current.email,
                             current.phone,
                         );
 
-                        this.setState({
-                            cover: createSucceedCover(
-                                this.props.language,
-                                tempPassword,
-                                () => this.props.history.goBack(),
-                            ),
-                        });
+                        setCover(createSucceedCover(
+                            props.language,
+                            tempPassword,
+                            () => props.history.goBack(),
+                        ));
 
                         window.alert(`${current.username}'s temp new password is ${tempPassword}`);
                     } catch (err) {
 
-                        this.setState({
-                            cover: createFailedCover(
-                                this.props.language,
-                                err.message,
-                                () => this.setState({ cover: undefined }),
-                            ),
-                        });
+                        setCover(createFailedCover(
+                            props.language,
+                            err.message,
+                            () => setCover(undefined),
+                        ));
                     }
                     setLoading(false);
                 }}
