@@ -6,7 +6,7 @@
 
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
-import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { NeonPair } from "@sudoo/neon/input";
 import { NeonPillGroup } from "@sudoo/neon/pill";
@@ -27,6 +27,7 @@ import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminApplicationMore, buildAdminGroupEdit } from "../util/path";
 import { ApplicationRedirectionEditor } from "./components/redirection";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
@@ -278,37 +279,23 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
 
         try {
 
-            const name: string = await updateApplicationRepository(this.state.application);
+            const applicationName: string = await updateApplicationRepository(this.state.application);
 
             this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-                    info: name,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+                cover: createSucceedCover(
+                    this.props.language,
+                    applicationName,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         } finally {
 

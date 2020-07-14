@@ -6,7 +6,6 @@
 
 import { DEFAULT_BRONTOSAURUS_NAMESPACE } from "@brontosaurus/definition";
 import { SudooFormat } from "@sudoo/internationalization";
-import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
 import { Connector } from "@sudoo/redux";
@@ -16,6 +15,7 @@ import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { registerForOrganization } from "./repository/register";
 
 type ConnectedStates = {
@@ -92,31 +92,23 @@ export const CurrentRegisterBase: React.FC<CurrentRegisterProp> = (props: Curren
                             current.phone,
                         );
 
-                        setCover({
-                            type: SIGNAL.SUCCEED,
-                            title: "Succeed",
-
-                            peek: {
-                                children: "<-",
-                                expend: "Complete",
-                                onClick: () => {
-                                    props.history.goBack();
-                                },
-                            },
+                        this.setState({
+                            cover: createSucceedCover(
+                                this.props.language,
+                                tempPassword,
+                                () => this.props.history.goBack(),
+                            ),
                         });
 
                         window.alert(`${current.username}'s temp new password is ${tempPassword}`);
                     } catch (err) {
-                        setCover({
-                            type: SIGNAL.ERROR,
-                            title: "Failed",
-                            info: err.message,
 
-                            peek: {
-                                children: "<-",
-                                expend: "Retry",
-                                onClick: () => setCover(undefined),
-                            },
+                        this.setState({
+                            cover: createFailedCover(
+                                this.props.language,
+                                err.message,
+                                () => this.setState({ cover: undefined }),
+                            ),
                         });
                     }
                     setLoading(false);

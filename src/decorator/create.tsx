@@ -4,16 +4,17 @@
  * @description Create
  */
 
-import { SIGNAL } from "@sudoo/neon/declare";
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { createDecorator } from "./repository/create";
-
-type CreateDecoratorProp = {
-} & RouteComponentProps;
 
 type CreateDecoratorStates = {
 
@@ -26,7 +27,18 @@ type CreateDecoratorStates = {
     };
 };
 
-export class CreateDecorator extends React.Component<CreateDecoratorProp, CreateDecoratorStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type CreateDecoratorProps = RouteComponentProps & ConnectedStates;
+
+export class CreateDecoratorBase extends React.Component<CreateDecoratorProps, CreateDecoratorStates> {
 
     public readonly state: CreateDecoratorStates = {
 
@@ -85,35 +97,22 @@ export class CreateDecorator extends React.Component<CreateDecoratorProp, Create
         try {
 
             const id: string = await createDecorator(name, description);
-            this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-                    info: id,
 
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+            this.setState({
+                cover: createSucceedCover(
+                    this.props.language,
+                    id,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         } finally {
 
@@ -123,3 +122,5 @@ export class CreateDecorator extends React.Component<CreateDecoratorProp, Create
         }
     }
 }
+
+export const CreateDecorator: React.ComponentType = connector.connect(CreateDecoratorBase);

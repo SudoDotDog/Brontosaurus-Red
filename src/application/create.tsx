@@ -4,17 +4,18 @@
  * @description Create
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { TimeBuilder } from "@sudoo/magic";
-import { SIGNAL } from "@sudoo/neon/declare";
 import { NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { createApplication } from "./repository/create";
-
-type CreateApplicationProp = {
-} & RouteComponentProps;
 
 type CreateApplicationStates = {
 
@@ -23,7 +24,18 @@ type CreateApplicationStates = {
     readonly current: any;
 };
 
-export class CreateApplication extends React.Component<CreateApplicationProp, CreateApplicationStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type CreateApplicationProps = RouteComponentProps & ConnectedStates;
+
+export class CreateApplicationBase extends React.Component<CreateApplicationProps, CreateApplicationStates> {
 
     public readonly state: CreateApplicationStates = {
 
@@ -84,34 +96,20 @@ export class CreateApplication extends React.Component<CreateApplicationProp, Cr
             );
 
             this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-                    info: id,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+                cover: createSucceedCover(
+                    this.props.language,
+                    id,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         }
 
@@ -120,3 +118,5 @@ export class CreateApplication extends React.Component<CreateApplicationProp, Cr
         });
     }
 }
+
+export const CreateApplication: React.ComponentType = connector.connect(CreateApplicationBase);
