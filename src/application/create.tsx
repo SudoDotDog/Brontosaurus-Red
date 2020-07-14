@@ -13,6 +13,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { createApplication } from "./repository/create";
@@ -52,11 +53,39 @@ export class CreateApplicationBase extends React.Component<CreateApplicationProp
                 <NeonSmartForm
                     loading={this.state.loading}
                     cover={this.state.cover}
-                    title="Create Application"
+                    title={this.props.language.get(
+                        PROFILE.CREATE_INSTANCE,
+                        this.props.language.get(PROFILE.APPLICATION),
+                    )}
+                    submit={this.props.language.get(PROFILE.SUBMIT)}
                     form={this._getForm()}
                     value={this.state.current}
                     onChange={(value: any) => this.setState({ current: value })}
-                    onSubmit={() => this._submit(this.state.current)}
+                    onSubmit={() => {
+
+                        if (!this.state.current.name) {
+                            alert(this.props.language.get(
+                                PROFILE.INSTANCE_CAN_NOT_BE_EMPTY,
+                                this.props.language.get(PROFILE.APPLICATION_NAME),
+                            ));
+                        }
+
+                        if (!this.state.current.key) {
+                            alert(this.props.language.get(
+                                PROFILE.INSTANCE_CAN_NOT_BE_EMPTY,
+                                this.props.language.get(PROFILE.APPLICATION_KEY),
+                            ));
+                        }
+
+                        if (!this.state.current.expire) {
+                            alert(this.props.language.get(
+                                PROFILE.INSTANCE_CAN_NOT_BE_EMPTY,
+                                this.props.language.get(PROFILE.EXPIRE_TIME),
+                            ));
+                        }
+
+                        this._submit(this.state.current);
+                    }}
                 />
             </React.Fragment>
         );
@@ -67,15 +96,15 @@ export class CreateApplicationBase extends React.Component<CreateApplicationProp
         return {
             name: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Application Name',
+                display: this.props.language.get(PROFILE.APPLICATION_NAME),
             },
             key: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Application Key',
+                display: this.props.language.get(PROFILE.APPLICATION_KEY),
             },
             expire: {
                 type: INPUT_TYPE.NUMBER,
-                display: 'Expire Time',
+                display: this.props.language.get(PROFILE.EXPIRE_TIME),
             },
         };
     }
