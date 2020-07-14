@@ -7,7 +7,7 @@
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton, NeonCoin } from "@sudoo/neon/button";
 import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
-import { NeonSticker } from "@sudoo/neon/flag";
+import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList, NeonTable } from "@sudoo/neon/table";
@@ -39,7 +39,7 @@ import { suspendTemporaryPasswordRepository, SuspendTemporaryPasswordResponse } 
 type AccountEditState = {
 
     readonly loading: boolean;
-    readonly cover: any;
+    readonly cover: NeonStickerCut | undefined;
     readonly user: SingleFetchResponse | null;
     readonly groups: string[];
     readonly tags: string[];

@@ -7,7 +7,7 @@
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
-import { NeonSticker } from "@sudoo/neon/flag";
+import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { NeonPillGroup } from "@sudoo/neon/pill";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
@@ -32,7 +32,7 @@ import { updateGroupRepository } from "./repository/update";
 type GroupEditState = {
 
     readonly loading: boolean;
-    readonly cover: any;
+    readonly cover: NeonStickerCut | undefined;
     readonly group: SingleGroupResponse | null;
     readonly decorators: string[];
 };

@@ -7,7 +7,7 @@
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIZE } from "@sudoo/neon/declare";
-import { NeonSticker } from "@sudoo/neon/flag";
+import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { NeonApplicable } from "@sudoo/neon/input";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
@@ -29,7 +29,7 @@ import { setOrganizationRepository } from "./repository/set-organization";
 export type AccountOrganizationAssignStates = {
 
     readonly loading: boolean;
-    readonly cover: any;
+    readonly cover: NeonStickerCut | undefined;
 
     readonly organizations: OrganizationResponse[];
     readonly keyword: string;

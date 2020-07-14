@@ -6,13 +6,14 @@
 
 import { SudooFormat } from "@sudoo/internationalization";
 import { SIGNAL } from "@sudoo/neon/declare";
+import { NeonStickerCut } from "@sudoo/neon/flag";
 import { PROFILE } from "../i18n/profile";
 
 export const createSucceedCover = (
     language: SudooFormat,
     info: string,
     peek: () => void,
-): any => {
+): NeonStickerCut => {
 
     return {
         type: SIGNAL.SUCCEED,
@@ -31,7 +32,7 @@ export const createFailedCover = (
     language: SudooFormat,
     info: string,
     peek: () => void,
-): any => {
+): NeonStickerCut => {
 
     return {
         type: SIGNAL.ERROR,

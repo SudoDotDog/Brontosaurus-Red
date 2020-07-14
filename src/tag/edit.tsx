@@ -7,7 +7,7 @@
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
-import { NeonSticker } from "@sudoo/neon/flag";
+import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
@@ -28,7 +28,7 @@ import { updateTagRepository } from "./repository/update";
 type TagEditState = {
 
     readonly loading: boolean;
-    readonly cover: any;
+    readonly cover: NeonStickerCut | undefined;
     readonly tag: SingleTagResponse | null;
 };
 

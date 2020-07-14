@@ -7,7 +7,7 @@
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
 import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
-import { NeonSticker } from "@sudoo/neon/flag";
+import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonSmartList } from "@sudoo/neon/table";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
@@ -29,7 +29,7 @@ import { updateNamespaceRepository } from "./repository/update";
 type NamespaceEditState = {
 
     readonly loading: boolean;
-    readonly cover: any;
+    readonly cover: NeonStickerCut | undefined;
     readonly namespace: SingleNamespaceResponse | null;
 };
 
