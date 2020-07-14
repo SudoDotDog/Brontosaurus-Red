@@ -95,7 +95,10 @@ export class MailerSourcePreferenceBase extends React.Component<MailerSourcePref
             this.setState({
                 cover: createSucceedCover(
                     this.props.language,
-                    `${changes} Preferences Updated`,
+                    this.props.language.get(
+                        PROFILE.PREFERENCES_UPDATED,
+                        changes.toString(),
+                    ),
                     () => this.props.history.goBack(),
                 ),
             });

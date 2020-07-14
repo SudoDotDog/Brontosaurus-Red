@@ -104,7 +104,10 @@ export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps,
             this.setState({
                 cover: createSucceedCover(
                     this.props.language,
-                    `${changed} Preferences Updated`,
+                    this.props.language.get(
+                        PROFILE.PREFERENCES_UPDATED,
+                        changed.toString(),
+                    ),
                     () => this.props.history.goBack(),
                 ),
             });
