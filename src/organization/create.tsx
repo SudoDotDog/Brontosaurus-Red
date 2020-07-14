@@ -5,16 +5,17 @@
  */
 
 import { DEFAULT_BRONTOSAURUS_NAMESPACE } from "@brontosaurus/definition";
-import { SIGNAL } from "@sudoo/neon/declare";
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { createOrganization } from "./repository/create";
-
-type CreateOrganizationProp = {
-} & RouteComponentProps;
 
 type CreateOrganizationStates = {
 
@@ -23,7 +24,18 @@ type CreateOrganizationStates = {
     readonly current: Record<string, any>;
 };
 
-export class CreateOrganization extends React.Component<CreateOrganizationProp, CreateOrganizationStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type CreateOrganizationProps = RouteComponentProps & ConnectedStates;
+
+export class CreateOrganizationBase extends React.Component<CreateOrganizationProps, CreateOrganizationStates> {
 
     public readonly state: CreateOrganizationStates = {
 
@@ -81,34 +93,20 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
             const id: string = await createOrganization(name, owner, ownerNamespace);
 
             this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-                    info: id,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+                cover: createSucceedCover(
+                    this.props.language,
+                    id,
+                    () => this.props.history.goBack(),
+                ),
             });
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         }
 
@@ -117,3 +115,5 @@ export class CreateOrganization extends React.Component<CreateOrganizationProp, 
         });
     }
 }
+
+export const CreateOrganization: React.ComponentType = connector.connect(CreateOrganizationBase);

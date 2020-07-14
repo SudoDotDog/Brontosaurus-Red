@@ -5,35 +5,48 @@
  */
 
 import { DEFAULT_BRONTOSAURUS_NAMESPACE } from "@brontosaurus/definition";
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
-import { MARGIN, SIGNAL, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { registerInfo } from "../account/repository/register-infos";
 import { GoBack } from "../components/go-back";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 import { registerSubOrganization } from "./repository/register";
-
-type OrganizationSubRegisterProp = {
-} & RouteComponentProps;
 
 type OrganizationSubRegisterStates = {
 
     readonly loading: boolean;
     readonly cover: NeonStickerCut | undefined;
     readonly infos: Array<{
-        name: string;
-        type: string;
+        readonly name: string;
+        readonly type: string;
     }>;
     readonly tags: string[];
     readonly selected: string[];
     readonly current: Record<string, any>;
 };
 
-export class OrganizationSubRegister extends React.Component<OrganizationSubRegisterProp, OrganizationSubRegisterStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type OrganizationSubRegisterProps = RouteComponentProps & ConnectedStates;
+
+export class OrganizationSubRegisterBase extends React.Component<OrganizationSubRegisterProps, OrganizationSubRegisterStates> {
 
     public readonly state: OrganizationSubRegisterStates = {
 
@@ -163,35 +176,22 @@ export class OrganizationSubRegister extends React.Component<OrganizationSubRegi
             );
 
             this.setState({
-                cover: {
-                    type: SIGNAL.SUCCEED,
-                    title: "Succeed",
-
-                    peek: {
-                        children: "<-",
-                        expend: "Complete",
-                        onClick: () => {
-                            this.props.history.goBack();
-                        },
-                    },
-                },
+                cover: createSucceedCover(
+                    this.props.language,
+                    tempPassword,
+                    () => this.props.history.goBack(),
+                ),
             });
 
             window.alert(`${response.username}'s temp new password is ${tempPassword}`);
         } catch (err) {
 
             this.setState({
-                cover: {
-                    type: SIGNAL.ERROR,
-                    title: "Failed",
-                    info: err.message,
-
-                    peek: {
-                        children: "<-",
-                        expend: "Retry",
-                        onClick: () => this.setState({ cover: undefined }),
-                    },
-                },
+                cover: createFailedCover(
+                    this.props.language,
+                    err.message,
+                    () => this.setState({ cover: undefined }),
+                ),
             });
         }
 
@@ -214,3 +214,5 @@ export class OrganizationSubRegister extends React.Component<OrganizationSubRegi
         return decodeURIComponent(params.organization);
     }
 }
+
+export const OrganizationSubRegister: React.ComponentType = connector.connect(OrganizationSubRegisterBase);

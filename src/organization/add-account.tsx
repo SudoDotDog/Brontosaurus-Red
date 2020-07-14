@@ -4,23 +4,24 @@
  * @description Add Account
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
-import { MARGIN, SIGNAL, SIZE } from "@sudoo/neon/declare";
+import { MARGIN, SIZE } from "@sudoo/neon/declare";
 import { NeonSticker } from "@sudoo/neon/flag";
 import { NeonApplicable } from "@sudoo/neon/input";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { setOrganizationRepository } from "../account/repository/set-organization";
 import { fetchStandaloneAccount, FetchStandaloneAccountResponse, StandaloneAccountResponse } from "../account/repository/standalone-account-fetch";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
-import { buildAdminAccountEdit } from "../util/path";
-
-export type UserProp = {
-} & RouteComponentProps;
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
+import { createFailedCover, createSucceedCover } from "../util/cover";
 
 export type UserState = {
 
@@ -33,7 +34,18 @@ export type UserState = {
     readonly page: number;
 };
 
-export class OrganizationAddAccount extends React.Component<UserProp, UserState> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+type UserProps = RouteComponentProps & ConnectedStates;
+
+export class OrganizationAddAccountBase extends React.Component<UserProps, UserState> {
 
     public readonly state: UserState = {
 
@@ -124,34 +136,24 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
 
         if (validation) {
             try {
+
                 const response = await setOrganizationRepository(username, namespace, organization);
 
                 this.setState({
-                    cover: {
-                        type: SIGNAL.SUCCEED,
-                        title: "Succeed",
-                        info: response.account + ' > ' + response.organization,
-
-                        peek: {
-                            children: "<-",
-                            expend: "Complete",
-                            onClick: () => this.props.history.push(buildAdminAccountEdit(username, namespace)),
-                        },
-                    },
+                    cover: createSucceedCover(
+                        this.props.language,
+                        response.account + ' > ' + response.organization,
+                        () => this.props.history.goBack(),
+                    ),
                 });
             } catch (err) {
-                this.setState({
-                    cover: {
-                        type: SIGNAL.ERROR,
-                        title: "Failed",
-                        info: err.message,
 
-                        peek: {
-                            children: "<-",
-                            expend: "Retry",
-                            onClick: () => this.setState({ cover: undefined }),
-                        },
-                    },
+                this.setState({
+                    cover: createFailedCover(
+                        this.props.language,
+                        err.message,
+                        () => this.setState({ cover: undefined }),
+                    ),
                 });
             } finally {
 
@@ -180,3 +182,5 @@ export class OrganizationAddAccount extends React.Component<UserProp, UserState>
         return decodeURIComponent(params.organization);
     }
 }
+
+export const OrganizationAddAccount: React.ComponentType = connector.connect(OrganizationAddAccountBase);
