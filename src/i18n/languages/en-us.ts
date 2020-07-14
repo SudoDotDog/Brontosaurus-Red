@@ -114,6 +114,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.OWNER_DISPLAY_NAME]: 'Owner Display Name',
     [PROFILE.OWNER_EMAIL]: 'Owner Email',
     [PROFILE.OWNER_INFORMATION]: 'Owner Information',
+    [PROFILE.OWNER_NAMESPACE]: 'Owner Namespace',
     [PROFILE.OWNER_PHONE]: 'Owner Phone',
     [PROFILE.OWNER_USERNAME]: 'Owner Username',
     [PROFILE.PASSWORD]: 'Password',

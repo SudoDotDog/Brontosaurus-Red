@@ -13,6 +13,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { createOrganization } from "./repository/create";
@@ -54,10 +55,14 @@ export class CreateOrganizationBase extends React.Component<CreateOrganizationPr
                 <NeonSmartForm
                     loading={this.state.loading}
                     cover={this.state.cover}
-                    title="Create Organization"
+                    title={this.props.language.get(
+                        PROFILE.CREATE_INSTANCE,
+                        this.props.language.get(PROFILE.ORGANIZATION),
+                    )}
                     form={this._getForm()}
                     value={this.state.current}
                     onChange={(value: any) => this.setState({ current: value })}
+                    submit={this.props.language.get(PROFILE.SUBMIT)}
                     onSubmit={() => this._submit(this.state.current.name, this.state.current.owner, this.state.current.ownerNamespace)}
                 />
             </React.Fragment>
@@ -69,15 +74,15 @@ export class CreateOrganizationBase extends React.Component<CreateOrganizationPr
         return {
             name: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Organization Name',
+                display: this.props.language.get(PROFILE.ORGANIZATION_NAME),
             },
             owner: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Owner Username',
+                display: this.props.language.get(PROFILE.OWNER_USERNAME),
             },
             ownerNamespace: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Owner Namespace',
+                display: this.props.language.get(PROFILE.OWNER_NAMESPACE),
             },
         };
     }
