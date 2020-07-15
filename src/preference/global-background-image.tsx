@@ -68,6 +68,10 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
 
     public async componentDidMount() {
 
+        this.setState({
+            loading: true,
+        })
+
         const response: ReadGlobalBackgroundImagesRepositoryResponse = await readGlobalBackgroundImagesPreferenceRepository();
         const images: string[] = response.globalBackgroundImages ?? [];
 
@@ -82,6 +86,7 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
         const current: FixedGlobalBackgroundImage | undefined = sample(fixedImages);
 
         this.setState({
+            loading: false,
             globalBackgroundImages: fixedImages,
             preview: current ?? null,
         });
@@ -128,10 +133,13 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
     private _renderPreview() {
 
         if (!this.state.preview) {
-            return 'test';
+            return null;
         }
 
         return (<div>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.SIMULATE_PREVIEW)}
+            </NeonTitle>
             <img
                 className={RedirectionStyle["preview-image"]}
                 src={this.state.preview.link}
@@ -152,7 +160,7 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
                     });
                 }}
             >
-                {this.props.language.get(PROFILE.SAVE_CHANGE)}
+                {this.props.language.get(PROFILE.GENERATE_SIMULATE_PREVIEW)}
             </NeonButton>
         </div>);
     }
@@ -164,6 +172,9 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
         }
 
         return (<div>
+            <NeonTitle size={SIZE.MEDIUM}>
+                {this.props.language.get(PROFILE.EDIT_BACKGROUND_IMAGES)}
+            </NeonTitle>
             {this.state.globalBackgroundImages.map((each: FixedGlobalBackgroundImage, index: number) => {
                 return this._renderImagesLink(each, index);
             })}
@@ -181,9 +192,9 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
                             {
                                 identifier: randomUnique(),
                                 link: 'https://example.sudo.dog/background.jpg',
-                            }
-                        ]
-                    })
+                            },
+                        ],
+                    });
                 }}
             >+</NeonCoin>
         </div>);
@@ -195,7 +206,7 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
             <div className={RedirectionStyle["name-container"]}>
                 <NeonInput
                     className={RedirectionStyle["name-input"]}
-                    label={this.props.language.get(PROFILE.NICKNAME)}
+                    label={this.props.language.get(PROFILE.IMAGE_LINK)}
                     value={imageLink.link}
                     onChange={(newLink: string) => {
 
