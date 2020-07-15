@@ -17,7 +17,7 @@ import { createFailedCover, createSucceedCover } from "../util/cover";
 import { globalBackgroundImagesPreferenceRepository } from "./repository/global-background-image";
 import { readGlobalBackgroundImagesPreferenceRepository, ReadGlobalBackgroundImagesRepositoryResponse } from "./repository/read-global-background-image";
 
-export type GlobalPreferenceStates = {
+export type GlobalBackgroundImagesPreferenceStates = {
 
     readonly globalBackgroundImages: string[] | null;
     readonly loading: boolean;
@@ -34,11 +34,11 @@ const connector = Connector.create<IStore, ConnectedStates>()
         language: intl.format(preference.language),
     }));
 
-export type GlobalPreferenceProps = RouteComponentProps & ConnectedStates;
+export type GlobalBackgroundImagesPreferenceProps = RouteComponentProps & ConnectedStates;
 
-export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps, GlobalPreferenceStates> {
+export class GlobalBackgroundImagesPreferenceBase extends React.Component<GlobalBackgroundImagesPreferenceProps, GlobalBackgroundImagesPreferenceStates> {
 
-    public readonly state: GlobalPreferenceStates = {
+    public readonly state: GlobalBackgroundImagesPreferenceStates = {
 
         globalBackgroundImages: null,
 
@@ -51,7 +51,7 @@ export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps,
 
         const response: ReadGlobalBackgroundImagesRepositoryResponse = await readGlobalBackgroundImagesPreferenceRepository();
         this.setState({
-            globalBackgroundImages: response.globalBackgroundImages,
+            globalBackgroundImages: response.globalBackgroundImages ?? [],
         });
     }
 
@@ -105,4 +105,4 @@ export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps,
     }
 }
 
-export const GlobalPreference: React.ComponentType = connector.connect(GlobalPreferenceBase);
+export const GlobalBackgroundImagesPreference: React.ComponentType = connector.connect(GlobalBackgroundImagesPreferenceBase);

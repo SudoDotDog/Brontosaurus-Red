@@ -42,6 +42,14 @@ export const PreferenceMenuBase: React.FC<PreferenceMenuProps> = (props: Prefere
         <MenuItem
             description={props.language.get(
                 PROFILE.VIEW_AND_MANAGE_INSTANCE_SETTING,
+                props.language.get(PROFILE.GLOBAL_BACKGROUND_IMAGES),
+            )}
+            link={props.language.get(PROFILE.GLOBAL_BACKGROUND_IMAGES)}
+            onClick={() => props.history.push('/admin/preference/global-background-images')}
+        />
+        <MenuItem
+            description={props.language.get(
+                PROFILE.VIEW_AND_MANAGE_INSTANCE_SETTING,
                 props.language.get(PROFILE.NAME_PREFERENCES),
             )}
             link={props.language.get(PROFILE.NAME_PREFERENCES)}

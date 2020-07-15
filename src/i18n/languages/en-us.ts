@@ -67,6 +67,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.FAILED]: 'Failed',
     [PROFILE.GENERATE_SOMETHING]: 'Generate {}',
     [PROFILE.GENERATE_SOMETHING_FOR_INSTANCE]: 'Generate {} for {} "{}"',
+    [PROFILE.GLOBAL_BACKGROUND_IMAGES]: 'Global Background Images',
     [PROFILE.GLOBAL_AVATAR]: 'Global Avatar',
     [PROFILE.GLOBAL_FAVICON]: 'Global Favicon',
     [PROFILE.GLOBAL_HELP_LINK]: 'Global Help Link',

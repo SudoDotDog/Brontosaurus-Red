@@ -67,6 +67,7 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.FAILED]: '失败',
     [PROFILE.GENERATE_SOMETHING]: '生成{}',
     [PROFILE.GENERATE_SOMETHING_FOR_INSTANCE]: '生成{}于{} "{}"',
+    [PROFILE.GLOBAL_BACKGROUND_IMAGES]: '全局背景图片',
     [PROFILE.GLOBAL_AVATAR]: '全局图片',
     [PROFILE.GLOBAL_FAVICON]: '全局 Favicon',
     [PROFILE.GLOBAL_HELP_LINK]: '全局帮助中心',
