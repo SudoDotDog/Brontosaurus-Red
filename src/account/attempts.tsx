@@ -5,16 +5,16 @@
  */
 
 import { SudooFormat } from "@sudoo/internationalization";
-import { MARGIN } from "@sudoo/neon/declare";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
-import { NeonTitle } from "@sudoo/neon/typography";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
+import { NamedTitle } from "../components/named-title";
 import { PageSelector } from "../components/page-selector";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { AccountAttemptElement, AccountAttemptResponse, fetchAccountAttempts } from "./repository/attempts";
 
@@ -55,26 +55,26 @@ export class AccountAttemptsBase extends React.Component<AccountAttemptsProps, A
 
     public render() {
 
+        const language: SudooFormat = this.props.language;
         return (
             <NeonIndicator
                 loading={this.state.loading}
             >
                 <GoBack />
-                <NeonTitle margin={MARGIN.SMALL}>
-                    {this._getUsername()}&#39;s Attempts
-                </NeonTitle>
-
+                <NamedTitle about={language.get(PROFILE.ATTEMPTS)}>
+                    {this._getUsername()}
+                </NamedTitle>
                 {this.state.attempts.length === 0
                     ? void 0
                     : <NeonTable
                         headers={[
-                            'At',
-                            'Application',
-                            'Platform',
-                            'User Agent',
-                            'Succeed',
-                            'Source',
-                            'Target',
+                            language.get(PROFILE.AT),
+                            language.get(PROFILE.APPLICATION),
+                            language.get(PROFILE.PLATFORM),
+                            language.get(PROFILE.USER_AGENT),
+                            language.get(PROFILE.SUCCEED),
+                            language.get(PROFILE.SOURCE),
+                            language.get(PROFILE.TARGET),
                         ]}
                         style={{ marginTop: '1rem' }}>
                         {this._renderAttempts()}
@@ -99,7 +99,12 @@ export class AccountAttemptsBase extends React.Component<AccountAttemptsProps, A
                 <td>{attempt.application}</td>
                 <td>{attempt.platform}</td>
                 <td>{attempt.userAgent}</td>
-                <td>{attempt.succeed ? 'YES' : 'NO'}</td>
+                <td>
+                    {attempt.succeed
+                        ? this.props.language.get(PROFILE.YES)
+                        : this.props.language.get(PROFILE.NO)
+                    }
+                </td>
                 <td>{attempt.source} [{attempt.proxySources.join(', ')}]</td>
                 <td>{attempt.target}</td>
             </tr>),
