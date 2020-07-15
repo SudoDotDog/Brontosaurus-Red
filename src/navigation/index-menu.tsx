@@ -70,8 +70,8 @@ export const IndexMenuBase: React.FC<IndexMenuProps> = (props: IndexMenuProps) =
                 <MenuItem
                     description={props.language.get(
                         PROFILE.ORGANIZATION_CONTROL_DESCRIPTION,
-                        organization,
-                        organization,
+                        organization ?? 'UNKNOWN',
+                        organization ?? 'UNKNOWN',
                     )}
                     link={props.language.get(PROFILE.MY_ORGANIZATION)}
                     onClick={() => props.history.push('/current')}
