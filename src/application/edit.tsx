@@ -75,15 +75,13 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
 
     public render() {
 
-        return (
-            <div>
-                <GoBack
-                    right={this.props.language.get(PROFILE.MORE)}
-                    onClickRight={() => this.props.history.push(buildAdminApplicationMore(this._getApplicationName()))}
-                />
-                {this._renderEditableInfos()}
-            </div>
-        );
+        return (<div>
+            <GoBack
+                right={this.props.language.get(PROFILE.MORE)}
+                onClickRight={() => this.props.history.push(buildAdminApplicationMore(this._getApplicationName()))}
+            />
+            {this._renderEditableInfos()}
+        </div>);
     }
 
     private _renderEditableInfos() {

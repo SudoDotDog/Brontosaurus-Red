@@ -4,11 +4,20 @@
  * @description Global Background Image
  */
 
+import { produce } from "@sudoo/immutable";
 import { SudooFormat } from "@sudoo/internationalization";
-import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
+import { NeonButton, NeonCoin } from "@sudoo/neon/button";
+import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
+import { NeonFlagCut, NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
+import { NeonInput } from "@sudoo/neon/input";
+import { NeonIndicator } from "@sudoo/neon/spinner";
+import { NeonThemeProvider } from "@sudoo/neon/theme";
+import { NeonTitle } from "@sudoo/neon/typography";
+import { randomUnique, } from "@sudoo/random";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import * as RedirectionStyle from "../../style/application/components/redirection.scss";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
@@ -16,10 +25,19 @@ import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { globalBackgroundImagesPreferenceRepository } from "./repository/global-background-image";
 import { readGlobalBackgroundImagesPreferenceRepository, ReadGlobalBackgroundImagesRepositoryResponse } from "./repository/read-global-background-image";
+import { sample } from "@sudoo/bark/array";
+
+export type FixedGlobalBackgroundImage = {
+
+    identifier: string;
+    link: string;
+};
 
 export type GlobalBackgroundImagesPreferenceStates = {
 
-    readonly globalBackgroundImages: string[] | null;
+    readonly globalBackgroundImages: FixedGlobalBackgroundImage[] | null;
+    readonly preview: FixedGlobalBackgroundImage | null;
+
     readonly loading: boolean;
     readonly cover: NeonStickerCut | undefined;
     readonly flag: NeonFlagCut | undefined;
@@ -41,6 +59,7 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
     public readonly state: GlobalBackgroundImagesPreferenceStates = {
 
         globalBackgroundImages: null,
+        preview: null,
 
         loading: false,
         cover: undefined,
@@ -50,19 +69,175 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
     public async componentDidMount() {
 
         const response: ReadGlobalBackgroundImagesRepositoryResponse = await readGlobalBackgroundImagesPreferenceRepository();
+        const images: string[] = response.globalBackgroundImages ?? [];
+
+        const fixedImages: FixedGlobalBackgroundImage[] = images.map((each: string) => {
+
+            return {
+                identifier: randomUnique(),
+                link: each,
+            };
+        });
+
+        const current: FixedGlobalBackgroundImage | undefined = sample(fixedImages);
+
         this.setState({
-            globalBackgroundImages: response.globalBackgroundImages ?? [],
+            globalBackgroundImages: fixedImages,
+            preview: current ?? null,
         });
     }
 
     public render() {
 
         return (<div>
-            <GoBack />
+            <GoBack
+                right={this.props.language.get(PROFILE.MORE)}
+                onClickRight={() => this.props.history.goBack()}
+            />
+            {this._renderInfos()}
         </div>);
     }
 
-    private async _handleSubmit() {
+    private _renderInfos() {
+
+        const language: SudooFormat = this.props.language;
+        return (<NeonThemeProvider value={{
+            margin: MARGIN.SMALL,
+        }} >
+            <NeonIndicator
+                loading={this.state.loading}
+                covering={Boolean(this.state.cover)}
+                cover={this._renderSticker()}
+            >
+                <NeonTitle>
+                    {language.get(PROFILE.GLOBAL_BACKGROUND_IMAGES)}
+                </NeonTitle>
+                {this._renderPreview()}
+                {this._renderImagesLinks()}
+                <NeonButton
+                    size={SIZE.MEDIUM}
+                    width={WIDTH.FULL}
+                    onClick={this._submit.bind(this)}
+                >
+                    {language.get(PROFILE.SAVE_CHANGE)}
+                </NeonButton>
+            </NeonIndicator>
+        </NeonThemeProvider>);
+    }
+
+    private _renderPreview() {
+
+        if (!this.state.preview) {
+            return 'test';
+        }
+
+        return (<div>
+            <img
+                className={RedirectionStyle["preview-image"]}
+                src={this.state.preview.link}
+            />
+            <NeonButton
+                size={SIZE.MEDIUM}
+                width={WIDTH.FULL}
+                onClick={() => {
+
+                    if (!this.state.globalBackgroundImages) {
+                        return;
+                    }
+
+                    const current: FixedGlobalBackgroundImage | undefined = sample(this.state.globalBackgroundImages);
+
+                    this.setState({
+                        preview: current ?? null,
+                    });
+                }}
+            >
+                {this.props.language.get(PROFILE.SAVE_CHANGE)}
+            </NeonButton>
+        </div>);
+    }
+
+    private _renderImagesLinks() {
+
+        if (!this.state.globalBackgroundImages) {
+            return null;
+        }
+
+        return (<div>
+            {this.state.globalBackgroundImages.map((each: FixedGlobalBackgroundImage, index: number) => {
+                return this._renderImagesLink(each, index);
+            })}
+            <NeonCoin
+                size={SIZE.NORMAL}
+                onClick={() => {
+
+                    if (!this.state.globalBackgroundImages) {
+                        return;
+                    }
+
+                    this.setState({
+                        globalBackgroundImages: [
+                            ...this.state.globalBackgroundImages,
+                            {
+                                identifier: randomUnique(),
+                                link: 'https://example.sudo.dog/background.jpg',
+                            }
+                        ]
+                    })
+                }}
+            >+</NeonCoin>
+        </div>);
+    }
+
+    private _renderImagesLink(imageLink: FixedGlobalBackgroundImage, index: number) {
+
+        return (<div key={imageLink.identifier}>
+            <div className={RedirectionStyle["name-container"]}>
+                <NeonInput
+                    className={RedirectionStyle["name-input"]}
+                    label={this.props.language.get(PROFILE.NICKNAME)}
+                    value={imageLink.link}
+                    onChange={(newLink: string) => {
+
+                        if (!this.state.globalBackgroundImages) {
+                            return;
+                        }
+
+                        this.setState({
+                            globalBackgroundImages: produce(this.state.globalBackgroundImages, (draft: FixedGlobalBackgroundImage[]) => {
+                                draft[index].link = newLink;
+                            }),
+                        });
+                    }}
+                />
+                <NeonCoin
+                    size={SIZE.NORMAL}
+                    onClick={() => {
+
+                        if (!this.state.globalBackgroundImages) {
+                            return;
+                        }
+
+                        this.setState({
+                            globalBackgroundImages: this.state.globalBackgroundImages.filter((_: FixedGlobalBackgroundImage, currentIndex: number) => {
+                                return currentIndex !== index;
+                            }),
+                        });
+                    }}
+                >X</NeonCoin>
+            </div>
+        </div>);
+    }
+
+    private _renderSticker() {
+
+        if (!this.state.cover) {
+            return null;
+        }
+        return <NeonSticker {...this.state.cover} />;
+    }
+
+    private async _submit() {
 
         if (!this.state.globalBackgroundImages) {
             return;
@@ -76,7 +251,9 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
 
         try {
             const changed: number = await globalBackgroundImagesPreferenceRepository(
-                this.state.globalBackgroundImages,
+                this.state.globalBackgroundImages.map((each: FixedGlobalBackgroundImage) => {
+                    return each.link;
+                }),
             );
 
             this.setState({

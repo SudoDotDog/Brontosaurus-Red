@@ -3,6 +3,7 @@ declare namespace RedirectionScssNamespace {
   export interface IRedirectionScss {
     "name-container": string;
     "name-input": string;
+    "preview-image": string;
     "regexp-input": string;
     "test-box": string;
   }

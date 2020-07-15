@@ -17,7 +17,7 @@ export const readGlobalBackgroundImagesPreferenceRepository = async (): Promise<
 
     const response: ReadGlobalBackgroundImagesRepositoryResponse = await Fetch
         .get
-        .withJson(joinRoute('/preference/read/global'))
+        .withJson(joinRoute('/preference/read/global-background-images'))
         .bearer(Brontosaurus.hard().raw)
         .fetchJson();
 
