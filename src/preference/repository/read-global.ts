@@ -11,7 +11,6 @@ import { joinRoute } from "../../repository/route";
 export type ReadGlobalRepositoryResponse = {
 
     readonly globalAvatar?: string;
-    readonly globalBackgroundImages?: string[];
     readonly globalHelpLink?: string;
     readonly globalPrivacyPolicy?: string;
 

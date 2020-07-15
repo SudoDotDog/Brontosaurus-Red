@@ -6,7 +6,6 @@
 
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonFlagCut, NeonStickerCut } from "@sudoo/neon/flag";
-import { INPUT_TYPE, NeonFromStructure, NeonSmartForm } from "@sudoo/neon/form";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -15,14 +14,12 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
-import { globalPreferenceRepository } from "./repository/global";
-import { readGlobalPreferenceRepository, ReadGlobalRepositoryResponse } from "./repository/read-global";
+import { globalBackgroundImagesPreferenceRepository } from "./repository/global-background-image";
+import { readGlobalBackgroundImagesPreferenceRepository, ReadGlobalBackgroundImagesRepositoryResponse } from "./repository/read-global-background-image";
 
 export type GlobalPreferenceStates = {
 
-    readonly initial: ReadGlobalRepositoryResponse | undefined;
-
-    readonly current: any;
+    readonly globalBackgroundImages: string[] | null;
     readonly loading: boolean;
     readonly cover: NeonStickerCut | undefined;
     readonly flag: NeonFlagCut | undefined;
@@ -43,9 +40,8 @@ export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps,
 
     public readonly state: GlobalPreferenceStates = {
 
-        initial: undefined,
+        globalBackgroundImages: null,
 
-        current: {},
         loading: false,
         cover: undefined,
         flag: undefined,
@@ -53,9 +49,9 @@ export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps,
 
     public async componentDidMount() {
 
-        const response: ReadGlobalRepositoryResponse = await readGlobalPreferenceRepository();
+        const response: ReadGlobalBackgroundImagesRepositoryResponse = await readGlobalBackgroundImagesPreferenceRepository();
         this.setState({
-            initial: response,
+            globalBackgroundImages: response.globalBackgroundImages,
         });
     }
 
@@ -63,24 +59,14 @@ export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps,
 
         return (<div>
             <GoBack />
-            <NeonSmartForm
-                loading={this.state.loading}
-                form={this._getForm()}
-                title={this.props.language.get(PROFILE.GLOBAL_PREFERENCES)}
-                submit={this.props.language.get(PROFILE.SAVE_CHANGE)}
-                cover={this.state.cover}
-                flag={this.state.flag}
-                value={{
-                    ...this.state.initial,
-                    ...this.state.current,
-                }}
-                onChange={(result: any) => this.setState({ current: result })}
-                onSubmit={this._handleSubmit.bind(this)}
-            />
         </div>);
     }
 
     private async _handleSubmit() {
+
+        if (!this.state.globalBackgroundImages) {
+            return;
+        }
 
         this.setState({
             cover: undefined,
@@ -88,16 +74,9 @@ export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps,
             loading: true,
         });
 
-        const current: any = this.state.current;
-
         try {
-            const changed: number = await globalPreferenceRepository(
-                current.globalAvatar,
-                current.globalFavicon,
-                current.globalHelpLink,
-                current.globalPrivacyPolicy,
-                current.indexPage,
-                current.entryPage,
+            const changed: number = await globalBackgroundImagesPreferenceRepository(
+                this.state.globalBackgroundImages,
             );
 
             this.setState({
@@ -123,36 +102,6 @@ export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps,
         this.setState({
             loading: false,
         });
-    }
-
-    private _getForm(): NeonFromStructure {
-
-        return {
-            globalAvatar: {
-                type: INPUT_TYPE.TEXT,
-                display: this.props.language.get(PROFILE.GLOBAL_AVATAR),
-            },
-            globalFavicon: {
-                type: INPUT_TYPE.TEXT,
-                display: this.props.language.get(PROFILE.GLOBAL_FAVICON),
-            },
-            globalHelpLink: {
-                type: INPUT_TYPE.TEXT,
-                display: this.props.language.get(PROFILE.GLOBAL_HELP_LINK),
-            },
-            globalPrivacyPolicy: {
-                type: INPUT_TYPE.TEXT,
-                display: this.props.language.get(PROFILE.GLOBAL_PRIVACY_POLICY),
-            },
-            indexPage: {
-                type: INPUT_TYPE.TEXT,
-                display: this.props.language.get(PROFILE.INDEX_PAGE),
-            },
-            entryPage: {
-                type: INPUT_TYPE.TEXT,
-                display: this.props.language.get(PROFILE.ENTRY_PAGE),
-            },
-        };
     }
 }
 
