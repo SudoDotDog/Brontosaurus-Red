@@ -4,18 +4,19 @@
  * @description Attempts
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { MARGIN } from "@sudoo/neon/declare";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { AccountAttemptElement, AccountAttemptResponse, fetchAccountAttempts } from "./repository/attempts";
-
-export type AccountAttemptsProps = {
-} & RouteComponentProps;
 
 export type AccountAttemptsStates = {
 
@@ -26,7 +27,18 @@ export type AccountAttemptsStates = {
     readonly page: number;
 };
 
-export class AccountAttempts extends React.Component<AccountAttemptsProps, AccountAttemptsStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type AccountAttemptsProps = RouteComponentProps & ConnectedStates;
+
+export class AccountAttemptsBase extends React.Component<AccountAttemptsProps, AccountAttemptsStates> {
 
     public readonly state: AccountAttemptsStates = {
 
@@ -48,7 +60,9 @@ export class AccountAttempts extends React.Component<AccountAttemptsProps, Accou
                 loading={this.state.loading}
             >
                 <GoBack />
-                <NeonTitle margin={MARGIN.SMALL}>{this._getUsername()}&#39;s Attempts</NeonTitle>
+                <NeonTitle margin={MARGIN.SMALL}>
+                    {this._getUsername()}&#39;s Attempts
+                </NeonTitle>
 
                 {this.state.attempts.length === 0
                     ? void 0
@@ -120,3 +134,5 @@ export class AccountAttempts extends React.Component<AccountAttemptsProps, Accou
         return params.namespace;
     }
 }
+
+export const AccountAttempts: React.ComponentType = connector.connect(AccountAttemptsBase);
