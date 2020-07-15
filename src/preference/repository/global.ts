@@ -10,7 +10,6 @@ import { joinRoute } from "../../repository/route";
 
 export const globalPreferenceRepository = async (
     globalAvatar?: string,
-    globalBackgroundImages?: string[],
     globalFavicon?: string,
     globalHelpLink?: string,
     globalPrivacyPolicy?: string,
@@ -25,7 +24,6 @@ export const globalPreferenceRepository = async (
         .withJson(joinRoute('/preference/global'))
         .bearer(Brontosaurus.hard().raw)
         .addIfExist('globalAvatar', globalAvatar)
-        .addIfExist('globalBackgroundImages', globalBackgroundImages)
         .addIfExist('globalFavicon', globalFavicon)
         .addIfExist('globalHelpLink', globalHelpLink)
         .addIfExist('globalPrivacyPolicy', globalPrivacyPolicy)

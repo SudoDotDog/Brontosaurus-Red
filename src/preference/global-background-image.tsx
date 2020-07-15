@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace Preference
- * @description Global
+ * @description Global Background Image
  */
 
 import { SudooFormat } from "@sudoo/internationalization";
