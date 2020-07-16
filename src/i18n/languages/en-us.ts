@@ -114,6 +114,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.NO]: 'No',
     [PROFILE.NO_MATCHED_REDIRECTION]: 'No Matched Redirection',
     [PROFILE.NO_ORGANIZATION_DESCRIPTION]: 'This user doesn\'t belong to any organization',
+    [PROFILE.NONE]: 'None',
     [PROFILE.NOTIFICATION_EMAIL]: 'Notification Email',
     [PROFILE.ORGANIZATION]: 'Organization',
     [PROFILE.ORGANIZATION_AND_USER]: 'Organization and User',

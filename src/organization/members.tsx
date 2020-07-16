@@ -79,14 +79,17 @@ export class OrganizationMembersBase extends React.Component<OrganizationMembers
                     ? void 0
                     : <NeonTable
                         headers={[
-                            'Namespace',
-                            'Username',
-                            'Display',
-                            'Phone',
-                            'Email',
-                            'Action',
+                            this.props.language.get(PROFILE.NAMESPACE),
+                            this.props.language.get(PROFILE.USERNAME),
+                            this.props.language.get(PROFILE.DISPLAY_NAME),
+                            this.props.language.get(PROFILE.PHONE),
+                            this.props.language.get(PROFILE.EMAIL),
+                            this.props.language.get(PROFILE.ACTION),
                         ]}
-                        style={{ marginTop: '1rem' }}>
+                        style={{
+                            marginTop: '1rem',
+                        }}
+                    >
                         {this._renderMembers()}
                     </NeonTable>}
                 <PageSelector
@@ -120,7 +123,7 @@ export class OrganizationMembersBase extends React.Component<OrganizationMembers
                 <td>{member.phone}</td>
                 <td>{member.email}</td>
                 <td>{isOwner
-                    ? 'None'
+                    ? this.props.language.get(PROFILE.NONE)
                     : (<NeonButton
                         className={MenuStyle["action-button"]}
                         style={{ margin: '2px' }}

@@ -114,6 +114,7 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.NO]: '否',
     [PROFILE.NO_MATCHED_REDIRECTION]: '没有匹配的重定向',
     [PROFILE.NO_ORGANIZATION_DESCRIPTION]: '这个用户不属于任何组织',
+    [PROFILE.NONE]: '无',
     [PROFILE.NOTIFICATION_EMAIL]: '推送电子邮箱',
     [PROFILE.ORGANIZATION]: '组织',
     [PROFILE.ORGANIZATION_AND_USER]: '组织和用户',

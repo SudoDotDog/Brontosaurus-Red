@@ -4,20 +4,21 @@
  * @description Members
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { MARGIN } from "@sudoo/neon/declare";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminAccountEdit } from "../util/path";
 import { fetchGroupMembers, GroupMemberElement, GroupMemberResponse } from "./repository/members";
-
-export type GroupMembersProps = {
-} & RouteComponentProps;
 
 export type GroupMembersStates = {
 
@@ -28,7 +29,18 @@ export type GroupMembersStates = {
     readonly page: number;
 };
 
-export class GroupMembers extends React.Component<GroupMembersProps, GroupMembersStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type GroupMembersProps = RouteComponentProps & ConnectedStates;
+
+export class GroupMembersBase extends React.Component<GroupMembersProps, GroupMembersStates> {
 
     public readonly state: GroupMembersStates = {
 
@@ -117,3 +129,5 @@ export class GroupMembers extends React.Component<GroupMembersProps, GroupMember
         return params.group;
     }
 }
+
+export const GroupMembers: React.ComponentType = connector.connect(GroupMembersBase);
