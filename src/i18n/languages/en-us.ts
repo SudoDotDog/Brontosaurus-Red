@@ -150,6 +150,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.REDIRECTIONS]: 'Redirections',
     [PROFILE.REGISTER]: 'Register',
     [PROFILE.REGISTER_ACCOUNT]: 'Register Account',
+    [PROFILE.REGISTER_ACCOUNT_FOR_INSTANCE]: 'Register Account for {}',
     [PROFILE.REGISTER_ACCOUNT_FOR_ORGANIZATION]: 'Register new account for organization "{}"',
     [PROFILE.REGISTER_DESCRIPTION]: 'Register sub account for your organization',
     [PROFILE.REGISTER_SUB_ACCOUNT]: 'Register Sub Account',

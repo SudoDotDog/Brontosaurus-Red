@@ -11,13 +11,14 @@ import { MARGIN, SIZE, WIDTH } from "@sudoo/neon/declare";
 import { NeonSticker, NeonStickerCut } from "@sudoo/neon/flag";
 import { FromElement, INPUT_TYPE, NeonSmartForm } from "@sudoo/neon/form";
 import { NeonIndicator } from "@sudoo/neon/spinner";
-import { NeonTitle } from "@sudoo/neon/typography";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { registerInfo } from "../account/repository/register-infos";
 import { GoBack } from "../components/go-back";
+import { NamedTitle } from "../components/named-title";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { registerSubOrganization } from "./repository/register";
@@ -84,7 +85,12 @@ export class OrganizationSubRegisterBase extends React.Component<OrganizationSub
                 covering={Boolean(this.state.cover)}
                 cover={this._renderSticker()}
             >
-                <NeonTitle>Register Sub Account for {this._getOrganizationName()}</NeonTitle>
+                <NamedTitle about={this.props.language.get(
+                    PROFILE.REGISTER_ACCOUNT_FOR_INSTANCE,
+                    this.props.language.get(PROFILE.ORGANIZATION),
+                )}>
+                    {this._getOrganizationName()}
+                </NamedTitle>
                 <NeonSmartForm
                     form={this._getForm()}
                     value={this.state.current}
@@ -94,8 +100,9 @@ export class OrganizationSubRegisterBase extends React.Component<OrganizationSub
                     onClick={() => this._submit(this.state.current)}
                     width={WIDTH.FULL}
                     size={SIZE.MEDIUM}
-                    margin={MARGIN.SMALL}>
-                    Submit
+                    margin={MARGIN.SMALL}
+                >
+                    {this.props.language.get(PROFILE.SUBMIT)}
                 </NeonButton>
             </NeonIndicator>
         </React.Fragment>);
@@ -106,23 +113,23 @@ export class OrganizationSubRegisterBase extends React.Component<OrganizationSub
         return {
             username: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Username',
+                display: this.props.language.get(PROFILE.USERNAME),
             },
             namespace: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Namespace',
+                display: this.props.language.get(PROFILE.NAMESPACE),
             },
             displayName: {
                 type: INPUT_TYPE.TEXT,
-                display: 'Display Name',
+                display: this.props.language.get(PROFILE.DISPLAY_NAME),
             },
             email: {
                 type: INPUT_TYPE.EMAIL,
-                display: 'Email Address',
+                display: this.props.language.get(PROFILE.EMAIL),
             },
             phone: {
                 type: INPUT_TYPE.NUMBER,
-                display: 'Phone Number',
+                display: this.props.language.get(PROFILE.PHONE),
             },
             ...this.state.infos.reduce((previous: Record<string, INPUT_TYPE>, current: {
                 name: string;
@@ -139,6 +146,16 @@ export class OrganizationSubRegisterBase extends React.Component<OrganizationSub
 
     private async _submit(response: Record<string, any>) {
 
+        if (!response.username) {
+            alert('username required');
+            return;
+        }
+
+        if (!response.namespace) {
+            alert('namespace required');
+            return;
+        }
+
         this.setState({
             loading: true,
         });
@@ -153,16 +170,6 @@ export class OrganizationSubRegisterBase extends React.Component<OrganizationSub
                 [current.name]: response[current.name] || '',
             };
         }, {} as Record<string, string>);
-
-        if (!response.username) {
-            alert('username required');
-            return;
-        }
-
-        if (!response.namespace) {
-            alert('namespace required');
-            return;
-        }
 
         try {
             const tempPassword: string = await registerSubOrganization(
