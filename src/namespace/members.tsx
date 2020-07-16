@@ -5,17 +5,17 @@
  */
 
 import { SudooFormat } from "@sudoo/internationalization";
-import { MARGIN } from "@sudoo/neon/declare";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
-import { NeonTitle } from "@sudoo/neon/typography";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
+import { NamedTitle } from "../components/named-title";
 import { PageSelector } from "../components/page-selector";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminAccountEdit } from "../util/path";
 import { fetchNamespaceMembers, NamespaceMemberElement, NamespaceMemberResponse } from "./repository/members";
@@ -62,19 +62,26 @@ export class NamespaceMembersBase extends React.Component<NamespaceMembersProps,
                 loading={this.state.loading}
             >
                 <GoBack />
-                <NeonTitle margin={MARGIN.SMALL}>{this._getNamespaceName()}&#39;s Member</NeonTitle>
-
+                <NamedTitle about={this.props.language.get(
+                    PROFILE.MEMBER_OF_INSTANCE,
+                    this.props.language.get(PROFILE.NAMESPACE),
+                )}>
+                    {this._getNamespaceName()}
+                </NamedTitle>
                 {this.state.members.length === 0
                     ? void 0
                     : <NeonTable
                         headers={[
-                            'Namespace',
-                            'Username',
-                            'Display',
-                            'Phone',
-                            'Email',
+                            this.props.language.get(PROFILE.NAMESPACE),
+                            this.props.language.get(PROFILE.USERNAME),
+                            this.props.language.get(PROFILE.DISPLAY_NAME),
+                            this.props.language.get(PROFILE.PHONE),
+                            this.props.language.get(PROFILE.EMAIL),
                         ]}
-                        style={{ marginTop: '1rem' }}>
+                        style={{
+                            marginTop: '1rem',
+                        }}
+                    >
                         {this._renderMembers()}
                     </NeonTable>}
 
