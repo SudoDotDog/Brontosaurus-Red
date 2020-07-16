@@ -128,8 +128,9 @@ export class OrganizationMembersBase extends React.Component<OrganizationMembers
                         className={MenuStyle["action-button"]}
                         style={{ margin: '2px' }}
                         onClick={() => this._promoteUser(member.username, member.namespace)}
-                        size={SIZE.RELATIVE}>
-                        Promote
+                        size={SIZE.RELATIVE}
+                    >
+                        {this.props.language.get(PROFILE.PROMOTE)}
                     </NeonButton>)}
                 </td>
             </tr>);
