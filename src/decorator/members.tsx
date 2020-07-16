@@ -4,20 +4,21 @@
  * @description Members
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { MARGIN } from "@sudoo/neon/declare";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminAccountEdit } from "../util/path";
 import { DecoratorMemberElement, DecoratorMemberResponse, fetchDecoratorMembers } from "./repository/members";
-
-export type DecoratorMembersProps = {
-} & RouteComponentProps;
 
 export type DecoratorMembersStates = {
 
@@ -28,7 +29,18 @@ export type DecoratorMembersStates = {
     readonly page: number;
 };
 
-export class DecoratorMembers extends React.Component<DecoratorMembersProps, DecoratorMembersStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type DecoratorMembersProps = RouteComponentProps & ConnectedStates;
+
+export class DecoratorMembersBase extends React.Component<DecoratorMembersProps, DecoratorMembersStates> {
 
     public readonly state: DecoratorMembersStates = {
 
@@ -118,3 +130,5 @@ export class DecoratorMembers extends React.Component<DecoratorMembersProps, Dec
         return params.decorator;
     }
 }
+
+export const DecoratorMembers: React.ComponentType = connector.connect(DecoratorMembersBase);

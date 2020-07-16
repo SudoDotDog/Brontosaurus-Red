@@ -4,20 +4,21 @@
  * @description Members
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { MARGIN } from "@sudoo/neon/declare";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
 import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
+import { intl } from "../i18n/intl";
+import { IStore } from "../state/declare";
 import { buildAdminAccountEdit } from "../util/path";
 import { fetchNamespaceMembers, NamespaceMemberElement, NamespaceMemberResponse } from "./repository/members";
-
-export type NamespaceMembersProps = {
-} & RouteComponentProps;
 
 export type NamespaceMembersStates = {
 
@@ -28,7 +29,18 @@ export type NamespaceMembersStates = {
     readonly page: number;
 };
 
-export class NamespaceMembers extends React.Component<NamespaceMembersProps, NamespaceMembersStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type NamespaceMembersProps = RouteComponentProps & ConnectedStates;
+
+export class NamespaceMembersBase extends React.Component<NamespaceMembersProps, NamespaceMembersStates> {
 
     public readonly state: NamespaceMembersStates = {
 
@@ -117,3 +129,5 @@ export class NamespaceMembers extends React.Component<NamespaceMembersProps, Nam
         return params.namespace;
     }
 }
+
+export const NamespaceMembers: React.ComponentType = connector.connect(NamespaceMembersBase);
