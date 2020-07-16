@@ -18,7 +18,6 @@ export type SingleApplicationFetchResponse = {
     readonly name: string;
     readonly key: string;
     readonly expire: number;
-    readonly groups: string[];
 
     readonly redirections: ApplicationRedirection[];
     readonly iFrameProtocol: boolean;
@@ -26,11 +25,14 @@ export type SingleApplicationFetchResponse = {
     readonly alertProtocol: boolean;
     readonly noneProtocol: boolean;
 
-    readonly requires: string[];
     readonly green: string;
     readonly greenAccess: boolean;
     readonly portalAccess: boolean;
     readonly publicKey: string;
+
+    readonly groups: string[];
+    readonly requires: string[];
+    readonly requireTags: string[];
 };
 
 export const singleFetchApplicationRepository = async (key: string): Promise<SingleApplicationFetchResponse> => {
