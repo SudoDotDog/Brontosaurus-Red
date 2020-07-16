@@ -99,6 +99,7 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.LIMIT]: '上限',
     [PROFILE.MAILER_SOURCE]: '电子邮件源',
     [PROFILE.MAILER_TRANSPORT]: '电子邮件配置',
+    [PROFILE.MEMBER_OF_INSTANCE]: '{}的成员',
     [PROFILE.MEMBERS]: '成员',
     [PROFILE.MODIFY_INSTANCE]: '编辑{}',
     [PROFILE.MORE]: '更多',

@@ -99,6 +99,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.LIMIT]: 'Limit',
     [PROFILE.MAILER_SOURCE]: 'Mailer Source',
     [PROFILE.MAILER_TRANSPORT]: 'Mailer Transport',
+    [PROFILE.MEMBER_OF_INSTANCE]: 'Member of {}',
     [PROFILE.MEMBERS]: 'Members',
     [PROFILE.MODIFY_INSTANCE]: 'Modify {}',
     [PROFILE.MORE]: 'More',
