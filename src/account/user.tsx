@@ -120,7 +120,8 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                 Boolean(user.twoFA) ? PROFILE.YES : PROFILE.NO,
             );
 
-            return (<tr key={user.username}>
+            const key: string = `${user.namespace}:${user.username}`;
+            return (<tr key={key}>
                 <td>
                     <ClickableSpan
                         to={buildAdminNamespaceEdit(user.namespace)}
