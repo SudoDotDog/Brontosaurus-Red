@@ -4,23 +4,25 @@
  * @description Members
  */
 
+import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton } from "@sudoo/neon/button";
-import { MARGIN, SIZE } from "@sudoo/neon/declare";
+import { SIZE } from "@sudoo/neon/declare";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonTable } from "@sudoo/neon/table";
-import { NeonTitle } from "@sudoo/neon/typography";
+import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import * as MenuStyle from "../../style/components/menu.scss";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
+import { NamedTitle } from "../components/named-title";
 import { PageSelector } from "../components/page-selector";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
 import { buildAdminAccountEdit } from "../util/path";
 import { fetchOrganizationMembers, OrganizationMemberElement, OrganizationMemberOwner, OrganizationMemberResponse } from "./repository/member";
 import { setOwnerRepository } from "./repository/set-owner";
-
-export type OrganizationMembersProps = {
-} & RouteComponentProps;
 
 export type OrganizationMembersStates = {
 
@@ -32,7 +34,18 @@ export type OrganizationMembersStates = {
     readonly page: number;
 };
 
-export class OrganizationMembers extends React.Component<OrganizationMembersProps, OrganizationMembersStates> {
+type ConnectedStates = {
+    readonly language: SudooFormat;
+};
+
+const connector = Connector.create<IStore, ConnectedStates>()
+    .connectStates(({ preference }: IStore) => ({
+        language: intl.format(preference.language),
+    }));
+
+export type OrganizationMembersProps = RouteComponentProps & ConnectedStates;
+
+export class OrganizationMembersBase extends React.Component<OrganizationMembersProps, OrganizationMembersStates> {
 
     public readonly state: OrganizationMembersStates = {
 
@@ -56,8 +69,12 @@ export class OrganizationMembers extends React.Component<OrganizationMembersProp
                 loading={this.state.loading}
             >
                 <GoBack />
-                <NeonTitle margin={MARGIN.SMALL}>{this._getOrganization()}&#39;s Member</NeonTitle>
-
+                <NamedTitle about={this.props.language.get(
+                    PROFILE.MEMBER_OF_INSTANCE,
+                    this.props.language.get(PROFILE.ORGANIZATION),
+                )}>
+                    {this._getOrganization()}
+                </NamedTitle>
                 {this.state.members.length === 0
                     ? void 0
                     : <NeonTable
@@ -176,3 +193,5 @@ export class OrganizationMembers extends React.Component<OrganizationMembersProp
         return params.organization;
     }
 }
+
+export const OrganizationMembers: React.ComponentType = connector.connect(OrganizationMembersBase);
