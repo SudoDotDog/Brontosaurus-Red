@@ -154,6 +154,8 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.REMOVE_ALL]: '清除全部',
     [PROFILE.REMOVE_TWO_FA]: '清除两步验证',
     [PROFILE.REMOVE_TWO_FA_OF_INSTANCE]: '清除{} "{}" 的两步验证',
+    [PROFILE.REQUIRE_GROUPS]: '需求用户组',
+    [PROFILE.REQUIRE_TAGS]: '需求标记',
     [PROFILE.REQUIRES]: '需求',
     [PROFILE.RESET]: '重置',
     [PROFILE.RESET_ATTEMPT_POINTS]: '重置尝试次数',

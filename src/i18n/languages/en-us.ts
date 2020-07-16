@@ -153,6 +153,8 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.REMOVE_ALL]: 'Remove All',
     [PROFILE.REMOVE_TWO_FA]: 'Remove 2FA',
     [PROFILE.REMOVE_TWO_FA_OF_INSTANCE]: 'Remove two-factoring authorization for {} "{}"',
+    [PROFILE.REQUIRE_GROUPS]: 'Require Groups',
+    [PROFILE.REQUIRE_TAGS]: 'Require Tags',
     [PROFILE.REQUIRES]: 'Requires',
     [PROFILE.RESET]: 'Reset',
     [PROFILE.RESET_ATTEMPT_POINTS]: 'Reset Attempt Points',
