@@ -20,6 +20,7 @@ import { RouteComponentProps } from "react-router-dom";
 import * as ApplicationEditStyle from "../../style/application/edit.scss";
 import { ApplicationRedirection } from "../common/declare";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
+import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
 import { ActiveStatus } from "../components/active-status";
 import { ClickableSpan } from "../components/clickable-span";
 import { GoBack } from "../components/go-back";
@@ -38,7 +39,9 @@ type ApplicationEditState = {
     readonly loading: boolean;
     readonly cover: NeonStickerCut | undefined;
     readonly application: SingleApplicationFetchResponse | null;
+
     readonly groups: string[];
+    readonly tags: string[];
 };
 
 type ConnectedStates = {
@@ -59,17 +62,21 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
         loading: false,
         cover: undefined,
         application: null,
+
         groups: [],
+        tags: [],
     };
 
     public async componentDidMount() {
 
         const response: SingleApplicationFetchResponse = await singleFetchApplicationRepository(this._getApplicationKey());
         const groups: AllGroupsResponse[] = await fetchAllGroups();
+        const tags: AllTagsResponse[] = await fetchAllTags();
 
         this.setState({
             application: response,
             groups: groups.map((group) => group.name),
+            tags: tags.map((tag) => tag.name),
         });
     }
 
@@ -175,7 +182,7 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
                         options={this.state.groups}
                     />
                     <NeonTitle size={SIZE.MEDIUM}>
-                        {language.get(PROFILE.REQUIRES)}
+                        {language.get(PROFILE.REQUIRE_GROUPS)}
                     </NeonTitle>
                     <NeonPillGroup
                         addText={language.get(PROFILE.ADD_INDICATOR)}
@@ -192,6 +199,25 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
                         addable
                         removable
                         options={this.state.groups}
+                    />
+                    <NeonTitle size={SIZE.MEDIUM}>
+                        {language.get(PROFILE.REQUIRE_TAGS)}
+                    </NeonTitle>
+                    <NeonPillGroup
+                        addText={language.get(PROFILE.ADD_INDICATOR)}
+                        style={{ flexWrap: 'wrap' }}
+                        selected={this.state.application.requireTags}
+                        onChange={(next: string[]) => this._updateApplication('requireTags', next)}
+                        render={(value: string) => {
+                            return (<ClickableSpan
+                                to={buildAdminGroupEdit(value)}
+                            >
+                                {value}
+                            </ClickableSpan>);
+                        }}
+                        addable
+                        removable
+                        options={this.state.tags}
                     />
                     <NeonTitle size={SIZE.MEDIUM}>
                         {language.get(PROFILE.REDIRECTIONS)}
