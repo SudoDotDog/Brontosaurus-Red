@@ -20,8 +20,10 @@ import { fetchStandaloneAccount, FetchStandaloneAccountResponse, StandaloneAccou
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
 import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { NamedTitle } from "../components/named-title";
 
 export type UserState = {
 
@@ -67,11 +69,17 @@ export class OrganizationAddAccountBase extends React.Component<UserProps, UserS
                 cover={this._renderSticker()}
             >
                 <GoBack />
+                <NamedTitle about={this.props.language.get(
+                    PROFILE.MEMBER_OF_INSTANCE,
+                    this.props.language.get(PROFILE.ORGANIZATION),
+                )}>
+                    {this._getOrganizationName()}
+                </NamedTitle>
                 <NeonTitle margin={MARGIN.SMALL}>Add account to Organization: {this._getOrganizationName()}</NeonTitle>
-
                 <NeonApplicable
                     size={SIZE.MEDIUM}
-                    label={'Search Accounts'}
+                    apply={this.props.language.get(PROFILE.APPLY)}
+                    label={`${this.props.language.get(PROFILE.SEARCH)} ${this.props.language.get(PROFILE.ACCOUNT)}`}
                     onApply={(keyword: string) => this.setState({ keyword, page: 0 }, () => {
                         this._searchUser();
                     })}
