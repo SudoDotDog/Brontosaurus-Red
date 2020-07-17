@@ -28,6 +28,7 @@ import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminAccountEdit, buildAdminDecoratorEdit, buildAdminNamespaceEdit, buildAdminOrganizationMore, buildAdminTagEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { singleOrganization, SingleOrganizationResponse } from "./repository/single";
 import { updateOrganizationRepository } from "./repository/update";
 
@@ -64,7 +65,10 @@ export class OrganizationEditBase extends React.Component<OrganizationEditProp, 
 
     public async componentDidMount() {
 
-        const response: SingleOrganizationResponse = await singleOrganization(this._getOrganizationName());
+        const organizationName: string = this._getOrganizationName();
+        TitleManager.setNestedPage(PROFILE.ORGANIZATION, PROFILE.EDIT, organizationName);
+
+        const response: SingleOrganizationResponse = await singleOrganization(organizationName);
         const decorators: AllDecoratorsResponse[] = await fetchAllDecorators();
         const tags: AllTagsResponse[] = await fetchAllTags();
 
@@ -73,6 +77,11 @@ export class OrganizationEditBase extends React.Component<OrganizationEditProp, 
             decorators: decorators.map((res: AllDecoratorsResponse) => res.name),
             tags: tags.map((res: AllTagsResponse) => res.name),
         });
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {

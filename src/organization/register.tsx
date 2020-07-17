@@ -21,6 +21,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { TitleManager } from "../util/title";
 import { registerSubOrganization } from "./repository/register";
 
 type OrganizationSubRegisterStates = {
@@ -63,6 +64,9 @@ export class OrganizationSubRegisterBase extends React.Component<OrganizationSub
 
     public async componentDidMount() {
 
+        const organizationName: string = this._getOrganizationName();
+        TitleManager.setNestedPage(PROFILE.ORGANIZATION, PROFILE.REGISTER, organizationName);
+
         const infos: Array<{
             name: string;
             type: string;
@@ -74,6 +78,11 @@ export class OrganizationSubRegisterBase extends React.Component<OrganizationSub
                 type: info.type,
             })),
         });
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {

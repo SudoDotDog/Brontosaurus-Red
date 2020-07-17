@@ -25,6 +25,7 @@ import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminGroupEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { inplodeOrganization } from "./repository/inplode";
 
 type InplodeOrganizationStates = {
@@ -67,6 +68,7 @@ export class InplodeOrganizationBase extends React.Component<InplodeOrganization
 
     public async componentDidMount() {
 
+        TitleManager.setNestedPage(PROFILE.ORGANIZATION, PROFILE.INPLODE);
         const infos: Array<{
             name: string;
             type: string;
@@ -79,6 +81,11 @@ export class InplodeOrganizationBase extends React.Component<InplodeOrganization
                 type: info.type,
             })),
         });
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {

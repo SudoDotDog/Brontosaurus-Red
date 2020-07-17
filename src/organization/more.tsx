@@ -16,6 +16,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminOrganizationEdit, buildAdminOrganizationMembers } from "../util/path";
+import { TitleManager } from "../util/title";
 import { activateOrganizationRepository } from "./repository/activate";
 import { deactivateOrganizationRepository } from "./repository/deactivate";
 
@@ -60,6 +61,12 @@ export const OrganizationMoreBase: React.FC<OrganizationMoreProps> = (props: Org
 
     const params: any = props.match.params;
     const organization: string = decodeURIComponent(params.organization);
+
+    React.useEffect(() => {
+
+        TitleManager.setNestedPage(PROFILE.ORGANIZATION, PROFILE.MORE, organization);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     return (<div>
         <GoBack

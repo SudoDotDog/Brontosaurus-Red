@@ -23,6 +23,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { TitleManager } from "../util/title";
 
 export type UserState = {
 
@@ -61,7 +62,15 @@ export class OrganizationAddAccountBase extends React.Component<UserProps, UserS
 
     public componentDidMount() {
 
+        const organizationName: string = this._getOrganizationName();
+        TitleManager.setNestedPage(PROFILE.ORGANIZATION, PROFILE.ADD, organizationName);
+
         this._searchUser();
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {

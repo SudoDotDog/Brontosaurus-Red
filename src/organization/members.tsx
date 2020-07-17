@@ -21,6 +21,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminAccountEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { fetchOrganizationMembers, OrganizationMemberElement, OrganizationMemberOwner, OrganizationMemberResponse } from "./repository/member";
 import { setOwnerRepository } from "./repository/set-owner";
 
@@ -59,7 +60,15 @@ export class OrganizationMembersBase extends React.Component<OrganizationMembers
 
     public componentDidMount() {
 
+        const organizationName: string = this._getOrganization();
+        TitleManager.setNestedPage(PROFILE.ORGANIZATION, PROFILE.MEMBERS, organizationName);
+
         this._fetchOrganization();
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {
