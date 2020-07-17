@@ -17,6 +17,20 @@ export class TitleManager {
         return instance;
     }
 
+    public static setSubPage(page: string): TitleManager {
+
+        const instance: TitleManager = this.instance;
+        instance.setSubPage(page);
+        return instance;
+    }
+
+    public static restore(): TitleManager {
+
+        const instance: TitleManager = this.instance;
+        instance.restore();
+        return instance;
+    }
+
     public static get instance(): TitleManager {
 
         return this._instance;
@@ -36,9 +50,15 @@ export class TitleManager {
         return this;
     }
 
-    public setSubPage(title: string): this {
+    public setSubPage(page: string): this {
 
-        this._title.setTitle(title);
+        this._title.setTitle(page);
+        return this;
+    }
+
+    public restore(): this {
+
+        this._title.restoreTitle();
         return this;
     }
 }

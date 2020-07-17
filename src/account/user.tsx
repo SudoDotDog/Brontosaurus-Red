@@ -20,6 +20,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminAccountEdit, buildAdminAccountMore, buildAdminNamespaceEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { fetchAccount, FetchAccountResponse, UserResponse } from "./repository/account-fetch";
 
 export type UserState = {
@@ -57,7 +58,14 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
     private readonly _defaultValue: string = searchKeywordCache.value;
 
     public componentDidMount() {
+
         this._searchUser();
+        TitleManager.setSubPage('User');
+    }
+
+    public componentWillUnmount() {
+
+        TitleManager.restore();
     }
 
     public render() {
@@ -165,6 +173,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
             this.state.keyword,
             this.state.page,
         );
+
         this.setState({
             users: response.accounts,
             pages: response.pages,
