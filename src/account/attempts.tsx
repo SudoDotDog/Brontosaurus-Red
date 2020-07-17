@@ -17,6 +17,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { AccountAttemptElement, AccountAttemptResponse, fetchAccountAttempts } from "./repository/attempts";
+import { TitleManager } from "../util/title";
 
 export type AccountAttemptsStates = {
 
@@ -50,7 +51,14 @@ export class AccountAttemptsBase extends React.Component<AccountAttemptsProps, A
     };
 
     public componentDidMount() {
+
+        TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.ATTEMPTS);
         this._fetchAttempts();
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {

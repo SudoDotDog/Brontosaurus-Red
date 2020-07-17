@@ -49,6 +49,20 @@ export class TitleManager {
         return instance;
     }
 
+    public static setEditPage(profile: PROFILE, instanceValue: string): TitleManager {
+
+        const instance: TitleManager = this.instance;
+        instance.setEditPage(profile, instanceValue);
+        return instance;
+    }
+
+    public static setMorePage(profile: PROFILE, instanceValue: string): TitleManager {
+
+        const instance: TitleManager = this.instance;
+        instance.setMorePage(profile, instanceValue);
+        return instance;
+    }
+
     public static restore(): TitleManager {
 
         const instance: TitleManager = this.instance;
@@ -64,7 +78,9 @@ export class TitleManager {
     private readonly _title: Title;
 
     private _language: LOCALE;
+
     private _currentSetup: PROFILE[];
+    private _instanceValue: string | null;
 
     private constructor() {
 
@@ -72,7 +88,9 @@ export class TitleManager {
 
         const checkedDefaultLanguage: LOCALE = getSystemLanguage(defaultLanguage);
         this._language = checkedDefaultLanguage;
+
         this._currentSetup = [];
+        this._instanceValue = null;
     }
 
     public setLanguage(language: LOCALE): this {
@@ -86,6 +104,7 @@ export class TitleManager {
         this._title.setInit(title);
         this._title.setLevelBase(`{} | ${title}`, 1);
         this._title.setLevelBase(`{} | {} | ${title}`, 2);
+        this._title.setLevelBase(`{} - {} | {} | ${title}`, 3);
         return this;
     }
 
@@ -94,7 +113,9 @@ export class TitleManager {
         const formatter: SudooFormat = intl.format(this._language);
 
         this._title.setTitle(formatter.get(profile));
+
         this._currentSetup = [profile];
+        this._instanceValue = null;
         return this;
     }
 
@@ -106,7 +127,39 @@ export class TitleManager {
             formatter.get(nested),
             formatter.get(profile),
         );
+
         this._currentSetup = [nested, profile];
+        this._instanceValue = null;
+        return this;
+    }
+
+    public setEditPage(profile: PROFILE, instanceValue: string): this {
+
+        const formatter: SudooFormat = intl.format(this._language);
+
+        this._title.setTitle(
+            instanceValue,
+            formatter.get(PROFILE.EDIT),
+            formatter.get(profile),
+        );
+
+        this._currentSetup = [PROFILE.EDIT, profile];
+        this._instanceValue = instanceValue;
+        return this;
+    }
+
+    public setMorePage(profile: PROFILE, instanceValue: string): this {
+
+        const formatter: SudooFormat = intl.format(this._language);
+
+        this._title.setTitle(
+            instanceValue,
+            formatter.get(PROFILE.MORE),
+            formatter.get(profile),
+        );
+
+        this._currentSetup = [PROFILE.MORE, profile];
+        this._instanceValue = instanceValue;
         return this;
     }
 
@@ -118,7 +171,18 @@ export class TitleManager {
 
         const formatter: SudooFormat = intl.format(this._language);
 
-        this._title.setTitle(...this._currentSetup.map((each: PROFILE) => formatter.get(each)));
+        if (this._instanceValue) {
+
+            this._title.setTitle(
+                this._instanceValue,
+                ...this._currentSetup.map((each: PROFILE) => formatter.get(each)),
+            );
+            return this;
+        }
+
+        this._title.setTitle(
+            ...this._currentSetup.map((each: PROFILE) => formatter.get(each)),
+        );
         return this;
     }
 
@@ -126,6 +190,7 @@ export class TitleManager {
 
         this._title.restoreTitle();
         this._currentSetup = [];
+        this._instanceValue = null;
         return this;
     }
 }

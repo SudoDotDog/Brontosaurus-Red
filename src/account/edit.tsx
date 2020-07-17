@@ -35,6 +35,7 @@ import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse, SpecialPasswordResponse } from "./repository/single-fetch";
 import { suspendApplicationPasswordRepository, SuspendApplicationPasswordResponse } from "./repository/suspend-application-password";
 import { suspendTemporaryPasswordRepository, SuspendTemporaryPasswordResponse } from "./repository/suspend-temp-password";
+import { TitleManager } from "../util/title";
 
 type AccountEditState = {
 
@@ -71,7 +72,10 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
 
     public async componentDidMount() {
 
-        const response: SingleFetchResponse = await singleFetchRepository(this._getUsername(), this._getNamespace());
+        const username: string = this._getUsername();
+        TitleManager.setEditPage(PROFILE.ACCOUNT, username);
+
+        const response: SingleFetchResponse = await singleFetchRepository(username, this._getNamespace());
         const groups: AllGroupsResponse[] = await fetchAllGroups();
         const decorators: AllDecoratorsResponse[] = await fetchAllDecorators();
         const tags: AllTagsResponse[] = await fetchAllTags();
@@ -82,6 +86,11 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
             decorators: decorators.map((res: AllDecoratorsResponse) => res.name),
             tags: tags.map((res: AllTagsResponse) => res.name),
         });
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {
