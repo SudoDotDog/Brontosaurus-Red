@@ -11,8 +11,9 @@ import { RouteComponentProps } from "react-router-dom";
 import * as StyleMe from "../../style/components/menu.scss";
 import { MenuItem } from "../components/menu-item";
 import { intl } from "../i18n/intl";
-import { IStore } from "../state/declare";
 import { PROFILE } from "../i18n/profile";
+import { IStore } from "../state/declare";
+import { TitleManager } from "../util/title";
 
 type ConnectedStates = {
     readonly language: SudooFormat;
@@ -26,6 +27,12 @@ const connector = Connector.create<IStore, ConnectedStates>()
 export type CurrentMenuProps = RouteComponentProps & ConnectedStates;
 
 export const CurrentMenuBase: React.FC<CurrentMenuProps> = (props: CurrentMenuProps) => {
+
+    React.useEffect(() => {
+
+        TitleManager.setSubPage(PROFILE.MY_ORGANIZATION);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     return (<div className={StyleMe["menu-grid"]}>
         <MenuItem

@@ -16,6 +16,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { TitleManager } from "../util/title";
 import { registerForOrganization } from "./repository/register";
 
 type ConnectedStates = {
@@ -30,6 +31,12 @@ const connector = Connector.create<IStore, ConnectedStates>()
 export type CurrentRegisterProp = RouteComponentProps & ConnectedStates;
 
 export const CurrentRegisterBase: React.FC<CurrentRegisterProp> = (props: CurrentRegisterProp) => {
+
+    React.useEffect(() => {
+
+        TitleManager.setNestedPage(PROFILE.MY_ORGANIZATION, PROFILE.REGISTER_SUB_ACCOUNT);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     const [current, setCurrent] = React.useState<Record<string, any>>({
         namespace: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,

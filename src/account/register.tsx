@@ -25,6 +25,7 @@ import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminGroupEdit, buildAdminTagEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { registerRepository } from "./repository/register";
 import { registerInfo } from "./repository/register-infos";
 
@@ -76,6 +77,7 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
 
     public async componentDidMount() {
 
+        TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.REGISTER);
         const infos: Array<{
             name: string;
             type: string;
@@ -89,6 +91,11 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
                 type: info.type,
             })),
         });
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {

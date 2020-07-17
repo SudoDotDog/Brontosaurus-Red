@@ -151,7 +151,7 @@ export const AccountMoreBase: React.FC<AccountMoreProps> = (props: AccountMorePr
 
         TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.MORE, username);
         return () => TitleManager.restoreVoid();
-    })
+    }, []);
 
     return (<div>
         <GoBack
