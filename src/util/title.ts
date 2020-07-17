@@ -14,6 +14,13 @@ export class TitleManager {
 
     private static readonly _instance: TitleManager = new TitleManager();
 
+    public static setLanguage(language: LOCALE): TitleManager {
+
+        const instance: TitleManager = this.instance;
+        instance.setLanguage(language);
+        return instance;
+    }
+
     public static setInit(title: string): TitleManager {
 
         const instance: TitleManager = this.instance;

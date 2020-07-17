@@ -4,8 +4,9 @@
  * @description Reducer
  */
 
-import { LOCALE, getSystemLanguage } from '@sudoo/internationalization';
+import { getSystemLanguage, LOCALE } from '@sudoo/internationalization';
 import { Reducer } from '@sudoo/redux';
+import { TitleManager } from '../../util/title';
 import { ACTIONS, IStore } from '../declare';
 import { defaultLanguage, ISetLanguageReducerAction, PreferenceStore } from './type';
 
@@ -13,15 +14,18 @@ const PREFERENCE_STORAGE_KEY: string = 'Brontosaurus_Preference';
 
 const reduceLanguage: Reducer<IStore, ISetLanguageReducerAction> = (state: IStore | undefined, action: ISetLanguageReducerAction): IStore => {
 
+    const language: LOCALE = action.language;
     const newPreference: PreferenceStore = {
         ...(state as IStore).preference,
-        language: action.language,
+        language,
     };
 
     localStorage.setItem(
         PREFERENCE_STORAGE_KEY,
         JSON.stringify(newPreference),
     );
+
+    TitleManager.setLanguage(language);
 
     return {
         ...state as IStore,
@@ -55,9 +59,12 @@ export const getDefaultPreference = (): PreferenceStore => {
     }
 
     const parsed: any = JSON.parse(item);
-    const preference: PreferenceStore = {
-        language: parsed.language ?? checkedDefaultLanguage,
-    };
+    const language: LOCALE = parsed.language ?? checkedDefaultLanguage;
 
+    TitleManager.setLanguage(language);
+
+    const preference: PreferenceStore = {
+        language,
+    };
     return preference;
 };
