@@ -64,7 +64,8 @@ export class AccountOrganizationAssignBase extends React.Component<AccountOrgani
 
     public componentDidMount() {
 
-        TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.ASSIGN);
+        const username: string = this._getUsername();
+        TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.ASSIGN, username);
         this._searchOrganization();
     }
 

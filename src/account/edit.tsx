@@ -73,7 +73,7 @@ export class AccountEditBase extends React.Component<AccountEditProp, AccountEdi
     public async componentDidMount() {
 
         const username: string = this._getUsername();
-        TitleManager.setEditPage(PROFILE.ACCOUNT, username);
+        TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.EDIT, username);
 
         const response: SingleFetchResponse = await singleFetchRepository(username, this._getNamespace());
         const groups: AllGroupsResponse[] = await fetchAllGroups();

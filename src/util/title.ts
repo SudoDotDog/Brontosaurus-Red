@@ -63,6 +63,9 @@ export class TitleManager {
 
     private readonly _title: Title;
 
+    private _initialized: boolean;
+    private _awaitSetup: string[] | null;
+
     private _language: LOCALE;
 
     private _currentSetup: PROFILE[];
@@ -71,6 +74,9 @@ export class TitleManager {
     private constructor() {
 
         this._title = Title.create();
+
+        this._initialized = false;
+        this._awaitSetup = null;
 
         const checkedDefaultLanguage: LOCALE = getSystemLanguage(defaultLanguage);
         this._language = checkedDefaultLanguage;
@@ -87,10 +93,14 @@ export class TitleManager {
 
     public setInit(title: string): this {
 
+        this._initialized = true;
+
         this._title.setInit(title);
         this._title.setLevelBase(`{} | ${title}`, 1);
         this._title.setLevelBase(`{} | {} | ${title}`, 2);
         this._title.setLevelBase(`{} - {} | {} | ${title}`, 3);
+
+        setImmediate(this._polyfillInit.bind(this));
         return this;
     }
 
@@ -98,11 +108,10 @@ export class TitleManager {
 
         const formatter: SudooFormat = intl.format(this._language);
 
-        this._title.setTitle(formatter.get(profile));
-
         this._currentSetup = [profile];
         this._instanceValue = null;
-        return this;
+
+        return this._modifyTitle(formatter.get(profile));
     }
 
     public setNestedPage(profile: PROFILE, nested: PROFILE, instanceValue?: string): this {
@@ -112,22 +121,19 @@ export class TitleManager {
 
         if (instanceValue) {
 
-            this._title.setTitle(
+            this._instanceValue = instanceValue;
+            return this._modifyTitle(
                 instanceValue,
                 formatter.get(nested),
                 formatter.get(profile),
             );
-            this._instanceValue = instanceValue;
-            return this;
         }
 
-        this._title.setTitle(
-            instanceValue,
+        this._instanceValue = null;
+        return this._modifyTitle(
             formatter.get(nested),
             formatter.get(profile),
         );
-        this._instanceValue = null;
-        return this;
     }
 
     public refreshTitle(): this {
@@ -140,17 +146,15 @@ export class TitleManager {
 
         if (this._instanceValue) {
 
-            this._title.setTitle(
+            return this._modifyTitle(
                 this._instanceValue,
                 ...this._currentSetup.map((each: PROFILE) => formatter.get(each)),
             );
-            return this;
         }
 
-        this._title.setTitle(
+        return this._modifyTitle(
             ...this._currentSetup.map((each: PROFILE) => formatter.get(each)),
         );
-        return this;
     }
 
     public restore(): this {
@@ -158,6 +162,28 @@ export class TitleManager {
         this._title.restoreTitle();
         this._currentSetup = [];
         this._instanceValue = null;
+        return this;
+    }
+
+    private _modifyTitle(...contents: string[]): this {
+
+        if (!this._initialized) {
+
+            this._awaitSetup = contents;
+            return this;
+        }
+
+        this._title.setTitle(...contents);
+        return this;
+    }
+
+    private _polyfillInit(): this {
+
+        if (this._awaitSetup) {
+
+            this._title.setTitle(...this._awaitSetup);
+            this._awaitSetup = null;
+        }
         return this;
     }
 }

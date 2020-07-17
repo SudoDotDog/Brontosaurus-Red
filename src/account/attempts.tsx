@@ -52,7 +52,8 @@ export class AccountAttemptsBase extends React.Component<AccountAttemptsProps, A
 
     public componentDidMount() {
 
-        TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.ATTEMPTS);
+        const username: string = this._getUsername();
+        TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.ATTEMPTS, username);
         this._fetchAttempts();
     }
 
