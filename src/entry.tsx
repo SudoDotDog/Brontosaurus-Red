@@ -26,6 +26,7 @@ import { OrganizationRoute } from "./organization/route";
 import { getCommandCenterName, GetCommandCenterNameResponse } from "./preference/repository/command-center";
 import { PreferenceRoute } from "./preference/route";
 import { TagRoute } from "./tag/route";
+import { TitleManager } from "./util/title";
 
 export type EntryStates = {
 
@@ -101,15 +102,18 @@ export class Entry extends React.Component<undefined, EntryStates> {
     private _setName(name?: string) {
 
         if (name) {
+
             this.setState({
                 commandCenterName: name,
             });
+            TitleManager.setInit(name);
             document.title = name;
         } else {
+
             this.setState({
                 commandCenterName: 'Brontosaurus RED',
             });
-            document.title = 'Red - Brontosaurus';
+            document.title = 'Brontosaurus RED';
         }
     }
 

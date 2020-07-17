@@ -28,7 +28,7 @@ module.exports = SudooWebpack.create(
             'process.env.PORTAL_PATH': JSON.stringify(process.env.PORTAL_PATH),
             'process.env.TEST_SERVER_PATH': JSON.stringify(process.env.TEST_SERVER_PATH),
         },
-        title: 'Red - Brontosaurus',
+        title: 'Brontosaurus RED',
         mobile: false,
         insertion: '<!-- Insertion Point -->',
     },
