@@ -42,24 +42,10 @@ export class TitleManager {
         return instance;
     }
 
-    public static setNestedPage(profile: PROFILE, nested: PROFILE): TitleManager {
+    public static setNestedPage(profile: PROFILE, nested: PROFILE, instanceValue?: string): TitleManager {
 
         const instance: TitleManager = this.instance;
-        instance.setNestedPage(profile, nested);
-        return instance;
-    }
-
-    public static setEditPage(profile: PROFILE, instanceValue: string): TitleManager {
-
-        const instance: TitleManager = this.instance;
-        instance.setEditPage(profile, instanceValue);
-        return instance;
-    }
-
-    public static setMorePage(profile: PROFILE, instanceValue: string): TitleManager {
-
-        const instance: TitleManager = this.instance;
-        instance.setMorePage(profile, instanceValue);
+        instance.setNestedPage(profile, nested, instanceValue);
         return instance;
     }
 
@@ -119,47 +105,28 @@ export class TitleManager {
         return this;
     }
 
-    public setNestedPage(profile: PROFILE, nested: PROFILE): this {
+    public setNestedPage(profile: PROFILE, nested: PROFILE, instanceValue?: string): this {
 
         const formatter: SudooFormat = intl.format(this._language);
+        this._currentSetup = [nested, profile];
+
+        if (instanceValue) {
+
+            this._title.setTitle(
+                instanceValue,
+                formatter.get(nested),
+                formatter.get(profile),
+            );
+            this._instanceValue = instanceValue;
+            return this;
+        }
 
         this._title.setTitle(
+            instanceValue,
             formatter.get(nested),
             formatter.get(profile),
         );
-
-        this._currentSetup = [nested, profile];
         this._instanceValue = null;
-        return this;
-    }
-
-    public setEditPage(profile: PROFILE, instanceValue: string): this {
-
-        const formatter: SudooFormat = intl.format(this._language);
-
-        this._title.setTitle(
-            instanceValue,
-            formatter.get(PROFILE.EDIT),
-            formatter.get(profile),
-        );
-
-        this._currentSetup = [PROFILE.EDIT, profile];
-        this._instanceValue = instanceValue;
-        return this;
-    }
-
-    public setMorePage(profile: PROFILE, instanceValue: string): this {
-
-        const formatter: SudooFormat = intl.format(this._language);
-
-        this._title.setTitle(
-            instanceValue,
-            formatter.get(PROFILE.MORE),
-            formatter.get(profile),
-        );
-
-        this._currentSetup = [PROFILE.MORE, profile];
-        this._instanceValue = instanceValue;
         return this;
     }
 
