@@ -49,6 +49,12 @@ export class TitleManager {
         return instance;
     }
 
+    public static restoreVoid(): void {
+
+        this.restore();
+        return;
+    }
+
     public static restore(): TitleManager {
 
         const instance: TitleManager = this.instance;

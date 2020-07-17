@@ -24,6 +24,7 @@ import { limboAccount, LimboAccountResponse } from "./repository/limbo";
 import { resetAttemptAccount } from "./repository/reset-attempt";
 import { removeTwoFAAccount } from "./repository/twoFARemove";
 import { withdrawOrganizationAccountRepository } from "./repository/withdraw-organization";
+import { TitleManager } from "../util/title";
 
 const activateUser = async (username: string, namespace: string, next: () => void) => {
 
@@ -145,6 +146,12 @@ export const AccountMoreBase: React.FC<AccountMoreProps> = (props: AccountMorePr
     const params: any = props.match.params;
     const username: string = decodeURIComponent(params.username);
     const namespace: string = decodeURIComponent(params.namespace);
+
+    React.useEffect(() => {
+
+        TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.MORE, username);
+        return () => TitleManager.restoreVoid();
+    })
 
     return (<div>
         <GoBack
