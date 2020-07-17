@@ -49,6 +49,11 @@ export class Entry extends React.Component<undefined, EntryStates> {
         this._setAccountName(commandCenter.accountName);
     }
 
+    public componentDidUpdate(a: any): void {
+
+        console.log(a);
+    }
+
     public render(): JSX.Element {
 
         return (
