@@ -21,6 +21,13 @@ export class TitleManager {
         return instance;
     }
 
+    public static refreshTitle(): TitleManager {
+
+        const instance: TitleManager = this.instance;
+        instance.refreshTitle();
+        return instance;
+    }
+
     public static setInit(title: string): TitleManager {
 
         const instance: TitleManager = this.instance;
@@ -50,6 +57,7 @@ export class TitleManager {
     private readonly _title: Title;
 
     private _language: LOCALE;
+    private _currentSetup: PROFILE[];
 
     private constructor() {
 
@@ -57,6 +65,7 @@ export class TitleManager {
 
         const checkedDefaultLanguage: LOCALE = getSystemLanguage(defaultLanguage);
         this._language = checkedDefaultLanguage;
+        this._currentSetup = [];
     }
 
     public setLanguage(language: LOCALE): this {
@@ -77,6 +86,19 @@ export class TitleManager {
         const formatter: SudooFormat = intl.format(this._language);
 
         this._title.setTitle(formatter.get(profile));
+        this._currentSetup = [profile];
+        return this;
+    }
+
+    public refreshTitle(): this {
+
+        if (this._currentSetup.length === 0) {
+            return this.restore();
+        }
+
+        const formatter: SudooFormat = intl.format(this._language);
+
+        this._title.setTitle(...this._currentSetup.map((each: PROFILE) => formatter.get(each)));
         return this;
     }
 

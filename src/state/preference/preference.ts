@@ -26,6 +26,7 @@ const reduceLanguage: Reducer<IStore, ISetLanguageReducerAction> = (state: IStor
     );
 
     TitleManager.setLanguage(language);
+    TitleManager.refreshTitle();
 
     return {
         ...state as IStore,
