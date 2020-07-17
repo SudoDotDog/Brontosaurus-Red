@@ -78,6 +78,7 @@ export class TitleManager {
 
         this._title.setInit(title);
         this._title.setLevelBase(`{} | ${title}`, 1);
+        this._title.setLevelBase(`{} | {} | ${title}`, 2);
         return this;
     }
 
@@ -87,6 +88,18 @@ export class TitleManager {
 
         this._title.setTitle(formatter.get(profile));
         this._currentSetup = [profile];
+        return this;
+    }
+
+    public setNestedPage(nested: PROFILE, profile: PROFILE): this {
+
+        const formatter: SudooFormat = intl.format(this._language);
+
+        this._title.setTitle(
+            formatter.get(nested),
+            formatter.get(profile),
+        );
+        this._currentSetup = [nested, profile];
         return this;
     }
 
