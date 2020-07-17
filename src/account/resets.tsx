@@ -13,6 +13,8 @@ import { RouteComponentProps } from "react-router-dom";
 import { GoBack } from "../components/go-back";
 import { PageSelector } from "../components/page-selector";
 import { AccountResetElement, AccountResetResponse, fetchAccountResets } from "./repository/resets";
+import { TitleManager } from "../util/title";
+import { PROFILE } from "../i18n/profile";
 
 export type AccountResetsProps = {
 } & RouteComponentProps;
@@ -38,7 +40,15 @@ export class AccountResets extends React.Component<AccountResetsProps, AccountRe
     };
 
     public componentDidMount() {
+
+        const username: string = this._getUsername();
+        TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.RESET, username);
         this._fetchResets();
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {
