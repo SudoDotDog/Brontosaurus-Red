@@ -4,7 +4,11 @@
  * @description Title
  */
 
+import { getSystemLanguage, LOCALE, SudooFormat } from "@sudoo/internationalization";
 import { Title } from "@sudoo/title";
+import { intl } from "../i18n/intl";
+import { PROFILE } from "../i18n/profile";
+import { defaultLanguage } from "../state/preference/type";
 
 export class TitleManager {
 
@@ -17,10 +21,10 @@ export class TitleManager {
         return instance;
     }
 
-    public static setSubPage(page: string): TitleManager {
+    public static setSubPage(profile: PROFILE): TitleManager {
 
         const instance: TitleManager = this.instance;
-        instance.setSubPage(page);
+        instance.setSubPage(profile);
         return instance;
     }
 
@@ -38,9 +42,20 @@ export class TitleManager {
 
     private readonly _title: Title;
 
+    private _language: LOCALE;
+
     private constructor() {
 
         this._title = Title.create();
+
+        const checkedDefaultLanguage: LOCALE = getSystemLanguage(defaultLanguage);
+        this._language = checkedDefaultLanguage;
+    }
+
+    public setLanguage(language: LOCALE): this {
+
+        this._language = language;
+        return this;
     }
 
     public setInit(title: string): this {
@@ -50,9 +65,11 @@ export class TitleManager {
         return this;
     }
 
-    public setSubPage(page: string): this {
+    public setSubPage(profile: PROFILE): this {
 
-        this._title.setTitle(page);
+        const formatter: SudooFormat = intl.format(this._language);
+
+        this._title.setTitle(formatter.get(profile));
         return this;
     }
 

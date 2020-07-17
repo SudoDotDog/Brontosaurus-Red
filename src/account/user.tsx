@@ -60,7 +60,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
     public componentDidMount() {
 
         this._searchUser();
-        TitleManager.setSubPage(this.props.language.get(PROFILE.ACCOUNT));
+        TitleManager.setSubPage(PROFILE.ACCOUNT);
     }
 
     public componentWillUnmount() {
