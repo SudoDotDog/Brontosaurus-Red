@@ -20,6 +20,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminAccountEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { fetchOrganization, FetchOrganizationResponse, OrganizationResponse } from "./repository/organization-fetch";
 
 export type OrganizationStates = {
@@ -57,7 +58,14 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
     private readonly _defaultValue: string = searchKeywordCache.value;
 
     public componentDidMount() {
+
+        TitleManager.setSubPage(PROFILE.ORGANIZATION);
         this._searchOrganization();
+    }
+
+    public componentWillUnmount() {
+
+        TitleManager.restore();
     }
 
     public render() {

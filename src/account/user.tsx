@@ -59,8 +59,8 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
 
     public componentDidMount() {
 
-        this._searchUser();
         TitleManager.setSubPage(PROFILE.ACCOUNT);
+        this._searchUser();
     }
 
     public componentWillUnmount() {

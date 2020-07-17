@@ -49,6 +49,7 @@ export const ENGLISH_UNITED_STATES: Record<PROFILE, string> = {
     [PROFILE.COMPLETE]: 'Complete',
     [PROFILE.CONFIG]: 'Config',
     [PROFILE.CONFIRM_PASSWORD]: 'Confirm Password',
+    [PROFILE.CREATE]: 'Create',
     [PROFILE.CREATE_INSTANCE]: 'Create {}',
     [PROFILE.CREATE_NEW]: 'New',
     [PROFILE.DEACTIVATE]: 'Deactivate',

@@ -16,6 +16,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { TitleManager } from "../util/title";
 import { createOrganization } from "./repository/create";
 
 type CreateOrganizationStates = {
@@ -46,6 +47,16 @@ export class CreateOrganizationBase extends React.Component<CreateOrganizationPr
             ownerNamespace: DEFAULT_BRONTOSAURUS_NAMESPACE.DEFAULT,
         },
     };
+
+    public componentDidMount() {
+
+        TitleManager.setNestedPage(PROFILE.ORGANIZATION, PROFILE.CREATE);
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
+    }
 
     public render() {
 

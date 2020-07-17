@@ -49,6 +49,7 @@ export const CHINESE_SIMPLIFIED: Record<PROFILE, string> = {
     [PROFILE.COMPLETE]: '完成',
     [PROFILE.CONFIG]: '配置',
     [PROFILE.CONFIRM_PASSWORD]: '确认密码',
+    [PROFILE.CREATE]: '创建',
     [PROFILE.CREATE_INSTANCE]: '创建{}',
     [PROFILE.CREATE_NEW]: '创建',
     [PROFILE.DEACTIVATE]: '停用',
