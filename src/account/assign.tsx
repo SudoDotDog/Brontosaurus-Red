@@ -25,6 +25,7 @@ import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminAccountEdit, buildAdminOrganizationEdit } from "../util/path";
 import { setOrganizationRepository } from "./repository/set-organization";
+import { TitleManager } from "../util/title";
 
 export type AccountOrganizationAssignStates = {
 
@@ -64,6 +65,12 @@ export class AccountOrganizationAssignBase extends React.Component<AccountOrgani
     public componentDidMount() {
 
         this._searchOrganization();
+        TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.ASSIGN);
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {

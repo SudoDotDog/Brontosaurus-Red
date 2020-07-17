@@ -42,6 +42,13 @@ export class TitleManager {
         return instance;
     }
 
+    public static setNestedPage(profile: PROFILE, nested: PROFILE): TitleManager {
+
+        const instance: TitleManager = this.instance;
+        instance.setNestedPage(profile, nested);
+        return instance;
+    }
+
     public static restore(): TitleManager {
 
         const instance: TitleManager = this.instance;
@@ -91,7 +98,7 @@ export class TitleManager {
         return this;
     }
 
-    public setNestedPage(nested: PROFILE, profile: PROFILE): this {
+    public setNestedPage(profile: PROFILE, nested: PROFILE): this {
 
         const formatter: SudooFormat = intl.format(this._language);
 
@@ -118,6 +125,7 @@ export class TitleManager {
     public restore(): this {
 
         this._title.restoreTitle();
+        this._currentSetup = [];
         return this;
     }
 }
