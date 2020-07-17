@@ -18,6 +18,7 @@ import { SearchNew } from "../components/search-new";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { TitleManager } from "../util/title";
 import { fetchGroup, FetchGroupResponse, GroupResponse } from "./repository/group-fetch";
 
 export type GroupStates = {
@@ -56,12 +57,17 @@ export class GroupBase extends React.Component<ConnectedProps, GroupStates> {
     private readonly _defaultValue: string = searchKeywordCache.value;
 
     public componentDidMount() {
+
+        TitleManager.setSubPage(PROFILE.GROUP);
+
         this._mounted = true;
         this._searchGroup();
     }
 
     public componentWillUnmount() {
+
         this._mounted = false;
+        TitleManager.restore();
     }
 
     public render() {

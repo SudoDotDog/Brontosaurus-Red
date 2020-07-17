@@ -16,6 +16,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminGroupEdit, buildAdminGroupMembers } from "../util/path";
+import { TitleManager } from "../util/title";
 import { activateGroupRepository } from "./repository/activate";
 import { deactivateGroupRepository } from "./repository/deactivate";
 import { removeAllGroupRepository } from "./repository/remove-all";
@@ -74,6 +75,12 @@ export const GroupMoreBase: React.FC<GroupMoreProps> = (props: GroupMoreProps) =
 
     const params: any = props.match.params;
     const group: string = decodeURIComponent(params.group);
+
+    React.useEffect(() => {
+
+        TitleManager.setNestedPage(PROFILE.GROUP, PROFILE.MORE, group);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     return (<div>
         <GoBack

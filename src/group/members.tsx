@@ -18,6 +18,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminAccountEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { fetchGroupMembers, GroupMemberElement, GroupMemberResponse } from "./repository/members";
 
 export type GroupMembersStates = {
@@ -52,7 +53,16 @@ export class GroupMembersBase extends React.Component<GroupMembersProps, GroupMe
     };
 
     public componentDidMount() {
+
+        const groupName: string = this._getGroupName();
+        TitleManager.setNestedPage(PROFILE.GROUP, PROFILE.MEMBERS, groupName);
+
         this._fetchMembers();
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {

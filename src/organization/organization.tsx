@@ -55,16 +55,20 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
         page: searchPageCache.value,
     };
 
+    private _mounted: boolean = false;
     private readonly _defaultValue: string = searchKeywordCache.value;
 
     public componentDidMount() {
 
         TitleManager.setSubPage(PROFILE.ORGANIZATION);
+
+        this._mounted = true;
         this._searchOrganization();
     }
 
     public componentWillUnmount() {
 
+        this._mounted = false;
         TitleManager.restore();
     }
 
@@ -156,10 +160,13 @@ export class OrganizationBase extends React.Component<ConnectedProps, Organizati
             this.state.keyword,
             this.state.page,
         );
-        this.setState({
-            organizations: response.organizations,
-            pages: response.pages,
-        });
+
+        if (this._mounted) {
+            this.setState({
+                organizations: response.organizations,
+                pages: response.pages,
+            });
+        }
     }
 }
 
