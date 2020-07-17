@@ -13,6 +13,7 @@ import { MenuItem } from "../components/menu-item";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { TitleManager } from "../util/title";
 
 type ConnectedStates = {
     readonly language: SudooFormat;
@@ -26,6 +27,12 @@ const connector = Connector.create<IStore, ConnectedStates>()
 export type MeMenuProps = RouteComponentProps & ConnectedStates;
 
 export const MeMenuBase: React.FC<MeMenuProps> = (props: MeMenuProps) => {
+
+    React.useEffect(() => {
+
+        TitleManager.setSubPage(PROFILE.MY_ACCOUNT);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     return (<div className={StyleMe["menu-grid"]}>
         <MenuItem

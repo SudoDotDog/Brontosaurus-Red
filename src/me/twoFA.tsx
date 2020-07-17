@@ -15,6 +15,7 @@ import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { TitleManager } from "../util/title";
 import { enable2FA } from "./repository/enable-2fa";
 
 type MeEnable2FAProp = {
@@ -30,6 +31,12 @@ const connector = Connector.create<IStore, ConnectedStates>()
     }));
 
 export const MeEnable2FABase: React.FC<MeEnable2FAProp> = (props: MeEnable2FAProp) => {
+
+    React.useEffect(() => {
+
+        TitleManager.setNestedPage(PROFILE.MY_ACCOUNT, PROFILE.TWO_FACTOR_AUTHORIZATION);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     const [twoFA, setTwoFA] = React.useState<string | null>(null);
 

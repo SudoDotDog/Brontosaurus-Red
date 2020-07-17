@@ -13,6 +13,7 @@ import { MenuItem } from "../components/menu-item";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { TitleManager } from "../util/title";
 
 export type AdminMenuBaseProps = {
 } & RouteComponentProps;
@@ -29,6 +30,12 @@ const connector = Connector.create<IStore, ConnectedStates>()
 export type AdminMenuProps = AdminMenuBaseProps & ConnectedStates;
 
 export const AdminMenuBase: React.FC<AdminMenuProps> = (props: AdminMenuProps) => {
+
+    React.useEffect(() => {
+
+        TitleManager.setSubPage(PROFILE.ADMIN_PANEL);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     return (<div className={MenuStyle["menu-grid"]}>
         <MenuItem

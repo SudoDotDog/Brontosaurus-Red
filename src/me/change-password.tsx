@@ -15,6 +15,7 @@ import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { TitleManager } from "../util/title";
 import { editPassword } from "./repository/change-password";
 
 type MeChangePasswordProp = {
@@ -30,6 +31,12 @@ const connector = Connector.create<IStore, ConnectedStates>()
     }));
 
 export const MeChangePasswordBase: React.FC<MeChangePasswordProp> = (props: MeChangePasswordProp) => {
+
+    React.useEffect(() => {
+
+        TitleManager.setNestedPage(PROFILE.MY_ACCOUNT, PROFILE.CHANGE_PASSWORD);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     const [current, setCurrent] = React.useState<any>({});
 
