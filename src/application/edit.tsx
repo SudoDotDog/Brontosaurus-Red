@@ -30,6 +30,7 @@ import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminApplicationMore, buildAdminGroupEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { ApplicationRedirectionEditor } from "./components/redirection";
 import { SingleApplicationFetchResponse, singleFetchApplicationRepository } from "./repository/single-fetch";
 import { updateApplicationRepository } from "./repository/update";
@@ -69,7 +70,10 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
 
     public async componentDidMount() {
 
-        const response: SingleApplicationFetchResponse = await singleFetchApplicationRepository(this._getApplicationKey());
+        const applicationKey: string = this._getApplicationKey();
+        TitleManager.setNestedPage(PROFILE.APPLICATION, PROFILE.EDIT, applicationKey);
+
+        const response: SingleApplicationFetchResponse = await singleFetchApplicationRepository(applicationKey);
         const groups: AllGroupsResponse[] = await fetchAllGroups();
         const tags: AllTagsResponse[] = await fetchAllTags();
 
@@ -80,12 +84,23 @@ export class ApplicationEditBase extends React.Component<ApplicationEditProps, A
         });
     }
 
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
+    }
+
     public render() {
 
         return (<div>
             <GoBack
                 right={this.props.language.get(PROFILE.MORE)}
-                onClickRight={() => this.props.history.push(buildAdminApplicationMore(this._getApplicationName()))}
+                onClickRight={() => {
+                    this.props.history.push(
+                        buildAdminApplicationMore(
+                            this._getApplicationName(),
+                        ),
+                    );
+                }}
             />
             {this._renderEditableInfos()}
         </div>);

@@ -16,6 +16,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminApplicationEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { activateApplicationRepository } from "./repository/activate";
 import { deactivateApplicationRepository } from "./repository/deactivate";
 import { refreshGreenRepository } from "./repository/refresh-green";
@@ -116,6 +117,12 @@ export const ApplicationMoreBase: React.FC<ApplicationMoreProps> = (props: Appli
 
     const params: any = props.match.params;
     const application: string = decodeURIComponent(params.application);
+
+    React.useEffect(() => {
+
+        TitleManager.setNestedPage(PROFILE.APPLICATION, PROFILE.MORE, application);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     return (<div>
         <GoBack
