@@ -18,6 +18,7 @@ import { SearchNew } from "../components/search-new";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { TitleManager } from "../util/title";
 import { fetchNamespace, FetchNamespaceResponse, NamespaceResponse } from "./repository/namespace-fetch";
 
 export type NamespaceState = {
@@ -52,10 +53,21 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
         page: searchPageCache.value,
     };
 
+    private _mounted: boolean = false;
     private readonly _defaultValue: string = searchKeywordCache.value;
 
     public componentDidMount() {
+
+        TitleManager.setSubPage(PROFILE.NAMESPACE);
+
+        this._mounted = true;
         this._searchNamespace();
+    }
+
+    public componentWillUnmount() {
+
+        this._mounted = false;
+        TitleManager.restore();
     }
 
     public render() {
@@ -130,10 +142,13 @@ export class NamespaceBase extends React.Component<ConnectedProps, NamespaceStat
             this.state.keyword,
             this.state.page,
         );
-        this.setState({
-            namespaces: response.namespaces,
-            pages: response.pages,
-        });
+
+        if (this._mounted) {
+            this.setState({
+                namespaces: response.namespaces,
+                pages: response.pages,
+            });
+        }
     }
 }
 
