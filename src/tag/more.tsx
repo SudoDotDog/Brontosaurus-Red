@@ -18,6 +18,7 @@ import { IStore } from "../state/declare";
 import { buildAdminTagEdit, buildAdminTagMembers } from "../util/path";
 import { activateTagRepository } from "./repository/activate";
 import { deactivateTagRepository } from "./repository/deactivate";
+import { TitleManager } from "../util/title";
 
 const activateTag = async (tag: string, next: () => void) => {
 
@@ -61,10 +62,20 @@ export const TagMoreBase: React.FC<TagMoreProps> = (props: TagMoreProps) => {
     const params: any = props.match.params;
     const tag: string = decodeURIComponent(params.tag);
 
+    React.useEffect(() => {
+
+        TitleManager.setNestedPage(PROFILE.TAG, PROFILE.MORE, tag);
+        return () => TitleManager.restoreVoid();
+    }, []);
+
     return (<div>
         <GoBack
             right={props.language.get(PROFILE.EDIT)}
-            onClickRight={() => props.history.push('/admin/tag/e/' + encodeURIComponent(tag))}
+            onClickRight={() => {
+                props.history.push(
+                    buildAdminTagEdit(tag),
+                );
+            }}
         />
         <NamedTitle about={props.language.get(
             PROFILE.MORE_ABOUT,

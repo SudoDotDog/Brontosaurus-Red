@@ -69,6 +69,12 @@ export const buildAdminTagEdit = (tag: string): string => {
     return `/admin/tag/e/${encoded}`;
 };
 
+export const buildAdminTagMore = (tag: string): string => {
+
+    const encoded: string = encodeURIComponent(tag);
+    return `/admin/tag/more/${encoded}`;
+};
+
 export const buildAdminTagMembers = (tag: string): string => {
 
     const encoded: string = encodeURIComponent(tag);

@@ -18,6 +18,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminAccountEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { fetchTagMembers, TagMemberElement, TagMemberResponse } from "./repository/members";
 
 export type TagMembersStates = {
@@ -52,7 +53,16 @@ export class TagMembersBase extends React.Component<TagMembersProps, TagMembersS
     };
 
     public componentDidMount() {
+
+        const tagName: string = this._getTagName();
+        TitleManager.setNestedPage(PROFILE.TAG, PROFILE.MEMBERS, tagName);
+
         this._fetchMembers();
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {

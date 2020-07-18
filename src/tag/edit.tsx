@@ -22,6 +22,8 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { buildAdminTagMore } from "../util/path";
+import { TitleManager } from "../util/title";
 import { singleTagRepository, SingleTagResponse } from "./repository/single";
 import { updateTagRepository } from "./repository/update";
 
@@ -54,11 +56,19 @@ export class TagEditBase extends React.Component<TagEditProp, TagEditState> {
 
     public async componentDidMount() {
 
-        const response: SingleTagResponse = await singleTagRepository(this._getTagName());
+        const tagName: string = this._getTagName();
+        TitleManager.setNestedPage(PROFILE.TAG, PROFILE.EDIT, tagName);
+
+        const response: SingleTagResponse = await singleTagRepository(tagName);
 
         this.setState({
             tag: response,
         });
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {
@@ -67,7 +77,11 @@ export class TagEditBase extends React.Component<TagEditProp, TagEditState> {
             <div>
                 <GoBack
                     right={this.props.language.get(PROFILE.MORE)}
-                    onClickRight={() => this.props.history.push('/admin/tag/more/' + encodeURIComponent(this._getTagName()))}
+                    onClickRight={() => {
+                        this.props.history.push(
+                            buildAdminTagMore(this._getTagName()),
+                        );
+                    }}
                 />
                 {this._renderEditableInfos()}
             </div>
