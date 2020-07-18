@@ -18,6 +18,7 @@ import { SearchNew } from "../components/search-new";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { buildAdminDecoratorMore, buildAdminNamespaceEdit } from "../util/path";
 import { DecoratorResponse, fetchDecorator, FetchDecoratorResponse } from "./repository/decorator-fetch";
 
 export type DecoratorState = {
@@ -66,9 +67,13 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
                     defaultValue={this._defaultValue}
                     label={this.props.language.get(PROFILE.DECORATOR)}
                     onSearch={(keyword: string) => {
+
                         searchKeywordCache.replace(keyword);
                         searchPageCache.replace(0);
-                        this.setState({ keyword, page: 0 }, () => {
+                        this.setState({
+                            keyword,
+                            page: 0,
+                        }, () => {
                             this._searchDecorator();
                         });
                     }}
@@ -82,15 +87,20 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
                             this.props.language.get(PROFILE.DESCRIPTION),
                             this.props.language.get(PROFILE.ACTION),
                         ]}
-                        style={{ marginTop: '1rem' }}>
+                        style={{
+                            marginTop: '1rem',
+                        }}>
                         {this._renderDecorator()}
                     </NeonTable>}
                 <PageSelector
                     total={this.state.pages}
                     selected={this.state.page}
                     onClick={(page: number) => {
+
                         searchPageCache.replace(page);
-                        this.setState({ page }, () => {
+                        this.setState({
+                            page,
+                        }, () => {
                             this._searchDecorator();
                         });
                     }}
@@ -102,11 +112,12 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
 
     private _renderDecorator(): JSX.Element[] {
 
-        return this.state.decorators.map((decorator: DecoratorResponse) =>
-            (<tr key={decorator.name}>
+        return this.state.decorators.map((decorator: DecoratorResponse) => {
+
+            return (<tr key={decorator.name}>
                 <td>
                     <ClickableSpan
-                        to={'/admin/decorator/e/' + encodeURIComponent(decorator.name)}
+                        to={buildAdminNamespaceEdit(decorator.name)}
                         red={!decorator.active}
                     >
                         {decorator.name}
@@ -114,12 +125,15 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
                 </td>
                 <td>{decorator.description}</td>
                 <td><NeonButton
-                    onClick={() => this.props.history.push('/admin/decorator/more/' + encodeURIComponent(decorator.name))}
-                    size={SIZE.RELATIVE}>
+                    onClick={() => {
+                        this.props.history.push(buildAdminDecoratorMore(decorator.name));
+                    }}
+                    size={SIZE.RELATIVE}
+                >
                     {this.props.language.get(PROFILE.MORE)}
                 </NeonButton></td>
-            </tr>),
-        );
+            </tr >);
+        });
     }
 
     private async _searchDecorator() {

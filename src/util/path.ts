@@ -99,6 +99,12 @@ export const buildAdminDecoratorEdit = (decorator: string): string => {
     return `/admin/decorator/e/${encoded}`;
 };
 
+export const buildAdminDecoratorMore = (decorator: string): string => {
+
+    const encoded: string = encodeURIComponent(decorator);
+    return `/admin/decorator/more/${encoded}`;
+};
+
 export const buildAdminDecoratorMembers = (decorator: string): string => {
 
     const encoded: string = encodeURIComponent(decorator);
