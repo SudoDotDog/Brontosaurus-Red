@@ -16,6 +16,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminNamespaceEdit, buildAdminNamespaceMembers } from "../util/path";
+import { TitleManager } from "../util/title";
 import { activateNamespaceRepository } from "./repository/activate";
 import { deactivateNamespaceRepository } from "./repository/deactivate";
 
@@ -60,6 +61,12 @@ export const NamespaceMoreBase: React.FC<NamespaceMoreProps> = (props: Namespace
 
     const params: any = props.match.params;
     const namespace: string = decodeURIComponent(params.namespace);
+
+    React.useEffect(() => {
+
+        TitleManager.setNestedPage(PROFILE.NAMESPACE, PROFILE.MORE, namespace);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     return (<div>
         <GoBack

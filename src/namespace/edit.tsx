@@ -23,6 +23,7 @@ import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminNamespaceMore } from "../util/path";
+import { TitleManager } from "../util/title";
 import { singleNamespace, SingleNamespaceResponse } from "./repository/single";
 import { updateNamespaceRepository } from "./repository/update";
 
@@ -55,11 +56,19 @@ export class NamespaceEditBase extends React.Component<NamespaceEditProp, Namesp
 
     public async componentDidMount() {
 
-        const response: SingleNamespaceResponse = await singleNamespace(this._getNamespaceNamespace());
+        const namespaceName: string = this._getNamespaceNamespace();
+        TitleManager.setNestedPage(PROFILE.NAMESPACE, PROFILE.EDIT, namespaceName);
+
+        const response: SingleNamespaceResponse = await singleNamespace(namespaceName);
 
         this.setState({
             namespace: response,
         });
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {

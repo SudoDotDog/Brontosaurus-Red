@@ -18,6 +18,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminAccountEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { fetchNamespaceMembers, NamespaceMemberElement, NamespaceMemberResponse } from "./repository/members";
 
 export type NamespaceMembersStates = {
@@ -52,7 +53,16 @@ export class NamespaceMembersBase extends React.Component<NamespaceMembersProps,
     };
 
     public componentDidMount() {
+
+        const namespaceName: string = this._getNamespaceName();
+        TitleManager.setNestedPage(PROFILE.NAMESPACE, PROFILE.MEMBERS, namespaceName);
+
         this._fetchMembers();
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {
