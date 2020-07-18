@@ -13,6 +13,7 @@ import { MenuItem } from "../components/menu-item";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { TitleManager } from "../util/title";
 
 export type PreferenceMenuBaseProps = {
 } & RouteComponentProps;
@@ -29,6 +30,12 @@ const connector = Connector.create<IStore, ConnectedStates>()
 export type PreferenceMenuProps = PreferenceMenuBaseProps & ConnectedStates;
 
 export const PreferenceMenuBase: React.FC<PreferenceMenuProps> = (props: PreferenceMenuProps) => {
+
+    React.useEffect(() => {
+
+        TitleManager.setSubPage(PROFILE.PREFERENCE);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     return (<div className={StyleMenu["menu-grid"]}>
         <MenuItem

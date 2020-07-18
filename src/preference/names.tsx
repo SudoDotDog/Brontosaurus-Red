@@ -15,6 +15,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { TitleManager } from "../util/title";
 import { namePreferenceRepository } from "./repository/names";
 import { readNamePreferenceRepository, ReadNamesRepositoryResponse } from "./repository/read-names";
 
@@ -53,10 +54,17 @@ export class NamesPreferenceBase extends React.Component<NamesPreferenceProp, Na
 
     public async componentDidMount() {
 
+        TitleManager.setNestedPage(PROFILE.PREFERENCE, PROFILE.NAME_PREFERENCES);
+
         const response: ReadNamesRepositoryResponse = await readNamePreferenceRepository();
         this.setState({
             initial: response,
         });
+    }
+
+    public componentWillUnmount() {
+
+        TitleManager.restore();
     }
 
     public render() {

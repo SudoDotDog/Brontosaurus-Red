@@ -15,6 +15,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { TitleManager } from "../util/title";
 import { mailerTransportPreferenceRepository } from "./repository/mailer-transport";
 import { readMailerTransportPreferenceRepository } from "./repository/read-mailer-transport";
 
@@ -53,12 +54,19 @@ export class MailerTransportPreferenceBase extends React.Component<MailerTranspo
 
     public async componentDidMount() {
 
+        TitleManager.setNestedPage(PROFILE.PREFERENCE, PROFILE.MAILER_TRANSPORT);
+
         const response: string = await readMailerTransportPreferenceRepository();
         this.setState({
             current: {
                 config: response,
             },
         });
+    }
+
+    public componentWillUnmount() {
+
+        TitleManager.restore();
     }
 
     public render() {

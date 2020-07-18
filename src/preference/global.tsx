@@ -15,6 +15,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { TitleManager } from "../util/title";
 import { globalPreferenceRepository } from "./repository/global";
 import { readGlobalPreferenceRepository, ReadGlobalRepositoryResponse } from "./repository/read-global";
 
@@ -53,10 +54,17 @@ export class GlobalPreferenceBase extends React.Component<GlobalPreferenceProps,
 
     public async componentDidMount() {
 
+        TitleManager.setNestedPage(PROFILE.PREFERENCE, PROFILE.GLOBAL_PREFERENCES);
+
         const response: ReadGlobalRepositoryResponse = await readGlobalPreferenceRepository();
         this.setState({
             initial: response,
         });
+    }
+
+    public componentWillUnmount() {
+
+        TitleManager.restore();
     }
 
     public render() {

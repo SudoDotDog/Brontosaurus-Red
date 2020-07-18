@@ -4,6 +4,7 @@
  * @description Global Background Image
  */
 
+import { sample } from "@sudoo/bark/array";
 import { produce } from "@sudoo/immutable";
 import { SudooFormat } from "@sudoo/internationalization";
 import { NeonButton, NeonCoin } from "@sudoo/neon/button";
@@ -13,7 +14,7 @@ import { NeonInput } from "@sudoo/neon/input";
 import { NeonIndicator } from "@sudoo/neon/spinner";
 import { NeonThemeProvider } from "@sudoo/neon/theme";
 import { NeonTitle } from "@sudoo/neon/typography";
-import { randomUnique, } from "@sudoo/random";
+import { randomUnique } from "@sudoo/random";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
@@ -23,9 +24,9 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { TitleManager } from "../util/title";
 import { globalBackgroundImagesPreferenceRepository } from "./repository/global-background-image";
 import { readGlobalBackgroundImagesPreferenceRepository, ReadGlobalBackgroundImagesRepositoryResponse } from "./repository/read-global-background-image";
-import { sample } from "@sudoo/bark/array";
 
 export type FixedGlobalBackgroundImage = {
 
@@ -68,6 +69,8 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
 
     public async componentDidMount() {
 
+        TitleManager.setNestedPage(PROFILE.PREFERENCE, PROFILE.GLOBAL_BACKGROUND_IMAGES);
+
         this.setState({
             loading: true,
         })
@@ -90,6 +93,11 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
             globalBackgroundImages: fixedImages,
             preview: current ?? null,
         });
+    }
+
+    public componentWillUnmount() {
+
+        TitleManager.restore();
     }
 
     public render() {

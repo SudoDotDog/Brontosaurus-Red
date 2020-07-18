@@ -15,6 +15,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { TitleManager } from "../util/title";
 import { mailerSourcePreferenceRepository } from "./repository/mailer-source";
 import { readMailerSourcePreferenceRepository, ReadMailerSourceRepositoryResponse } from "./repository/read-mailer-source";
 
@@ -52,10 +53,17 @@ export class MailerSourcePreferenceBase extends React.Component<MailerSourcePref
 
     public async componentDidMount() {
 
+        TitleManager.setNestedPage(PROFILE.PREFERENCE, PROFILE.MAILER_SOURCE);
+
         const response: ReadMailerSourceRepositoryResponse = await readMailerSourcePreferenceRepository();
         this.setState({
             current: response,
         });
+    }
+
+    public componentWillUnmount() {
+
+        TitleManager.restore();
     }
 
     public render() {
