@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
- * @namespace Tags
- * @description Tags
+ * @namespace Tag
+ * @description Tag
  */
 
 import { Dump } from "@sudoo/dump";
@@ -18,6 +18,7 @@ import { SearchNew } from "../components/search-new";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { TitleManager } from "../util/title";
 import { fetchTagRepository, FetchTagResponse, TagResponse } from "./repository/tag-fetch";
 
 export type TagsState = {
@@ -52,60 +53,69 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
         page: searchPageCache.value,
     };
 
+    private _mounted: boolean = false;
     private readonly _defaultValue: string = searchKeywordCache.value;
 
     public componentDidMount() {
+
+        TitleManager.setSubPage(PROFILE.TAG);
+
+        this._mounted = true;
         this._searchTags();
+    }
+
+    public componentWillUnmount() {
+
+        this._mounted = false;
+        TitleManager.restore();
     }
 
     public render() {
 
-        return (
-            <div>
-                <SearchNew
-                    defaultValue={this._defaultValue}
-                    label={this.props.language.get(PROFILE.TAG)}
-                    onSearch={(keyword: string) => {
-                        searchKeywordCache.replace(keyword);
-                        searchPageCache.replace(0);
-                        this.setState({ keyword, page: 0 }, () => {
-                            this._searchTags();
-                        });
-                    }}
-                    onNew={() => this.props.history.push('/admin/tag/create')}
-                />
-
-                {this.state.tags.length === 0
-                    ? void 0
-                    : <NeonTable
-                        headers={[
-                            this.props.language.get(PROFILE.NAME),
-                            this.props.language.get(PROFILE.DESCRIPTION),
-                            this.props.language.get(PROFILE.ACTION),
-                        ]}
-                        style={{ marginTop: '1rem' }}>
-                        {this._renderTags()}
-                    </NeonTable>}
-
-                <PageSelector
-                    total={this.state.pages}
-                    selected={this.state.page}
-                    onClick={(page: number) => {
-                        searchPageCache.replace(page);
-                        this.setState({ page }, () => {
-                            this._searchTags();
-                        });
-                    }}
-                />
-            </div>
-
-        );
+        return (<div>
+            <SearchNew
+                defaultValue={this._defaultValue}
+                label={this.props.language.get(PROFILE.TAG)}
+                onSearch={(keyword: string) => {
+                    searchKeywordCache.replace(keyword);
+                    searchPageCache.replace(0);
+                    this.setState({ keyword, page: 0 }, () => {
+                        this._searchTags();
+                    });
+                }}
+                onNew={() => {
+                    this.props.history.push('/admin/tag/create');
+                }}
+            />
+            {this.state.tags.length === 0
+                ? void 0
+                : <NeonTable
+                    headers={[
+                        this.props.language.get(PROFILE.NAME),
+                        this.props.language.get(PROFILE.DESCRIPTION),
+                        this.props.language.get(PROFILE.ACTION),
+                    ]}
+                    style={{ marginTop: '1rem' }}>
+                    {this._renderTags()}
+                </NeonTable>}
+            <PageSelector
+                total={this.state.pages}
+                selected={this.state.page}
+                onClick={(page: number) => {
+                    searchPageCache.replace(page);
+                    this.setState({ page }, () => {
+                        this._searchTags();
+                    });
+                }}
+            />
+        </div>);
     }
 
     private _renderTags(): JSX.Element[] {
 
-        return this.state.tags.map((tag: TagResponse) =>
-            (<tr key={tag.name}>
+        return this.state.tags.map((tag: TagResponse) => {
+
+            return (<tr key={tag.name}>
                 <td>
                     <ClickableSpan
                         to={'/admin/tag/e/' + encodeURIComponent(tag.name)}
@@ -120,8 +130,8 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
                     size={SIZE.RELATIVE}>
                     {this.props.language.get(PROFILE.MORE)}
                 </NeonButton></td>
-            </tr>),
-        );
+            </tr>);
+        });
     }
 
     private async _searchTags() {
@@ -130,10 +140,13 @@ export class TagsBase extends React.Component<ConnectedProps, TagsState> {
             this.state.keyword,
             this.state.page,
         );
-        this.setState({
-            tags: response.tags,
-            pages: response.pages,
-        });
+
+        if (this._mounted) {
+            this.setState({
+                tags: response.tags,
+                pages: response.pages,
+            });
+        }
     }
 }
 
