@@ -19,6 +19,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminDecoratorMore, buildAdminNamespaceEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { DecoratorResponse, fetchDecorator, FetchDecoratorResponse } from "./repository/decorator-fetch";
 
 export type DecoratorState = {
@@ -53,10 +54,21 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
         page: searchPageCache.value,
     };
 
+    private _mounted: boolean = false;
     private readonly _defaultValue: string = searchKeywordCache.value;
 
     public componentDidMount() {
+
+        TitleManager.setSubPage(PROFILE.DECORATOR);
+
+        this._mounted = true;
         this._searchDecorator();
+    }
+
+    public componentWillUnmount() {
+
+        this._mounted = false;
+        TitleManager.restore();
     }
 
     public render() {
@@ -142,10 +154,13 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
             this.state.keyword,
             this.state.page,
         );
-        this.setState({
-            decorators: response.decorators,
-            pages: response.pages,
-        });
+
+        if (this._mounted) {
+            this.setState({
+                decorators: response.decorators,
+                pages: response.pages,
+            });
+        }
     }
 }
 
