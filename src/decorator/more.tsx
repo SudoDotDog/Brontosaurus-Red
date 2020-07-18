@@ -16,6 +16,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { buildAdminDecoratorEdit, buildAdminDecoratorMembers } from "../util/path";
+import { TitleManager } from "../util/title";
 import { activateDecoratorRepository } from "./repository/activate";
 import { deactivateDecoratorRepository } from "./repository/deactivate";
 
@@ -60,6 +61,12 @@ export const DecoratorMoreBase: React.FC<DecoratorMoreProps> = (props: Decorator
 
     const params: any = props.match.params;
     const decorator: string = decodeURIComponent(params.decorator);
+
+    React.useEffect(() => {
+
+        TitleManager.setNestedPage(PROFILE.DECORATOR, PROFILE.MORE, decorator);
+        return () => TitleManager.restoreVoid();
+    }, []);
 
     return (<div>
         <GoBack

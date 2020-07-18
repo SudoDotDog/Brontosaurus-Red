@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Decorator
+ * @namespace Group
  * @description Edit
  */
 

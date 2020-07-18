@@ -26,6 +26,7 @@ import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminGroupEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { singleDecorator, SingleDecoratorResponse } from "./repository/single";
 import { updateDecoratorRepository } from "./repository/update";
 
@@ -60,13 +61,21 @@ export class DecoratorEditBase extends React.Component<DecoratorEditProp, Decora
 
     public async componentDidMount() {
 
-        const response: SingleDecoratorResponse = await singleDecorator(this._getDecoratorName());
+        const decoratorName: string = this._getDecoratorName();
+        TitleManager.setNestedPage(PROFILE.DECORATOR, PROFILE.EDIT, decoratorName);
+
+        const response: SingleDecoratorResponse = await singleDecorator(decoratorName);
         const groups: AllGroupsResponse[] = await fetchAllGroups();
 
         this.setState({
             decorator: response,
             groups: groups.map((res: AllGroupsResponse) => res.name),
         });
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
     }
 
     public render() {

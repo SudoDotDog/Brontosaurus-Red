@@ -15,6 +15,7 @@ import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
+import { TitleManager } from "../util/title";
 import { createDecorator } from "./repository/create";
 
 type CreateDecoratorStates = {
@@ -48,6 +49,16 @@ export class CreateDecoratorBase extends React.Component<CreateDecoratorProps, C
         flag: undefined,
         current: {},
     };
+
+    public componentDidMount() {
+
+        TitleManager.setNestedPage(PROFILE.DECORATOR, PROFILE.CREATE);
+    }
+
+    public componentWillUnmount(): void {
+
+        TitleManager.restore();
+    }
 
     public render() {
 
