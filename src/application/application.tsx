@@ -18,6 +18,7 @@ import { SearchNew } from "../components/search-new";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { TitleManager } from "../util/title";
 import { ApplicationResponse, fetchApplication, FetchApplicationResponse } from "./repository/application-fetch";
 
 export type ApplicationState = {
@@ -52,10 +53,21 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
         page: searchPageCache.value,
     };
 
+    private _mounted: boolean = false;
     private readonly _defaultValue: string = searchKeywordCache.value;
 
     public componentDidMount() {
+
+        TitleManager.setSubPage(PROFILE.APPLICATION);
+
+        this._mounted = true;
         this._searchApplication();
+    }
+
+    public componentWillUnmount() {
+
+        this._mounted = false;
+        TitleManager.restore();
     }
 
     public render() {
@@ -73,7 +85,6 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                 }}
                 onNew={() => this.props.history.push('/admin/application/create')}
             />
-
             {this.state.applications.length === 0
                 ? void 0
                 : <NeonTable
@@ -90,7 +101,6 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                     style={{ marginTop: '1rem' }}>
                     {this._renderApplication()}
                 </NeonTable>}
-
             <PageSelector
                 total={this.state.pages}
                 selected={this.state.page}
@@ -165,10 +175,13 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
             this.state.keyword,
             this.state.page,
         );
-        this.setState({
-            applications: response.applications,
-            pages: response.pages,
-        });
+
+        if (this._mounted) {
+            this.setState({
+                applications: response.applications,
+                pages: response.pages,
+            });
+        }
     }
 }
 
