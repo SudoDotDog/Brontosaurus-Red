@@ -76,7 +76,11 @@ export class NamespaceEditBase extends React.Component<NamespaceEditProp, Namesp
         return (<div>
             <GoBack
                 right={this.props.language.get(PROFILE.MORE)}
-                onClickRight={() => buildAdminNamespaceMore(this._getNamespaceNamespace())}
+                onClickRight={() => {
+                    this.props.history.push(
+                        buildAdminNamespaceMore(this._getNamespaceNamespace()),
+                    );
+                }}
             />
             {this._renderEditableInfos()}
         </div>);

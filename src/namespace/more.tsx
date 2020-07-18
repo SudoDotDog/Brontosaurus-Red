@@ -71,7 +71,11 @@ export const NamespaceMoreBase: React.FC<NamespaceMoreProps> = (props: Namespace
     return (<div>
         <GoBack
             right={props.language.get(PROFILE.EDIT)}
-            onClickRight={() => buildAdminNamespaceEdit(namespace)}
+            onClickRight={() => {
+                props.history.push(
+                    buildAdminNamespaceEdit(namespace),
+                );
+            }}
         />
         <NamedTitle about={props.language.get(
             PROFILE.MORE_ABOUT,
@@ -96,7 +100,16 @@ export const NamespaceMoreBase: React.FC<NamespaceMoreProps> = (props: Namespace
                     props.language.get(PROFILE.NAMESPACE),
                 )}
                 link={props.language.get(PROFILE.ACTIVATE)}
-                onClick={() => activateNamespace(namespace, () => props.history.replace(buildAdminNamespaceEdit(namespace)))}
+                onClick={() => {
+                    activateNamespace(
+                        namespace,
+                        () => {
+                            props.history.replace(
+                                buildAdminNamespaceEdit(namespace),
+                            );
+                        },
+                    );
+                }}
             />
             <MenuItem
                 description={props.language.get(
