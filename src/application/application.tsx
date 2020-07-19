@@ -18,6 +18,8 @@ import { SearchNew } from "../components/search-new";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
+import { formatYNBoolean } from "../util/language";
+import { buildAdminApplicationEdit, buildAdminApplicationMore } from "../util/path";
 import { TitleManager } from "../util/title";
 import { ApplicationResponse, fetchApplication, FetchApplicationResponse } from "./repository/application-fetch";
 
@@ -78,13 +80,20 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                 defaultValue={this._defaultValue}
                 label={this.props.language.get(PROFILE.APPLICATION)}
                 onSearch={(keyword: string) => {
+
                     searchKeywordCache.replace(keyword);
                     searchPageCache.replace(0);
-                    this.setState({ keyword, page: 0 }, () => {
+
+                    this.setState({
+                        keyword,
+                        page: 0,
+                    }, () => {
                         this._searchApplication();
                     });
                 }}
-                onNew={() => this.props.history.push('/admin/application/create')}
+                onNew={() => {
+                    this.props.history.push('/admin/application/create');
+                }}
             />
             {this.state.applications.length === 0
                 ? void 0
@@ -119,18 +128,19 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
 
         return this.state.applications.map((application: ApplicationResponse) => {
 
-            const greenAccess: string = this.props.language.get(
-                Boolean(application.greenAccess) ? PROFILE.YES : PROFILE.NO,
+            const greenAccess: string = formatYNBoolean(
+                this.props.language,
+                application.greenAccess,
             );
-
-            const portalAccess: string = this.props.language.get(
-                Boolean(application.portalAccess) ? PROFILE.YES : PROFILE.NO,
+            const portalAccess: string = formatYNBoolean(
+                this.props.language,
+                application.portalAccess,
             );
 
             return (<tr key={application.key}>
                 <td>
                     <ClickableSpan
-                        to={'/admin/application/e/' + encodeURIComponent(application.key)}
+                        to={buildAdminApplicationEdit(application.key)}
                         red={!application.active}
                     >
                         {application.name}
@@ -142,11 +152,18 @@ export class ApplicationBase extends React.Component<ConnectedProps, Application
                 <td>{portalAccess}</td>
                 <td>{application.redirections.length}</td>
                 <td>{this._renderProtocol(application)}</td>
-                <td><NeonButton
-                    onClick={() => this.props.history.push('/admin/application/more/' + encodeURIComponent(application.key))}
-                    size={SIZE.RELATIVE}>
-                    {this.props.language.get(PROFILE.MORE)}
-                </NeonButton></td>
+                <td>
+                    <NeonButton
+                        onClick={() => {
+                            this.props.history.push(
+                                buildAdminApplicationMore(application.key),
+                            );
+                        }}
+                        size={SIZE.RELATIVE}
+                    >
+                        {this.props.language.get(PROFILE.MORE)}
+                    </NeonButton>
+                </td>
             </tr>);
         });
     }
