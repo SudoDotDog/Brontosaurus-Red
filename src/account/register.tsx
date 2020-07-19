@@ -27,7 +27,7 @@ import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminGroupEdit, buildAdminTagEdit } from "../util/path";
 import { TitleManager } from "../util/title";
 import { registerRepository } from "./repository/register";
-import { registerInfo } from "./repository/register-infos";
+import { registerInfo, RegisterInfoElement } from "./repository/register-infos";
 
 export type RegisterState = {
 
@@ -78,10 +78,8 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
     public async componentDidMount() {
 
         TitleManager.setNestedPage(PROFILE.ACCOUNT, PROFILE.REGISTER);
-        const infos: Array<{
-            name: string;
-            type: string;
-        }> = await registerInfo();
+        const infos: RegisterInfoElement[] = await registerInfo();
+
         this._fetchTags();
         this._fetchGroups();
 
