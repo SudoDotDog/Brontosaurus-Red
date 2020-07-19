@@ -55,16 +55,20 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
         page: searchPageCache.value,
     };
 
+    private _mounted: boolean = false;
     private readonly _defaultValue: string = searchKeywordCache.value;
 
     public componentDidMount() {
 
         TitleManager.setSubPage(PROFILE.ACCOUNT);
+
+        this._mounted = true;
         this._searchUser();
     }
 
     public componentWillUnmount() {
 
+        this._mounted = false;
         TitleManager.restore();
     }
 
@@ -174,10 +178,12 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
             this.state.page,
         );
 
-        this.setState({
-            users: response.accounts,
-            pages: response.pages,
-        });
+        if (this._mounted) {
+            this.setState({
+                users: response.accounts,
+                pages: response.pages,
+            });
+        }
     }
 }
 
