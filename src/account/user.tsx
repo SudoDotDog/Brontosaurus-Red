@@ -22,6 +22,7 @@ import { IStore } from "../state/declare";
 import { buildAdminAccountEdit, buildAdminAccountMore, buildAdminNamespaceEdit } from "../util/path";
 import { TitleManager } from "../util/title";
 import { fetchAccount, FetchAccountResponse, UserResponse } from "./repository/account-fetch";
+import { formatYNBoolean } from "../util/language";
 
 export type UserState = {
 
@@ -128,10 +129,7 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
 
         return this.state.users.map((user: UserResponse) => {
 
-            const twoFA: string = this.props.language.get(
-                Boolean(user.twoFA) ? PROFILE.YES : PROFILE.NO,
-            );
-
+            const twoFA: string = formatYNBoolean(this.props.language);
             const key: string = `${user.namespace}:${user.username}`;
             return (<tr key={key}>
                 <td>

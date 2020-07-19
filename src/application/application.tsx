@@ -30,6 +30,7 @@ export type ApplicationState = {
 };
 
 type ConnectedStates = {
+
     readonly language: SudooFormat;
 };
 
