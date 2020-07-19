@@ -84,7 +84,7 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
         this._fetchGroups();
 
         this.setState({
-            infos: infos.map((info) => ({
+            infos: infos.map((info: RegisterInfoElement) => ({
                 name: info.name,
                 type: info.type,
             })),
@@ -237,10 +237,7 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
             loading: true,
         });
 
-        const parsed: Record<string, string> = this.state.infos.reduce((previous: Record<string, string>, current: {
-            name: string;
-            type: string;
-        }) => {
+        const parsed: Record<string, string> = this.state.infos.reduce((previous: Record<string, string>, current: RegisterInfoElement) => {
 
             return {
                 ...previous,
@@ -249,6 +246,7 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
         }, {} as Record<string, string>);
 
         if (!response.username) {
+
             alert('username required');
             this.setState({
                 loading: false,
@@ -257,6 +255,7 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
         }
 
         if (!response.namespace) {
+
             alert('namespace required');
             this.setState({
                 loading: false,
@@ -265,6 +264,7 @@ export class RegisterBase extends React.Component<RegisterProps, RegisterState> 
         }
 
         if (!response.password) {
+
             alert('password required');
             this.setState({
                 loading: false,
