@@ -30,6 +30,7 @@ export type NamespaceState = {
 };
 
 type ConnectedStates = {
+
     readonly language: SudooFormat;
 };
 

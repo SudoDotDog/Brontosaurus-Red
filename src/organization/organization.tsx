@@ -32,6 +32,7 @@ export type OrganizationStates = {
 };
 
 type ConnectedStates = {
+
     readonly language: SudooFormat;
 };
 

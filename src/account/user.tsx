@@ -89,7 +89,6 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                     }}
                     onNew={() => this.props.history.push('/admin/account/new')}
                 />
-
                 {this.state.users.length === 0
                     ? void 0
                     : <NeonTable
@@ -110,7 +109,6 @@ export class UserBase extends React.Component<ConnectedProps, UserState> {
                         style={{ marginTop: '1rem' }}>
                         {this._renderUser()}
                     </NeonTable>}
-
                 <PageSelector
                     total={this.state.pages}
                     selected={this.state.page}
