@@ -13,6 +13,8 @@ import { produce } from "@sudoo/immutable";
 export const updateApplicationRepository = async (application: SingleApplicationFetchResponse): Promise<string> => {
 
     const parsedApplication: SingleApplicationFetchResponse = produce(application, (draft: SingleApplicationFetchResponse) => {
+
+        (draft as any).expire = Number(draft.expire);
         for (const redirection of draft.redirections) {
             delete redirection.identifier;
         }
