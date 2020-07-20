@@ -18,7 +18,7 @@ import { SearchNew } from "../components/search-new";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
-import { buildAdminDecoratorMore, buildAdminNamespaceEdit } from "../util/path";
+import { buildAdminDecoratorEdit, buildAdminDecoratorMore } from "../util/path";
 import { TitleManager } from "../util/title";
 import { DecoratorResponse, fetchDecorator, FetchDecoratorResponse } from "./repository/decorator-fetch";
 
@@ -130,7 +130,7 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
             return (<tr key={decorator.name}>
                 <td>
                     <ClickableSpan
-                        to={buildAdminNamespaceEdit(decorator.name)}
+                        to={buildAdminDecoratorEdit(decorator.name)}
                         red={!decorator.active}
                     >
                         {decorator.name}
@@ -139,7 +139,9 @@ export class DecoratorBase extends React.Component<ConnectedProps, DecoratorStat
                 <td>{decorator.description}</td>
                 <td><NeonButton
                     onClick={() => {
-                        this.props.history.push(buildAdminDecoratorMore(decorator.name));
+                        this.props.history.push(
+                            buildAdminDecoratorMore(decorator.name),
+                        );
                     }}
                     size={SIZE.RELATIVE}
                 >
