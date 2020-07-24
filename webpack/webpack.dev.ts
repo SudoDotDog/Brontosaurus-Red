@@ -14,24 +14,24 @@ const COMMON_SASS_DIR: string = Path.resolve(__dirname, '..', 'style', 'common')
 
 const PORT_NUMBER: number = 8082;
 
-export default SudooWebpack.create(
-    {
-        APP_DIR,
-        BUILD_DIR,
-        COMMON_SASS_DIR,
+export default SudooWebpack.create({
 
-        TSCONFIG_PATH,
+    APP_DIR,
+    BUILD_DIR,
+    COMMON_SASS_DIR,
 
-        APP_ENTRY_FILE_NAME: 'index.tsx',
+    TSCONFIG_PATH,
+
+    APP_ENTRY_FILE_NAME: 'index.tsx',
+}, {
+
+    defines: {
+
+        'process.env.RELEASE_VERSION': JSON.stringify(process.env.RELEASE_VERSION || 'LOCAL'),
+        'process.env.PORTAL_PATH': JSON.stringify(process.env.PORTAL_PATH),
+        'process.env.TEST_SERVER_PATH': JSON.stringify(process.env.TEST_SERVER_PATH),
     },
-    {
-        defines: {
-            'process.env.RELEASE_VERSION': JSON.stringify(process.env.RELEASE_VERSION || 'LOCAL'),
-            'process.env.PORTAL_PATH': JSON.stringify(process.env.PORTAL_PATH),
-            'process.env.TEST_SERVER_PATH': JSON.stringify(process.env.TEST_SERVER_PATH),
-        },
-        title: 'Brontosaurus RED',
-        mobile: false,
-        insertion: '<!-- Insertion Point -->',
-    },
-).development(PORT_NUMBER);
+    title: 'Brontosaurus RED',
+    mobile: false,
+    insertion: '<!-- Insertion Point -->',
+}).development(PORT_NUMBER);

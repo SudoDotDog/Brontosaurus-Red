@@ -12,24 +12,24 @@ const APP_DIR: string = Path.resolve(__dirname, '..', 'src');
 const TSCONFIG_PATH: string = Path.resolve(__dirname, '..', 'typescript', 'tsconfig.dev.json');
 const COMMON_SASS_DIR: string = Path.resolve(__dirname, '..', 'style', 'common');
 
-export default SudooWebpack.create(
-    {
-        APP_DIR,
-        BUILD_DIR,
-        COMMON_SASS_DIR,
+export default SudooWebpack.create({
 
-        TSCONFIG_PATH,
+    APP_DIR,
+    BUILD_DIR,
+    COMMON_SASS_DIR,
 
-        APP_ENTRY_FILE_NAME: 'index.tsx',
+    TSCONFIG_PATH,
+
+    APP_ENTRY_FILE_NAME: 'index.tsx',
+}, {
+
+    defines: {
+
+        'process.env.RELEASE_VERSION': JSON.stringify(process.env.RELEASE_VERSION || 'LOCAL'),
     },
-    {
-        defines: {
-            'process.env.RELEASE_VERSION': JSON.stringify(process.env.RELEASE_VERSION || 'LOCAL'),
-        },
-        title: 'Brontosaurus RED',
-        silent: true,
-        mobile: false,
-        insertion: '<!-- Insertion Point -->',
-        favicon: '/favicon.png',
-    },
-).production();
+    title: 'Brontosaurus RED',
+    silent: true,
+    mobile: false,
+    insertion: '<!-- Insertion Point -->',
+    favicon: '/favicon.png',
+}).production();
