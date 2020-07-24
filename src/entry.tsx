@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace Red
- * @description Provider
+ * @description Entry
  */
 
 import { EnableForGroup } from "@brontosaurus/react";
