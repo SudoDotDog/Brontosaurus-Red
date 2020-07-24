@@ -51,52 +51,50 @@ export class Entry extends React.Component<undefined, EntryStates> {
 
     public render(): JSX.Element {
 
-        return (
-            <div className={EntryStyle.container}>
-                <div className={EntryStyle.title}>
-                    <NeonTitle>{this.state.commandCenterName}</NeonTitle>
-                </div>
-                <div className={EntryStyle.nav}>
-                    <Route path="/" component={Nav} />
-                </div>
-                <div className={EntryStyle.content}>
-                    <NeonPaper>
-                        <Route path="/" exact render={(props: any) =>
-                            <IndexMenu
-                                {...props}
-                                accountName={this.state.accountName}
-                                commandCenterName={this.state.commandCenterName}
-                            />}
-                        />
-                        <Route path="/admin" exact component={AdminMenu} />
-                        <EnableForGroup
-                            visit={false}
-                            group={['BRONTOSAURUS_SELF_CONTROL']}>
-                            <MeRoute />
-                        </EnableForGroup>
-                        <EnableForGroup
-                            visit={false}
-                            validation={(token: Token | null) => Boolean(token && token.organization)}
-                            group={['BRONTOSAURUS_ORGANIZATION_CONTROL']}>
-                            <CurrentRoute />
-                        </EnableForGroup>
-                        <EnableForGroup
-                            visit={false}
-                            group={['BRONTOSAURUS_SUPER_ADMIN']}>
-                            <UserRoute />
-                            <OrganizationRoute />
-                            <GroupRoute />
-                            <DecoratorRoute />
-                            <NamespaceRoute />
-                            <TagRoute />
-                            <ApplicationRoute />
-                            <PreferenceRoute />
-                        </EnableForGroup>
-                    </NeonPaper>
-                </div>
-                <ConnectedLanguage />
+        return (<div className={EntryStyle.container}>
+            <div className={EntryStyle.title}>
+                <NeonTitle>{this.state.commandCenterName}</NeonTitle>
             </div>
-        );
+            <div className={EntryStyle.nav}>
+                <Route path="/" component={Nav} />
+            </div>
+            <div className={EntryStyle.content}>
+                <NeonPaper>
+                    <Route path="/" exact render={(props: any) =>
+                        <IndexMenu
+                            {...props}
+                            accountName={this.state.accountName}
+                            commandCenterName={this.state.commandCenterName}
+                        />}
+                    />
+                    <Route path="/admin" exact component={AdminMenu} />
+                    <EnableForGroup
+                        visit={false}
+                        group={['BRONTOSAURUS_SELF_CONTROL']}>
+                        <MeRoute />
+                    </EnableForGroup>
+                    <EnableForGroup
+                        visit={false}
+                        validation={(token: Token | null) => Boolean(token && token.organization)}
+                        group={['BRONTOSAURUS_ORGANIZATION_CONTROL']}>
+                        <CurrentRoute />
+                    </EnableForGroup>
+                    <EnableForGroup
+                        visit={false}
+                        group={['BRONTOSAURUS_SUPER_ADMIN']}>
+                        <UserRoute />
+                        <OrganizationRoute />
+                        <GroupRoute />
+                        <DecoratorRoute />
+                        <NamespaceRoute />
+                        <TagRoute />
+                        <ApplicationRoute />
+                        <PreferenceRoute />
+                    </EnableForGroup>
+                </NeonPaper>
+            </div>
+            <ConnectedLanguage />
+        </div>);
     }
 
     private _setName(name?: string) {
