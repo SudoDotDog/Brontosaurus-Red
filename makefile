@@ -1,6 +1,6 @@
 # Paths
-webpack_build := webpack/webpack.config.js
-webpack_dev := webpack/webpack.dev.js
+webpack_build := webpack/webpack.config.ts
+webpack_dev := webpack/webpack.dev.ts
 
 # NPX functions
 tsc := node_modules/.bin/tsc
