@@ -4,15 +4,15 @@
  * @description Production
  */
 
-const SudooWebpack = require("@sudoo/webpack-react").SudooWebpack;
-const path = require('path');
+import { SudooWebpack } from "@sudoo/webpack-react";
+import * as Path from "path";
 
-const BUILD_DIR = path.resolve(__dirname, '..', 'dist');
-const APP_DIR = path.resolve(__dirname, '..', 'src');
-const TSCONFIG_PATH = path.resolve(__dirname, '..', 'typescript', 'tsconfig.dev.json');
-const COMMON_SASS_DIR = path.resolve(__dirname, '..', 'style', 'common');
+const BUILD_DIR = Path.resolve(__dirname, '..', 'dist');
+const APP_DIR = Path.resolve(__dirname, '..', 'src');
+const TSCONFIG_PATH = Path.resolve(__dirname, '..', 'typescript', 'tsconfig.dev.json');
+const COMMON_SASS_DIR = Path.resolve(__dirname, '..', 'style', 'common');
 
-module.exports = SudooWebpack.create(
+export default SudooWebpack.create(
     {
         APP_DIR,
         BUILD_DIR,
