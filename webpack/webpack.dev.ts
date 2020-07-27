@@ -4,7 +4,7 @@
  * @description Development
  */
 
-import { SudooWebpack } from "@sudoo/webpack-react";
+import { SudooWebpackReact } from "@sudoo/webpack-react";
 import * as Path from "path";
 
 const BUILD_DIR: string = Path.resolve(__dirname, '..', 'dist');
@@ -14,15 +14,15 @@ const COMMON_SASS_DIR: string = Path.resolve(__dirname, '..', 'style', 'common')
 
 const PORT_NUMBER: number = 8082;
 
-export default SudooWebpack.create({
+export default SudooWebpackReact.create({
 
-    APP_DIR,
-    BUILD_DIR,
-    COMMON_SASS_DIR,
+    applicationPath: APP_DIR,
+    applicationEntryFile: 'index.tsx',
 
-    TSCONFIG_PATH,
+    buildPath: BUILD_DIR,
+    commonSassPath: COMMON_SASS_DIR,
 
-    APP_ENTRY_FILE_NAME: 'index.tsx',
+    tsconfigPath: TSCONFIG_PATH,
 }, {
 
     defines: {
