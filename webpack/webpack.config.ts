@@ -15,7 +15,7 @@ export default SudooWebpackReact.create({
     buildPath: getBuildPath(),
     commonSassPath: joinStylePath('common'),
 
-    tsconfigPath: joinTypeScriptPath('tsconfig.dev.json'),
+    tsconfigPath: joinTypeScriptPath('tsconfig.build.json'),
 }, {
 
     defines: {
