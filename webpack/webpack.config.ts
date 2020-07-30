@@ -5,22 +5,17 @@
  */
 
 import { SudooWebpackReact } from "@sudoo/webpack-react";
-import * as Path from "path";
-
-const BUILD_DIR: string = Path.resolve(__dirname, '..', 'dist');
-const APP_DIR: string = Path.resolve(__dirname, '..', 'src');
-const TSCONFIG_PATH: string = Path.resolve(__dirname, '..', 'typescript', 'tsconfig.dev.json');
-const COMMON_SASS_DIR: string = Path.resolve(__dirname, '..', 'style', 'common');
+import { getBuildPath, getSourcePath, joinStylePath, joinTypeScriptPath } from "./path";
 
 export default SudooWebpackReact.create({
 
-    applicationPath: APP_DIR,
+    applicationPath: getSourcePath(),
     applicationEntryFile: 'index.tsx',
 
-    buildPath: BUILD_DIR,
-    commonSassPath: COMMON_SASS_DIR,
+    buildPath: getBuildPath(),
+    commonSassPath: joinStylePath('common'),
 
-    tsconfigPath: TSCONFIG_PATH,
+    tsconfigPath: joinTypeScriptPath('tsconfig.dev.json'),
 }, {
 
     defines: {
