@@ -143,10 +143,10 @@
     jss "^10.3.0"
     jss-preset-default "^10.3.0"
 
-"@sudoo/pattern@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/pattern/-/pattern-1.4.0.tgz#f1cabc7fc3e6c7dd8e53cfdc0dab90a6ba24e0f0"
-  integrity sha512-jmrUJIaxtvYok5YXWQUNtmEf5dYlOYcUEiFk3aBAvyrendU0q/QgyV3py6hYE6Dyp+sBLJfUIEzkPmWYLpiBpg==
+"@sudoo/pattern@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@sudoo/pattern/-/pattern-1.4.1.tgz#4e81187254036d23d330f958251b5f33fbd5c8dc"
+  integrity sha512-adtH3+RDKh+UMKNYSK99RmxE7qXnxix90zsF3/xy5PSXFnjXkwkOPgxZ15EC5R4k8qXPi3H9S9WLPE2n6HzpqQ==
 
 "@sudoo/random@^2.1.1":
   version "2.1.1"
