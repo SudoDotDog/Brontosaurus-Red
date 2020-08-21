@@ -73,7 +73,7 @@ export class GlobalBackgroundImagesPreferenceBase extends React.Component<Global
 
         this.setState({
             loading: true,
-        })
+        });
 
         const response: ReadGlobalBackgroundImagesRepositoryResponse = await readGlobalBackgroundImagesPreferenceRepository();
         const images: string[] = response.globalBackgroundImages ?? [];

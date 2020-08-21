@@ -12,7 +12,7 @@ export type SpecialPasswordResponse = {
 
     readonly id: string;
     readonly by: string;
-    readonly expireAt: Date,
+    readonly expireAt: Date;
     readonly suspendedAt?: Date;
     readonly suspendedBy?: string;
 };

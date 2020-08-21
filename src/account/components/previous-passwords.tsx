@@ -101,7 +101,7 @@ export class AccountPreviousPasswordsBase extends React.Component<AccountPreviou
         this.setState({
             verifying: true,
             verifyResult: result,
-        })
+        });
     }
 }
 
