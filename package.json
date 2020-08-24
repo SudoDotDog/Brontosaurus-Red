@@ -21,7 +21,7 @@
     "@brontosaurus/web": "^3.12.1",
     "@sudoo/bark": "^2.7.2",
     "@sudoo/dump": "^1.6.0",
-    "@sudoo/fetch": "^2.0.0",
+    "@sudoo/fetch": "^2.1.0",
     "@sudoo/immutable": "^1.3.0",
     "@sudoo/internationalization": "^1.4.2",
     "@sudoo/magic": "^1.8.0",
