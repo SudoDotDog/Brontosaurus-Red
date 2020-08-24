@@ -102,10 +102,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/eslint-config/-/eslint-config-1.5.0.tgz#6394523d5366d95dd18685af700673e14fcf6270"
   integrity sha512-pFNYuEUwRCsdK6/KuffiRxLiuMWL8hKXEfbAVndBlsGg83C1VZ6B7BFKb2C+QgSIp1vqhmZZcrvB23+LFCQIKQ==
 
-"@sudoo/fetch@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-2.0.0.tgz#45babf45ebf1a77cd9cea81b94ea5600c097d40f"
-  integrity sha512-rYBZ7wvbOJ+mF5xNwcvcf6qwaH7jGkvVK8W4SIMyISTUuEM8UMb/9L6fIqRw9ksoTBtxlf2i1QyHdY9VixfQJw==
+"@sudoo/fetch@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/fetch/-/fetch-2.1.0.tgz#5bdfe0760577fd5798be6d5afbc8d21eb5a4b2d8"
+  integrity sha512-maR4DNg6+oWu9VL7ZEjDQdZ85F7Xh+AZ+pVZrFc3SjJsxNyG+Uo2LAHMMfywCJcYDl6AT7KfvLDc7QNNU5YjJg==
 
 "@sudoo/immutable@^1.3.0":
   version "1.3.0"
