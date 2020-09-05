@@ -187,10 +187,10 @@
     enzyme "3.11.0"
     enzyme-adapter-react-16 "1.15.4"
 
-"@sudoo/react-force@^1.7.3":
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/@sudoo/react-force/-/react-force-1.7.3.tgz#80e63730e3e511910bba8838fa540eec6fbbfe8d"
-  integrity sha512-0y6AMAowIMOUFkwl5iW1C2z+C/XdSM9gaXB5LdLDiQXouxf11gEYB9Yct0/rCnu64EUE2ClCssAfIQatv8nBmg==
+"@sudoo/react-force@^1.7.4":
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/@sudoo/react-force/-/react-force-1.7.4.tgz#707fe6307e206989c75e5c19802aa4f2f0de0d90"
+  integrity sha512-Tzj5GD1/aw7S9VXXFerU9QI/bUSAL0a1DxhZMvNQV/ZMCGbgfo/NTHTE6o4rA2pYYMXwR9343871sTqCyWZHGw==
   dependencies:
     react "16.13.1"
     react-dom "16.13.1"
