@@ -30,10 +30,10 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@brontosaurus/definition@^3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-3.4.0.tgz#05f362da522fad8a15f053b2811ec125ad024bf8"
-  integrity sha512-QmL5pCIEMQK8WtrpjxG3Zf0RuocVotXEC+jcUgfr01wOtlkEh4U7qsMra4ZuFzgQx9fTVcvmfuEZsjVz2baRtA==
+"@brontosaurus/definition@^3.4.0", "@brontosaurus/definition@^3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@brontosaurus/definition/-/definition-3.4.1.tgz#40f13435e51d5548de828a8d30b0b3ec474ac31d"
+  integrity sha512-fh0sqaO3CxjcmqGgxlF96V9+aVCohqrWVCsnv8EPu0P1ikpSEs1tAslYjCSgV1hygUhJuDxO+pKROcPH17kgxw==
 
 "@brontosaurus/react@^3.12.1":
   version "3.12.1"
