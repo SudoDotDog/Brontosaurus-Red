@@ -28,13 +28,13 @@
     "@sudoo/neon": "^2.12.5",
     "@sudoo/pattern": "^1.6.1",
     "@sudoo/random": "^2.1.1",
-    "@sudoo/react-force": "^1.7.4",
+    "@sudoo/react-force": "^1.8.0",
     "@sudoo/redux": "^1.6.0",
     "@sudoo/title": "^1.0.2",
     "@sudoo/verify": "^1.16.0"
   },
   "devDependencies": {
-    "@sudoo/react-force-dev": "^1.7.4",
+    "@sudoo/react-force-dev": "^1.8.0",
     "@sudoo/triforce": "^2.9.4",
     "@sudoo/webpack-react": "^4.2.0",
     "ts-loader": "^8.0.5"
