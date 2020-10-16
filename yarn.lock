@@ -187,18 +187,18 @@
   resolved "https://registry.yarnpkg.com/@sudoo/random/-/random-2.1.1.tgz#acc6a9a5257d1ce6ea0bfe2c87a3696d873492ac"
   integrity sha512-OQE1ea2d7RyTlocWorCcJurMDPUcs6XZiPBOjA/x2Bq1p10YUZNbQZtF+X4OXyjsDH36RxbWvU8P49uRicxq1w==
 
-"@sudoo/react-force-dev@^1.7.4":
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/@sudoo/react-force-dev/-/react-force-dev-1.7.4.tgz#14b0066ae48423c759b6c31033c65fd77dc3208f"
-  integrity sha512-k5gMAcH1VSii0QyfBF9ekKVyR22411vubpFYeGyefFOVgWGE5a5ZxORyIbkh54D8b+zWd06PiMtiI8CwXinYeQ==
+"@sudoo/react-force-dev@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/react-force-dev/-/react-force-dev-1.8.0.tgz#39f864f81c0d28d185dcfe649797771fb7b9b7f1"
+  integrity sha512-VeUw81p7fWyPaJfbFoQRS4gbicxx6A5xUYoZCARUESz4uVfSTvmbS8Oy2bWFm9UXWGE7HDM/Rg+0HEKMnXz6Lg==
   dependencies:
-    "@types/enzyme" "3.10.5"
+    "@types/enzyme" "3.10.7"
     "@types/enzyme-adapter-react-16" "1.0.6"
-    "@types/react" "16.9.49"
+    "@types/react" "16.9.52"
     "@types/react-dom" "16.9.8"
-    "@types/react-router-dom" "5.1.5"
+    "@types/react-router-dom" "5.1.6"
     enzyme "3.11.0"
-    enzyme-adapter-react-16 "1.15.4"
+    enzyme-adapter-react-16 "1.15.5"
 
 "@sudoo/react-force@^1.7.4":
   version "1.7.4"
@@ -325,18 +325,10 @@
   dependencies:
     "@types/enzyme" "*"
 
-"@types/enzyme@*":
+"@types/enzyme@*", "@types/enzyme@3.10.7":
   version "3.10.7"
   resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.10.7.tgz#ebdf3b972d293095e09af479e36c772025285e3a"
   integrity sha512-J+0wduPGAkzOvW7sr6hshGv1gBI3WXLRTczkRKzVPxLP3xAkYxZmvvagSBPw8Z452fZ8TGUxCmAXcb44yLQksw==
-  dependencies:
-    "@types/cheerio" "*"
-    "@types/react" "*"
-
-"@types/enzyme@3.10.5":
-  version "3.10.5"
-  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.10.5.tgz#fe7eeba3550369eed20e7fb565bfb74eec44f1f0"
-  integrity sha512-R+phe509UuUYy9Tk0YlSbipRpfVtIzb/9BHn5pTEtjJTF5LXvUjrIQcZvNyANNEyFrd2YGs196PniNT1fgvOQA==
   dependencies:
     "@types/cheerio" "*"
     "@types/react" "*"
@@ -396,10 +388,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-router-dom@5.1.5":
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.1.5.tgz#7c334a2ea785dbad2b2dcdd83d2cf3d9973da090"
-  integrity sha512-ArBM4B1g3BWLGbaGvwBGO75GNFbLDUthrDojV2vHLih/Tq8M+tgvY1DSwkuNrPSwdp/GUL93WSEpTZs8nVyJLw==
+"@types/react-router-dom@5.1.6":
+  version "5.1.6"
+  resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.1.6.tgz#07b14e7ab1893a837c8565634960dc398564b1fb"
+  integrity sha512-gjrxYqxz37zWEdMVvQtWPFMFj1dRDb4TGOcgyOfSXTrEXdF92L00WE3C471O3TV/RF1oskcStkXsOU0Ete4s/g==
   dependencies:
     "@types/history" "*"
     "@types/react" "*"
@@ -413,18 +405,10 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react@*":
-  version "16.9.50"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.50.tgz#cb5f2c22d42de33ca1f5efc6a0959feb784a3a2d"
-  integrity sha512-kPx5YsNnKDJejTk1P+lqThwxN2PczrocwsvqXnjvVvKpFescoY62ZiM3TV7dH1T8lFhlHZF+PE5xUyimUwqEGA==
-  dependencies:
-    "@types/prop-types" "*"
-    csstype "^3.0.2"
-
-"@types/react@16.9.49":
-  version "16.9.49"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.49.tgz#09db021cf8089aba0cdb12a49f8021a69cce4872"
-  integrity sha512-DtLFjSj0OYAdVLBbyjhuV9CdGVHCkHn2R+xr3XkBvK2rS1Y1tkc14XSGjYgm5Fjjr90AxH9tiSzc1pCFMGO06g==
+"@types/react@*", "@types/react@16.9.52":
+  version "16.9.52"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.52.tgz#c46c72d1a1d8d9d666f4dd2066c0e22600ccfde1"
+  integrity sha512-EHRjmnxiNivwhGdMh9sz1Yw9AUxTSZFxKqdBWAAzyZx3sufWwx6ogqHYh/WB1m/I4ZpjkoZLExF5QTy2ekVi/Q==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -2568,10 +2552,10 @@ entities@^2.0.0:
   resolved "https://registry.yarnpkg.com/entities/-/entities-2.0.3.tgz#5c487e5742ab93c15abb5da22759b8590ec03b7f"
   integrity sha512-MyoZ0jgnLvB2X3Lg5HqpFmn1kybDiIfEQmKzTb5apr51Rb+T3KdmMiqa70T+bhGnyv7bQ6WMj2QMHpGMmlrUYQ==
 
-enzyme-adapter-react-16@1.15.4:
-  version "1.15.4"
-  resolved "https://registry.yarnpkg.com/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.15.4.tgz#328a782365a363ecb424f99283c4833dd92c0f21"
-  integrity sha512-wPzxs+JaGDK2TPYzl5a9YWGce6i2SQ3Cg51ScLeyj2WotUZ8Obcq1ke/U1Y2VGpYlb9rrX2yCjzSMgtKCeAt5w==
+enzyme-adapter-react-16@1.15.5:
+  version "1.15.5"
+  resolved "https://registry.yarnpkg.com/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.15.5.tgz#7a6f0093d3edd2f7025b36e7fbf290695473ee04"
+  integrity sha512-33yUJGT1nHFQlbVI5qdo5Pfqvu/h4qPwi1o0a6ZZsjpiqq92a3HjynDhwd1IeED+Su60HDWV8mxJqkTnLYdGkw==
   dependencies:
     enzyme-adapter-utils "^1.13.1"
     enzyme-shallow-equal "^1.0.4"
