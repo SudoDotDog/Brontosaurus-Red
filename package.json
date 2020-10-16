@@ -34,7 +34,7 @@
     "@sudoo/verify": "^1.16.0"
   },
   "devDependencies": {
-    "@sudoo/react-force-dev": "^1.7.4",
+    "@sudoo/react-force-dev": "^1.8.0",
     "@sudoo/triforce": "^2.9.4",
     "@sudoo/webpack-react": "^4.1.1",
     "ts-loader": "^8.0.5"
