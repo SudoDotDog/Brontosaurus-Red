@@ -200,13 +200,13 @@
     enzyme "3.11.0"
     enzyme-adapter-react-16 "1.15.5"
 
-"@sudoo/react-force@^1.7.4":
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/@sudoo/react-force/-/react-force-1.7.4.tgz#707fe6307e206989c75e5c19802aa4f2f0de0d90"
-  integrity sha512-Tzj5GD1/aw7S9VXXFerU9QI/bUSAL0a1DxhZMvNQV/ZMCGbgfo/NTHTE6o4rA2pYYMXwR9343871sTqCyWZHGw==
+"@sudoo/react-force@^1.8.0":
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/@sudoo/react-force/-/react-force-1.8.0.tgz#95d5ba1defd2733e1e543f15017a1eaa03fe6537"
+  integrity sha512-jH0ql6x7pmLF6DZ0LxBIA1xrZvFcc+g6jy2tTK1uiwxsCNELYMzpsbUQtW4W8kyjO44Tai6HNLIQpDjhXs9iZQ==
   dependencies:
-    react "16.13.1"
-    react-dom "16.13.1"
+    react "16.14.0"
+    react-dom "16.14.0"
     react-router-dom "^5.2.0"
 
 "@sudoo/redux@^1.6.0":
@@ -6419,10 +6419,10 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-react-dom@16.13.1:
-  version "16.13.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
-  integrity sha512-81PIMmVLnCNLO/fFOQxdQkvEq/+Hfpv24XNJfpyZhTRfO0QcmQIF/PgCa1zCOj2w1hrn12MFLyaJ/G0+Mxtfag==
+react-dom@16.14.0:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
+  integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -6503,10 +6503,10 @@ react-test-renderer@^16.0.0-0:
     react-is "^16.8.6"
     scheduler "^0.19.1"
 
-react@16.13.1:
-  version "16.13.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
-  integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
+react@16.14.0:
+  version "16.14.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
+  integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
