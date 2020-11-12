@@ -4,6 +4,7 @@
         "alwaysStrict": true,
         "downlevelIteration": true,
         "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
         "experimentalDecorators": true,
         "jsx": "react",
         "lib": [
