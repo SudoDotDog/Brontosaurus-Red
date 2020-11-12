@@ -6,7 +6,7 @@
 
 import { NeonCoin } from "@sudoo/neon/button";
 import * as React from "react";
-import * as PageSelectorStyle from "../../style/components/page-selector.scss";
+import PageSelectorStyle from "../../style/components/page-selector.scss";
 import { combineClasses } from "../util/style";
 
 export type PageSelectorProps = {

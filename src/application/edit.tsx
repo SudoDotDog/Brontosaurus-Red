@@ -17,7 +17,7 @@ import { NeonTitle } from "@sudoo/neon/typography";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import * as ApplicationEditStyle from "../../style/application/edit.scss";
+import ApplicationEditStyle from "../../style/application/edit.scss";
 import { ApplicationRedirection } from "../common/declare";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";

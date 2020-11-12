@@ -5,7 +5,7 @@
  */
 
 import * as React from "react";
-import * as ActiveStatusStyle from "../../style/components/active-status.scss";
+import ActiveStatusStyle from "../../style/components/active-status.scss";
 import { combineClasses } from "../util/style";
 
 export type LiteStatusProps = {

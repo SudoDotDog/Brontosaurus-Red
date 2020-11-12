@@ -10,7 +10,7 @@ import { NeonPaper } from "@sudoo/neon/paper";
 import { NeonTitle } from "@sudoo/neon/typography";
 import * as React from "react";
 import { Route } from "react-router-dom";
-import * as EntryStyle from "../style/route/entry.scss";
+import EntryStyle from "../style/route/entry.scss";
 import { UserRoute } from "./account/route";
 import { ApplicationRoute } from "./application/route";
 import { ConnectedLanguage } from "./components/language";

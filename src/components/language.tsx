@@ -7,7 +7,7 @@
 import { LOCALE } from "@sudoo/internationalization";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
-import * as EntryStyle from "../../style/route/entry.scss";
+import EntryStyle from "../../style/route/entry.scss";
 import { IStore } from "../state/declare";
 import { setLanguage } from "../state/preference/preference";
 import { combineClasses } from "../util/style";

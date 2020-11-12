@@ -5,7 +5,7 @@
  */
 
 import * as React from "react";
-import * as NavStyle from "../../style/page/nav.scss";
+import NavStyle from "../../style/page/nav.scss";
 import { combineClasses } from "../util/style";
 
 export type SubButtonProps = {

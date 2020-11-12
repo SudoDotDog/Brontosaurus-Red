@@ -9,7 +9,7 @@ import { NeonSub } from "@sudoo/neon/typography";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps, withRouter } from "react-router";
-import * as MenuStyle from "../../style/components/menu.scss";
+import MenuStyle from "../../style/components/menu.scss";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";

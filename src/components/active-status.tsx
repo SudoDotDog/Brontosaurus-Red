@@ -8,7 +8,7 @@ import { SudooFormat } from "@sudoo/internationalization";
 import { NeonSub } from "@sudoo/neon/typography";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
-import * as ActiveStatusStyle from "../../style/components/active-status.scss";
+import ActiveStatusStyle from "../../style/components/active-status.scss";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";

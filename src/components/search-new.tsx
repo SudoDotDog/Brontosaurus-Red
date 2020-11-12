@@ -10,7 +10,7 @@ import { SIZE } from "@sudoo/neon/declare";
 import { NeonApplicable } from "@sudoo/neon/input";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
-import * as SearchNewStyle from "../../style/components/search-new.scss";
+import SearchNewStyle from "../../style/components/search-new.scss";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";

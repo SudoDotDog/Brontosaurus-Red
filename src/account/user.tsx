@@ -12,7 +12,7 @@ import { NeonTable } from "@sudoo/neon/table";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import * as MenuStyle from "../../style/components/menu.scss";
+import MenuStyle from "../../style/components/menu.scss";
 import { ClickableSpan } from "../components/clickable-span";
 import { PageSelector } from "../components/page-selector";
 import { SearchNew } from "../components/search-new";

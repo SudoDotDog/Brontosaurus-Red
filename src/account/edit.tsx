@@ -16,7 +16,7 @@ import { NeonSub, NeonTitle } from "@sudoo/neon/typography";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import * as MenuStyle from "../../style/components/menu.scss";
+import MenuStyle from "../../style/components/menu.scss";
 import { AllDecoratorsResponse, fetchAllDecorators } from "../common/repository/all-decorator";
 import { AllGroupsResponse, fetchAllGroups } from "../common/repository/all-group";
 import { AllTagsResponse, fetchAllTags } from "../common/repository/all-tag";
@@ -30,12 +30,12 @@ import { PROFILE } from "../i18n/profile";
 import { IStore } from "../state/declare";
 import { createFailedCover, createSucceedCover } from "../util/cover";
 import { buildAdminAccountMore, buildAdminDecoratorEdit, buildAdminGroupEdit, buildAdminTagEdit } from "../util/path";
+import { TitleManager } from "../util/title";
 import { AccountPreviousPasswords } from "./components/previous-passwords";
 import { editAccountAdminRepository } from "./repository/admin-edit";
 import { singleFetchRepository, SingleFetchResponse, SpecialPasswordResponse } from "./repository/single-fetch";
 import { suspendApplicationPasswordRepository, SuspendApplicationPasswordResponse } from "./repository/suspend-application-password";
 import { suspendTemporaryPasswordRepository, SuspendTemporaryPasswordResponse } from "./repository/suspend-temp-password";
-import { TitleManager } from "../util/title";
 
 type AccountEditState = {
 

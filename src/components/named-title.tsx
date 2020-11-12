@@ -5,7 +5,7 @@
  */
 
 import * as React from "react";
-import * as MenuStyle from "../../style/components/menu.scss";
+import MenuStyle from "../../style/components/menu.scss";
 import { combineClasses } from "../util/style";
 
 export type NamedTitleProps = {

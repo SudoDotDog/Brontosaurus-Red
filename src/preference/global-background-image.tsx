@@ -18,7 +18,7 @@ import { randomUnique } from "@sudoo/random";
 import { Connector } from "@sudoo/redux";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import * as RedirectionStyle from "../../style/application/components/redirection.scss";
+import RedirectionStyle from "../../style/application/components/redirection.scss";
 import { GoBack } from "../components/go-back";
 import { intl } from "../i18n/intl";
 import { PROFILE } from "../i18n/profile";
