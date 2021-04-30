@@ -263,10 +263,10 @@
   resolved "https://registry.yarnpkg.com/@sudoo/verify/-/verify-1.16.0.tgz#a1ddde7064723c0d62ceb6a2ea7a2b5af9e6635a"
   integrity sha512-2Zdrr+Rl6bmy67aAcZbA2gJQuuRYy55kDo5f3XVJSl40V8bvw7UtA0W+DXtuBqT+3fMm3yR42M6UevO5Cs/VNQ==
 
-"@sudoo/webpack-react@^4.5.1":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-4.5.1.tgz#0fda0d23bed7e048333406897cb618fe72ca1e0c"
-  integrity sha512-YfN9rzJigVWp1PMyTf0/F9n1xLEGkmpUmlZ/4TSL6c+HoA2OX6UttbhO+1k0Bk8uAPPZGQooXsm69xttT9ai8w==
+"@sudoo/webpack-react@^4.5.3":
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/@sudoo/webpack-react/-/webpack-react-4.5.3.tgz#47bc2cb1ad69f9688d2f2bca5f89813636de50c7"
+  integrity sha512-MzKgU32/KBPbcbLXJKaI2pHito5JfS3W6GE5c5jY2bCU3UrDmQf0hfUraSDi+S2dyvw1x7F63i6mTb0zEdR9cQ==
   dependencies:
     "@teamsupercell/typings-for-css-modules-loader" "2.5.1"
     copy-webpack-plugin "6.4.1"
@@ -274,7 +274,7 @@
     file-loader "6.2.0"
     html-webpack-plugin "4.5.2"
     license-webpack-plugin "2.3.17"
-    mini-css-extract-plugin "1.5.0"
+    mini-css-extract-plugin "1.5.1"
     mini-svg-data-uri "1.2.3"
     node-sass "5.0.0"
     optimize-css-assets-webpack-plugin "5.0.4"
@@ -5085,10 +5085,10 @@ mini-create-react-context@^0.4.0:
     "@babel/runtime" "^7.12.1"
     tiny-warning "^1.0.3"
 
-mini-css-extract-plugin@1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-1.5.0.tgz#69bee3b273d2d4ee8649a2eb409514b7df744a27"
-  integrity sha512-SIbuLMv6jsk1FnLIU5OUG/+VMGUprEjM1+o2trOAx8i5KOKMrhyezb1dJ4Ugsykb8Jgq8/w5NEopy6escV9G7g==
+mini-css-extract-plugin@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/mini-css-extract-plugin/-/mini-css-extract-plugin-1.5.1.tgz#c0ac557c48a7de47de3df0768fe037c9cf961f69"
+  integrity sha512-wEpr0XooH6rw/Mlf+9KTJoMBLT3HujzdTrmohPjAzF47N4Q6yAeczQLpRD/WxvAtXvskcXbily7TAdCfi2M4Dg==
   dependencies:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
